@@ -57,6 +57,19 @@ func (c *Client) Delete(req *Request, result any) error {
 	return c.do("DELETE", req, result)
 }
 
+// RawResponse contains the full HTTP response for raw requests.
+type RawResponse struct {
+	StatusCode int
+	Status     string
+	Headers    http.Header
+	Body       []byte
+}
+
+// DoRaw performs a raw HTTP request against the configured API host.
+func (c *Client) DoRaw(method string, fullURL string, body []byte, headers map[string]string) (*RawResponse, error) {
+	return c.doRawWithRetry(method, fullURL, body, headers, 0)
+}
+
 func (c *Client) do(method string, req *Request, result any) error {
 	return c.doWithRetry(method, req, result, 0)
 }
@@ -158,6 +171,72 @@ func (c *Client) doWithRetry(method string, req *Request, result any, tryCount i
 	}
 
 	return nil
+}
+
+func (c *Client) doRawWithRetry(method string, fullURL string, body []byte, headers map[string]string, tryCount int) (*RawResponse, error) {
+	var bodyReader io.Reader
+	if body != nil {
+		bodyReader = bytes.NewReader(body)
+	}
+
+	httpReq, err := http.NewRequest(method, fullURL, bodyReader)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: failed to create request: %w", err)
+	}
+
+	httpReq.Header.Set("Accept", "application/json")
+	httpReq.Header.Set("Authorization", "Bearer "+c.apiKey)
+
+	for k, v := range c.headers {
+		httpReq.Header.Set(k, v)
+	}
+	for k, v := range headers {
+		httpReq.Header.Set(k, v)
+	}
+
+	resp, err := c.httpClient.Do(httpReq)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: request failed: %w", err)
+	}
+	defer resp.Body.Close()
+
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: failed to read response body: %w", err)
+	}
+
+	if resp.StatusCode == 429 && tryCount < 3 {
+		retryAfter := resp.Header.Get("Retry-After")
+		delay := 3 * time.Second
+		if retryAfter != "" {
+			if seconds, err := strconv.Atoi(retryAfter); err == nil {
+				delay = time.Duration(seconds+3) * time.Second
+			}
+		}
+		time.Sleep(delay)
+		return c.doRawWithRetry(method, fullURL, body, headers, tryCount+1)
+	}
+
+	result := &RawResponse{
+		StatusCode: resp.StatusCode,
+		Status:     resp.Status,
+		Headers:    resp.Header.Clone(),
+		Body:       respBody,
+	}
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		apiErr := &Error{
+			StatusCode: resp.StatusCode,
+			RequestID:  resp.Header.Get("X-Request-ID"),
+		}
+		_ = json.Unmarshal(respBody, apiErr)
+		if apiErr.Message == "" {
+			apiErr.Message = http.StatusText(resp.StatusCode)
+		}
+		return result, apiErr
+	}
+
+	return result, nil
 }
 
 // queryValue converts a value to a query string value.

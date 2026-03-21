@@ -36,6 +36,7 @@ const apiVersion = "2026-01-01-magnetar"
 // Management endpoints operate across instances and require an instance ID parameter.
 type ManagementEndpoints struct {
 	Instance                              *management.InstanceEndpoint
+	Instances                             *management.InstancesEndpoint
 	Providers                             *management.ProvidersEndpoint
 	ProvidersVersions                     *management.ProvidersVersionsEndpoint
 	ProvidersTools                        *management.ProvidersToolsEndpoint
@@ -89,8 +90,11 @@ type ManagementEndpoints struct {
 
 // MetorialSdk is the main entry point for the Metorial API.
 type MetorialSdk struct {
+	client *endpoint.Client
+
 	// Public API endpoints (scoped to the current instance via API key).
 	Instance                              *endpoints.InstanceEndpoint
+	Instances                             *endpoints.InstancesEndpoint
 	Providers                             *endpoints.ProvidersEndpoint
 	ProvidersVersions                     *endpoints.ProvidersVersionsEndpoint
 	ProvidersTools                        *endpoints.ProvidersToolsEndpoint
@@ -163,7 +167,9 @@ func New(opts ...Option) (*MetorialSdk, error) {
 	c := endpoint.NewClient(o.apiHost, o.apiKey, apiVersion, o.headers)
 
 	return &MetorialSdk{
+		client:                                c,
 		Instance:                              endpoints.NewInstanceEndpoint(c),
+		Instances:                             endpoints.NewInstancesEndpoint(c),
 		Providers:                             endpoints.NewProvidersEndpoint(c),
 		ProvidersVersions:                     endpoints.NewProvidersVersionsEndpoint(c),
 		ProvidersTools:                        endpoints.NewProvidersToolsEndpoint(c),
@@ -214,7 +220,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		MagicMcpSessions:                      endpoints.NewMagicMcpSessionsEndpoint(c),
 		MagicMcpTokens:                        endpoints.NewMagicMcpTokensEndpoint(c),
 		Management: &ManagementEndpoints{
-			Instance:                              management.NewInstanceEndpoint(c),
+			Instances:                             management.NewInstancesEndpoint(c),
 			Providers:                             management.NewProvidersEndpoint(c),
 			ProvidersVersions:                     management.NewProvidersVersionsEndpoint(c),
 			ProvidersTools:                        management.NewProvidersToolsEndpoint(c),
