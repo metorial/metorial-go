@@ -36,7 +36,6 @@ const apiVersion = "2026-01-01-magnetar"
 // Management endpoints operate across instances and require an instance ID parameter.
 type ManagementEndpoints struct {
 	Instance                              *management.InstanceEndpoint
-	Instances                             *management.InstancesEndpoint
 	Providers                             *management.ProvidersEndpoint
 	ProvidersVersions                     *management.ProvidersVersionsEndpoint
 	ProvidersTools                        *management.ProvidersToolsEndpoint
@@ -220,7 +219,6 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		MagicMcpSessions:                      endpoints.NewMagicMcpSessionsEndpoint(c),
 		MagicMcpTokens:                        endpoints.NewMagicMcpTokensEndpoint(c),
 		Management: &ManagementEndpoints{
-			Instances:                             management.NewInstancesEndpoint(c),
 			Providers:                             management.NewProvidersEndpoint(c),
 			ProvidersVersions:                     management.NewProvidersVersionsEndpoint(c),
 			ProvidersTools:                        management.NewProvidersToolsEndpoint(c),
