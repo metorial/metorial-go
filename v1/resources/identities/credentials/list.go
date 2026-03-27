@@ -57,6 +57,22 @@ func MapIdentitiesCredentialsListOutputToJSON(v *IdentitiesCredentialsListOutput
 	return json.Marshal(v)
 }
 
+// IdentitiesCredentialsListQueryCreatedAt - Filter identity credential creation time by date range
+type IdentitiesCredentialsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for identity credential creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity credential creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// IdentitiesCredentialsListQueryUpdatedAt - Filter identity credential last update time by date range
+type IdentitiesCredentialsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for identity credential last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity credential last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // IdentitiesCredentialsListQuery represents the identities credentials list query type.
 type IdentitiesCredentialsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -82,6 +98,10 @@ type IdentitiesCredentialsListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID or IDs.
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// CreatedAt - Filter identity credential creation time by date range
+	CreatedAt *IdentitiesCredentialsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity credential last update time by date range
+	UpdatedAt *IdentitiesCredentialsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapIdentitiesCredentialsListQueryFromJSON deserializes JSON data into a IdentitiesCredentialsListQuery.

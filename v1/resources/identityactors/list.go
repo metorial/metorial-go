@@ -55,6 +55,22 @@ func MapIdentityActorsListOutputToJSON(v *IdentityActorsListOutput) ([]byte, err
 	return json.Marshal(v)
 }
 
+// IdentityActorsListQueryCreatedAt - Filter identity actor creation time by date range
+type IdentityActorsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for identity actor creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity actor creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// IdentityActorsListQueryUpdatedAt - Filter identity actor last update time by date range
+type IdentityActorsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for identity actor last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity actor last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // IdentityActorsListQuery represents the identity actors list query type.
 type IdentityActorsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -70,6 +86,10 @@ type IdentityActorsListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// AgentId - Filter by linked agent ID or IDs.
 	AgentId *any `json:"agent_id,omitempty"`
+	// CreatedAt - Filter identity actor creation time by date range
+	CreatedAt *IdentityActorsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity actor last update time by date range
+	UpdatedAt *IdentityActorsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapIdentityActorsListQueryFromJSON deserializes JSON data into a IdentityActorsListQuery.

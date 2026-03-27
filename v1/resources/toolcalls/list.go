@@ -148,6 +148,22 @@ func MapToolCallsListOutputToJSON(v *ToolCallsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// ToolCallsListQueryCreatedAt - Filter tool call creation time by date range
+type ToolCallsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for tool call creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for tool call creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ToolCallsListQueryUpdatedAt - Filter tool call last update time by date range
+type ToolCallsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for tool call last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for tool call last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ToolCallsListQuery represents the tool calls list query type.
 type ToolCallsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -169,6 +185,10 @@ type ToolCallsListQuery struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
+	// CreatedAt - Filter tool call creation time by date range
+	CreatedAt *ToolCallsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter tool call last update time by date range
+	UpdatedAt *ToolCallsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapToolCallsListQueryFromJSON deserializes JSON data into a ToolCallsListQuery.

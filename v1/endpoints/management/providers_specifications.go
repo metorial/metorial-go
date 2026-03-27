@@ -32,6 +32,10 @@ type ProvidersSpecificationsEndpointListParams struct {
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
 	// ProviderConfigId - Filter by provider config ID(s)
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
+	// CreatedAt - Filter provider specification creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider specification last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of provider specifications.

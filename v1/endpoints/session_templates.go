@@ -38,6 +38,10 @@ type SessionTemplatesEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter templates that include provider auth configs with these IDs
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// CreatedAt - Filter session template creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session template last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SessionTemplatesEndpointCreateBody contains the request body for Create.

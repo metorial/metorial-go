@@ -170,6 +170,22 @@ func MapProvidersSpecificationsListOutputToJSON(v *ProvidersSpecificationsListOu
 	return json.Marshal(v)
 }
 
+// ProvidersSpecificationsListQueryCreatedAt - Filter provider specification creation time by date range
+type ProvidersSpecificationsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider specification creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider specification creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProvidersSpecificationsListQueryUpdatedAt - Filter provider specification last update time by date range
+type ProvidersSpecificationsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider specification last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider specification last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProvidersSpecificationsListQuery represents the providers specifications list query type.
 type ProvidersSpecificationsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -187,6 +203,10 @@ type ProvidersSpecificationsListQuery struct {
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
 	// ProviderConfigId - Filter by provider config ID(s)
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
+	// CreatedAt - Filter provider specification creation time by date range
+	CreatedAt *ProvidersSpecificationsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider specification last update time by date range
+	UpdatedAt *ProvidersSpecificationsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProvidersSpecificationsListQueryFromJSON deserializes JSON data into a ProvidersSpecificationsListQuery.

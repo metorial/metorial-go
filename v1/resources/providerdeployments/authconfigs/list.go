@@ -36,6 +36,8 @@ type ProviderDeploymentsAuthConfigsListOutputItemsCredentials struct {
 	Type string `json:"type"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
+	// IsManaged - Whether these credentials are managed by Metorial
+	IsManaged bool `json:"is_managed"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -165,6 +167,22 @@ func MapProviderDeploymentsAuthConfigsListOutputToJSON(v *ProviderDeploymentsAut
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsAuthConfigsListQueryCreatedAt - Filter provider auth config creation time by date range
+type ProviderDeploymentsAuthConfigsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth config creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth config creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsListQueryUpdatedAt - Filter provider auth config last update time by date range
+type ProviderDeploymentsAuthConfigsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth config last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth config last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsListQuery represents the provider deployments auth configs list query type.
 type ProviderDeploymentsAuthConfigsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -186,6 +204,10 @@ type ProviderDeploymentsAuthConfigsListQuery struct {
 	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider auth config creation time by date range
+	CreatedAt *ProviderDeploymentsAuthConfigsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth config last update time by date range
+	UpdatedAt *ProviderDeploymentsAuthConfigsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsAuthConfigsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsAuthConfigsListQuery.

@@ -36,6 +36,10 @@ type ToolCallsEndpointListParams struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
+	// CreatedAt - Filter tool call creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter tool call last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ToolCallsEndpointCreateBody contains the request body for Create.

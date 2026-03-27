@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// SessionsParticipantsListOutputItemsData - Participant payload data
+type SessionsParticipantsListOutputItemsData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
 // SessionsParticipantsListOutputItems represents the sessions participants list output items type.
 type SessionsParticipantsListOutputItems struct {
 	// Object - String representing the object's type
@@ -18,7 +26,7 @@ type SessionsParticipantsListOutputItems struct {
 	// Name - Display name
 	Name string `json:"name"`
 	// Data - Participant payload data
-	Data map[string]any `json:"data"`
+	Data SessionsParticipantsListOutputItemsData `json:"data"`
 	// ProviderId - Provider ID if associated
 	ProviderId *string `json:"provider_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -51,6 +59,22 @@ func MapSessionsParticipantsListOutputToJSON(v *SessionsParticipantsListOutput) 
 	return json.Marshal(v)
 }
 
+// SessionsParticipantsListQueryCreatedAt - Filter session participant creation time by date range
+type SessionsParticipantsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session participant creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session participant creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsParticipantsListQueryUpdatedAt - Filter session participant last update time by date range
+type SessionsParticipantsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session participant last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session participant last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsParticipantsListQuery represents the sessions participants list query type.
 type SessionsParticipantsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -68,6 +92,10 @@ type SessionsParticipantsListQuery struct {
 	SessionConnectionId *any `json:"session_connection_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)
 	SessionMessageId *any `json:"session_message_id,omitempty"`
+	// CreatedAt - Filter session participant creation time by date range
+	CreatedAt *SessionsParticipantsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session participant last update time by date range
+	UpdatedAt *SessionsParticipantsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsParticipantsListQueryFromJSON deserializes JSON data into a SessionsParticipantsListQuery.

@@ -32,6 +32,10 @@ type ProviderDeploymentsEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider deployment creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider deployment last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsEndpointCreateBody contains the request body for Create.

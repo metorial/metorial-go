@@ -32,6 +32,10 @@ type ProviderListingsEndpointListParams struct {
 	IsVerified           *bool    `json:"is_verified,omitempty"`
 	IsOfficial           *bool    `json:"is_official,omitempty"`
 	IsMetorial           *bool    `json:"is_metorial,omitempty"`
+	// CreatedAt - Filter provider listing creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider listing last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of provider listings.

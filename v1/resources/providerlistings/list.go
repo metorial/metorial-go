@@ -220,6 +220,22 @@ func MapProviderListingsListOutputToJSON(v *ProviderListingsListOutput) ([]byte,
 	return json.Marshal(v)
 }
 
+// ProviderListingsListQueryCreatedAt - Filter provider listing creation time by date range
+type ProviderListingsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider listing creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider listing creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderListingsListQueryUpdatedAt - Filter provider listing last update time by date range
+type ProviderListingsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider listing last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider listing last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderListingsListQuery represents the provider listings list query type.
 type ProviderListingsListQuery struct {
 	Limit                *float64 `json:"limit,omitempty"`
@@ -237,6 +253,10 @@ type ProviderListingsListQuery struct {
 	IsVerified           *bool    `json:"is_verified,omitempty"`
 	IsOfficial           *bool    `json:"is_official,omitempty"`
 	IsMetorial           *bool    `json:"is_metorial,omitempty"`
+	// CreatedAt - Filter provider listing creation time by date range
+	CreatedAt *ProviderListingsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider listing last update time by date range
+	UpdatedAt *ProviderListingsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderListingsListQueryFromJSON deserializes JSON data into a ProviderListingsListQuery.

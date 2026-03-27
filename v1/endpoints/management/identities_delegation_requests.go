@@ -30,6 +30,10 @@ type IdentitiesDelegationRequestsEndpointListParams struct {
 	ActorId *any `json:"actor_id,omitempty"`
 	// IdentityId - Filter by identity ID or IDs.
 	IdentityId *any `json:"identity_id,omitempty"`
+	// CreatedAt - Filter identity delegation request creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity delegation request last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // IdentitiesDelegationRequestsEndpointGetParams contains optional query parameters for Get.

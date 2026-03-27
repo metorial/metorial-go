@@ -57,6 +57,22 @@ func MapIdentitiesDelegationConfigsListOutputToJSON(v *IdentitiesDelegationConfi
 	return json.Marshal(v)
 }
 
+// IdentitiesDelegationConfigsListQueryCreatedAt - Filter identity delegation config creation time by date range
+type IdentitiesDelegationConfigsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for identity delegation config creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity delegation config creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// IdentitiesDelegationConfigsListQueryUpdatedAt - Filter identity delegation config last update time by date range
+type IdentitiesDelegationConfigsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for identity delegation config last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity delegation config last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // IdentitiesDelegationConfigsListQuery represents the identities delegation configs list query type.
 type IdentitiesDelegationConfigsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -70,6 +86,10 @@ type IdentitiesDelegationConfigsListQuery struct {
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by config ID or IDs.
 	Id *any `json:"id,omitempty"`
+	// CreatedAt - Filter identity delegation config creation time by date range
+	CreatedAt *IdentitiesDelegationConfigsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity delegation config last update time by date range
+	UpdatedAt *IdentitiesDelegationConfigsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapIdentitiesDelegationConfigsListQueryFromJSON deserializes JSON data into a IdentitiesDelegationConfigsListQuery.

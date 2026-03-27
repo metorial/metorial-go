@@ -220,6 +220,22 @@ func MapCustomProvidersListOutputToJSON(v *CustomProvidersListOutput) ([]byte, e
 	return json.Marshal(v)
 }
 
+// CustomProvidersListQueryCreatedAt - Filter custom provider creation time by date range
+type CustomProvidersListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// CustomProvidersListQueryUpdatedAt - Filter custom provider last update time by date range
+type CustomProvidersListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // CustomProvidersListQuery represents the custom providers list query type.
 type CustomProvidersListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -237,6 +253,10 @@ type CustomProvidersListQuery struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter custom provider creation time by date range
+	CreatedAt *CustomProvidersListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider last update time by date range
+	UpdatedAt *CustomProvidersListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapCustomProvidersListQueryFromJSON deserializes JSON data into a CustomProvidersListQuery.

@@ -32,6 +32,10 @@ type CustomProvidersCommitsEndpointListParams struct {
 	CustomProviderId *any `json:"custom_provider_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// CreatedAt - Filter custom provider commit creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider commit last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // CustomProvidersCommitsEndpointCreateBody contains the request body for Create.

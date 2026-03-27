@@ -30,6 +30,10 @@ type IdentityActorsEndpointListParams struct {
 	Id *any `json:"id,omitempty"`
 	// AgentId - Filter by linked agent ID or IDs.
 	AgentId *any `json:"agent_id,omitempty"`
+	// CreatedAt - Filter identity actor creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity actor last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // IdentityActorsEndpointCreateBody contains the request body for Create.

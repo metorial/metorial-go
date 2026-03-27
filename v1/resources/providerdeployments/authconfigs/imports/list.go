@@ -36,6 +36,8 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigCredentials s
 	Type string `json:"type"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
+	// IsManaged - Whether these credentials are managed by Metorial
+	IsManaged bool `json:"is_managed"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -194,6 +196,22 @@ func MapProviderDeploymentsAuthConfigsImportsListOutputToJSON(v *ProviderDeploym
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt - Filter provider auth import creation time by date range
+type ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth import creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth import creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt - Filter provider auth import last update time by date range
+type ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth import last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth import last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsImportsListQuery represents the provider deployments auth configs imports list query type.
 type ProviderDeploymentsAuthConfigsImportsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -211,6 +229,10 @@ type ProviderDeploymentsAuthConfigsImportsListQuery struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// CreatedAt - Filter provider auth import creation time by date range
+	CreatedAt *ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth import last update time by date range
+	UpdatedAt *ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsAuthConfigsImportsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsAuthConfigsImportsListQuery.

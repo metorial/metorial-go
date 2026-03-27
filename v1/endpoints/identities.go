@@ -32,6 +32,10 @@ type IdentitiesEndpointListParams struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by owner identity actor ID or IDs.
 	ActorId *any `json:"actor_id,omitempty"`
+	// CreatedAt - Filter identity creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // IdentitiesEndpointCreateBody contains the request body for Create.

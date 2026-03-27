@@ -57,6 +57,22 @@ func MapProvidersVersionsListOutputToJSON(v *ProvidersVersionsListOutput) ([]byt
 	return json.Marshal(v)
 }
 
+// ProvidersVersionsListQueryCreatedAt - Filter provider version creation time by date range
+type ProvidersVersionsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider version creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider version creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProvidersVersionsListQueryUpdatedAt - Filter provider version last update time by date range
+type ProvidersVersionsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider version last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider version last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProvidersVersionsListQuery represents the providers versions list query type.
 type ProvidersVersionsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -68,6 +84,10 @@ type ProvidersVersionsListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// CreatedAt - Filter provider version creation time by date range
+	CreatedAt *ProvidersVersionsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider version last update time by date range
+	UpdatedAt *ProvidersVersionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProvidersVersionsListQueryFromJSON deserializes JSON data into a ProvidersVersionsListQuery.

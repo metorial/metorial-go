@@ -190,6 +190,22 @@ func MapIdentitiesDelegationsListOutputToJSON(v *IdentitiesDelegationsListOutput
 	return json.Marshal(v)
 }
 
+// IdentitiesDelegationsListQueryCreatedAt - Filter identity delegation creation time by date range
+type IdentitiesDelegationsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for identity delegation creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity delegation creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// IdentitiesDelegationsListQueryUpdatedAt - Filter identity delegation last update time by date range
+type IdentitiesDelegationsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for identity delegation last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity delegation last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // IdentitiesDelegationsListQuery represents the identities delegations list query type.
 type IdentitiesDelegationsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -211,6 +227,10 @@ type IdentitiesDelegationsListQuery struct {
 	DelegateeActorId *any `json:"delegatee_actor_id,omitempty"`
 	// IdentityId - Filter by identity ID or IDs.
 	IdentityId *any `json:"identity_id,omitempty"`
+	// CreatedAt - Filter identity delegation creation time by date range
+	CreatedAt *IdentitiesDelegationsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity delegation last update time by date range
+	UpdatedAt *IdentitiesDelegationsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapIdentitiesDelegationsListQueryFromJSON deserializes JSON data into a IdentitiesDelegationsListQuery.

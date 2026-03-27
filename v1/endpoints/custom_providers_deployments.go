@@ -30,6 +30,10 @@ type CustomProvidersDeploymentsEndpointListParams struct {
 	CustomProviderVersionId *any `json:"custom_provider_version_id,omitempty"`
 	// CustomProviderId - Filter by custom provider IDs
 	CustomProviderId *any `json:"custom_provider_id,omitempty"`
+	// CreatedAt - Filter custom provider deployment creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider deployment last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of deployments for a custom provider.

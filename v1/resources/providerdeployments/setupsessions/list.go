@@ -94,6 +94,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsCredentials struct {
 	Type string `json:"type"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
+	// IsManaged - Whether these credentials are managed by Metorial
+	IsManaged bool `json:"is_managed"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -139,6 +141,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigCredentials struct
 	Type string `json:"type"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
+	// IsManaged - Whether these credentials are managed by Metorial
+	IsManaged bool `json:"is_managed"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -396,6 +400,22 @@ func MapProviderDeploymentsSetupSessionsListOutputToJSON(v *ProviderDeploymentsS
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsSetupSessionsListQueryCreatedAt - Filter provider setup session creation time by date range
+type ProviderDeploymentsSetupSessionsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider setup session creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider setup session creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListQueryUpdatedAt - Filter provider setup session last update time by date range
+type ProviderDeploymentsSetupSessionsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider setup session last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider setup session last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsListQuery represents the provider deployments setup sessions list query type.
 type ProviderDeploymentsSetupSessionsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -417,6 +437,10 @@ type ProviderDeploymentsSetupSessionsListQuery struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// Status - Filter by session status (archived, failed, completed, expired, pending)
 	Status *any `json:"status,omitempty"`
+	// CreatedAt - Filter provider setup session creation time by date range
+	CreatedAt *ProviderDeploymentsSetupSessionsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider setup session last update time by date range
+	UpdatedAt *ProviderDeploymentsSetupSessionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsSetupSessionsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsSetupSessionsListQuery.

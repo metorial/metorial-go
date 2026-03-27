@@ -55,6 +55,22 @@ func MapProviderRunsListOutputToJSON(v *ProviderRunsListOutput) ([]byte, error) 
 	return json.Marshal(v)
 }
 
+// ProviderRunsListQueryCreatedAt - Filter provider run creation time by date range
+type ProviderRunsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider run creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider run creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderRunsListQueryUpdatedAt - Filter provider run last update time by date range
+type ProviderRunsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider run last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider run last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderRunsListQuery represents the provider runs list query type.
 type ProviderRunsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -76,6 +92,10 @@ type ProviderRunsListQuery struct {
 	SessionConnectionId *any `json:"session_connection_id,omitempty"`
 	// ProviderVersionId - Filter by provider version ID(s)
 	ProviderVersionId *any `json:"provider_version_id,omitempty"`
+	// CreatedAt - Filter provider run creation time by date range
+	CreatedAt *ProviderRunsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider run last update time by date range
+	UpdatedAt *ProviderRunsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderRunsListQueryFromJSON deserializes JSON data into a ProviderRunsListQuery.

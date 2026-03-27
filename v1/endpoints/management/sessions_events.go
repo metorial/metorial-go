@@ -38,6 +38,10 @@ type SessionsEventsEndpointListParams struct {
 	SessionMessageId *any `json:"session_message_id,omitempty"`
 	// SessionErrorId - Filter by session error ID(s)
 	SessionErrorId *any `json:"session_error_id,omitempty"`
+	// CreatedAt - Filter session event creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session event last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of events for a session.

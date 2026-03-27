@@ -780,6 +780,22 @@ func MapCustomProvidersCommitsListOutputToJSON(v *CustomProvidersCommitsListOutp
 	return json.Marshal(v)
 }
 
+// CustomProvidersCommitsListQueryCreatedAt - Filter custom provider commit creation time by date range
+type CustomProvidersCommitsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider commit creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider commit creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// CustomProvidersCommitsListQueryUpdatedAt - Filter custom provider commit last update time by date range
+type CustomProvidersCommitsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider commit last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider commit last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // CustomProvidersCommitsListQuery represents the custom providers commits list query type.
 type CustomProvidersCommitsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -797,6 +813,10 @@ type CustomProvidersCommitsListQuery struct {
 	CustomProviderId *any `json:"custom_provider_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// CreatedAt - Filter custom provider commit creation time by date range
+	CreatedAt *CustomProvidersCommitsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider commit last update time by date range
+	UpdatedAt *CustomProvidersCommitsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapCustomProvidersCommitsListQueryFromJSON deserializes JSON data into a CustomProvidersCommitsListQuery.

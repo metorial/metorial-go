@@ -14,6 +14,8 @@ type ProviderDeploymentsAuthCredentialsListOutputItems struct {
 	Type string `json:"type"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
+	// IsManaged - Whether these credentials are managed by Metorial
+	IsManaged bool `json:"is_managed"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -54,6 +56,22 @@ func MapProviderDeploymentsAuthCredentialsListOutputToJSON(v *ProviderDeployment
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsAuthCredentialsListQueryCreatedAt - Filter provider auth credentials creation time by date range
+type ProviderDeploymentsAuthCredentialsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth credentials creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth credentials creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsAuthCredentialsListQueryUpdatedAt - Filter provider auth credentials last update time by date range
+type ProviderDeploymentsAuthCredentialsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider auth credentials last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider auth credentials last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsAuthCredentialsListQuery represents the provider deployments auth credentials list query type.
 type ProviderDeploymentsAuthCredentialsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -67,8 +85,16 @@ type ProviderDeploymentsAuthCredentialsListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// ProviderAuthMethodId - Filter by provider auth method ID(s)
+	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
+	// Origin - Filter by credential origin (custom, managed)
+	Origin *any `json:"origin,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider auth credentials creation time by date range
+	CreatedAt *ProviderDeploymentsAuthCredentialsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth credentials last update time by date range
+	UpdatedAt *ProviderDeploymentsAuthCredentialsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsAuthCredentialsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsAuthCredentialsListQuery.

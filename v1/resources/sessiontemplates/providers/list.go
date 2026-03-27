@@ -111,6 +111,22 @@ func MapSessionTemplatesProvidersListOutputToJSON(v *SessionTemplatesProvidersLi
 	return json.Marshal(v)
 }
 
+// SessionTemplatesProvidersListQueryCreatedAt - Filter session template provider creation time by date range
+type SessionTemplatesProvidersListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session template provider creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session template provider creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionTemplatesProvidersListQueryUpdatedAt - Filter session template provider last update time by date range
+type SessionTemplatesProvidersListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session template provider last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session template provider last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionTemplatesProvidersListQuery represents the session templates providers list query type.
 type SessionTemplatesProvidersListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -133,6 +149,10 @@ type SessionTemplatesProvidersListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// CreatedAt - Filter session template provider creation time by date range
+	CreatedAt *SessionTemplatesProvidersListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session template provider last update time by date range
+	UpdatedAt *SessionTemplatesProvidersListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionTemplatesProvidersListQueryFromJSON deserializes JSON data into a SessionTemplatesProvidersListQuery.

@@ -38,6 +38,10 @@ type SessionsProvidersEndpointListParams struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// Status - Filter by provider status
 	Status *any `json:"status,omitempty"`
+	// CreatedAt - Filter session provider creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session provider last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SessionsProvidersEndpointCreateBody contains the request body for Create.

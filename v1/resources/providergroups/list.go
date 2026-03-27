@@ -49,6 +49,22 @@ func MapProviderGroupsListOutputToJSON(v *ProviderGroupsListOutput) ([]byte, err
 	return json.Marshal(v)
 }
 
+// ProviderGroupsListQueryCreatedAt - Filter provider group creation time by date range
+type ProviderGroupsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider group creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider group creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderGroupsListQueryUpdatedAt - Filter provider group last update time by date range
+type ProviderGroupsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider group last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider group last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderGroupsListQuery represents the provider groups list query type.
 type ProviderGroupsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -62,6 +78,10 @@ type ProviderGroupsListQuery struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderListingId - Filter by provider listing ID(s)
 	ProviderListingId *any `json:"provider_listing_id,omitempty"`
+	// CreatedAt - Filter provider group creation time by date range
+	CreatedAt *ProviderGroupsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider group last update time by date range
+	UpdatedAt *ProviderGroupsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderGroupsListQueryFromJSON deserializes JSON data into a ProviderGroupsListQuery.

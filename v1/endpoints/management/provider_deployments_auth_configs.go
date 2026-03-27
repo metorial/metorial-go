@@ -36,6 +36,10 @@ type ProviderDeploymentsAuthConfigsEndpointListParams struct {
 	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider auth config creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth config last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsEndpointCreateBody contains the request body for Create.

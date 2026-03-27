@@ -113,6 +113,22 @@ func MapIdentitiesListOutputToJSON(v *IdentitiesListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// IdentitiesListQueryCreatedAt - Filter identity creation time by date range
+type IdentitiesListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for identity creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// IdentitiesListQueryUpdatedAt - Filter identity last update time by date range
+type IdentitiesListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for identity last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for identity last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // IdentitiesListQuery represents the identities list query type.
 type IdentitiesListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -130,6 +146,10 @@ type IdentitiesListQuery struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by owner identity actor ID or IDs.
 	ActorId *any `json:"actor_id,omitempty"`
+	// CreatedAt - Filter identity creation time by date range
+	CreatedAt *IdentitiesListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity last update time by date range
+	UpdatedAt *IdentitiesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapIdentitiesListQueryFromJSON deserializes JSON data into a IdentitiesListQuery.

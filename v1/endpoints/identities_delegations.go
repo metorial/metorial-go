@@ -36,6 +36,10 @@ type IdentitiesDelegationsEndpointListParams struct {
 	DelegateeActorId *any `json:"delegatee_actor_id,omitempty"`
 	// IdentityId - Filter by identity ID or IDs.
 	IdentityId *any `json:"identity_id,omitempty"`
+	// CreatedAt - Filter identity delegation creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity delegation last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // IdentitiesDelegationsEndpointCreateBody contains the request body for Create.

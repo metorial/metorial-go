@@ -32,6 +32,10 @@ type ProviderDeploymentsAuthConfigsImportsEndpointListParams struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// CreatedAt - Filter provider auth import creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth import last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsEndpointCreateBody contains the request body for Create.

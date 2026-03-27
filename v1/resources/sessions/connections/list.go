@@ -23,6 +23,14 @@ type SessionsConnectionsListOutputItemsMcp struct {
 	Transport string `json:"transport"`
 }
 
+// SessionsConnectionsListOutputItemsParticipantData - Participant payload data
+type SessionsConnectionsListOutputItemsParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
 // SessionsConnectionsListOutputItemsParticipant represents the sessions connections list output items participant type.
 type SessionsConnectionsListOutputItemsParticipant struct {
 	// Object - String representing the object's type
@@ -36,7 +44,7 @@ type SessionsConnectionsListOutputItemsParticipant struct {
 	// Name - Display name
 	Name string `json:"name"`
 	// Data - Participant payload data
-	Data map[string]any `json:"data"`
+	Data SessionsConnectionsListOutputItemsParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
 	ProviderId *string `json:"provider_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -69,7 +77,7 @@ type SessionsConnectionsListOutputItems struct {
 	// LastMessageAt - Timestamp of last message
 	LastMessageAt time.Time `json:"last_message_at"`
 	// LastActiveAt - Timestamp when last active
-	LastActiveAt time.Time `json:"last_active_at"`
+	LastActiveAt *time.Time `json:"last_active_at,omitempty"`
 }
 
 // SessionsConnectionsListOutputPagination represents the sessions connections list output pagination type.
@@ -98,6 +106,22 @@ func MapSessionsConnectionsListOutputToJSON(v *SessionsConnectionsListOutput) ([
 	return json.Marshal(v)
 }
 
+// SessionsConnectionsListQueryCreatedAt - Filter session connection creation time by date range
+type SessionsConnectionsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session connection creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session connection creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsConnectionsListQueryUpdatedAt - Filter session connection last update time by date range
+type SessionsConnectionsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session connection last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session connection last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsConnectionsListQuery represents the sessions connections list query type.
 type SessionsConnectionsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -117,6 +141,10 @@ type SessionsConnectionsListQuery struct {
 	SessionProviderId *any `json:"session_provider_id,omitempty"`
 	// ParticipantId - Filter by participant ID(s)
 	ParticipantId *any `json:"participant_id,omitempty"`
+	// CreatedAt - Filter session connection creation time by date range
+	CreatedAt *SessionsConnectionsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session connection last update time by date range
+	UpdatedAt *SessionsConnectionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsConnectionsListQueryFromJSON deserializes JSON data into a SessionsConnectionsListQuery.

@@ -74,6 +74,22 @@ func MapProviderDeploymentsConfigVaultsListOutputToJSON(v *ProviderDeploymentsCo
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsConfigVaultsListQueryCreatedAt - Filter provider config vault creation time by date range
+type ProviderDeploymentsConfigVaultsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider config vault creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider config vault creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsConfigVaultsListQueryUpdatedAt - Filter provider config vault last update time by date range
+type ProviderDeploymentsConfigVaultsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider config vault last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider config vault last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsConfigVaultsListQuery represents the provider deployments config vaults list query type.
 type ProviderDeploymentsConfigVaultsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -95,6 +111,10 @@ type ProviderDeploymentsConfigVaultsListQuery struct {
 	ProviderConfigVaultId *any `json:"provider_config_vault_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider config vault creation time by date range
+	CreatedAt *ProviderDeploymentsConfigVaultsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider config vault last update time by date range
+	UpdatedAt *ProviderDeploymentsConfigVaultsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsConfigVaultsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsConfigVaultsListQuery.

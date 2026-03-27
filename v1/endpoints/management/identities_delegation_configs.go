@@ -28,6 +28,10 @@ type IdentitiesDelegationConfigsEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by config ID or IDs.
 	Id *any `json:"id,omitempty"`
+	// CreatedAt - Filter identity delegation config creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter identity delegation config last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // IdentitiesDelegationConfigsEndpointCreateBody contains the request body for Create.

@@ -28,6 +28,10 @@ type ProviderGroupsEndpointListParams struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderListingId - Filter by provider listing ID(s)
 	ProviderListingId *any `json:"provider_listing_id,omitempty"`
+	// CreatedAt - Filter provider group creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider group last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderGroupsEndpointCreateBody contains the request body for Create.

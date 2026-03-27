@@ -36,6 +36,10 @@ type CustomProvidersVersionsEndpointListParams struct {
 	CustomProviderDeploymentId *any `json:"custom_provider_deployment_id,omitempty"`
 	// CustomProviderEnvironmentId - Filter by custom provider environment IDs (matches providers connected to sessions)
 	CustomProviderEnvironmentId *any `json:"custom_provider_environment_id,omitempty"`
+	// CreatedAt - Filter custom provider version creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider version last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // CustomProvidersVersionsEndpointCreateBody contains the request body for Create.

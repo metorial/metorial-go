@@ -160,6 +160,14 @@ type SessionsMessagesListOutputItemsToolCall struct {
 	CreatedAt time.Time `json:"created_at"`
 }
 
+// SessionsMessagesListOutputItemsSenderParticipantData - Participant payload data
+type SessionsMessagesListOutputItemsSenderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
 // SessionsMessagesListOutputItemsSenderParticipant represents the sessions messages list output items sender participant type.
 type SessionsMessagesListOutputItemsSenderParticipant struct {
 	// Object - String representing the object's type
@@ -173,11 +181,19 @@ type SessionsMessagesListOutputItemsSenderParticipant struct {
 	// Name - Display name
 	Name string `json:"name"`
 	// Data - Participant payload data
-	Data map[string]any `json:"data"`
+	Data SessionsMessagesListOutputItemsSenderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
 	ProviderId *string `json:"provider_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
+}
+
+// SessionsMessagesListOutputItemsResponderParticipantData - Participant payload data
+type SessionsMessagesListOutputItemsResponderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
 }
 
 // SessionsMessagesListOutputItemsResponderParticipant represents the sessions messages list output items responder participant type.
@@ -193,7 +209,7 @@ type SessionsMessagesListOutputItemsResponderParticipant struct {
 	// Name - Display name
 	Name string `json:"name"`
 	// Data - Participant payload data
-	Data map[string]any `json:"data"`
+	Data SessionsMessagesListOutputItemsResponderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
 	ProviderId *string `json:"provider_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -290,6 +306,22 @@ func MapSessionsMessagesListOutputToJSON(v *SessionsMessagesListOutput) ([]byte,
 	return json.Marshal(v)
 }
 
+// SessionsMessagesListQueryCreatedAt - Filter session message creation time by date range
+type SessionsMessagesListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session message creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session message creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsMessagesListQueryUpdatedAt - Filter session message last update time by date range
+type SessionsMessagesListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session message last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session message last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsMessagesListQuery represents the sessions messages list query type.
 type SessionsMessagesListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -319,6 +351,10 @@ type SessionsMessagesListQuery struct {
 	ParticipantId *any `json:"participant_id,omitempty"`
 	// ParentMessageId - Filter by parent message ID(s)
 	ParentMessageId *any `json:"parent_message_id,omitempty"`
+	// CreatedAt - Filter session message creation time by date range
+	CreatedAt *SessionsMessagesListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session message last update time by date range
+	UpdatedAt *SessionsMessagesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsMessagesListQueryFromJSON deserializes JSON data into a SessionsMessagesListQuery.

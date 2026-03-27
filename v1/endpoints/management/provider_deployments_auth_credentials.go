@@ -28,8 +28,16 @@ type ProviderDeploymentsAuthCredentialsEndpointListParams struct {
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// ProviderAuthMethodId - Filter by provider auth method ID(s)
+	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
+	// Origin - Filter by credential origin (custom, managed)
+	Origin *any `json:"origin,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider auth credentials creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider auth credentials last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthCredentialsEndpointCreateBody contains the request body for Create.

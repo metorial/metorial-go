@@ -103,6 +103,22 @@ func MapProviderDeploymentsListOutputToJSON(v *ProviderDeploymentsListOutput) ([
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsListQueryCreatedAt - Filter provider deployment creation time by date range
+type ProviderDeploymentsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for provider deployment creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider deployment creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// ProviderDeploymentsListQueryUpdatedAt - Filter provider deployment last update time by date range
+type ProviderDeploymentsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for provider deployment last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for provider deployment last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // ProviderDeploymentsListQuery represents the provider deployments list query type.
 type ProviderDeploymentsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -120,6 +136,10 @@ type ProviderDeploymentsListQuery struct {
 	Status *any `json:"status,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider deployment creation time by date range
+	CreatedAt *ProviderDeploymentsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider deployment last update time by date range
+	UpdatedAt *ProviderDeploymentsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapProviderDeploymentsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsListQuery.

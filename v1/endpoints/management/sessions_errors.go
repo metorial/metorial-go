@@ -40,6 +40,10 @@ type SessionsErrorsEndpointListParams struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)
 	SessionMessageId *any `json:"session_message_id,omitempty"`
+	// CreatedAt - Filter session error creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session error last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of errors across all sessions.

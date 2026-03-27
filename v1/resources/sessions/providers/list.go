@@ -125,6 +125,22 @@ func MapSessionsProvidersListOutputToJSON(v *SessionsProvidersListOutput) ([]byt
 	return json.Marshal(v)
 }
 
+// SessionsProvidersListQueryCreatedAt - Filter session provider creation time by date range
+type SessionsProvidersListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session provider creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session provider creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsProvidersListQueryUpdatedAt - Filter session provider last update time by date range
+type SessionsProvidersListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session provider last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session provider last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsProvidersListQuery represents the sessions providers list query type.
 type SessionsProvidersListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -148,6 +164,10 @@ type SessionsProvidersListQuery struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// Status - Filter by provider status
 	Status *any `json:"status,omitempty"`
+	// CreatedAt - Filter session provider creation time by date range
+	CreatedAt *SessionsProvidersListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session provider last update time by date range
+	UpdatedAt *SessionsProvidersListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsProvidersListQueryFromJSON deserializes JSON data into a SessionsProvidersListQuery.

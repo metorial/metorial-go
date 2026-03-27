@@ -44,6 +44,10 @@ type SessionsMessagesEndpointListParams struct {
 	ParticipantId *any `json:"participant_id,omitempty"`
 	// ParentMessageId - Filter by parent message ID(s)
 	ParentMessageId *any `json:"parent_message_id,omitempty"`
+	// CreatedAt - Filter session message creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session message last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of messages for a session.

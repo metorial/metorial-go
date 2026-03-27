@@ -323,6 +323,22 @@ func MapCustomProvidersVersionsListOutputToJSON(v *CustomProvidersVersionsListOu
 	return json.Marshal(v)
 }
 
+// CustomProvidersVersionsListQueryCreatedAt - Filter custom provider version creation time by date range
+type CustomProvidersVersionsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider version creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider version creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// CustomProvidersVersionsListQueryUpdatedAt - Filter custom provider version last update time by date range
+type CustomProvidersVersionsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider version last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider version last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // CustomProvidersVersionsListQuery represents the custom providers versions list query type.
 type CustomProvidersVersionsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -344,6 +360,10 @@ type CustomProvidersVersionsListQuery struct {
 	CustomProviderDeploymentId *any `json:"custom_provider_deployment_id,omitempty"`
 	// CustomProviderEnvironmentId - Filter by custom provider environment IDs (matches providers connected to sessions)
 	CustomProviderEnvironmentId *any `json:"custom_provider_environment_id,omitempty"`
+	// CreatedAt - Filter custom provider version creation time by date range
+	CreatedAt *CustomProvidersVersionsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider version last update time by date range
+	UpdatedAt *CustomProvidersVersionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapCustomProvidersVersionsListQueryFromJSON deserializes JSON data into a CustomProvidersVersionsListQuery.

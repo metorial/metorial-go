@@ -36,6 +36,10 @@ type ProviderDeploymentsConfigVaultsEndpointListParams struct {
 	ProviderConfigVaultId *any `json:"provider_config_vault_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
+	// CreatedAt - Filter provider config vault creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider config vault last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsConfigVaultsEndpointCreateBody contains the request body for Create.

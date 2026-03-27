@@ -59,6 +59,22 @@ func MapSessionsErrorsListOutputToJSON(v *SessionsErrorsListOutput) ([]byte, err
 	return json.Marshal(v)
 }
 
+// SessionsErrorsListQueryCreatedAt - Filter session error creation time by date range
+type SessionsErrorsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session error creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session error creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsErrorsListQueryUpdatedAt - Filter session error last update time by date range
+type SessionsErrorsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session error last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session error last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsErrorsListQuery represents the sessions errors list query type.
 type SessionsErrorsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -84,6 +100,10 @@ type SessionsErrorsListQuery struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)
 	SessionMessageId *any `json:"session_message_id,omitempty"`
+	// CreatedAt - Filter session error creation time by date range
+	CreatedAt *SessionsErrorsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session error last update time by date range
+	UpdatedAt *SessionsErrorsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsErrorsListQueryFromJSON deserializes JSON data into a SessionsErrorsListQuery.

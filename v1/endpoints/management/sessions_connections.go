@@ -34,6 +34,10 @@ type SessionsConnectionsEndpointListParams struct {
 	SessionProviderId *any `json:"session_provider_id,omitempty"`
 	// ParticipantId - Filter by participant ID(s)
 	ParticipantId *any `json:"participant_id,omitempty"`
+	// CreatedAt - Filter session connection creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session connection last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of connections for a session.

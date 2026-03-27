@@ -211,6 +211,22 @@ func MapCustomProvidersDeploymentsListOutputToJSON(v *CustomProvidersDeployments
 	return json.Marshal(v)
 }
 
+// CustomProvidersDeploymentsListQueryCreatedAt - Filter custom provider deployment creation time by date range
+type CustomProvidersDeploymentsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider deployment creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider deployment creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// CustomProvidersDeploymentsListQueryUpdatedAt - Filter custom provider deployment last update time by date range
+type CustomProvidersDeploymentsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for custom provider deployment last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for custom provider deployment last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // CustomProvidersDeploymentsListQuery represents the custom providers deployments list query type.
 type CustomProvidersDeploymentsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -226,6 +242,10 @@ type CustomProvidersDeploymentsListQuery struct {
 	CustomProviderVersionId *any `json:"custom_provider_version_id,omitempty"`
 	// CustomProviderId - Filter by custom provider IDs
 	CustomProviderId *any `json:"custom_provider_id,omitempty"`
+	// CreatedAt - Filter custom provider deployment creation time by date range
+	CreatedAt *CustomProvidersDeploymentsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter custom provider deployment last update time by date range
+	UpdatedAt *CustomProvidersDeploymentsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapCustomProvidersDeploymentsListQueryFromJSON deserializes JSON data into a CustomProvidersDeploymentsListQuery.

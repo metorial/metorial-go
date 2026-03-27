@@ -166,6 +166,22 @@ func MapSessionsListOutputToJSON(v *SessionsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// SessionsListQueryCreatedAt - Filter session creation time by date range
+type SessionsListQueryCreatedAt struct {
+	// Gt - Only include records after this timestamp for session creation time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session creation time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
+// SessionsListQueryUpdatedAt - Filter session last update time by date range
+type SessionsListQueryUpdatedAt struct {
+	// Gt - Only include records after this timestamp for session last update time
+	Gt *time.Time `json:"gt,omitempty"`
+	// Lt - Only include records before this timestamp for session last update time
+	Lt *time.Time `json:"lt,omitempty"`
+}
+
 // SessionsListQuery represents the sessions list query type.
 type SessionsListQuery struct {
 	Limit  *float64 `json:"limit,omitempty"`
@@ -189,6 +205,10 @@ type SessionsListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// CreatedAt - Filter session creation time by date range
+	CreatedAt *SessionsListQueryCreatedAt `json:"created_at,omitempty"`
+	// UpdatedAt - Filter session last update time by date range
+	UpdatedAt *SessionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 
 // MapSessionsListQueryFromJSON deserializes JSON data into a SessionsListQuery.

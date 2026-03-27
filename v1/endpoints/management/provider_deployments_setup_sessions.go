@@ -36,6 +36,10 @@ type ProviderDeploymentsSetupSessionsEndpointListParams struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// Status - Filter by session status (archived, failed, completed, expired, pending)
 	Status *any `json:"status,omitempty"`
+	// CreatedAt - Filter provider setup session creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter provider setup session last update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEndpointCreateBody contains the request body for Create.
