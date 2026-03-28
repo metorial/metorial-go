@@ -244,6 +244,7 @@ type ProviderListingsListQuery struct {
 	Cursor               *string  `json:"cursor,omitempty"`
 	Order                *string  `json:"order,omitempty"`
 	Search               *string  `json:"search,omitempty"`
+	Id                   *any     `json:"id,omitempty"`
 	ProviderCategoryId   *any     `json:"provider_category_id,omitempty"`
 	ProviderCollectionId *any     `json:"provider_collection_id,omitempty"`
 	ProviderGroupId      *any     `json:"provider_group_id,omitempty"`
