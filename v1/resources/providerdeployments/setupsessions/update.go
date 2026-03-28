@@ -110,8 +110,8 @@ type ProviderDeploymentsSetupSessionsUpdateOutputCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeploymentPreview represents the provider deployments setup sessions update output auth config deployment preview type.
-type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeploymentPreview struct {
+// ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment represents the provider deployments setup sessions update output auth config deployment type.
+type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -236,10 +236,10 @@ type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata          *map[string]any                                                          `json:"metadata,omitempty"`
-	DeploymentPreview *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeploymentPreview `json:"deployment_preview,omitempty"`
-	Credentials       *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigCredentials       `json:"credentials,omitempty"`
-	AuthMethod        ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigAuthMethod         `json:"auth_method"`
+	Metadata    *map[string]any                                                    `json:"metadata,omitempty"`
+	Deployment  *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigCredentials `json:"credentials,omitempty"`
+	AuthMethod  ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigAuthMethod   `json:"auth_method"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

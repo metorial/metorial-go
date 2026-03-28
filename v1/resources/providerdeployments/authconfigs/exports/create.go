@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeploymentPreview represents the provider deployments auth configs exports create output auth config deployment preview type.
-type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeploymentPreview struct {
+// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeployment represents the provider deployments auth configs exports create output auth config deployment type.
+type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -131,10 +131,10 @@ type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata          *map[string]any                                                               `json:"metadata,omitempty"`
-	DeploymentPreview *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeploymentPreview `json:"deployment_preview,omitempty"`
-	Credentials       *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigCredentials       `json:"credentials,omitempty"`
-	AuthMethod        ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAuthMethod         `json:"auth_method"`
+	Metadata    *map[string]any                                                         `json:"metadata,omitempty"`
+	Deployment  *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigCredentials `json:"credentials,omitempty"`
+	AuthMethod  ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAuthMethod   `json:"auth_method"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

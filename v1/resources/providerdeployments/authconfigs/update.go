@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// ProviderDeploymentsAuthConfigsUpdateOutputDeploymentPreview represents the provider deployments auth configs update output deployment preview type.
-type ProviderDeploymentsAuthConfigsUpdateOutputDeploymentPreview struct {
+// ProviderDeploymentsAuthConfigsUpdateOutputDeployment represents the provider deployments auth configs update output deployment type.
+type ProviderDeploymentsAuthConfigsUpdateOutputDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -131,10 +131,10 @@ type ProviderDeploymentsAuthConfigsUpdateOutput struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata          *map[string]any                                              `json:"metadata,omitempty"`
-	DeploymentPreview *ProviderDeploymentsAuthConfigsUpdateOutputDeploymentPreview `json:"deployment_preview,omitempty"`
-	Credentials       *ProviderDeploymentsAuthConfigsUpdateOutputCredentials       `json:"credentials,omitempty"`
-	AuthMethod        ProviderDeploymentsAuthConfigsUpdateOutputAuthMethod         `json:"auth_method"`
+	Metadata    *map[string]any                                        `json:"metadata,omitempty"`
+	Deployment  *ProviderDeploymentsAuthConfigsUpdateOutputDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsAuthConfigsUpdateOutputCredentials `json:"credentials,omitempty"`
+	AuthMethod  ProviderDeploymentsAuthConfigsUpdateOutputAuthMethod   `json:"auth_method"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

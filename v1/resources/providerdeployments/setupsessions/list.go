@@ -110,8 +110,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeploymentPreview represents the provider deployments setup sessions list output items auth config deployment preview type.
-type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeploymentPreview struct {
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment represents the provider deployments setup sessions list output items auth config deployment type.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -236,10 +236,10 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata          *map[string]any                                                             `json:"metadata,omitempty"`
-	DeploymentPreview *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeploymentPreview `json:"deployment_preview,omitempty"`
-	Credentials       *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigCredentials       `json:"credentials,omitempty"`
-	AuthMethod        ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAuthMethod         `json:"auth_method"`
+	Metadata    *map[string]any                                                       `json:"metadata,omitempty"`
+	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigCredentials `json:"credentials,omitempty"`
+	AuthMethod  ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

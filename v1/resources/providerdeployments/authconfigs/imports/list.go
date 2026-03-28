@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeploymentPreview represents the provider deployments auth configs imports list output items auth config deployment preview type.
-type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeploymentPreview struct {
+// ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeployment represents the provider deployments auth configs imports list output items auth config deployment type.
+type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -131,10 +131,10 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata          *map[string]any                                                                  `json:"metadata,omitempty"`
-	DeploymentPreview *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeploymentPreview `json:"deployment_preview,omitempty"`
-	Credentials       *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigCredentials       `json:"credentials,omitempty"`
-	AuthMethod        ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod         `json:"auth_method"`
+	Metadata    *map[string]any                                                            `json:"metadata,omitempty"`
+	Deployment  *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigCredentials `json:"credentials,omitempty"`
+	AuthMethod  ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
