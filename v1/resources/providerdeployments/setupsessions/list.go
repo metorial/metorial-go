@@ -110,6 +110,14 @@ type ProviderDeploymentsSetupSessionsListOutputItemsCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment represents the provider deployments setup sessions list output items auth config deployment type.
 type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -236,7 +244,9 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                       `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`
@@ -244,6 +254,14 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsListOutputItemsConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsListOutputItemsConfigDeployment represents the provider deployments setup sessions list output items config deployment type.
@@ -325,6 +343,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsConfig struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsSetupSessionsListOutputItemsConfigToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -355,9 +375,11 @@ type ProviderDeploymentsSetupSessionsListOutputItems struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Setup session configuration
+	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  string                                                      `json:"provider_id"`
-	AuthMethod  ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod   `json:"auth_method"`
+	ProviderId  *string                                                     `json:"provider_id,omitempty"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod  `json:"auth_method,omitempty"`
 	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig  `json:"auth_config,omitempty"`

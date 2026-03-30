@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsConfigsUpdateOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsConfigsUpdateOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsConfigsUpdateOutputDeployment represents the provider deployments configs update output deployment type.
 type ProviderDeploymentsConfigsUpdateOutputDeployment struct {
 	// Object - String representing the object's type
@@ -84,6 +92,8 @@ type ProviderDeploymentsConfigsUpdateOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsConfigsUpdateOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -115,7 +125,8 @@ type ProviderDeploymentsConfigsUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // MapProviderDeploymentsConfigsUpdateBodyFromJSON deserializes JSON data into a ProviderDeploymentsConfigsUpdateBody.

@@ -110,6 +110,14 @@ type ProviderDeploymentsSetupSessionsCreateOutputCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsCreateOutputAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfigDeployment represents the provider deployments setup sessions create output auth config deployment type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -236,7 +244,9 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                    `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsSetupSessionsCreateOutputAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsSetupSessionsCreateOutputAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsCreateOutputAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethod   `json:"auth_method"`
@@ -244,6 +254,14 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfig struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateOutputConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsCreateOutputConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputConfigDeployment represents the provider deployments setup sessions create output config deployment type.
@@ -325,6 +343,8 @@ type ProviderDeploymentsSetupSessionsCreateOutputConfig struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsSetupSessionsCreateOutputConfigToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -355,9 +375,11 @@ type ProviderDeploymentsSetupSessionsCreateOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Setup session configuration
+	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  string                                                   `json:"provider_id"`
-	AuthMethod  ProviderDeploymentsSetupSessionsCreateOutputAuthMethod   `json:"auth_method"`
+	ProviderId  *string                                                  `json:"provider_id,omitempty"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsCreateOutputAuthMethod  `json:"auth_method,omitempty"`
 	Deployment  *ProviderDeploymentsSetupSessionsCreateOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsCreateOutputCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsCreateOutputAuthConfig  `json:"auth_config,omitempty"`
@@ -388,10 +410,49 @@ func MapProviderDeploymentsSetupSessionsCreateOutputToJSON(v *ProviderDeployment
 	return json.Marshal(v)
 }
 
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups represents the provider deployments setup sessions create body configuration provider search groups type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups struct {
+	GroupId string `json:"group_id"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections represents the provider deployments setup sessions create body configuration provider search collections type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections struct {
+	CollectionId string `json:"collection_id"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories represents the provider deployments setup sessions create body configuration provider search categories type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories struct {
+	CategoryId string `json:"category_id"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch represents the provider deployments setup sessions create body configuration provider search type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch struct {
+	Groups      *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups      `json:"groups,omitempty"`
+	Collections *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections `json:"collections,omitempty"`
+	Categories  *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories  `json:"categories,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters represents the provider deployments setup sessions create body configuration tool filters type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters struct {
+	Enabled *bool `json:"enabled,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi represents the provider deployments setup sessions create body configuration ui type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi struct {
+	Layout *string `json:"layout,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsCreateBodyConfiguration represents the provider deployments setup sessions create body configuration type.
+type ProviderDeploymentsSetupSessionsCreateBodyConfiguration struct {
+	ProviderSearch *ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch `json:"provider_search,omitempty"`
+	ToolFilters    *ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters    `json:"tool_filters,omitempty"`
+	Ui             *ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi             `json:"ui,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsCreateBody represents the provider deployments setup sessions create body type.
 type ProviderDeploymentsSetupSessionsCreateBody struct {
 	// ProviderId - The provider ID
-	ProviderId string `json:"provider_id"`
+	ProviderId *string `json:"provider_id,omitempty"`
 	// ProviderDeploymentId - Optional provider deployment ID
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
 	Name                 *string `json:"name,omitempty"`
@@ -401,8 +462,9 @@ type ProviderDeploymentsSetupSessionsCreateBody struct {
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
 	// ProviderAuthCredentialsId - Optional OAuth app credentials to use instead of defaults
-	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
-	RedirectUrl               *string `json:"redirect_url,omitempty"`
+	ProviderAuthCredentialsId *string                                                  `json:"provider_auth_credentials_id,omitempty"`
+	RedirectUrl               *string                                                  `json:"redirect_url,omitempty"`
+	Configuration             *ProviderDeploymentsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
 }
 
 // MapProviderDeploymentsSetupSessionsCreateBodyFromJSON deserializes JSON data into a ProviderDeploymentsSetupSessionsCreateBody.

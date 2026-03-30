@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsConfigsDeleteOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsConfigsDeleteOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsConfigsDeleteOutputDeployment represents the provider deployments configs delete output deployment type.
 type ProviderDeploymentsConfigsDeleteOutputDeployment struct {
 	// Object - String representing the object's type
@@ -84,6 +92,8 @@ type ProviderDeploymentsConfigsDeleteOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsConfigsDeleteOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID

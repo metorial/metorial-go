@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsConfigsCreateOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsConfigsCreateOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsConfigsCreateOutputDeployment represents the provider deployments configs create output deployment type.
 type ProviderDeploymentsConfigsCreateOutputDeployment struct {
 	// Object - String representing the object's type
@@ -84,6 +92,8 @@ type ProviderDeploymentsConfigsCreateOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsConfigsCreateOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -119,7 +129,8 @@ type ProviderDeploymentsConfigsCreateBody struct {
 	Name                 *string `json:"name,omitempty"`
 	Description          *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// Value - Provider-specific configuration values
 	Value *map[string]any `json:"value,omitempty"`
 	// ProviderConfigVaultId - Config vault ID to use as template

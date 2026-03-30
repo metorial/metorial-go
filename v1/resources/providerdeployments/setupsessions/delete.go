@@ -110,6 +110,14 @@ type ProviderDeploymentsSetupSessionsDeleteOutputCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigDeployment represents the provider deployments setup sessions delete output auth config deployment type.
 type ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -236,7 +244,9 @@ type ProviderDeploymentsSetupSessionsDeleteOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                    `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigAuthMethod   `json:"auth_method"`
@@ -244,6 +254,14 @@ type ProviderDeploymentsSetupSessionsDeleteOutputAuthConfig struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProviderDeploymentsSetupSessionsDeleteOutputConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsDeleteOutputConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsDeleteOutputConfigDeployment represents the provider deployments setup sessions delete output config deployment type.
@@ -325,6 +343,8 @@ type ProviderDeploymentsSetupSessionsDeleteOutputConfig struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsSetupSessionsDeleteOutputConfigToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -355,9 +375,11 @@ type ProviderDeploymentsSetupSessionsDeleteOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Setup session configuration
+	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  string                                                   `json:"provider_id"`
-	AuthMethod  ProviderDeploymentsSetupSessionsDeleteOutputAuthMethod   `json:"auth_method"`
+	ProviderId  *string                                                  `json:"provider_id,omitempty"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsDeleteOutputAuthMethod  `json:"auth_method,omitempty"`
 	Deployment  *ProviderDeploymentsSetupSessionsDeleteOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsDeleteOutputCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsDeleteOutputAuthConfig  `json:"auth_config,omitempty"`

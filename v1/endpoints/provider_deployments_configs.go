@@ -51,7 +51,8 @@ type ProviderDeploymentsConfigsEndpointCreateBody struct {
 	Name                 *string `json:"name,omitempty"`
 	Description          *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// Value - Provider-specific configuration values
 	Value *map[string]any `json:"value,omitempty"`
 	// ProviderConfigVaultId - Config vault ID to use as template
@@ -63,7 +64,8 @@ type ProviderDeploymentsConfigsEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // ProviderDeploymentsConfigsEndpointGetConfigSchemaParams contains optional query parameters for GetConfigSchema.

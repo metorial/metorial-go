@@ -47,7 +47,8 @@ type ProviderDeploymentsAuthConfigsEndpointCreateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// ProviderAuthMethodId - The authentication method this config uses (e.g., OAuth, API key)
 	ProviderAuthMethodId string `json:"provider_auth_method_id"`
 	// ProviderDeploymentId - The provider deployment this auth config is associated with (if applicable)
@@ -61,7 +62,8 @@ type ProviderDeploymentsAuthConfigsEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // List returns a paginated list of provider auth configs.

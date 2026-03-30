@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsAuthConfigsUpdateOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsAuthConfigsUpdateOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsUpdateOutputDeployment represents the provider deployments auth configs update output deployment type.
 type ProviderDeploymentsAuthConfigsUpdateOutputDeployment struct {
 	// Object - String representing the object's type
@@ -131,7 +139,9 @@ type ProviderDeploymentsAuthConfigsUpdateOutput struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                        `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsAuthConfigsUpdateOutputToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsAuthConfigsUpdateOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsUpdateOutputCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsUpdateOutputAuthMethod   `json:"auth_method"`
@@ -160,7 +170,8 @@ type ProviderDeploymentsAuthConfigsUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // MapProviderDeploymentsAuthConfigsUpdateBodyFromJSON deserializes JSON data into a ProviderDeploymentsAuthConfigsUpdateBody.

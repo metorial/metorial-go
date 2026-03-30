@@ -45,7 +45,7 @@ type ProviderDeploymentsSetupSessionsEndpointListParams struct {
 // ProviderDeploymentsSetupSessionsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// ProviderId - The provider ID
-	ProviderId string `json:"provider_id"`
+	ProviderId *string `json:"provider_id,omitempty"`
 	// ProviderDeploymentId - Optional provider deployment ID
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
 	Name                 *string `json:"name,omitempty"`
@@ -55,8 +55,9 @@ type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
 	// ProviderAuthCredentialsId - Optional OAuth app credentials to use instead of defaults
-	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
-	RedirectUrl               *string `json:"redirect_url,omitempty"`
+	ProviderAuthCredentialsId *string         `json:"provider_auth_credentials_id,omitempty"`
+	RedirectUrl               *string         `json:"redirect_url,omitempty"`
+	Configuration             *map[string]any `json:"configuration,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEndpointUpdateBody contains the request body for Update.

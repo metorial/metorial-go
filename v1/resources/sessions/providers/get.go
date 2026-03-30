@@ -16,8 +16,9 @@ type SessionsProvidersGetOutputUsage struct {
 // SessionsProvidersGetOutputToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type SessionsProvidersGetOutputToolFilter struct {
-	Type    *string `json:"type,omitempty"`
-	Filters *[]any  `json:"filters,omitempty"`
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // SessionsProvidersGetOutputDeployment represents the sessions providers get output deployment type.

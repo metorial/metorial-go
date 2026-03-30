@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigDeployment represents the provider deployments auth configs exports list output items auth config deployment type.
 type ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -131,7 +139,9 @@ type ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                            `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsExportsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`

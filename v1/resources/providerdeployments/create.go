@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsCreateOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsCreateOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsCreateOutputLockedVersion represents the provider deployments create output locked version type.
 type ProviderDeploymentsCreateOutputLockedVersion struct {
 	// Object - String representing the object's type
@@ -67,6 +75,8 @@ type ProviderDeploymentsCreateOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsCreateOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId    string                                        `json:"provider_id"`
 	LockedVersion *ProviderDeploymentsCreateOutputLockedVersion `json:"locked_version,omitempty"`
@@ -106,7 +116,8 @@ type ProviderDeploymentsCreateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// ProviderId - The provider to deploy
 	ProviderId string `json:"provider_id"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version

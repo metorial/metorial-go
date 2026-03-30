@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsAuthConfigsCreateOutputToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsAuthConfigsCreateOutputToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsCreateOutputDeployment represents the provider deployments auth configs create output deployment type.
 type ProviderDeploymentsAuthConfigsCreateOutputDeployment struct {
 	// Object - String representing the object's type
@@ -131,7 +139,9 @@ type ProviderDeploymentsAuthConfigsCreateOutput struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                        `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsAuthConfigsCreateOutputToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsAuthConfigsCreateOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsCreateOutputCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsCreateOutputAuthMethod   `json:"auth_method"`
@@ -160,7 +170,8 @@ type ProviderDeploymentsAuthConfigsCreateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// ProviderAuthMethodId - The authentication method this config uses (e.g., OAuth, API key)
 	ProviderAuthMethodId string `json:"provider_auth_method_id"`
 	// ProviderDeploymentId - The provider deployment this auth config is associated with (if applicable)

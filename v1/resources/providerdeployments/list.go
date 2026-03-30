@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsListOutputItemsToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsListOutputItemsToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsListOutputItemsLockedVersion represents the provider deployments list output items locked version type.
 type ProviderDeploymentsListOutputItemsLockedVersion struct {
 	// Object - String representing the object's type
@@ -67,6 +75,8 @@ type ProviderDeploymentsListOutputItems struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsListOutputItemsToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId    string                                           `json:"provider_id"`
 	LockedVersion *ProviderDeploymentsListOutputItemsLockedVersion `json:"locked_version,omitempty"`

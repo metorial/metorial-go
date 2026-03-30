@@ -110,6 +110,14 @@ type ProviderDeploymentsSetupSessionsUpdateOutputCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment represents the provider deployments setup sessions update output auth config deployment type.
 type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -236,7 +244,9 @@ type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                    `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsUpdateOutputAuthConfigAuthMethod   `json:"auth_method"`
@@ -244,6 +254,14 @@ type ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProviderDeploymentsSetupSessionsUpdateOutputConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsUpdateOutputConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsUpdateOutputConfigDeployment represents the provider deployments setup sessions update output config deployment type.
@@ -325,6 +343,8 @@ type ProviderDeploymentsSetupSessionsUpdateOutputConfig struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsSetupSessionsUpdateOutputConfigToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -355,9 +375,11 @@ type ProviderDeploymentsSetupSessionsUpdateOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Setup session configuration
+	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  string                                                   `json:"provider_id"`
-	AuthMethod  ProviderDeploymentsSetupSessionsUpdateOutputAuthMethod   `json:"auth_method"`
+	ProviderId  *string                                                  `json:"provider_id,omitempty"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsUpdateOutputAuthMethod  `json:"auth_method,omitempty"`
 	Deployment  *ProviderDeploymentsSetupSessionsUpdateOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsUpdateOutputCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig  `json:"auth_config,omitempty"`

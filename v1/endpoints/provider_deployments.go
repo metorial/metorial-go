@@ -43,7 +43,8 @@ type ProviderDeploymentsEndpointCreateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// ProviderId - The provider to deploy
 	ProviderId string `json:"provider_id"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version
@@ -58,7 +59,8 @@ type ProviderDeploymentsEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // List returns a paginated list of provider deployments.

@@ -8,8 +8,9 @@ import (
 // SessionTemplatesProvidersGetOutputToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type SessionTemplatesProvidersGetOutputToolFilter struct {
-	Type    *string `json:"type,omitempty"`
-	Filters *[]any  `json:"filters,omitempty"`
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // SessionTemplatesProvidersGetOutputDeployment represents the session templates providers get output deployment type.

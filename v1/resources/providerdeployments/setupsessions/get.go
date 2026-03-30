@@ -110,6 +110,14 @@ type ProviderDeploymentsSetupSessionsGetOutputCredentials struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsGetOutputAuthConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsGetOutputAuthConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsGetOutputAuthConfigDeployment represents the provider deployments setup sessions get output auth config deployment type.
 type ProviderDeploymentsSetupSessionsGetOutputAuthConfigDeployment struct {
 	// Object - String representing the object's type
@@ -236,7 +244,9 @@ type ProviderDeploymentsSetupSessionsGetOutputAuthConfig struct {
 	// Description - Description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any                                                 `json:"metadata,omitempty"`
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter  ProviderDeploymentsSetupSessionsGetOutputAuthConfigToolFilter   `json:"tool_filter"`
 	Deployment  *ProviderDeploymentsSetupSessionsGetOutputAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsGetOutputAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsGetOutputAuthConfigAuthMethod   `json:"auth_method"`
@@ -244,6 +254,14 @@ type ProviderDeploymentsSetupSessionsGetOutputAuthConfig struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProviderDeploymentsSetupSessionsGetOutputConfigToolFilter represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderDeploymentsSetupSessionsGetOutputConfigToolFilter struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsGetOutputConfigDeployment represents the provider deployments setup sessions get output config deployment type.
@@ -325,6 +343,8 @@ type ProviderDeploymentsSetupSessionsGetOutputConfig struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilter - Tool filter configuration
+	ToolFilter ProviderDeploymentsSetupSessionsGetOutputConfigToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SpecificationId - Specification ID
@@ -355,9 +375,11 @@ type ProviderDeploymentsSetupSessionsGetOutput struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Setup session configuration
+	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  string                                                `json:"provider_id"`
-	AuthMethod  ProviderDeploymentsSetupSessionsGetOutputAuthMethod   `json:"auth_method"`
+	ProviderId  *string                                               `json:"provider_id,omitempty"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsGetOutputAuthMethod  `json:"auth_method,omitempty"`
 	Deployment  *ProviderDeploymentsSetupSessionsGetOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsGetOutputCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsGetOutputAuthConfig  `json:"auth_config,omitempty"`
