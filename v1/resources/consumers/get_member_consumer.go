@@ -31,7 +31,7 @@ func MapConsumersGetMemberConsumerOutputToJSON(v *ConsumersGetMemberConsumerOutp
 
 // ConsumersGetMemberConsumerBody represents the consumers get member consumer body type.
 type ConsumersGetMemberConsumerBody struct {
-	SurfaceIdentifier string `json:"surface_identifier"`
+	SurfaceIdentifier *string `json:"surface_identifier,omitempty"`
 }
 
 // MapConsumersGetMemberConsumerBodyFromJSON deserializes JSON data into a ConsumersGetMemberConsumerBody.

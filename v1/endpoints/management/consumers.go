@@ -32,7 +32,7 @@ type ConsumersEndpointCreateBody struct {
 
 // ConsumersEndpointGetMemberConsumerBody contains the request body for GetMemberConsumer.
 type ConsumersEndpointGetMemberConsumerBody struct {
-	SurfaceIdentifier string `json:"surface_identifier"`
+	SurfaceIdentifier *string `json:"surface_identifier,omitempty"`
 }
 
 // ConsumersEndpointUpdateBody contains the request body for Update.
