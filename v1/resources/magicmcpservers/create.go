@@ -43,9 +43,10 @@ func MapMagicMcpServersCreateOutputToJSON(v *MagicMcpServersCreateOutput) ([]byt
 
 // MagicMcpServersCreateBody represents the magic mcp servers create body type.
 type MagicMcpServersCreateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	Name              *string         `json:"name,omitempty"`
+	Description       *string         `json:"description,omitempty"`
+	Metadata          *map[string]any `json:"metadata,omitempty"`
+	ConsumerProfileId *string         `json:"consumer_profile_id,omitempty"`
 }
 
 // MapMagicMcpServersCreateBodyFromJSON deserializes JSON data into a MagicMcpServersCreateBody.

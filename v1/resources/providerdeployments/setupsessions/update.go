@@ -378,12 +378,16 @@ type ProviderDeploymentsSetupSessionsUpdateOutput struct {
 	// Configuration - Setup session configuration
 	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  *string                                                  `json:"provider_id,omitempty"`
-	AuthMethod  *ProviderDeploymentsSetupSessionsUpdateOutputAuthMethod  `json:"auth_method,omitempty"`
-	Deployment  *ProviderDeploymentsSetupSessionsUpdateOutputDeployment  `json:"deployment,omitempty"`
-	Credentials *ProviderDeploymentsSetupSessionsUpdateOutputCredentials `json:"credentials,omitempty"`
-	AuthConfig  *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig  `json:"auth_config,omitempty"`
-	Config      *ProviderDeploymentsSetupSessionsUpdateOutputConfig      `json:"config,omitempty"`
+	ProviderId *string `json:"provider_id,omitempty"`
+	// IdentityId - Linked identity ID
+	IdentityId *string `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Identity credential created from this setup session
+	IdentityCredentialId *string                                                  `json:"identity_credential_id,omitempty"`
+	AuthMethod           *ProviderDeploymentsSetupSessionsUpdateOutputAuthMethod  `json:"auth_method,omitempty"`
+	Deployment           *ProviderDeploymentsSetupSessionsUpdateOutputDeployment  `json:"deployment,omitempty"`
+	Credentials          *ProviderDeploymentsSetupSessionsUpdateOutputCredentials `json:"credentials,omitempty"`
+	AuthConfig           *ProviderDeploymentsSetupSessionsUpdateOutputAuthConfig  `json:"auth_config,omitempty"`
+	Config               *ProviderDeploymentsSetupSessionsUpdateOutputConfig      `json:"config,omitempty"`
 	// UiMode - UI mode for setup
 	UiMode string `json:"ui_mode"`
 	// RedirectUrl - URL to redirect after setup
@@ -416,6 +420,8 @@ type ProviderDeploymentsSetupSessionsUpdateBody struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IdentityId - Optional identity to link this setup session to
+	IdentityId *string `json:"identity_id,omitempty"`
 }
 
 // MapProviderDeploymentsSetupSessionsUpdateBodyFromJSON deserializes JSON data into a ProviderDeploymentsSetupSessionsUpdateBody.

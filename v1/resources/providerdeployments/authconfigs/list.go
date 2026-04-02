@@ -212,6 +212,14 @@ type ProviderDeploymentsAuthConfigsListQuery struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// ProviderAuthMethodId - Filter by auth method ID(s)
 	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
+	// ActorId - Filter by actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Filter by identity credential ID(s)
+	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
 	// CreatedAt - Filter provider auth config creation time by date range

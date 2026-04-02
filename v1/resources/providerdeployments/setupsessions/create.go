@@ -378,12 +378,16 @@ type ProviderDeploymentsSetupSessionsCreateOutput struct {
 	// Configuration - Setup session configuration
 	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  *string                                                  `json:"provider_id,omitempty"`
-	AuthMethod  *ProviderDeploymentsSetupSessionsCreateOutputAuthMethod  `json:"auth_method,omitempty"`
-	Deployment  *ProviderDeploymentsSetupSessionsCreateOutputDeployment  `json:"deployment,omitempty"`
-	Credentials *ProviderDeploymentsSetupSessionsCreateOutputCredentials `json:"credentials,omitempty"`
-	AuthConfig  *ProviderDeploymentsSetupSessionsCreateOutputAuthConfig  `json:"auth_config,omitempty"`
-	Config      *ProviderDeploymentsSetupSessionsCreateOutputConfig      `json:"config,omitempty"`
+	ProviderId *string `json:"provider_id,omitempty"`
+	// IdentityId - Linked identity ID
+	IdentityId *string `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Identity credential created from this setup session
+	IdentityCredentialId *string                                                  `json:"identity_credential_id,omitempty"`
+	AuthMethod           *ProviderDeploymentsSetupSessionsCreateOutputAuthMethod  `json:"auth_method,omitempty"`
+	Deployment           *ProviderDeploymentsSetupSessionsCreateOutputDeployment  `json:"deployment,omitempty"`
+	Credentials          *ProviderDeploymentsSetupSessionsCreateOutputCredentials `json:"credentials,omitempty"`
+	AuthConfig           *ProviderDeploymentsSetupSessionsCreateOutputAuthConfig  `json:"auth_config,omitempty"`
+	Config               *ProviderDeploymentsSetupSessionsCreateOutputConfig      `json:"config,omitempty"`
 	// UiMode - UI mode for setup
 	UiMode string `json:"ui_mode"`
 	// RedirectUrl - URL to redirect after setup
@@ -462,9 +466,11 @@ type ProviderDeploymentsSetupSessionsCreateBody struct {
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
 	// ProviderAuthCredentialsId - Optional OAuth app credentials to use instead of defaults
-	ProviderAuthCredentialsId *string                                                  `json:"provider_auth_credentials_id,omitempty"`
-	RedirectUrl               *string                                                  `json:"redirect_url,omitempty"`
-	Configuration             *ProviderDeploymentsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
+	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
+	// IdentityId - Optional identity to link this setup session to
+	IdentityId    *string                                                  `json:"identity_id,omitempty"`
+	RedirectUrl   *string                                                  `json:"redirect_url,omitempty"`
+	Configuration *ProviderDeploymentsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
 }
 
 // MapProviderDeploymentsSetupSessionsCreateBodyFromJSON deserializes JSON data into a ProviderDeploymentsSetupSessionsCreateBody.

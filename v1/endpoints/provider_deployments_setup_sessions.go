@@ -55,9 +55,11 @@ type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
 	// ProviderAuthCredentialsId - Optional OAuth app credentials to use instead of defaults
-	ProviderAuthCredentialsId *string         `json:"provider_auth_credentials_id,omitempty"`
-	RedirectUrl               *string         `json:"redirect_url,omitempty"`
-	Configuration             *map[string]any `json:"configuration,omitempty"`
+	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
+	// IdentityId - Optional identity to link this setup session to
+	IdentityId    *string         `json:"identity_id,omitempty"`
+	RedirectUrl   *string         `json:"redirect_url,omitempty"`
+	Configuration *map[string]any `json:"configuration,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEndpointUpdateBody contains the request body for Update.
@@ -66,6 +68,8 @@ type ProviderDeploymentsSetupSessionsEndpointUpdateBody struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IdentityId - Optional identity to link this setup session to
+	IdentityId *string `json:"identity_id,omitempty"`
 }
 
 // List returns a paginated list of provider setup sessions.

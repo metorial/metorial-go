@@ -378,12 +378,16 @@ type ProviderDeploymentsSetupSessionsListOutputItems struct {
 	// Configuration - Setup session configuration
 	Configuration *map[string]any `json:"configuration,omitempty"`
 	// ProviderId - Provider ID
-	ProviderId  *string                                                     `json:"provider_id,omitempty"`
-	AuthMethod  *ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod  `json:"auth_method,omitempty"`
-	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsDeployment  `json:"deployment,omitempty"`
-	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsCredentials `json:"credentials,omitempty"`
-	AuthConfig  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig  `json:"auth_config,omitempty"`
-	Config      *ProviderDeploymentsSetupSessionsListOutputItemsConfig      `json:"config,omitempty"`
+	ProviderId *string `json:"provider_id,omitempty"`
+	// IdentityId - Linked identity ID
+	IdentityId *string `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Identity credential created from this setup session
+	IdentityCredentialId *string                                                     `json:"identity_credential_id,omitempty"`
+	AuthMethod           *ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod  `json:"auth_method,omitempty"`
+	Deployment           *ProviderDeploymentsSetupSessionsListOutputItemsDeployment  `json:"deployment,omitempty"`
+	Credentials          *ProviderDeploymentsSetupSessionsListOutputItemsCredentials `json:"credentials,omitempty"`
+	AuthConfig           *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig  `json:"auth_config,omitempty"`
+	Config               *ProviderDeploymentsSetupSessionsListOutputItemsConfig      `json:"config,omitempty"`
 	// UiMode - UI mode for setup
 	UiMode string `json:"ui_mode"`
 	// RedirectUrl - URL to redirect after setup

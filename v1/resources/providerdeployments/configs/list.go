@@ -167,6 +167,14 @@ type ProviderDeploymentsConfigsListQuery struct {
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
 	// ProviderConfigVaultId - Filter by config vault ID(s)
 	ProviderConfigVaultId *any `json:"provider_config_vault_id,omitempty"`
+	// ActorId - Filter by actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Filter by identity credential ID(s)
+	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
 	// CreatedAt - Filter provider config creation time by date range

@@ -28,6 +28,14 @@ type ProviderDeploymentsEndpointListParams struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderVersionId - Filter by version ID(s)
 	ProviderVersionId *any `json:"provider_version_id,omitempty"`
+	// ActorId - Filter by actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// IdentityCredentialId - Filter by identity credential ID(s)
+	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Search - Search by name or description
