@@ -53,6 +53,7 @@ type ProviderTemplatesListQuery struct {
 	Order                *string  `json:"order,omitempty"`
 	Id                   *any     `json:"id,omitempty"`
 	ProviderDeploymentId *any     `json:"provider_deployment_id,omitempty"`
+	Search               *string  `json:"search,omitempty"`
 	Status               *any     `json:"status,omitempty"`
 }
 

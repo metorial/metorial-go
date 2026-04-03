@@ -17,6 +17,7 @@ type MagicMcpServersListOutputItems struct {
 	Object             string                                    `json:"object"`
 	Id                 string                                    `json:"id"`
 	Status             string                                    `json:"status"`
+	Source             string                                    `json:"source"`
 	SessionTemplateId  string                                    `json:"session_template_id"`
 	ProviderTemplateId *string                                   `json:"provider_template_id,omitempty"`
 	Endpoints          []MagicMcpServersListOutputItemsEndpoints `json:"endpoints"`
@@ -65,6 +66,7 @@ type MagicMcpServersListQuery struct {
 	ConsumerId        *any     `json:"consumer_id,omitempty"`
 	ConsumerProfileId *any     `json:"consumer_profile_id,omitempty"`
 	Search            *string  `json:"search,omitempty"`
+	PreconfiguredOnly *bool    `json:"preconfigured_only,omitempty"`
 }
 
 // MapMagicMcpServersListQueryFromJSON deserializes JSON data into a MagicMcpServersListQuery.

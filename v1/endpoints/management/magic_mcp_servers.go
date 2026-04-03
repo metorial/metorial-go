@@ -27,6 +27,7 @@ type MagicMcpServersEndpointListParams struct {
 	ConsumerId        *any     `json:"consumer_id,omitempty"`
 	ConsumerProfileId *any     `json:"consumer_profile_id,omitempty"`
 	Search            *string  `json:"search,omitempty"`
+	PreconfiguredOnly *bool    `json:"preconfigured_only,omitempty"`
 }
 
 // MagicMcpServersEndpointCreateBody contains the request body for Create.
