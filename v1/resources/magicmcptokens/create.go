@@ -48,10 +48,10 @@ func MapMagicMcpTokensCreateOutputToJSON(v *MagicMcpTokensCreateOutput) ([]byte,
 
 // MagicMcpTokensCreateBody represents the magic mcp tokens create body type.
 type MagicMcpTokensCreateBody struct {
-	Name        string          `json:"name"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	GroupIds    *[]string       `json:"group_ids,omitempty"`
+	Name             string          `json:"name"`
+	Description      *string         `json:"description,omitempty"`
+	Metadata         *map[string]any `json:"metadata,omitempty"`
+	MagicMcpGroupIds *[]string       `json:"magic_mcp_group_ids,omitempty"`
 }
 
 // MapMagicMcpTokensCreateBodyFromJSON deserializes JSON data into a MagicMcpTokensCreateBody.

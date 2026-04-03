@@ -140,8 +140,6 @@ type SessionTemplatesProvidersListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
 	SessionTemplateId *any `json:"session_template_id,omitempty"`
-	// SessionTemplateTemplateId - Filter by session template template ID(s)
-	SessionTemplateTemplateId *any `json:"session_template_template_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)

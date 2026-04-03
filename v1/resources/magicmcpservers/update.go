@@ -18,7 +18,6 @@ type MagicMcpServersUpdateOutput struct {
 	Id                 string                                 `json:"id"`
 	Status             string                                 `json:"status"`
 	Source             string                                 `json:"source"`
-	SessionTemplateId  string                                 `json:"session_template_id"`
 	ProviderTemplateId *string                                `json:"provider_template_id,omitempty"`
 	Endpoints          []MagicMcpServersUpdateOutputEndpoints `json:"endpoints"`
 	Name               *string                                `json:"name,omitempty"`

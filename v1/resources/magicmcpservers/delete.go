@@ -18,7 +18,6 @@ type MagicMcpServersDeleteOutput struct {
 	Id                 string                                 `json:"id"`
 	Status             string                                 `json:"status"`
 	Source             string                                 `json:"source"`
-	SessionTemplateId  string                                 `json:"session_template_id"`
 	ProviderTemplateId *string                                `json:"provider_template_id,omitempty"`
 	Endpoints          []MagicMcpServersDeleteOutputEndpoints `json:"endpoints"`
 	Name               *string                                `json:"name,omitempty"`

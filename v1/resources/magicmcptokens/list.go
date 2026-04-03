@@ -60,13 +60,14 @@ func MapMagicMcpTokensListOutputToJSON(v *MagicMcpTokensListOutput) ([]byte, err
 
 // MagicMcpTokensListQuery represents the magic mcp tokens list query type.
 type MagicMcpTokensListQuery struct {
-	Limit           *float64 `json:"limit,omitempty"`
-	After           *string  `json:"after,omitempty"`
-	Before          *string  `json:"before,omitempty"`
-	Cursor          *string  `json:"cursor,omitempty"`
-	Order           *string  `json:"order,omitempty"`
-	Status          *any     `json:"status,omitempty"`
-	MagicMcpGroupId *any     `json:"magic_mcp_group_id,omitempty"`
+	Limit            *float64 `json:"limit,omitempty"`
+	After            *string  `json:"after,omitempty"`
+	Before           *string  `json:"before,omitempty"`
+	Cursor           *string  `json:"cursor,omitempty"`
+	Order            *string  `json:"order,omitempty"`
+	Status           *any     `json:"status,omitempty"`
+	MagicMcpGroupId  *any     `json:"magic_mcp_group_id,omitempty"`
+	MagicMcpServerId *any     `json:"magic_mcp_server_id,omitempty"`
 }
 
 // MapMagicMcpTokensListQueryFromJSON deserializes JSON data into a MagicMcpTokensListQuery.
