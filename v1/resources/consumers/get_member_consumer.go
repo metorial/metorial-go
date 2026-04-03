@@ -5,14 +5,48 @@ import (
 	"time"
 )
 
+// ConsumersGetMemberConsumerOutputProfileGroupsGroup represents the consumers get member consumer output profile groups group type.
+type ConsumersGetMemberConsumerOutputProfileGroupsGroup struct {
+	Object      string    `json:"object"`
+	Id          string    `json:"id"`
+	Status      string    `json:"status"`
+	Name        string    `json:"name"`
+	Description *string   `json:"description,omitempty"`
+	IsDefault   bool      `json:"is_default"`
+	SsoGroupIds []string  `json:"sso_group_ids"`
+	CreatedAt   time.Time `json:"created_at"`
+	UpdatedAt   time.Time `json:"updated_at"`
+}
+
+// ConsumersGetMemberConsumerOutputProfileGroups represents the consumers get member consumer output profile groups type.
+type ConsumersGetMemberConsumerOutputProfileGroups struct {
+	Object      string                                             `json:"object"`
+	Group       ConsumersGetMemberConsumerOutputProfileGroupsGroup `json:"group"`
+	AssignedVia string                                             `json:"assigned_via"`
+}
+
+// ConsumersGetMemberConsumerOutputProfile represents the consumers get member consumer output profile type.
+type ConsumersGetMemberConsumerOutputProfile struct {
+	Object     string                                           `json:"object"`
+	Id         string                                           `json:"id"`
+	Name       string                                           `json:"name"`
+	Email      string                                           `json:"email"`
+	ImageUrl   string                                           `json:"image_url"`
+	Groups     *[]ConsumersGetMemberConsumerOutputProfileGroups `json:"groups,omitempty"`
+	ConsumerId string                                           `json:"consumer_id"`
+	CreatedAt  time.Time                                        `json:"created_at"`
+	UpdatedAt  time.Time                                        `json:"updated_at"`
+}
+
 // ConsumersGetMemberConsumerOutput represents the consumers get member consumer output type.
 type ConsumersGetMemberConsumerOutput struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	Object    string                                  `json:"object"`
+	Id        string                                  `json:"id"`
+	Name      string                                  `json:"name"`
+	Email     string                                  `json:"email"`
+	CreatedAt time.Time                               `json:"created_at"`
+	UpdatedAt time.Time                               `json:"updated_at"`
+	Profile   ConsumersGetMemberConsumerOutputProfile `json:"profile"`
 }
 
 // MapConsumersGetMemberConsumerOutputFromJSON deserializes JSON data into a ConsumersGetMemberConsumerOutput.

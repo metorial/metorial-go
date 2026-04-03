@@ -57,8 +57,12 @@ type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// ProviderAuthCredentialsId - Optional OAuth app credentials to use instead of defaults
 	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
 	// IdentityId - Optional identity to link this setup session to
-	IdentityId    *string         `json:"identity_id,omitempty"`
-	RedirectUrl   *string         `json:"redirect_url,omitempty"`
+	IdentityId *string `json:"identity_id,omitempty"`
+	// ConsumerId - Optional consumer to link this setup session to
+	ConsumerId  *string `json:"consumer_id,omitempty"`
+	RedirectUrl *string `json:"redirect_url,omitempty"`
+	// Type - The type of setup session, determining the flow and outcome of the session
+	Type          *string         `json:"type,omitempty"`
 	Configuration *map[string]any `json:"configuration,omitempty"`
 }
 
