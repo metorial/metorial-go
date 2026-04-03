@@ -33,6 +33,7 @@ type MagicMcpTokensEndpointCreateBody struct {
 	Description      *string         `json:"description,omitempty"`
 	Metadata         *map[string]any `json:"metadata,omitempty"`
 	MagicMcpGroupIds *[]string       `json:"magic_mcp_group_ids,omitempty"`
+	MagicMcpServerId *string         `json:"magic_mcp_server_id,omitempty"`
 }
 
 // MagicMcpTokensEndpointUpdateBody contains the request body for Update.

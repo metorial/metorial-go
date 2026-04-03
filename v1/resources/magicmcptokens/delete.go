@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// MagicMcpTokensDeleteOutputServer represents the magic mcp tokens delete output server type.
+type MagicMcpTokensDeleteOutputServer struct {
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Status      string  `json:"status"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
 // MagicMcpTokensDeleteOutputGroups represents the magic mcp tokens delete output groups type.
 type MagicMcpTokensDeleteOutputGroups struct {
 	Object      string         `json:"object"`
@@ -26,6 +35,7 @@ type MagicMcpTokensDeleteOutput struct {
 	Secret      string                             `json:"secret"`
 	Name        *string                            `json:"name,omitempty"`
 	Description *string                            `json:"description,omitempty"`
+	Server      *MagicMcpTokensDeleteOutputServer  `json:"server,omitempty"`
 	Groups      []MagicMcpTokensDeleteOutputGroups `json:"groups"`
 	Metadata    map[string]any                     `json:"metadata"`
 	CreatedAt   time.Time                          `json:"created_at"`

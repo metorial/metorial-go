@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// MagicMcpTokensListOutputItemsServer represents the magic mcp tokens list output items server type.
+type MagicMcpTokensListOutputItemsServer struct {
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Status      string  `json:"status"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
 // MagicMcpTokensListOutputItemsGroups represents the magic mcp tokens list output items groups type.
 type MagicMcpTokensListOutputItemsGroups struct {
 	Object      string         `json:"object"`
@@ -26,6 +35,7 @@ type MagicMcpTokensListOutputItems struct {
 	Secret      string                                `json:"secret"`
 	Name        *string                               `json:"name,omitempty"`
 	Description *string                               `json:"description,omitempty"`
+	Server      *MagicMcpTokensListOutputItemsServer  `json:"server,omitempty"`
 	Groups      []MagicMcpTokensListOutputItemsGroups `json:"groups"`
 	Metadata    map[string]any                        `json:"metadata"`
 	CreatedAt   time.Time                             `json:"created_at"`

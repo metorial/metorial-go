@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// MagicMcpTokensCreateOutputServer represents the magic mcp tokens create output server type.
+type MagicMcpTokensCreateOutputServer struct {
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Status      string  `json:"status"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
 // MagicMcpTokensCreateOutputGroups represents the magic mcp tokens create output groups type.
 type MagicMcpTokensCreateOutputGroups struct {
 	Object      string         `json:"object"`
@@ -26,6 +35,7 @@ type MagicMcpTokensCreateOutput struct {
 	Secret      string                             `json:"secret"`
 	Name        *string                            `json:"name,omitempty"`
 	Description *string                            `json:"description,omitempty"`
+	Server      *MagicMcpTokensCreateOutputServer  `json:"server,omitempty"`
 	Groups      []MagicMcpTokensCreateOutputGroups `json:"groups"`
 	Metadata    map[string]any                     `json:"metadata"`
 	CreatedAt   time.Time                          `json:"created_at"`
@@ -52,6 +62,7 @@ type MagicMcpTokensCreateBody struct {
 	Description      *string         `json:"description,omitempty"`
 	Metadata         *map[string]any `json:"metadata,omitempty"`
 	MagicMcpGroupIds *[]string       `json:"magic_mcp_group_ids,omitempty"`
+	MagicMcpServerId *string         `json:"magic_mcp_server_id,omitempty"`
 }
 
 // MapMagicMcpTokensCreateBodyFromJSON deserializes JSON data into a MagicMcpTokensCreateBody.
