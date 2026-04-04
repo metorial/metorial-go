@@ -150,7 +150,6 @@ type MetorialSdk struct {
 }
 
 // New creates a new MetorialSdk with the given options.
-// At minimum, an API key must be provided via WithAPIKey.
 func New(opts ...Option) (*MetorialSdk, error) {
 	o := &options{
 		apiHost: defaultAPIHost,
@@ -159,7 +158,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		opt(o)
 	}
 
-	if o.apiKey == "" {
+	if o.apiKey == "" && !browserSessionAuthAvailable() {
 		return nil, fmt.Errorf("metorial: API key is required, use WithAPIKey option")
 	}
 
