@@ -29,13 +29,12 @@ type MagicMcpSessionsListOutputItemsMagicMcpServer struct {
 
 // MagicMcpSessionsListOutputItems represents the magic mcp sessions list output items type.
 type MagicMcpSessionsListOutputItems struct {
-	Object                    string                                        `json:"object"`
-	Id                        string                                        `json:"id"`
-	SubspaceSessionId         string                                        `json:"subspace_session_id"`
-	SubspaceSessionTemplateId string                                        `json:"subspace_session_template_id"`
-	MagicMcpServer            MagicMcpSessionsListOutputItemsMagicMcpServer `json:"magic_mcp_server"`
-	CreatedAt                 time.Time                                     `json:"created_at"`
-	UpdatedAt                 time.Time                                     `json:"updated_at"`
+	Object         string                                        `json:"object"`
+	Id             string                                        `json:"id"`
+	SessionId      string                                        `json:"session_id"`
+	MagicMcpServer MagicMcpSessionsListOutputItemsMagicMcpServer `json:"magic_mcp_server"`
+	CreatedAt      time.Time                                     `json:"created_at"`
+	UpdatedAt      time.Time                                     `json:"updated_at"`
 }
 
 // MagicMcpSessionsListOutputPagination represents the magic mcp sessions list output pagination type.

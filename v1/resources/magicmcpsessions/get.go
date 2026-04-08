@@ -29,13 +29,12 @@ type MagicMcpSessionsGetOutputMagicMcpServer struct {
 
 // MagicMcpSessionsGetOutput represents the magic mcp sessions get output type.
 type MagicMcpSessionsGetOutput struct {
-	Object                    string                                  `json:"object"`
-	Id                        string                                  `json:"id"`
-	SubspaceSessionId         string                                  `json:"subspace_session_id"`
-	SubspaceSessionTemplateId string                                  `json:"subspace_session_template_id"`
-	MagicMcpServer            MagicMcpSessionsGetOutputMagicMcpServer `json:"magic_mcp_server"`
-	CreatedAt                 time.Time                               `json:"created_at"`
-	UpdatedAt                 time.Time                               `json:"updated_at"`
+	Object         string                                  `json:"object"`
+	Id             string                                  `json:"id"`
+	SessionId      string                                  `json:"session_id"`
+	MagicMcpServer MagicMcpSessionsGetOutputMagicMcpServer `json:"magic_mcp_server"`
+	CreatedAt      time.Time                               `json:"created_at"`
+	UpdatedAt      time.Time                               `json:"updated_at"`
 }
 
 // MapMagicMcpSessionsGetOutputFromJSON deserializes JSON data into a MagicMcpSessionsGetOutput.
