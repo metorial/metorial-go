@@ -92,6 +92,8 @@ type ProviderDeploymentsSetupSessionsCreateOutputCredentials struct {
 	// Id - Unique credentials identifier
 	Id   string `json:"id"`
 	Type string `json:"type"`
+	// Status - Credentials status
+	Status string `json:"status"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
 	// IsManaged - Whether these credentials are managed by Metorial
@@ -147,6 +149,8 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigCredentials struct {
 	// Id - Unique credentials identifier
 	Id   string `json:"id"`
 	Type string `json:"type"`
+	// Status - Credentials status
+	Status string `json:"status"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
 	// IsManaged - Whether these credentials are managed by Metorial
@@ -314,6 +318,8 @@ type ProviderDeploymentsSetupSessionsCreateOutputConfigFromVault struct {
 	Object string `json:"object"`
 	// Id - Unique config vault identifier
 	Id string `json:"id"`
+	// Status - Status of the config vault
+	Status string `json:"status"`
 	// Name - Display name
 	Name string `json:"name"`
 	// Description - Description
@@ -335,6 +341,8 @@ type ProviderDeploymentsSetupSessionsCreateOutputConfig struct {
 	Object string `json:"object"`
 	// Id - Unique config identifier
 	Id string `json:"id"`
+	// Status - Config status
+	Status string `json:"status"`
 	// IsDefault - Whether this is the default config
 	IsDefault bool `json:"is_default"`
 	// Name - Display name

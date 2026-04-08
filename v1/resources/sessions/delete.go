@@ -5,32 +5,32 @@ import (
 	"time"
 )
 
-// SessionsGetOutputUsage represents the sessions get output usage type.
-type SessionsGetOutputUsage struct {
+// SessionsDeleteOutputUsage represents the sessions delete output usage type.
+type SessionsDeleteOutputUsage struct {
 	// TotalProductiveClientMessageCount - Total productive client messages
 	TotalProductiveClientMessageCount float64 `json:"total_productive_client_message_count"`
 	// TotalProductiveProviderMessageCount - Total productive provider messages
 	TotalProductiveProviderMessageCount float64 `json:"total_productive_provider_message_count"`
 }
 
-// SessionsGetOutputProvidersUsage - Usage statistics
-type SessionsGetOutputProvidersUsage struct {
+// SessionsDeleteOutputProvidersUsage - Usage statistics
+type SessionsDeleteOutputProvidersUsage struct {
 	// TotalProductiveClientMessageCount - Total productive client messages
 	TotalProductiveClientMessageCount float64 `json:"total_productive_client_message_count"`
 	// TotalProductiveProviderMessageCount - Total productive provider messages
 	TotalProductiveProviderMessageCount float64 `json:"total_productive_provider_message_count"`
 }
 
-// SessionsGetOutputProvidersToolFilter represents one of several possible types.
+// SessionsDeleteOutputProvidersToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
-type SessionsGetOutputProvidersToolFilter struct {
+type SessionsDeleteOutputProvidersToolFilter struct {
 	Type                *string `json:"type,omitempty"`
 	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
 	Filters             *[]any  `json:"filters,omitempty"`
 }
 
-// SessionsGetOutputProvidersDeployment represents the sessions get output providers deployment type.
-type SessionsGetOutputProvidersDeployment struct {
+// SessionsDeleteOutputProvidersDeployment represents the sessions delete output providers deployment type.
+type SessionsDeleteOutputProvidersDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -51,8 +51,8 @@ type SessionsGetOutputProvidersDeployment struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionsGetOutputProvidersConfig represents the sessions get output providers config type.
-type SessionsGetOutputProvidersConfig struct {
+// SessionsDeleteOutputProvidersConfig represents the sessions delete output providers config type.
+type SessionsDeleteOutputProvidersConfig struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Config ID
@@ -73,14 +73,14 @@ type SessionsGetOutputProvidersConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionsGetOutputProvidersAuthConfig represents the sessions get output providers auth config type.
-type SessionsGetOutputProvidersAuthConfig struct {
+// SessionsDeleteOutputProvidersAuthConfig represents the sessions delete output providers auth config type.
+type SessionsDeleteOutputProvidersAuthConfig struct {
 	Object string `json:"object"`
 	Id     string `json:"id"`
 }
 
-// SessionsGetOutputProviders represents the sessions get output providers type.
-type SessionsGetOutputProviders struct {
+// SessionsDeleteOutputProviders represents the sessions delete output providers type.
+type SessionsDeleteOutputProviders struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Unique session provider identifier
@@ -88,9 +88,9 @@ type SessionsGetOutputProviders struct {
 	// Status - Provider status
 	Status string `json:"status"`
 	// Usage - Usage statistics
-	Usage SessionsGetOutputProvidersUsage `json:"usage"`
+	Usage SessionsDeleteOutputProvidersUsage `json:"usage"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter SessionsGetOutputProvidersToolFilter `json:"tool_filter"`
+	ToolFilter SessionsDeleteOutputProvidersToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// SessionId - Parent session ID
@@ -98,18 +98,18 @@ type SessionsGetOutputProviders struct {
 	// FromTemplateId - Source template ID
 	FromTemplateId *string `json:"from_template_id,omitempty"`
 	// FromTemplateProviderId - Source template provider ID
-	FromTemplateProviderId *string                               `json:"from_template_provider_id,omitempty"`
-	Deployment             SessionsGetOutputProvidersDeployment  `json:"deployment"`
-	Config                 SessionsGetOutputProvidersConfig      `json:"config"`
-	AuthConfig             *SessionsGetOutputProvidersAuthConfig `json:"auth_config,omitempty"`
+	FromTemplateProviderId *string                                  `json:"from_template_provider_id,omitempty"`
+	Deployment             SessionsDeleteOutputProvidersDeployment  `json:"deployment"`
+	Config                 SessionsDeleteOutputProvidersConfig      `json:"config"`
+	AuthConfig             *SessionsDeleteOutputProvidersAuthConfig `json:"auth_config,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionsGetOutput represents the sessions get output type.
-type SessionsGetOutput struct {
+// SessionsDeleteOutput represents the sessions delete output type.
+type SessionsDeleteOutput struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Unique session identifier
@@ -127,10 +127,10 @@ type SessionsGetOutput struct {
 	// ConnectionUrl - MCP connection URL for this session
 	ConnectionUrl string `json:"connection_url"`
 	// ClientSecret - Session-scoped fine grained client secret token
-	ClientSecret *string                `json:"client_secret,omitempty"`
-	Usage        SessionsGetOutputUsage `json:"usage"`
+	ClientSecret *string                   `json:"client_secret,omitempty"`
+	Usage        SessionsDeleteOutputUsage `json:"usage"`
 	// Providers - Session providers
-	Providers []SessionsGetOutputProviders `json:"providers"`
+	Providers []SessionsDeleteOutputProviders `json:"providers"`
 	// FromTemplatesIds - Template IDs this session was created from
 	FromTemplatesIds []string `json:"from_templates_ids"`
 	// HasErrors - Whether the session has any errors
@@ -143,16 +143,16 @@ type SessionsGetOutput struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MapSessionsGetOutputFromJSON deserializes JSON data into a SessionsGetOutput.
-func MapSessionsGetOutputFromJSON(data []byte) (*SessionsGetOutput, error) {
-	var v SessionsGetOutput
+// MapSessionsDeleteOutputFromJSON deserializes JSON data into a SessionsDeleteOutput.
+func MapSessionsDeleteOutputFromJSON(data []byte) (*SessionsDeleteOutput, error) {
+	var v SessionsDeleteOutput
 	if err := json.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 	return &v, nil
 }
 
-// MapSessionsGetOutputToJSON serializes a SessionsGetOutput to JSON.
-func MapSessionsGetOutputToJSON(v *SessionsGetOutput) ([]byte, error) {
+// MapSessionsDeleteOutputToJSON serializes a SessionsDeleteOutput to JSON.
+func MapSessionsDeleteOutputToJSON(v *SessionsDeleteOutput) ([]byte, error) {
 	return json.Marshal(v)
 }

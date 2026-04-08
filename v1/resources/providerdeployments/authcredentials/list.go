@@ -12,6 +12,8 @@ type ProviderDeploymentsAuthCredentialsListOutputItems struct {
 	// Id - Unique credentials identifier
 	Id   string `json:"id"`
 	Type string `json:"type"`
+	// Status - Credentials status
+	Status string `json:"status"`
 	// IsDefault - Whether this is the default credentials for the provider
 	IsDefault bool `json:"is_default"`
 	// IsManaged - Whether these credentials are managed by Metorial

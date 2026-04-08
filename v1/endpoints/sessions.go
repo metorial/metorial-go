@@ -114,3 +114,15 @@ func (e *SessionsEndpoint) Update(sessionId string, body *SessionsEndpointUpdate
 	}
 	return &result, nil
 }
+
+// Delete deletes a session.
+func (e *SessionsEndpoint) Delete(sessionId string) (*sessions.SessionsDeleteOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"sessions", sessionId},
+	}
+	var result sessions.SessionsDeleteOutput
+	if err := e.client.Delete(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}

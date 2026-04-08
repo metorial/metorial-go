@@ -33,6 +33,8 @@ type ProviderDeploymentsConfigVaultsGetOutput struct {
 	Object string `json:"object"`
 	// Id - Unique config vault identifier
 	Id string `json:"id"`
+	// Status - Status of the config vault
+	Status string `json:"status"`
 	// Name - Display name
 	Name string `json:"name"`
 	// Description - Description
