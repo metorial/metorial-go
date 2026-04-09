@@ -22,6 +22,8 @@ type ConsumersEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	Search *string  `json:"search,omitempty"`
+	Id     *string  `json:"id,omitempty"`
 }
 
 // ConsumersEndpointCreateBody contains the request body for Create.

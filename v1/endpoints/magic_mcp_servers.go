@@ -76,6 +76,18 @@ func (e *MagicMcpServersEndpoint) Get(magicMcpServerId string) (*magicmcpservers
 	return &result, nil
 }
 
+// Tools returns the effective set of tools available through the providers backing a magic MCP server.
+func (e *MagicMcpServersEndpoint) Tools(magicMcpServerId string) (*magicmcpservers.MagicMcpServersToolsOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"magic-mcp-servers", magicMcpServerId, "tools"},
+	}
+	var result magicmcpservers.MagicMcpServersToolsOutput
+	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // Create creates a magic MCP server with a new session template. A Subspace session is created automatically on first connection and then reused.
 func (e *MagicMcpServersEndpoint) Create(body *MagicMcpServersEndpointCreateBody) (*magicmcpservers.MagicMcpServersCreateOutput, error) {
 	req := &endpoint.Request{

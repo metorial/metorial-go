@@ -14,6 +14,16 @@ type MagicMcpTokensAddGroupsOutputServer struct {
 	Description *string `json:"description,omitempty"`
 }
 
+// MagicMcpTokensAddGroupsOutputEndpoint represents the magic mcp tokens add groups output endpoint type.
+type MagicMcpTokensAddGroupsOutputEndpoint struct {
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Status      string  `json:"status"`
+	Slug        string  `json:"slug"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+}
+
 // MagicMcpTokensAddGroupsOutputGroups represents the magic mcp tokens add groups output groups type.
 type MagicMcpTokensAddGroupsOutputGroups struct {
 	Object      string         `json:"object"`
@@ -29,17 +39,18 @@ type MagicMcpTokensAddGroupsOutputGroups struct {
 
 // MagicMcpTokensAddGroupsOutput represents the magic mcp tokens add groups output type.
 type MagicMcpTokensAddGroupsOutput struct {
-	Object      string                                `json:"object"`
-	Id          string                                `json:"id"`
-	Status      string                                `json:"status"`
-	Secret      string                                `json:"secret"`
-	Name        *string                               `json:"name,omitempty"`
-	Description *string                               `json:"description,omitempty"`
-	Server      *MagicMcpTokensAddGroupsOutputServer  `json:"server,omitempty"`
-	Groups      []MagicMcpTokensAddGroupsOutputGroups `json:"groups"`
-	Metadata    map[string]any                        `json:"metadata"`
-	CreatedAt   time.Time                             `json:"created_at"`
-	UpdatedAt   time.Time                             `json:"updated_at"`
+	Object      string                                 `json:"object"`
+	Id          string                                 `json:"id"`
+	Status      string                                 `json:"status"`
+	Secret      string                                 `json:"secret"`
+	Name        *string                                `json:"name,omitempty"`
+	Description *string                                `json:"description,omitempty"`
+	Server      *MagicMcpTokensAddGroupsOutputServer   `json:"server,omitempty"`
+	Endpoint    *MagicMcpTokensAddGroupsOutputEndpoint `json:"endpoint,omitempty"`
+	Groups      []MagicMcpTokensAddGroupsOutputGroups  `json:"groups"`
+	Metadata    map[string]any                         `json:"metadata"`
+	CreatedAt   time.Time                              `json:"created_at"`
+	UpdatedAt   time.Time                              `json:"updated_at"`
 }
 
 // MapMagicMcpTokensAddGroupsOutputFromJSON deserializes JSON data into a MagicMcpTokensAddGroupsOutput.

@@ -26,16 +26,18 @@ type PortalsEndpointListParams struct {
 
 // PortalsEndpointCreateBody contains the request body for Create.
 type PortalsEndpointCreateBody struct {
-	Name                       string   `json:"name"`
-	Description                *string  `json:"description,omitempty"`
-	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	Name                       string            `json:"name"`
+	Description                *string           `json:"description,omitempty"`
+	AllowedRedirectUrlFilters  *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
+	SessionExpiryTimeInSeconds *float64          `json:"session_expiry_time_in_seconds,omitempty"`
 }
 
 // PortalsEndpointUpdateBody contains the request body for Update.
 type PortalsEndpointUpdateBody struct {
-	Name                       *string  `json:"name,omitempty"`
-	Description                *string  `json:"description,omitempty"`
-	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	Name                       *string           `json:"name,omitempty"`
+	Description                *string           `json:"description,omitempty"`
+	AllowedRedirectUrlFilters  *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
+	SessionExpiryTimeInSeconds *float64          `json:"session_expiry_time_in_seconds,omitempty"`
 }
 
 // List returns a paginated list of portals.

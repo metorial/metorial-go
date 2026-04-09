@@ -5,10 +5,16 @@ import (
 	"time"
 )
 
+// PortalsCreateOutputAuthAllowedRedirectUrlFilters represents the portals create output auth allowed redirect url filters type.
+type PortalsCreateOutputAuthAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsCreateOutputAuth represents the portals create output auth type.
 type PortalsCreateOutputAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string                                             `json:"object"`
+	SessionExpiryTimeInSeconds float64                                            `json:"session_expiry_time_in_seconds"`
+	AllowedRedirectUrlFilters  []PortalsCreateOutputAuthAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters"`
 }
 
 // PortalsCreateOutputUrls represents the portals create output urls type.
@@ -52,11 +58,17 @@ func MapPortalsCreateOutputToJSON(v *PortalsCreateOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// PortalsCreateBodyAllowedRedirectUrlFilters represents the portals create body allowed redirect url filters type.
+type PortalsCreateBodyAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsCreateBody represents the portals create body type.
 type PortalsCreateBody struct {
-	Name                       string   `json:"name"`
-	Description                *string  `json:"description,omitempty"`
-	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	Name                       string                                        `json:"name"`
+	Description                *string                                       `json:"description,omitempty"`
+	AllowedRedirectUrlFilters  *[]PortalsCreateBodyAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters,omitempty"`
+	SessionExpiryTimeInSeconds *float64                                      `json:"session_expiry_time_in_seconds,omitempty"`
 }
 
 // MapPortalsCreateBodyFromJSON deserializes JSON data into a PortalsCreateBody.

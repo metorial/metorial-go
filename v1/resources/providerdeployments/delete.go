@@ -67,6 +67,8 @@ type ProviderDeploymentsDeleteOutput struct {
 	Object string `json:"object"`
 	// Id - Unique deployment identifier
 	Id string `json:"id"`
+	// Status - Deployment status
+	Status string `json:"status"`
 	// IsDefault - Whether this is the default deployment
 	IsDefault bool `json:"is_default"`
 	// Name - Display name

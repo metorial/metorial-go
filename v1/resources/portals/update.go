@@ -5,10 +5,16 @@ import (
 	"time"
 )
 
+// PortalsUpdateOutputAuthAllowedRedirectUrlFilters represents the portals update output auth allowed redirect url filters type.
+type PortalsUpdateOutputAuthAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsUpdateOutputAuth represents the portals update output auth type.
 type PortalsUpdateOutputAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string                                             `json:"object"`
+	SessionExpiryTimeInSeconds float64                                            `json:"session_expiry_time_in_seconds"`
+	AllowedRedirectUrlFilters  []PortalsUpdateOutputAuthAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters"`
 }
 
 // PortalsUpdateOutputUrls represents the portals update output urls type.
@@ -52,11 +58,17 @@ func MapPortalsUpdateOutputToJSON(v *PortalsUpdateOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// PortalsUpdateBodyAllowedRedirectUrlFilters represents the portals update body allowed redirect url filters type.
+type PortalsUpdateBodyAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsUpdateBody represents the portals update body type.
 type PortalsUpdateBody struct {
-	Name                       *string  `json:"name,omitempty"`
-	Description                *string  `json:"description,omitempty"`
-	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	Name                       *string                                       `json:"name,omitempty"`
+	Description                *string                                       `json:"description,omitempty"`
+	AllowedRedirectUrlFilters  *[]PortalsUpdateBodyAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters,omitempty"`
+	SessionExpiryTimeInSeconds *float64                                      `json:"session_expiry_time_in_seconds,omitempty"`
 }
 
 // MapPortalsUpdateBodyFromJSON deserializes JSON data into a PortalsUpdateBody.

@@ -116,3 +116,15 @@ func (e *SessionTemplatesEndpoint) Update(sessionTemplateId string, body *Sessio
 	}
 	return &result, nil
 }
+
+// Delete deletes a specific session template.
+func (e *SessionTemplatesEndpoint) Delete(sessionTemplateId string) (*sessiontemplates.SessionTemplatesDeleteOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"session-templates", sessionTemplateId},
+	}
+	var result sessiontemplates.SessionTemplatesDeleteOutput
+	if err := e.client.Delete(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}

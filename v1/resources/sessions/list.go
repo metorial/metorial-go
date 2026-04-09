@@ -114,6 +114,8 @@ type SessionsListOutputItems struct {
 	Object string `json:"object"`
 	// Id - Unique session identifier
 	Id string `json:"id"`
+	// Status - Session status
+	Status string `json:"status"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description

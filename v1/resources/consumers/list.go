@@ -48,6 +48,8 @@ type ConsumersListQuery struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	Search *string  `json:"search,omitempty"`
+	Id     *string  `json:"id,omitempty"`
 }
 
 // MapConsumersListQueryFromJSON deserializes JSON data into a ConsumersListQuery.

@@ -92,6 +92,8 @@ type SessionTemplatesListOutputItems struct {
 	Object string `json:"object"`
 	// Id - Unique session template identifier
 	Id string `json:"id"`
+	// Status - Status of the session template
+	Status string `json:"status"`
 	// Name - Template name
 	Name string `json:"name"`
 	// Description - Template description
