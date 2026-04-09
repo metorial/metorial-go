@@ -34,6 +34,7 @@ type ConsumersProfilesGetOutput struct {
 	ImageUrl   string                              `json:"image_url"`
 	Groups     *[]ConsumersProfilesGetOutputGroups `json:"groups,omitempty"`
 	ConsumerId string                              `json:"consumer_id"`
+	Status     string                              `json:"status"`
 	CreatedAt  time.Time                           `json:"created_at"`
 	UpdatedAt  time.Time                           `json:"updated_at"`
 }

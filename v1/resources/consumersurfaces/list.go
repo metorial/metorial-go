@@ -7,8 +7,9 @@ import (
 
 // ConsumerSurfacesListOutputItemsAuth represents the consumer surfaces list output items auth type.
 type ConsumerSurfacesListOutputItemsAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string   `json:"object"`
+	SessionExpiryTimeInSeconds float64  `json:"session_expiry_time_in_seconds"`
+	EmailWhitelist             []string `json:"email_whitelist"`
 }
 
 // ConsumerSurfacesListOutputItems represents the consumer surfaces list output items type.

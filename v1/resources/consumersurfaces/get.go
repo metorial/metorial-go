@@ -7,8 +7,9 @@ import (
 
 // ConsumerSurfacesGetOutputAuth represents the consumer surfaces get output auth type.
 type ConsumerSurfacesGetOutputAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string   `json:"object"`
+	SessionExpiryTimeInSeconds float64  `json:"session_expiry_time_in_seconds"`
+	EmailWhitelist             []string `json:"email_whitelist"`
 }
 
 // ConsumerSurfacesGetOutput represents the consumer surfaces get output type.
