@@ -5,10 +5,16 @@ import (
 	"time"
 )
 
+// PortalsDeleteOutputAuthAllowedRedirectUrlFilters represents the portals delete output auth allowed redirect url filters type.
+type PortalsDeleteOutputAuthAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsDeleteOutputAuth represents the portals delete output auth type.
 type PortalsDeleteOutputAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string                                             `json:"object"`
+	SessionExpiryTimeInSeconds float64                                            `json:"session_expiry_time_in_seconds"`
+	AllowedRedirectUrlFilters  []PortalsDeleteOutputAuthAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters"`
 }
 
 // PortalsDeleteOutputUrls represents the portals delete output urls type.

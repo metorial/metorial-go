@@ -17,23 +17,25 @@ func NewMagicMcpTokensEndpoint(client *endpoint.Client) *MagicMcpTokensEndpoint 
 
 // MagicMcpTokensEndpointListParams contains optional query parameters for List.
 type MagicMcpTokensEndpointListParams struct {
-	Limit            *float64 `json:"limit,omitempty"`
-	After            *string  `json:"after,omitempty"`
-	Before           *string  `json:"before,omitempty"`
-	Cursor           *string  `json:"cursor,omitempty"`
-	Order            *string  `json:"order,omitempty"`
-	Status           *any     `json:"status,omitempty"`
-	MagicMcpGroupId  *any     `json:"magic_mcp_group_id,omitempty"`
-	MagicMcpServerId *any     `json:"magic_mcp_server_id,omitempty"`
+	Limit              *float64 `json:"limit,omitempty"`
+	After              *string  `json:"after,omitempty"`
+	Before             *string  `json:"before,omitempty"`
+	Cursor             *string  `json:"cursor,omitempty"`
+	Order              *string  `json:"order,omitempty"`
+	Status             *any     `json:"status,omitempty"`
+	MagicMcpGroupId    *any     `json:"magic_mcp_group_id,omitempty"`
+	MagicMcpServerId   *any     `json:"magic_mcp_server_id,omitempty"`
+	MagicMcpEndpointId *any     `json:"magic_mcp_endpoint_id,omitempty"`
 }
 
 // MagicMcpTokensEndpointCreateBody contains the request body for Create.
 type MagicMcpTokensEndpointCreateBody struct {
-	Name             string          `json:"name"`
-	Description      *string         `json:"description,omitempty"`
-	Metadata         *map[string]any `json:"metadata,omitempty"`
-	MagicMcpGroupIds *[]string       `json:"magic_mcp_group_ids,omitempty"`
-	MagicMcpServerId *string         `json:"magic_mcp_server_id,omitempty"`
+	Name               string          `json:"name"`
+	Description        *string         `json:"description,omitempty"`
+	Metadata           *map[string]any `json:"metadata,omitempty"`
+	MagicMcpGroupIds   *[]string       `json:"magic_mcp_group_ids,omitempty"`
+	MagicMcpServerId   *string         `json:"magic_mcp_server_id,omitempty"`
+	MagicMcpEndpointId *string         `json:"magic_mcp_endpoint_id,omitempty"`
 }
 
 // MagicMcpTokensEndpointUpdateBody contains the request body for Update.

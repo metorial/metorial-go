@@ -27,14 +27,33 @@ type MagicMcpSessionsGetOutputMagicMcpServer struct {
 	UpdatedAt          time.Time                                          `json:"updated_at"`
 }
 
+// MagicMcpSessionsGetOutputMagicMcpEndpoint represents the magic mcp sessions get output magic mcp endpoint type.
+type MagicMcpSessionsGetOutputMagicMcpEndpoint struct {
+	Object            string           `json:"object"`
+	Id                string           `json:"id"`
+	Status            string           `json:"status"`
+	Slug              string           `json:"slug"`
+	Url               string           `json:"url"`
+	ConsumerProfileId *string          `json:"consumer_profile_id,omitempty"`
+	SessionTemplateId *string          `json:"session_template_id,omitempty"`
+	SessionId         *string          `json:"session_id,omitempty"`
+	Servers           []map[string]any `json:"servers"`
+	Name              *string          `json:"name,omitempty"`
+	Description       *string          `json:"description,omitempty"`
+	Metadata          map[string]any   `json:"metadata"`
+	CreatedAt         time.Time        `json:"created_at"`
+	UpdatedAt         time.Time        `json:"updated_at"`
+}
+
 // MagicMcpSessionsGetOutput represents the magic mcp sessions get output type.
 type MagicMcpSessionsGetOutput struct {
-	Object         string                                  `json:"object"`
-	Id             string                                  `json:"id"`
-	SessionId      string                                  `json:"session_id"`
-	MagicMcpServer MagicMcpSessionsGetOutputMagicMcpServer `json:"magic_mcp_server"`
-	CreatedAt      time.Time                               `json:"created_at"`
-	UpdatedAt      time.Time                               `json:"updated_at"`
+	Object           string                                     `json:"object"`
+	Id               string                                     `json:"id"`
+	MagicMcpServer   *MagicMcpSessionsGetOutputMagicMcpServer   `json:"magic_mcp_server,omitempty"`
+	MagicMcpEndpoint *MagicMcpSessionsGetOutputMagicMcpEndpoint `json:"magic_mcp_endpoint,omitempty"`
+	SessionId        string                                     `json:"session_id"`
+	CreatedAt        time.Time                                  `json:"created_at"`
+	UpdatedAt        time.Time                                  `json:"updated_at"`
 }
 
 // MapMagicMcpSessionsGetOutputFromJSON deserializes JSON data into a MagicMcpSessionsGetOutput.
