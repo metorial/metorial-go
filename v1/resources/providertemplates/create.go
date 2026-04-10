@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// ProviderTemplatesCreateOutputToolFilters represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type ProviderTemplatesCreateOutputToolFilters struct {
+	Type                *string `json:"type,omitempty"`
+	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
+	Filters             *[]any  `json:"filters,omitempty"`
+}
+
 // ProviderTemplatesCreateOutput represents the provider templates create output type.
 type ProviderTemplatesCreateOutput struct {
 	Object               string         `json:"object"`
@@ -14,8 +22,10 @@ type ProviderTemplatesCreateOutput struct {
 	Description          *string        `json:"description,omitempty"`
 	Metadata             map[string]any `json:"metadata"`
 	ProviderDeploymentId string         `json:"provider_deployment_id"`
-	CreatedAt            time.Time      `json:"created_at"`
-	UpdatedAt            time.Time      `json:"updated_at"`
+	// ToolFilters - Tool filter configuration
+	ToolFilters ProviderTemplatesCreateOutputToolFilters `json:"tool_filters"`
+	CreatedAt   time.Time                                `json:"created_at"`
+	UpdatedAt   time.Time                                `json:"updated_at"`
 }
 
 // MapProviderTemplatesCreateOutputFromJSON deserializes JSON data into a ProviderTemplatesCreateOutput.
@@ -46,6 +56,7 @@ type ProviderTemplatesCreateBody struct {
 	Name                 string                                         `json:"name"`
 	Description          *string                                        `json:"description,omitempty"`
 	Metadata             *map[string]any                                `json:"metadata,omitempty"`
+	ToolFilers           *any                                           `json:"tool_filers,omitempty"`
 	ProviderDeploymentId *string                                        `json:"provider_deployment_id,omitempty"`
 	ProviderDeployment   *ProviderTemplatesCreateBodyProviderDeployment `json:"provider_deployment,omitempty"`
 }

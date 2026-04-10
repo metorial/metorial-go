@@ -33,6 +33,7 @@ type ProviderTemplatesEndpointCreateBody struct {
 	Name                 string          `json:"name"`
 	Description          *string         `json:"description,omitempty"`
 	Metadata             *map[string]any `json:"metadata,omitempty"`
+	ToolFilers           *any            `json:"tool_filers,omitempty"`
 	ProviderDeploymentId *string         `json:"provider_deployment_id,omitempty"`
 	ProviderDeployment   *map[string]any `json:"provider_deployment,omitempty"`
 }
@@ -42,6 +43,7 @@ type ProviderTemplatesEndpointUpdateBody struct {
 	Name        *string         `json:"name,omitempty"`
 	Description *string         `json:"description,omitempty"`
 	Metadata    *map[string]any `json:"metadata,omitempty"`
+	ToolFilters *any            `json:"tool_filters,omitempty"`
 }
 
 // List returns a paginated list of provider templates.

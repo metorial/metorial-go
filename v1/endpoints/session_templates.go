@@ -128,3 +128,15 @@ func (e *SessionTemplatesEndpoint) Delete(sessionTemplateId string) (*sessiontem
 	}
 	return &result, nil
 }
+
+// ListTools returns the effective set of tools available through the providers in a session template, filtered by the tool filters of each provider, deployment, config, and auth config.
+func (e *SessionTemplatesEndpoint) ListTools(sessionTemplateId string) (*sessiontemplates.SessionTemplatesListToolsOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"session-templates", sessionTemplateId, "tools"},
+	}
+	var result sessiontemplates.SessionTemplatesListToolsOutput
+	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
