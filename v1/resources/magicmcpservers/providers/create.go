@@ -1,20 +1,20 @@
-package provider
+package providers
 
 import (
 	"encoding/json"
 	"time"
 )
 
-// MagicMcpServersProviderCreateOutputToolFilter represents one of several possible types.
+// MagicMcpServersProvidersCreateOutputToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
-type MagicMcpServersProviderCreateOutputToolFilter struct {
+type MagicMcpServersProvidersCreateOutputToolFilter struct {
 	Type                *string `json:"type,omitempty"`
 	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
 	Filters             *[]any  `json:"filters,omitempty"`
 }
 
-// MagicMcpServersProviderCreateOutputDeployment represents the magic mcp servers provider create output deployment type.
-type MagicMcpServersProviderCreateOutputDeployment struct {
+// MagicMcpServersProvidersCreateOutputDeployment represents the magic mcp servers providers create output deployment type.
+type MagicMcpServersProvidersCreateOutputDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -35,8 +35,8 @@ type MagicMcpServersProviderCreateOutputDeployment struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MagicMcpServersProviderCreateOutputConfig represents the magic mcp servers provider create output config type.
-type MagicMcpServersProviderCreateOutputConfig struct {
+// MagicMcpServersProvidersCreateOutputConfig represents the magic mcp servers providers create output config type.
+type MagicMcpServersProvidersCreateOutputConfig struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Config ID
@@ -57,14 +57,14 @@ type MagicMcpServersProviderCreateOutputConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MagicMcpServersProviderCreateOutputAuthConfig represents the magic mcp servers provider create output auth config type.
-type MagicMcpServersProviderCreateOutputAuthConfig struct {
+// MagicMcpServersProvidersCreateOutputAuthConfig represents the magic mcp servers providers create output auth config type.
+type MagicMcpServersProvidersCreateOutputAuthConfig struct {
 	Object string `json:"object"`
 	Id     string `json:"id"`
 }
 
-// MagicMcpServersProviderCreateOutput represents the magic mcp servers provider create output type.
-type MagicMcpServersProviderCreateOutput struct {
+// MagicMcpServersProvidersCreateOutput represents the magic mcp servers providers create output type.
+type MagicMcpServersProvidersCreateOutput struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Unique magic MCP server provider identifier
@@ -72,36 +72,36 @@ type MagicMcpServersProviderCreateOutput struct {
 	// Status - Provider status
 	Status string `json:"status"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter MagicMcpServersProviderCreateOutputToolFilter `json:"tool_filter"`
+	ToolFilter MagicMcpServersProvidersCreateOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// MagicMcpServerId - Parent magic MCP server ID
-	MagicMcpServerId string                                         `json:"magic_mcp_server_id"`
-	Deployment       MagicMcpServersProviderCreateOutputDeployment  `json:"deployment"`
-	Config           MagicMcpServersProviderCreateOutputConfig      `json:"config"`
-	AuthConfig       *MagicMcpServersProviderCreateOutputAuthConfig `json:"auth_config,omitempty"`
+	MagicMcpServerId string                                          `json:"magic_mcp_server_id"`
+	Deployment       MagicMcpServersProvidersCreateOutputDeployment  `json:"deployment"`
+	Config           MagicMcpServersProvidersCreateOutputConfig      `json:"config"`
+	AuthConfig       *MagicMcpServersProvidersCreateOutputAuthConfig `json:"auth_config,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MapMagicMcpServersProviderCreateOutputFromJSON deserializes JSON data into a MagicMcpServersProviderCreateOutput.
-func MapMagicMcpServersProviderCreateOutputFromJSON(data []byte) (*MagicMcpServersProviderCreateOutput, error) {
-	var v MagicMcpServersProviderCreateOutput
+// MapMagicMcpServersProvidersCreateOutputFromJSON deserializes JSON data into a MagicMcpServersProvidersCreateOutput.
+func MapMagicMcpServersProvidersCreateOutputFromJSON(data []byte) (*MagicMcpServersProvidersCreateOutput, error) {
+	var v MagicMcpServersProvidersCreateOutput
 	if err := json.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 	return &v, nil
 }
 
-// MapMagicMcpServersProviderCreateOutputToJSON serializes a MagicMcpServersProviderCreateOutput to JSON.
-func MapMagicMcpServersProviderCreateOutputToJSON(v *MagicMcpServersProviderCreateOutput) ([]byte, error) {
+// MapMagicMcpServersProvidersCreateOutputToJSON serializes a MagicMcpServersProvidersCreateOutput to JSON.
+func MapMagicMcpServersProvidersCreateOutputToJSON(v *MagicMcpServersProvidersCreateOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// MagicMcpServersProviderCreateBody represents the magic mcp servers provider create body type.
-type MagicMcpServersProviderCreateBody struct {
+// MagicMcpServersProvidersCreateBody represents the magic mcp servers providers create body type.
+type MagicMcpServersProvidersCreateBody struct {
 	ProviderDeploymentId  *string `json:"provider_deployment_id,omitempty"`
 	ProviderConfigId      *string `json:"provider_config_id,omitempty"`
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
@@ -109,16 +109,16 @@ type MagicMcpServersProviderCreateBody struct {
 	ToolFilters           *any    `json:"tool_filters,omitempty"`
 }
 
-// MapMagicMcpServersProviderCreateBodyFromJSON deserializes JSON data into a MagicMcpServersProviderCreateBody.
-func MapMagicMcpServersProviderCreateBodyFromJSON(data []byte) (*MagicMcpServersProviderCreateBody, error) {
-	var v MagicMcpServersProviderCreateBody
+// MapMagicMcpServersProvidersCreateBodyFromJSON deserializes JSON data into a MagicMcpServersProvidersCreateBody.
+func MapMagicMcpServersProvidersCreateBodyFromJSON(data []byte) (*MagicMcpServersProvidersCreateBody, error) {
+	var v MagicMcpServersProvidersCreateBody
 	if err := json.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 	return &v, nil
 }
 
-// MapMagicMcpServersProviderCreateBodyToJSON serializes a MagicMcpServersProviderCreateBody to JSON.
-func MapMagicMcpServersProviderCreateBodyToJSON(v *MagicMcpServersProviderCreateBody) ([]byte, error) {
+// MapMagicMcpServersProvidersCreateBodyToJSON serializes a MagicMcpServersProvidersCreateBody to JSON.
+func MapMagicMcpServersProvidersCreateBodyToJSON(v *MagicMcpServersProvidersCreateBody) ([]byte, error) {
 	return json.Marshal(v)
 }

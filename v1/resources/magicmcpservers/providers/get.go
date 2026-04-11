@@ -1,20 +1,20 @@
-package provider
+package providers
 
 import (
 	"encoding/json"
 	"time"
 )
 
-// MagicMcpServersProviderGetOutputToolFilter represents one of several possible types.
+// MagicMcpServersProvidersGetOutputToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
-type MagicMcpServersProviderGetOutputToolFilter struct {
+type MagicMcpServersProvidersGetOutputToolFilter struct {
 	Type                *string `json:"type,omitempty"`
 	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
 	Filters             *[]any  `json:"filters,omitempty"`
 }
 
-// MagicMcpServersProviderGetOutputDeployment represents the magic mcp servers provider get output deployment type.
-type MagicMcpServersProviderGetOutputDeployment struct {
+// MagicMcpServersProvidersGetOutputDeployment represents the magic mcp servers providers get output deployment type.
+type MagicMcpServersProvidersGetOutputDeployment struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Deployment ID
@@ -35,8 +35,8 @@ type MagicMcpServersProviderGetOutputDeployment struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MagicMcpServersProviderGetOutputConfig represents the magic mcp servers provider get output config type.
-type MagicMcpServersProviderGetOutputConfig struct {
+// MagicMcpServersProvidersGetOutputConfig represents the magic mcp servers providers get output config type.
+type MagicMcpServersProvidersGetOutputConfig struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Config ID
@@ -57,14 +57,14 @@ type MagicMcpServersProviderGetOutputConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MagicMcpServersProviderGetOutputAuthConfig represents the magic mcp servers provider get output auth config type.
-type MagicMcpServersProviderGetOutputAuthConfig struct {
+// MagicMcpServersProvidersGetOutputAuthConfig represents the magic mcp servers providers get output auth config type.
+type MagicMcpServersProvidersGetOutputAuthConfig struct {
 	Object string `json:"object"`
 	Id     string `json:"id"`
 }
 
-// MagicMcpServersProviderGetOutput represents the magic mcp servers provider get output type.
-type MagicMcpServersProviderGetOutput struct {
+// MagicMcpServersProvidersGetOutput represents the magic mcp servers providers get output type.
+type MagicMcpServersProvidersGetOutput struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Unique magic MCP server provider identifier
@@ -72,30 +72,30 @@ type MagicMcpServersProviderGetOutput struct {
 	// Status - Provider status
 	Status string `json:"status"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter MagicMcpServersProviderGetOutputToolFilter `json:"tool_filter"`
+	ToolFilter MagicMcpServersProvidersGetOutputToolFilter `json:"tool_filter"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// MagicMcpServerId - Parent magic MCP server ID
-	MagicMcpServerId string                                      `json:"magic_mcp_server_id"`
-	Deployment       MagicMcpServersProviderGetOutputDeployment  `json:"deployment"`
-	Config           MagicMcpServersProviderGetOutputConfig      `json:"config"`
-	AuthConfig       *MagicMcpServersProviderGetOutputAuthConfig `json:"auth_config,omitempty"`
+	MagicMcpServerId string                                       `json:"magic_mcp_server_id"`
+	Deployment       MagicMcpServersProvidersGetOutputDeployment  `json:"deployment"`
+	Config           MagicMcpServersProvidersGetOutputConfig      `json:"config"`
+	AuthConfig       *MagicMcpServersProvidersGetOutputAuthConfig `json:"auth_config,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MapMagicMcpServersProviderGetOutputFromJSON deserializes JSON data into a MagicMcpServersProviderGetOutput.
-func MapMagicMcpServersProviderGetOutputFromJSON(data []byte) (*MagicMcpServersProviderGetOutput, error) {
-	var v MagicMcpServersProviderGetOutput
+// MapMagicMcpServersProvidersGetOutputFromJSON deserializes JSON data into a MagicMcpServersProvidersGetOutput.
+func MapMagicMcpServersProvidersGetOutputFromJSON(data []byte) (*MagicMcpServersProvidersGetOutput, error) {
+	var v MagicMcpServersProvidersGetOutput
 	if err := json.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 	return &v, nil
 }
 
-// MapMagicMcpServersProviderGetOutputToJSON serializes a MagicMcpServersProviderGetOutput to JSON.
-func MapMagicMcpServersProviderGetOutputToJSON(v *MagicMcpServersProviderGetOutput) ([]byte, error) {
+// MapMagicMcpServersProvidersGetOutputToJSON serializes a MagicMcpServersProvidersGetOutput to JSON.
+func MapMagicMcpServersProvidersGetOutputToJSON(v *MagicMcpServersProvidersGetOutput) ([]byte, error) {
 	return json.Marshal(v)
 }

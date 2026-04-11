@@ -23,12 +23,6 @@ type PortalsListOutputItemsUrls struct {
 	Url  string `json:"url"`
 }
 
-// PortalsListOutputItemsBrand represents the portals list output items brand type.
-type PortalsListOutputItemsBrand struct {
-	Image string `json:"image"`
-	Name  string `json:"name"`
-}
-
 // PortalsListOutputItems represents the portals list output items type.
 type PortalsListOutputItems struct {
 	Object      string                       `json:"object"`
@@ -39,7 +33,6 @@ type PortalsListOutputItems struct {
 	Description *string                      `json:"description,omitempty"`
 	Auth        PortalsListOutputItemsAuth   `json:"auth"`
 	Urls        []PortalsListOutputItemsUrls `json:"urls"`
-	Brand       PortalsListOutputItemsBrand  `json:"brand"`
 	CreatedAt   time.Time                    `json:"created_at"`
 	UpdatedAt   time.Time                    `json:"updated_at"`
 }

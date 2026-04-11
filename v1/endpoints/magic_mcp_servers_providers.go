@@ -2,21 +2,21 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
-	"github.com/metorial/metorial-go/v1/resources/magicmcpservers/provider"
+	"github.com/metorial/metorial-go/v1/resources/magicmcpservers/providers"
 )
 
-// MagicMcpServersProviderEndpoint provides access to magic MCP server providers define which providers are included in the setup session template backing a magic MCP server.
-type MagicMcpServersProviderEndpoint struct {
+// MagicMcpServersProvidersEndpoint provides access to magic MCP server providers define which providers are included in the setup session template backing a magic MCP server.
+type MagicMcpServersProvidersEndpoint struct {
 	client *endpoint.Client
 }
 
-// NewMagicMcpServersProviderEndpoint creates a new MagicMcpServersProviderEndpoint.
-func NewMagicMcpServersProviderEndpoint(client *endpoint.Client) *MagicMcpServersProviderEndpoint {
-	return &MagicMcpServersProviderEndpoint{client: client}
+// NewMagicMcpServersProvidersEndpoint creates a new MagicMcpServersProvidersEndpoint.
+func NewMagicMcpServersProvidersEndpoint(client *endpoint.Client) *MagicMcpServersProvidersEndpoint {
+	return &MagicMcpServersProvidersEndpoint{client: client}
 }
 
-// MagicMcpServersProviderEndpointListParams contains optional query parameters for List.
-type MagicMcpServersProviderEndpointListParams struct {
+// MagicMcpServersProvidersEndpointListParams contains optional query parameters for List.
+type MagicMcpServersProvidersEndpointListParams struct {
 	Limit  *float64 `json:"limit,omitempty"`
 	After  *string  `json:"after,omitempty"`
 	Before *string  `json:"before,omitempty"`
@@ -39,8 +39,8 @@ type MagicMcpServersProviderEndpointListParams struct {
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// MagicMcpServersProviderEndpointCreateBody contains the request body for Create.
-type MagicMcpServersProviderEndpointCreateBody struct {
+// MagicMcpServersProvidersEndpointCreateBody contains the request body for Create.
+type MagicMcpServersProvidersEndpointCreateBody struct {
 	ProviderDeploymentId  *string `json:"provider_deployment_id,omitempty"`
 	ProviderConfigId      *string `json:"provider_config_id,omitempty"`
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
@@ -48,22 +48,22 @@ type MagicMcpServersProviderEndpointCreateBody struct {
 	ToolFilters           *any    `json:"tool_filters,omitempty"`
 }
 
-// MagicMcpServersProviderEndpointUpdateBody contains the request body for Update.
-type MagicMcpServersProviderEndpointUpdateBody struct {
+// MagicMcpServersProvidersEndpointUpdateBody contains the request body for Update.
+type MagicMcpServersProvidersEndpointUpdateBody struct {
 	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // List returns a paginated list of providers configured for a magic MCP server.
-func (e *MagicMcpServersProviderEndpoint) List(magicMcpServerId string, params *MagicMcpServersProviderEndpointListParams) (*provider.MagicMcpServersProviderListOutput, error) {
+func (e *MagicMcpServersProvidersEndpoint) List(magicMcpServerId string, params *MagicMcpServersProvidersEndpointListParams) (*providers.MagicMcpServersProvidersListOutput, error) {
 	var query map[string]any
 	if params != nil {
 		query = endpoint.StructToQuery(params)
 	}
 	req := &endpoint.Request{
-		Path:  []string{"magic-mcp-servers", magicMcpServerId, "provider"},
+		Path:  []string{"magic-mcp-servers", magicMcpServerId, "providers"},
 		Query: query,
 	}
-	var result provider.MagicMcpServersProviderListOutput
+	var result providers.MagicMcpServersProvidersListOutput
 	if err := e.client.Get(req, &result); err != nil {
 		return nil, err
 	}
@@ -71,11 +71,11 @@ func (e *MagicMcpServersProviderEndpoint) List(magicMcpServerId string, params *
 }
 
 // Get retrieves a specific provider configuration from a magic MCP server.
-func (e *MagicMcpServersProviderEndpoint) Get(magicMcpServerId string, magicMcpServerProviderId string) (*provider.MagicMcpServersProviderGetOutput, error) {
+func (e *MagicMcpServersProvidersEndpoint) Get(magicMcpServerId string, magicMcpServerProviderId string) (*providers.MagicMcpServersProvidersGetOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"magic-mcp-servers", magicMcpServerId, "provider", magicMcpServerProviderId},
+		Path: []string{"magic-mcp-servers", magicMcpServerId, "providers", magicMcpServerProviderId},
 	}
-	var result provider.MagicMcpServersProviderGetOutput
+	var result providers.MagicMcpServersProvidersGetOutput
 	if err := e.client.Get(req, &result); err != nil {
 		return nil, err
 	}
@@ -83,12 +83,12 @@ func (e *MagicMcpServersProviderEndpoint) Get(magicMcpServerId string, magicMcpS
 }
 
 // Create adds a new provider configuration to a magic MCP server.
-func (e *MagicMcpServersProviderEndpoint) Create(magicMcpServerId string, body *MagicMcpServersProviderEndpointCreateBody) (*provider.MagicMcpServersProviderCreateOutput, error) {
+func (e *MagicMcpServersProvidersEndpoint) Create(magicMcpServerId string, body *MagicMcpServersProvidersEndpointCreateBody) (*providers.MagicMcpServersProvidersCreateOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"magic-mcp-servers", magicMcpServerId, "provider"},
+		Path: []string{"magic-mcp-servers", magicMcpServerId, "providers"},
 		Body: body,
 	}
-	var result provider.MagicMcpServersProviderCreateOutput
+	var result providers.MagicMcpServersProvidersCreateOutput
 	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
@@ -96,12 +96,12 @@ func (e *MagicMcpServersProviderEndpoint) Create(magicMcpServerId string, body *
 }
 
 // Update updates a provider configuration in a magic MCP server.
-func (e *MagicMcpServersProviderEndpoint) Update(magicMcpServerId string, magicMcpServerProviderId string, body *MagicMcpServersProviderEndpointUpdateBody) (*provider.MagicMcpServersProviderUpdateOutput, error) {
+func (e *MagicMcpServersProvidersEndpoint) Update(magicMcpServerId string, magicMcpServerProviderId string, body *MagicMcpServersProvidersEndpointUpdateBody) (*providers.MagicMcpServersProvidersUpdateOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"magic-mcp-servers", magicMcpServerId, "provider", magicMcpServerProviderId},
+		Path: []string{"magic-mcp-servers", magicMcpServerId, "providers", magicMcpServerProviderId},
 		Body: body,
 	}
-	var result provider.MagicMcpServersProviderUpdateOutput
+	var result providers.MagicMcpServersProvidersUpdateOutput
 	if err := e.client.Patch(req, &result); err != nil {
 		return nil, err
 	}
@@ -109,11 +109,11 @@ func (e *MagicMcpServersProviderEndpoint) Update(magicMcpServerId string, magicM
 }
 
 // Delete removes a provider configuration from a magic MCP server.
-func (e *MagicMcpServersProviderEndpoint) Delete(magicMcpServerId string, magicMcpServerProviderId string) (*provider.MagicMcpServersProviderDeleteOutput, error) {
+func (e *MagicMcpServersProvidersEndpoint) Delete(magicMcpServerId string, magicMcpServerProviderId string) (*providers.MagicMcpServersProvidersDeleteOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"magic-mcp-servers", magicMcpServerId, "provider", magicMcpServerProviderId},
+		Path: []string{"magic-mcp-servers", magicMcpServerId, "providers", magicMcpServerProviderId},
 	}
-	var result provider.MagicMcpServersProviderDeleteOutput
+	var result providers.MagicMcpServersProvidersDeleteOutput
 	if err := e.client.Delete(req, &result); err != nil {
 		return nil, err
 	}

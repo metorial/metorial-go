@@ -23,12 +23,6 @@ type PortalsDeleteOutputUrls struct {
 	Url  string `json:"url"`
 }
 
-// PortalsDeleteOutputBrand represents the portals delete output brand type.
-type PortalsDeleteOutputBrand struct {
-	Image string `json:"image"`
-	Name  string `json:"name"`
-}
-
 // PortalsDeleteOutput represents the portals delete output type.
 type PortalsDeleteOutput struct {
 	Object      string                    `json:"object"`
@@ -39,7 +33,6 @@ type PortalsDeleteOutput struct {
 	Description *string                   `json:"description,omitempty"`
 	Auth        PortalsDeleteOutputAuth   `json:"auth"`
 	Urls        []PortalsDeleteOutputUrls `json:"urls"`
-	Brand       PortalsDeleteOutputBrand  `json:"brand"`
 	CreatedAt   time.Time                 `json:"created_at"`
 	UpdatedAt   time.Time                 `json:"updated_at"`
 }

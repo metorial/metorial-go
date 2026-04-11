@@ -17,17 +17,19 @@ func NewMagicMcpServersEndpoint(client *endpoint.Client) *MagicMcpServersEndpoin
 
 // MagicMcpServersEndpointListParams contains optional query parameters for List.
 type MagicMcpServersEndpointListParams struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	Status            *any     `json:"status,omitempty"`
-	MagicMcpGroupId   *any     `json:"magic_mcp_group_id,omitempty"`
-	ConsumerId        *any     `json:"consumer_id,omitempty"`
-	ConsumerProfileId *any     `json:"consumer_profile_id,omitempty"`
-	Search            *string  `json:"search,omitempty"`
-	PreconfiguredOnly *bool    `json:"preconfigured_only,omitempty"`
+	Limit              *float64 `json:"limit,omitempty"`
+	After              *string  `json:"after,omitempty"`
+	Before             *string  `json:"before,omitempty"`
+	Cursor             *string  `json:"cursor,omitempty"`
+	Order              *string  `json:"order,omitempty"`
+	Status             *any     `json:"status,omitempty"`
+	MagicMcpGroupId    *any     `json:"magic_mcp_group_id,omitempty"`
+	ProviderTemplateId *any     `json:"provider_template_id,omitempty"`
+	ConsumerId         *any     `json:"consumer_id,omitempty"`
+	ConsumerProfileId  *any     `json:"consumer_profile_id,omitempty"`
+	Search             *string  `json:"search,omitempty"`
+	Id                 *any     `json:"id,omitempty"`
+	PreconfiguredOnly  *bool    `json:"preconfigured_only,omitempty"`
 }
 
 // MagicMcpServersEndpointCreateBody contains the request body for Create.
