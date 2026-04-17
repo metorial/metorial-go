@@ -56,7 +56,10 @@ type ProviderDeploymentsAuthCredentialsEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata     *map[string]any `json:"metadata,omitempty"`
+	ClientId     *string         `json:"client_id,omitempty"`
+	ClientSecret *string         `json:"client_secret,omitempty"`
+	Scopes       *[]string       `json:"scopes,omitempty"`
 }
 
 // List returns a paginated list of provider auth credentials.
