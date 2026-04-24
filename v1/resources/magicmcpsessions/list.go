@@ -47,13 +47,16 @@ type MagicMcpSessionsListOutputItemsMagicMcpEndpoint struct {
 
 // MagicMcpSessionsListOutputItems represents the magic mcp sessions list output items type.
 type MagicMcpSessionsListOutputItems struct {
-	Object           string                                           `json:"object"`
-	Id               string                                           `json:"id"`
-	MagicMcpServer   *MagicMcpSessionsListOutputItemsMagicMcpServer   `json:"magic_mcp_server,omitempty"`
-	MagicMcpEndpoint *MagicMcpSessionsListOutputItemsMagicMcpEndpoint `json:"magic_mcp_endpoint,omitempty"`
-	SessionId        string                                           `json:"session_id"`
-	CreatedAt        time.Time                                        `json:"created_at"`
-	UpdatedAt        time.Time                                        `json:"updated_at"`
+	Object                 string                                           `json:"object"`
+	Id                     string                                           `json:"id"`
+	MagicMcpServer         *MagicMcpSessionsListOutputItemsMagicMcpServer   `json:"magic_mcp_server,omitempty"`
+	MagicMcpEndpoint       *MagicMcpSessionsListOutputItemsMagicMcpEndpoint `json:"magic_mcp_endpoint,omitempty"`
+	ConsumerProfileId      *string                                          `json:"consumer_profile_id,omitempty"`
+	ConsumerIntegrationIds []string                                         `json:"consumer_integration_ids"`
+	SessionId              string                                           `json:"session_id"`
+	ExpiresAt              *time.Time                                       `json:"expires_at,omitempty"`
+	CreatedAt              time.Time                                        `json:"created_at"`
+	UpdatedAt              time.Time                                        `json:"updated_at"`
 }
 
 // MagicMcpSessionsListOutputPagination represents the magic mcp sessions list output pagination type.

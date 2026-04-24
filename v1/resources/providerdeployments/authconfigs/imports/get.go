@@ -54,6 +54,8 @@ type ProviderDeploymentsAuthConfigsImportsGetOutputAuthConfigCredentials struct 
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Scopes - OAuth scopes requested by this credential
+	Scopes *[]string `json:"scopes,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// CreatedAt - Timestamp when created
