@@ -79,7 +79,7 @@ type ManagementEndpoints struct {
 	IdentitiesDelegationRequests          *management.IdentitiesDelegationRequestsEndpoint
 	IdentityActors                        *management.IdentityActorsEndpoint
 	Files                                 *management.FilesEndpoint
-	FileLinks                             *management.FileLinksEndpoint
+	FilesLinks                            *management.FilesLinksEndpoint
 	Portals                               *management.PortalsEndpoint
 	MagicMcpGroups                        *management.MagicMcpGroupsEndpoint
 	MagicMcpServers                       *management.MagicMcpServersEndpoint
@@ -137,7 +137,7 @@ type MetorialSdk struct {
 	IdentitiesDelegationRequests          *endpoints.IdentitiesDelegationRequestsEndpoint
 	IdentityActors                        *endpoints.IdentityActorsEndpoint
 	Files                                 *endpoints.FilesEndpoint
-	FileLinks                             *endpoints.FileLinksEndpoint
+	FilesLinks                            *endpoints.FilesLinksEndpoint
 	Portals                               *endpoints.PortalsEndpoint
 	MagicMcpGroups                        *endpoints.MagicMcpGroupsEndpoint
 	MagicMcpServers                       *endpoints.MagicMcpServersEndpoint
@@ -211,7 +211,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		IdentitiesDelegationRequests:          endpoints.NewIdentitiesDelegationRequestsEndpoint(c),
 		IdentityActors:                        endpoints.NewIdentityActorsEndpoint(c),
 		Files:                                 endpoints.NewFilesEndpoint(c),
-		FileLinks:                             endpoints.NewFileLinksEndpoint(c),
+		FilesLinks:                            endpoints.NewFilesLinksEndpoint(c),
 		Portals:                               endpoints.NewPortalsEndpoint(c),
 		MagicMcpGroups:                        endpoints.NewMagicMcpGroupsEndpoint(c),
 		MagicMcpServers:                       endpoints.NewMagicMcpServersEndpoint(c),
@@ -261,7 +261,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 			IdentitiesDelegationRequests:          management.NewIdentitiesDelegationRequestsEndpoint(c),
 			IdentityActors:                        management.NewIdentityActorsEndpoint(c),
 			Files:                                 management.NewFilesEndpoint(c),
-			FileLinks:                             management.NewFileLinksEndpoint(c),
+			FilesLinks:                            management.NewFilesLinksEndpoint(c),
 			Portals:                               management.NewPortalsEndpoint(c),
 			MagicMcpGroups:                        management.NewMagicMcpGroupsEndpoint(c),
 			MagicMcpServers:                       management.NewMagicMcpServersEndpoint(c),
