@@ -5,27 +5,17 @@ import (
 	"time"
 )
 
-// ProviderTemplatesCreateOutputToolFilters represents one of several possible types.
-// This is a union type - only one set of fields will be populated.
-type ProviderTemplatesCreateOutputToolFilters struct {
-	Type                *string `json:"type,omitempty"`
-	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
-	Filters             *[]any  `json:"filters,omitempty"`
-}
-
 // ProviderTemplatesCreateOutput represents the provider templates create output type.
 type ProviderTemplatesCreateOutput struct {
-	Object               string         `json:"object"`
-	Id                   string         `json:"id"`
-	Status               string         `json:"status"`
-	Name                 string         `json:"name"`
-	Description          *string        `json:"description,omitempty"`
-	Metadata             map[string]any `json:"metadata"`
-	ProviderDeploymentId string         `json:"provider_deployment_id"`
-	// ToolFilters - Tool filter configuration
-	ToolFilters ProviderTemplatesCreateOutputToolFilters `json:"tool_filters"`
-	CreatedAt   time.Time                                `json:"created_at"`
-	UpdatedAt   time.Time                                `json:"updated_at"`
+	Object        string         `json:"object"`
+	Id            string         `json:"id"`
+	Status        string         `json:"status"`
+	Name          string         `json:"name"`
+	Description   *string        `json:"description,omitempty"`
+	Metadata      map[string]any `json:"metadata"`
+	IntegrationId *string        `json:"integration_id,omitempty"`
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
 }
 
 // MapProviderTemplatesCreateOutputFromJSON deserializes JSON data into a ProviderTemplatesCreateOutput.
@@ -42,23 +32,25 @@ func MapProviderTemplatesCreateOutputToJSON(v *ProviderTemplatesCreateOutput) ([
 	return json.Marshal(v)
 }
 
-// ProviderTemplatesCreateBodyProviderDeployment represents the provider templates create body provider deployment type.
-type ProviderTemplatesCreateBodyProviderDeployment struct {
-	ProviderId              string          `json:"provider_id"`
-	Name                    *string         `json:"name,omitempty"`
-	Description             *string         `json:"description,omitempty"`
-	Metadata                *map[string]any `json:"metadata,omitempty"`
-	LockedProviderVersionId *string         `json:"locked_provider_version_id,omitempty"`
+// ProviderTemplatesCreateBodyProviders represents the provider templates create body providers type.
+type ProviderTemplatesCreateBodyProviders struct {
+	ProviderId                string          `json:"provider_id"`
+	ProviderDeploymentId      *string         `json:"provider_deployment_id,omitempty"`
+	ProviderAuthMethodId      *string         `json:"provider_auth_method_id,omitempty"`
+	ProviderAuthCredentialsId *string         `json:"provider_auth_credentials_id,omitempty"`
+	ProviderConfigId          *string         `json:"provider_config_id,omitempty"`
+	Name                      *string         `json:"name,omitempty"`
+	Description               *string         `json:"description,omitempty"`
+	Metadata                  *map[string]any `json:"metadata,omitempty"`
+	ToolFilters               *any            `json:"tool_filters,omitempty"`
 }
 
 // ProviderTemplatesCreateBody represents the provider templates create body type.
 type ProviderTemplatesCreateBody struct {
-	Name                 string                                         `json:"name"`
-	Description          *string                                        `json:"description,omitempty"`
-	Metadata             *map[string]any                                `json:"metadata,omitempty"`
-	ToolFilers           *any                                           `json:"tool_filers,omitempty"`
-	ProviderDeploymentId *string                                        `json:"provider_deployment_id,omitempty"`
-	ProviderDeployment   *ProviderTemplatesCreateBodyProviderDeployment `json:"provider_deployment,omitempty"`
+	Name        string                                 `json:"name"`
+	Description *string                                `json:"description,omitempty"`
+	Metadata    *map[string]any                        `json:"metadata,omitempty"`
+	Providers   []ProviderTemplatesCreateBodyProviders `json:"providers"`
 }
 
 // MapProviderTemplatesCreateBodyFromJSON deserializes JSON data into a ProviderTemplatesCreateBody.

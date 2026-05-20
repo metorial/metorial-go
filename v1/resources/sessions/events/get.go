@@ -46,7 +46,13 @@ type SessionsEventsGetOutputConnectionParticipant struct {
 	// Data - Participant payload data
 	Data SessionsEventsGetOutputConnectionParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -140,6 +146,74 @@ type SessionsEventsGetOutputMessageTransport struct {
 	Type     string                                           `json:"type"`
 	Mcp      *SessionsEventsGetOutputMessageTransportMcp      `json:"mcp,omitempty"`
 	ToolCall *SessionsEventsGetOutputMessageTransportToolCall `json:"tool_call,omitempty"`
+}
+
+// SessionsEventsGetOutputMessageToolCallSenderParticipantData - Participant payload data
+type SessionsEventsGetOutputMessageToolCallSenderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// SessionsEventsGetOutputMessageToolCallSenderParticipant represents the sessions events get output message tool call sender participant type.
+type SessionsEventsGetOutputMessageToolCallSenderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data SessionsEventsGetOutputMessageToolCallSenderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
+}
+
+// SessionsEventsGetOutputMessageToolCallResponderParticipantData - Participant payload data
+type SessionsEventsGetOutputMessageToolCallResponderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// SessionsEventsGetOutputMessageToolCallResponderParticipant represents the sessions events get output message tool call responder participant type.
+type SessionsEventsGetOutputMessageToolCallResponderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data SessionsEventsGetOutputMessageToolCallResponderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsEventsGetOutputMessageToolCallToolInputSchema represents the sessions events get output message tool call tool input schema type.
@@ -248,9 +322,11 @@ type SessionsEventsGetOutputMessageToolCall struct {
 	// ConnectionId - Session connection ID
 	ConnectionId *string `json:"connection_id,omitempty"`
 	// ProviderRunId - Provider run ID
-	ProviderRunId *string                                      `json:"provider_run_id,omitempty"`
-	Tool          SessionsEventsGetOutputMessageToolCallTool   `json:"tool"`
-	Error         *SessionsEventsGetOutputMessageToolCallError `json:"error,omitempty"`
+	ProviderRunId        *string                                                     `json:"provider_run_id,omitempty"`
+	SenderParticipant    *SessionsEventsGetOutputMessageToolCallSenderParticipant    `json:"sender_participant,omitempty"`
+	ResponderParticipant *SessionsEventsGetOutputMessageToolCallResponderParticipant `json:"responder_participant,omitempty"`
+	Tool                 SessionsEventsGetOutputMessageToolCallTool                  `json:"tool"`
+	Error                *SessionsEventsGetOutputMessageToolCallError                `json:"error,omitempty"`
 	// Input - Input data passed to the tool call
 	Input *map[string]any `json:"input,omitempty"`
 	// Output - Output data returned from the tool call
@@ -282,7 +358,13 @@ type SessionsEventsGetOutputMessageSenderParticipant struct {
 	// Data - Participant payload data
 	Data SessionsEventsGetOutputMessageSenderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -310,7 +392,13 @@ type SessionsEventsGetOutputMessageResponderParticipant struct {
 	// Data - Participant payload data
 	Data SessionsEventsGetOutputMessageResponderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }

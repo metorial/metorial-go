@@ -30,6 +30,10 @@ type ProviderDeploymentsAuthConfigsEndpointListParams struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// AvailableForUse - Only return auth configs that are not owned by another integration instance provider.
+	AvailableForUse *bool `json:"available_for_use,omitempty"`
+	// AvailableForProviderDeploymentId - Only return auth configs that are not locked to a different provider deployment.
+	AvailableForProviderDeploymentId *string `json:"available_for_provider_deployment_id,omitempty"`
 	// ProviderAuthCredentialsId - Filter by auth credentials ID(s)
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// ProviderAuthMethodId - Filter by auth method ID(s)

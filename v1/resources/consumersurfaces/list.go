@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// ConsumerSurfacesListOutputItemsSkillConfiguration represents the consumer surfaces list output items skill configuration type.
+type ConsumerSurfacesListOutputItemsSkillConfiguration struct {
+	Id                          string   `json:"id"`
+	IsDefault                   bool     `json:"is_default"`
+	AllowScripts                bool     `json:"allow_scripts"`
+	AllowedFileExtensions       []string `json:"allowed_file_extensions"`
+	AllowNonStandardDirectories bool     `json:"allow_non_standard_directories"`
+}
+
 // ConsumerSurfacesListOutputItemsAuth represents the consumer surfaces list output items auth type.
 type ConsumerSurfacesListOutputItemsAuth struct {
 	Object                     string   `json:"object"`
@@ -14,14 +23,17 @@ type ConsumerSurfacesListOutputItemsAuth struct {
 
 // ConsumerSurfacesListOutputItems represents the consumer surfaces list output items type.
 type ConsumerSurfacesListOutputItems struct {
-	Object      string                              `json:"object"`
-	Id          string                              `json:"id"`
-	Status      string                              `json:"status"`
-	Name        string                              `json:"name"`
-	Description *string                             `json:"description,omitempty"`
-	Auth        ConsumerSurfacesListOutputItemsAuth `json:"auth"`
-	CreatedAt   time.Time                           `json:"created_at"`
-	UpdatedAt   time.Time                           `json:"updated_at"`
+	Object                       string                                            `json:"object"`
+	Id                           string                                            `json:"id"`
+	Status                       string                                            `json:"status"`
+	Name                         string                                            `json:"name"`
+	Description                  *string                                           `json:"description,omitempty"`
+	AllowConsumerSkillAuthoring  bool                                              `json:"allow_consumer_skill_authoring"`
+	AllowConsumerSkillPublishing bool                                              `json:"allow_consumer_skill_publishing"`
+	SkillConfiguration           ConsumerSurfacesListOutputItemsSkillConfiguration `json:"skill_configuration"`
+	Auth                         ConsumerSurfacesListOutputItemsAuth               `json:"auth"`
+	CreatedAt                    time.Time                                         `json:"created_at"`
+	UpdatedAt                    time.Time                                         `json:"updated_at"`
 }
 
 // ConsumerSurfacesListOutputPagination represents the consumer surfaces list output pagination type.

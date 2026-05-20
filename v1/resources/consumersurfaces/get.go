@@ -5,6 +5,15 @@ import (
 	"time"
 )
 
+// ConsumerSurfacesGetOutputSkillConfiguration represents the consumer surfaces get output skill configuration type.
+type ConsumerSurfacesGetOutputSkillConfiguration struct {
+	Id                          string   `json:"id"`
+	IsDefault                   bool     `json:"is_default"`
+	AllowScripts                bool     `json:"allow_scripts"`
+	AllowedFileExtensions       []string `json:"allowed_file_extensions"`
+	AllowNonStandardDirectories bool     `json:"allow_non_standard_directories"`
+}
+
 // ConsumerSurfacesGetOutputAuth represents the consumer surfaces get output auth type.
 type ConsumerSurfacesGetOutputAuth struct {
 	Object                     string   `json:"object"`
@@ -14,14 +23,17 @@ type ConsumerSurfacesGetOutputAuth struct {
 
 // ConsumerSurfacesGetOutput represents the consumer surfaces get output type.
 type ConsumerSurfacesGetOutput struct {
-	Object      string                        `json:"object"`
-	Id          string                        `json:"id"`
-	Status      string                        `json:"status"`
-	Name        string                        `json:"name"`
-	Description *string                       `json:"description,omitempty"`
-	Auth        ConsumerSurfacesGetOutputAuth `json:"auth"`
-	CreatedAt   time.Time                     `json:"created_at"`
-	UpdatedAt   time.Time                     `json:"updated_at"`
+	Object                       string                                      `json:"object"`
+	Id                           string                                      `json:"id"`
+	Status                       string                                      `json:"status"`
+	Name                         string                                      `json:"name"`
+	Description                  *string                                     `json:"description,omitempty"`
+	AllowConsumerSkillAuthoring  bool                                        `json:"allow_consumer_skill_authoring"`
+	AllowConsumerSkillPublishing bool                                        `json:"allow_consumer_skill_publishing"`
+	SkillConfiguration           ConsumerSurfacesGetOutputSkillConfiguration `json:"skill_configuration"`
+	Auth                         ConsumerSurfacesGetOutputAuth               `json:"auth"`
+	CreatedAt                    time.Time                                   `json:"created_at"`
+	UpdatedAt                    time.Time                                   `json:"updated_at"`
 }
 
 // MapConsumerSurfacesGetOutputFromJSON deserializes JSON data into a ConsumerSurfacesGetOutput.

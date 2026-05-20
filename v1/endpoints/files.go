@@ -22,8 +22,20 @@ type FilesEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Id - Filter by file ID
+	Id *any `json:"id,omitempty"`
 	// Purpose - Filter by file purpose
-	Purpose *string `json:"purpose,omitempty"`
+	Purpose *any `json:"purpose,omitempty"`
+	// StoreId - Filter by store ID
+	StoreId *any `json:"store_id,omitempty"`
+	// DocumentId - Filter by document ID
+	DocumentId *any `json:"document_id,omitempty"`
+	// FileLinkId - Filter by file link ID
+	FileLinkId *any `json:"file_link_id,omitempty"`
+	// CreatedAt - Filter Filter by creation time by date range
+	CreatedAt *map[string]any `json:"created_at,omitempty"`
+	// UpdatedAt - Filter Filter by update time by date range
+	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // List returns a paginated list of files owned by the instance.

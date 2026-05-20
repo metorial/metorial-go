@@ -99,7 +99,9 @@ type SessionTemplatesUpdateOutput struct {
 	// Description - Template description
 	Description *string `json:"description,omitempty"`
 	// Metadata - Custom key-value pairs
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	Metadata                   *map[string]any `json:"metadata,omitempty"`
+	IntegrationInstanceId      *string         `json:"integration_instance_id,omitempty"`
+	IntegrationInstanceGroupId *string         `json:"integration_instance_group_id,omitempty"`
 	// Providers - Template providers
 	Providers []SessionTemplatesUpdateOutputProviders `json:"providers"`
 	// CreatedAt - Timestamp when created

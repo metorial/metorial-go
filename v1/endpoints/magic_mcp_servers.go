@@ -34,19 +34,19 @@ type MagicMcpServersEndpointListParams struct {
 
 // MagicMcpServersEndpointCreateBody contains the request body for Create.
 type MagicMcpServersEndpointCreateBody struct {
-	Name              *string         `json:"name,omitempty"`
-	Description       *string         `json:"description,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	ConsumerProfileId *string         `json:"consumer_profile_id,omitempty"`
+	Name               *string         `json:"name,omitempty"`
+	Description        *string         `json:"description,omitempty"`
+	Metadata           *map[string]any `json:"metadata,omitempty"`
+	ProviderTemplateId *string         `json:"provider_template_id,omitempty"`
+	ConsumerProfileId  *string         `json:"consumer_profile_id,omitempty"`
 }
 
 // MagicMcpServersEndpointUpdateBody contains the request body for Update.
 type MagicMcpServersEndpointUpdateBody struct {
-	Name              *string         `json:"name,omitempty"`
-	Description       *string         `json:"description,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	Aliases           *[]string       `json:"aliases,omitempty"`
-	SessionTemplateId *string         `json:"session_template_id,omitempty"`
+	Name        *string         `json:"name,omitempty"`
+	Description *string         `json:"description,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
+	Aliases     *[]string       `json:"aliases,omitempty"`
 }
 
 // List returns a paginated list of magic MCP servers.

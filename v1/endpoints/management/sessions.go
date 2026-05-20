@@ -26,6 +26,14 @@ type SessionsEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by session ID(s)
 	Id *any `json:"id,omitempty"`
+	// AgentId - Filter by connected agent ID(s)
+	AgentId *any `json:"agent_id,omitempty"`
+	// ActorId - Filter by connected identity actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by connected consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by connected identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
 	SessionTemplateId *any `json:"session_template_id,omitempty"`
 	// SessionProviderId - Filter by session provider ID(s)

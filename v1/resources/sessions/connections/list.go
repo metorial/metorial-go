@@ -46,7 +46,13 @@ type SessionsConnectionsListOutputItemsParticipant struct {
 	// Data - Participant payload data
 	Data SessionsConnectionsListOutputItemsParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -135,6 +141,16 @@ type SessionsConnectionsListQuery struct {
 	ConnectionState *any `json:"connection_state,omitempty"`
 	// Id - Filter by session connection ID(s)
 	Id *any `json:"id,omitempty"`
+	// AgentId - Filter by connected agent ID(s)
+	AgentId *any `json:"agent_id,omitempty"`
+	// ActorId - Filter by connected identity actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by connected consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by connected identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// AgentInstanceId - Filter by connected agent instance ID(s)
+	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// SessionId - Filter by session ID(s)
 	SessionId *any `json:"session_id,omitempty"`
 	// SessionProviderId - Filter by session provider ID(s)

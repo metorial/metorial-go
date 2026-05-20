@@ -5,27 +5,17 @@ import (
 	"time"
 )
 
-// ProviderTemplatesListOutputItemsToolFilters represents one of several possible types.
-// This is a union type - only one set of fields will be populated.
-type ProviderTemplatesListOutputItemsToolFilters struct {
-	Type                *string `json:"type,omitempty"`
-	IgnoreParentFilters *bool   `json:"ignore_parent_filters,omitempty"`
-	Filters             *[]any  `json:"filters,omitempty"`
-}
-
 // ProviderTemplatesListOutputItems represents the provider templates list output items type.
 type ProviderTemplatesListOutputItems struct {
-	Object               string         `json:"object"`
-	Id                   string         `json:"id"`
-	Status               string         `json:"status"`
-	Name                 string         `json:"name"`
-	Description          *string        `json:"description,omitempty"`
-	Metadata             map[string]any `json:"metadata"`
-	ProviderDeploymentId string         `json:"provider_deployment_id"`
-	// ToolFilters - Tool filter configuration
-	ToolFilters ProviderTemplatesListOutputItemsToolFilters `json:"tool_filters"`
-	CreatedAt   time.Time                                   `json:"created_at"`
-	UpdatedAt   time.Time                                   `json:"updated_at"`
+	Object        string         `json:"object"`
+	Id            string         `json:"id"`
+	Status        string         `json:"status"`
+	Name          string         `json:"name"`
+	Description   *string        `json:"description,omitempty"`
+	Metadata      map[string]any `json:"metadata"`
+	IntegrationId *string        `json:"integration_id,omitempty"`
+	CreatedAt     time.Time      `json:"created_at"`
+	UpdatedAt     time.Time      `json:"updated_at"`
 }
 
 // ProviderTemplatesListOutputPagination represents the provider templates list output pagination type.
@@ -56,15 +46,15 @@ func MapProviderTemplatesListOutputToJSON(v *ProviderTemplatesListOutput) ([]byt
 
 // ProviderTemplatesListQuery represents the provider templates list query type.
 type ProviderTemplatesListQuery struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	ProviderDeploymentId *any     `json:"provider_deployment_id,omitempty"`
-	Search               *string  `json:"search,omitempty"`
-	Status               *any     `json:"status,omitempty"`
+	Limit         *float64 `json:"limit,omitempty"`
+	After         *string  `json:"after,omitempty"`
+	Before        *string  `json:"before,omitempty"`
+	Cursor        *string  `json:"cursor,omitempty"`
+	Order         *string  `json:"order,omitempty"`
+	Id            *any     `json:"id,omitempty"`
+	IntegrationId *any     `json:"integration_id,omitempty"`
+	Search        *string  `json:"search,omitempty"`
+	Status        *any     `json:"status,omitempty"`
 }
 
 // MapProviderTemplatesListQueryFromJSON deserializes JSON data into a ProviderTemplatesListQuery.

@@ -34,6 +34,16 @@ type ToolCallsEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// AgentId - Filter by agent ID(s)
+	AgentId *any `json:"agent_id,omitempty"`
+	// ActorId - Filter by identity actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// AgentInstanceId - Filter by agent instance ID(s)
+	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
 	// CreatedAt - Filter tool call creation time by date range

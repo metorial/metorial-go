@@ -17,33 +17,31 @@ func NewProviderTemplatesEndpoint(client *endpoint.Client) *ProviderTemplatesEnd
 
 // ProviderTemplatesEndpointListParams contains optional query parameters for List.
 type ProviderTemplatesEndpointListParams struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	ProviderDeploymentId *any     `json:"provider_deployment_id,omitempty"`
-	Search               *string  `json:"search,omitempty"`
-	Status               *any     `json:"status,omitempty"`
+	Limit         *float64 `json:"limit,omitempty"`
+	After         *string  `json:"after,omitempty"`
+	Before        *string  `json:"before,omitempty"`
+	Cursor        *string  `json:"cursor,omitempty"`
+	Order         *string  `json:"order,omitempty"`
+	Id            *any     `json:"id,omitempty"`
+	IntegrationId *any     `json:"integration_id,omitempty"`
+	Search        *string  `json:"search,omitempty"`
+	Status        *any     `json:"status,omitempty"`
 }
 
 // ProviderTemplatesEndpointCreateBody contains the request body for Create.
 type ProviderTemplatesEndpointCreateBody struct {
-	Name                 string          `json:"name"`
-	Description          *string         `json:"description,omitempty"`
-	Metadata             *map[string]any `json:"metadata,omitempty"`
-	ToolFilers           *any            `json:"tool_filers,omitempty"`
-	ProviderDeploymentId *string         `json:"provider_deployment_id,omitempty"`
-	ProviderDeployment   *map[string]any `json:"provider_deployment,omitempty"`
+	Name        string           `json:"name"`
+	Description *string          `json:"description,omitempty"`
+	Metadata    *map[string]any  `json:"metadata,omitempty"`
+	Providers   []map[string]any `json:"providers"`
 }
 
 // ProviderTemplatesEndpointUpdateBody contains the request body for Update.
 type ProviderTemplatesEndpointUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	Name        *string           `json:"name,omitempty"`
+	Description *string           `json:"description,omitempty"`
+	Metadata    *map[string]any   `json:"metadata,omitempty"`
+	Providers   *[]map[string]any `json:"providers,omitempty"`
 }
 
 // List returns a paginated list of provider templates.

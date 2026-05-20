@@ -32,6 +32,10 @@ type ProviderDeploymentsConfigsEndpointListParams struct {
 	ProviderSpecificationId *any `json:"provider_specification_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// AvailableForUse - Only return configs that are not owned by another integration instance provider.
+	AvailableForUse *bool `json:"available_for_use,omitempty"`
+	// AvailableForProviderDeploymentId - Only return configs that are not locked to a different provider deployment.
+	AvailableForProviderDeploymentId *string `json:"available_for_provider_deployment_id,omitempty"`
 	// ProviderConfigVaultId - Filter by config vault ID(s)
 	ProviderConfigVaultId *any `json:"provider_config_vault_id,omitempty"`
 	// ActorId - Filter by actor ID(s)

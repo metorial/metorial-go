@@ -33,8 +33,8 @@ type MagicMcpEndpointsEndpointCreateBody struct {
 	Description       *string           `json:"description,omitempty"`
 	Metadata          *map[string]any   `json:"metadata,omitempty"`
 	ConsumerProfileId *string           `json:"consumer_profile_id,omitempty"`
-	MagicMcpServerIds *[]string         `json:"magic_mcp_server_ids,omitempty"`
-	Servers           *[]map[string]any `json:"servers,omitempty"`
+	SkillPluginId     *string           `json:"skill_plugin_id,omitempty"`
+	MagicMcpServers   *[]map[string]any `json:"magic_mcp_servers,omitempty"`
 }
 
 // MagicMcpEndpointsEndpointUpdateBody contains the request body for Update.
@@ -46,8 +46,7 @@ type MagicMcpEndpointsEndpointUpdateBody struct {
 
 // MagicMcpEndpointsEndpointAddServersBody contains the request body for AddServers.
 type MagicMcpEndpointsEndpointAddServersBody struct {
-	MagicMcpServerIds *[]string         `json:"magic_mcp_server_ids,omitempty"`
-	Servers           *[]map[string]any `json:"servers,omitempty"`
+	MagicMcpServers *[]map[string]any `json:"magic_mcp_servers,omitempty"`
 }
 
 // MagicMcpEndpointsEndpointRemoveServersBody contains the request body for RemoveServers.

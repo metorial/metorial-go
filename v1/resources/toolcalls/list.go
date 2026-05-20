@@ -5,6 +5,74 @@ import (
 	"time"
 )
 
+// ToolCallsListOutputItemsSenderParticipantData - Participant payload data
+type ToolCallsListOutputItemsSenderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// ToolCallsListOutputItemsSenderParticipant represents the tool calls list output items sender participant type.
+type ToolCallsListOutputItemsSenderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data ToolCallsListOutputItemsSenderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
+}
+
+// ToolCallsListOutputItemsResponderParticipantData - Participant payload data
+type ToolCallsListOutputItemsResponderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// ToolCallsListOutputItemsResponderParticipant represents the tool calls list output items responder participant type.
+type ToolCallsListOutputItemsResponderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data ToolCallsListOutputItemsResponderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
+}
+
 // ToolCallsListOutputItemsToolInputSchema represents the tool calls list output items tool input schema type.
 type ToolCallsListOutputItemsToolInputSchema struct {
 	Type string `json:"type"`
@@ -111,9 +179,11 @@ type ToolCallsListOutputItems struct {
 	// ConnectionId - Session connection ID
 	ConnectionId *string `json:"connection_id,omitempty"`
 	// ProviderRunId - Provider run ID
-	ProviderRunId *string                        `json:"provider_run_id,omitempty"`
-	Tool          ToolCallsListOutputItemsTool   `json:"tool"`
-	Error         *ToolCallsListOutputItemsError `json:"error,omitempty"`
+	ProviderRunId        *string                                       `json:"provider_run_id,omitempty"`
+	SenderParticipant    *ToolCallsListOutputItemsSenderParticipant    `json:"sender_participant,omitempty"`
+	ResponderParticipant *ToolCallsListOutputItemsResponderParticipant `json:"responder_participant,omitempty"`
+	Tool                 ToolCallsListOutputItemsTool                  `json:"tool"`
+	Error                *ToolCallsListOutputItemsError                `json:"error,omitempty"`
 	// Input - Input data passed to the tool call
 	Input *map[string]any `json:"input,omitempty"`
 	// Output - Output data returned from the tool call
@@ -183,6 +253,16 @@ type ToolCallsListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// AgentId - Filter by agent ID(s)
+	AgentId *any `json:"agent_id,omitempty"`
+	// ActorId - Filter by identity actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// AgentInstanceId - Filter by agent instance ID(s)
+	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
 	// CreatedAt - Filter tool call creation time by date range

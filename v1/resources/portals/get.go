@@ -5,16 +5,20 @@ import (
 	"time"
 )
 
-// PortalsGetOutputAuthAllowedRedirectUrlFilters represents the portals get output auth allowed redirect url filters type.
-type PortalsGetOutputAuthAllowedRedirectUrlFilters struct {
-	Url string `json:"url"`
+// PortalsGetOutputSkillConfiguration represents the portals get output skill configuration type.
+type PortalsGetOutputSkillConfiguration struct {
+	Object                      string   `json:"object"`
+	Id                          string   `json:"id"`
+	IsDefault                   bool     `json:"is_default"`
+	AllowScripts                bool     `json:"allow_scripts"`
+	AllowedFileExtensions       []string `json:"allowed_file_extensions"`
+	AllowNonStandardDirectories bool     `json:"allow_non_standard_directories"`
 }
 
 // PortalsGetOutputAuth represents the portals get output auth type.
 type PortalsGetOutputAuth struct {
-	Object                     string                                          `json:"object"`
-	SessionExpiryTimeInSeconds float64                                         `json:"session_expiry_time_in_seconds"`
-	AllowedRedirectUrlFilters  []PortalsGetOutputAuthAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters"`
+	Object                     string  `json:"object"`
+	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
 }
 
 // PortalsGetOutputUrls represents the portals get output urls type.
@@ -25,16 +29,19 @@ type PortalsGetOutputUrls struct {
 
 // PortalsGetOutput represents the portals get output type.
 type PortalsGetOutput struct {
-	Object      string                 `json:"object"`
-	Id          string                 `json:"id"`
-	Status      string                 `json:"status"`
-	Name        string                 `json:"name"`
-	Slug        string                 `json:"slug"`
-	Description *string                `json:"description,omitempty"`
-	Auth        PortalsGetOutputAuth   `json:"auth"`
-	Urls        []PortalsGetOutputUrls `json:"urls"`
-	CreatedAt   time.Time              `json:"created_at"`
-	UpdatedAt   time.Time              `json:"updated_at"`
+	Object                       string                             `json:"object"`
+	Id                           string                             `json:"id"`
+	Status                       string                             `json:"status"`
+	Name                         string                             `json:"name"`
+	Slug                         string                             `json:"slug"`
+	Description                  *string                            `json:"description,omitempty"`
+	AllowConsumerSkillAuthoring  bool                               `json:"allow_consumer_skill_authoring"`
+	AllowConsumerSkillPublishing bool                               `json:"allow_consumer_skill_publishing"`
+	SkillConfiguration           PortalsGetOutputSkillConfiguration `json:"skill_configuration"`
+	Auth                         PortalsGetOutputAuth               `json:"auth"`
+	Urls                         []PortalsGetOutputUrls             `json:"urls"`
+	CreatedAt                    time.Time                          `json:"created_at"`
+	UpdatedAt                    time.Time                          `json:"updated_at"`
 }
 
 // MapPortalsGetOutputFromJSON deserializes JSON data into a PortalsGetOutput.

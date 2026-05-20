@@ -43,6 +43,74 @@ type SessionsMessagesListOutputItemsTransport struct {
 	ToolCall *SessionsMessagesListOutputItemsTransportToolCall `json:"tool_call,omitempty"`
 }
 
+// SessionsMessagesListOutputItemsToolCallSenderParticipantData - Participant payload data
+type SessionsMessagesListOutputItemsToolCallSenderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// SessionsMessagesListOutputItemsToolCallSenderParticipant represents the sessions messages list output items tool call sender participant type.
+type SessionsMessagesListOutputItemsToolCallSenderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data SessionsMessagesListOutputItemsToolCallSenderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
+}
+
+// SessionsMessagesListOutputItemsToolCallResponderParticipantData - Participant payload data
+type SessionsMessagesListOutputItemsToolCallResponderParticipantData struct {
+	// Identifier - Participant-specific identifier within the payload
+	Identifier string `json:"identifier"`
+	// Name - Participant-specific display name within the payload
+	Name string `json:"name"`
+}
+
+// SessionsMessagesListOutputItemsToolCallResponderParticipant represents the sessions messages list output items tool call responder participant type.
+type SessionsMessagesListOutputItemsToolCallResponderParticipant struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique session participant identifier
+	Id string `json:"id"`
+	// Type - Participant type
+	Type string `json:"type"`
+	// Identifier - Participant identifier
+	Identifier string `json:"identifier"`
+	// Name - Display name
+	Name string `json:"name"`
+	// Data - Participant payload data
+	Data SessionsMessagesListOutputItemsToolCallResponderParticipantData `json:"data"`
+	// ProviderId - Provider ID if associated
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Timestamp when created
+	CreatedAt time.Time `json:"created_at"`
+}
+
 // SessionsMessagesListOutputItemsToolCallToolInputSchema represents the sessions messages list output items tool call tool input schema type.
 type SessionsMessagesListOutputItemsToolCallToolInputSchema struct {
 	Type string `json:"type"`
@@ -149,9 +217,11 @@ type SessionsMessagesListOutputItemsToolCall struct {
 	// ConnectionId - Session connection ID
 	ConnectionId *string `json:"connection_id,omitempty"`
 	// ProviderRunId - Provider run ID
-	ProviderRunId *string                                       `json:"provider_run_id,omitempty"`
-	Tool          SessionsMessagesListOutputItemsToolCallTool   `json:"tool"`
-	Error         *SessionsMessagesListOutputItemsToolCallError `json:"error,omitempty"`
+	ProviderRunId        *string                                                      `json:"provider_run_id,omitempty"`
+	SenderParticipant    *SessionsMessagesListOutputItemsToolCallSenderParticipant    `json:"sender_participant,omitempty"`
+	ResponderParticipant *SessionsMessagesListOutputItemsToolCallResponderParticipant `json:"responder_participant,omitempty"`
+	Tool                 SessionsMessagesListOutputItemsToolCallTool                  `json:"tool"`
+	Error                *SessionsMessagesListOutputItemsToolCallError                `json:"error,omitempty"`
 	// Input - Input data passed to the tool call
 	Input *map[string]any `json:"input,omitempty"`
 	// Output - Output data returned from the tool call
@@ -183,7 +253,13 @@ type SessionsMessagesListOutputItemsSenderParticipant struct {
 	// Data - Participant payload data
 	Data SessionsMessagesListOutputItemsSenderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -211,7 +287,13 @@ type SessionsMessagesListOutputItemsResponderParticipant struct {
 	// Data - Participant payload data
 	Data SessionsMessagesListOutputItemsResponderParticipantData `json:"data"`
 	// ProviderId - Provider ID if associated
-	ProviderId *string `json:"provider_id,omitempty"`
+	ProviderId      *string `json:"provider_id,omitempty"`
+	ConnectionType  *string `json:"connection_type,omitempty"`
+	AgentId         *string `json:"agent_id,omitempty"`
+	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	AgentClientId   *string `json:"agent_client_id,omitempty"`
+	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }

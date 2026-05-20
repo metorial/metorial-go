@@ -7,20 +7,17 @@ import (
 
 // MagicMcpEndpointsAddServersOutput represents the magic mcp endpoints add servers output type.
 type MagicMcpEndpointsAddServersOutput struct {
-	Object            string           `json:"object"`
-	Id                string           `json:"id"`
-	Status            string           `json:"status"`
-	Slug              string           `json:"slug"`
-	Url               string           `json:"url"`
-	ConsumerProfileId *string          `json:"consumer_profile_id,omitempty"`
-	SessionTemplateId *string          `json:"session_template_id,omitempty"`
-	SessionId         *string          `json:"session_id,omitempty"`
-	Servers           []map[string]any `json:"servers"`
-	Name              *string          `json:"name,omitempty"`
-	Description       *string          `json:"description,omitempty"`
-	Metadata          map[string]any   `json:"metadata"`
-	CreatedAt         time.Time        `json:"created_at"`
-	UpdatedAt         time.Time        `json:"updated_at"`
+	Object      string           `json:"object"`
+	Id          string           `json:"id"`
+	Status      string           `json:"status"`
+	Slug        string           `json:"slug"`
+	Url         string           `json:"url"`
+	Servers     []map[string]any `json:"servers"`
+	Name        *string          `json:"name,omitempty"`
+	Description *string          `json:"description,omitempty"`
+	Metadata    map[string]any   `json:"metadata"`
+	CreatedAt   time.Time        `json:"created_at"`
+	UpdatedAt   time.Time        `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsAddServersOutputFromJSON deserializes JSON data into a MagicMcpEndpointsAddServersOutput.
@@ -37,16 +34,15 @@ func MapMagicMcpEndpointsAddServersOutputToJSON(v *MagicMcpEndpointsAddServersOu
 	return json.Marshal(v)
 }
 
-// MagicMcpEndpointsAddServersBodyServers represents the magic mcp endpoints add servers body servers type.
-type MagicMcpEndpointsAddServersBodyServers struct {
+// MagicMcpEndpointsAddServersBodyMagicMcpServers represents the magic mcp endpoints add servers body magic mcp servers type.
+type MagicMcpEndpointsAddServersBodyMagicMcpServers struct {
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
 	ToolFilters      *any   `json:"tool_filters,omitempty"`
 }
 
 // MagicMcpEndpointsAddServersBody represents the magic mcp endpoints add servers body type.
 type MagicMcpEndpointsAddServersBody struct {
-	MagicMcpServerIds *[]string                                 `json:"magic_mcp_server_ids,omitempty"`
-	Servers           *[]MagicMcpEndpointsAddServersBodyServers `json:"servers,omitempty"`
+	MagicMcpServers *[]MagicMcpEndpointsAddServersBodyMagicMcpServers `json:"magic_mcp_servers,omitempty"`
 }
 
 // MapMagicMcpEndpointsAddServersBodyFromJSON deserializes JSON data into a MagicMcpEndpointsAddServersBody.

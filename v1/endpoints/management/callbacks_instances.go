@@ -61,6 +61,18 @@ func (e *CallbacksInstancesEndpoint) List(instanceId string, callbackId string, 
 	return &result, nil
 }
 
+// Get retrieves a specific callback instance by ID.
+func (e *CallbacksInstancesEndpoint) Get(instanceId string, callbackId string, callbackInstanceId string) (*instances.CallbacksInstancesGetOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "callbacks", callbackId, "instances", callbackInstanceId},
+	}
+	var result instances.CallbacksInstancesGetOutput
+	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // Create attaches a callback to a config and optional auth config.
 func (e *CallbacksInstancesEndpoint) Create(instanceId string, callbackId string, body *CallbacksInstancesEndpointCreateBody) (*instances.CallbacksInstancesCreateOutput, error) {
 	req := &endpoint.Request{

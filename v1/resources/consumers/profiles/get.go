@@ -32,11 +32,11 @@ type ConsumersProfilesGetOutput struct {
 	Name       string                              `json:"name"`
 	Email      string                              `json:"email"`
 	ImageUrl   string                              `json:"image_url"`
-	Groups     *[]ConsumersProfilesGetOutputGroups `json:"groups,omitempty"`
 	ConsumerId string                              `json:"consumer_id"`
 	Status     string                              `json:"status"`
 	CreatedAt  time.Time                           `json:"created_at"`
 	UpdatedAt  time.Time                           `json:"updated_at"`
+	Groups     *[]ConsumersProfilesGetOutputGroups `json:"groups,omitempty"`
 }
 
 // MapConsumersProfilesGetOutputFromJSON deserializes JSON data into a ConsumersProfilesGetOutput.

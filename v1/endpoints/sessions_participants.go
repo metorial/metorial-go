@@ -26,6 +26,16 @@ type SessionsParticipantsEndpointListParams struct {
 	Type *any `json:"type,omitempty"`
 	// Id - Filter by participant ID(s)
 	Id *any `json:"id,omitempty"`
+	// AgentId - Filter by connected agent ID(s)
+	AgentId *any `json:"agent_id,omitempty"`
+	// ActorId - Filter by connected identity actor ID(s)
+	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerId - Filter by connected consumer ID(s)
+	ConsumerId *any `json:"consumer_id,omitempty"`
+	// IdentityId - Filter by connected identity ID(s)
+	IdentityId *any `json:"identity_id,omitempty"`
+	// AgentInstanceId - Filter by connected agent instance ID(s)
+	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// SessionId - Filter by session ID(s)
 	SessionId *any `json:"session_id,omitempty"`
 	// SessionConnectionId - Filter by session connection ID(s)

@@ -7,20 +7,17 @@ import (
 
 // MagicMcpEndpointsCreateOutput represents the magic mcp endpoints create output type.
 type MagicMcpEndpointsCreateOutput struct {
-	Object            string           `json:"object"`
-	Id                string           `json:"id"`
-	Status            string           `json:"status"`
-	Slug              string           `json:"slug"`
-	Url               string           `json:"url"`
-	ConsumerProfileId *string          `json:"consumer_profile_id,omitempty"`
-	SessionTemplateId *string          `json:"session_template_id,omitempty"`
-	SessionId         *string          `json:"session_id,omitempty"`
-	Servers           []map[string]any `json:"servers"`
-	Name              *string          `json:"name,omitempty"`
-	Description       *string          `json:"description,omitempty"`
-	Metadata          map[string]any   `json:"metadata"`
-	CreatedAt         time.Time        `json:"created_at"`
-	UpdatedAt         time.Time        `json:"updated_at"`
+	Object      string           `json:"object"`
+	Id          string           `json:"id"`
+	Status      string           `json:"status"`
+	Slug        string           `json:"slug"`
+	Url         string           `json:"url"`
+	Servers     []map[string]any `json:"servers"`
+	Name        *string          `json:"name,omitempty"`
+	Description *string          `json:"description,omitempty"`
+	Metadata    map[string]any   `json:"metadata"`
+	CreatedAt   time.Time        `json:"created_at"`
+	UpdatedAt   time.Time        `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsCreateOutputFromJSON deserializes JSON data into a MagicMcpEndpointsCreateOutput.
@@ -37,20 +34,20 @@ func MapMagicMcpEndpointsCreateOutputToJSON(v *MagicMcpEndpointsCreateOutput) ([
 	return json.Marshal(v)
 }
 
-// MagicMcpEndpointsCreateBodyServers represents the magic mcp endpoints create body servers type.
-type MagicMcpEndpointsCreateBodyServers struct {
+// MagicMcpEndpointsCreateBodyMagicMcpServers represents the magic mcp endpoints create body magic mcp servers type.
+type MagicMcpEndpointsCreateBodyMagicMcpServers struct {
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
 	ToolFilters      *any   `json:"tool_filters,omitempty"`
 }
 
 // MagicMcpEndpointsCreateBody represents the magic mcp endpoints create body type.
 type MagicMcpEndpointsCreateBody struct {
-	Name              *string                               `json:"name,omitempty"`
-	Description       *string                               `json:"description,omitempty"`
-	Metadata          *map[string]any                       `json:"metadata,omitempty"`
-	ConsumerProfileId *string                               `json:"consumer_profile_id,omitempty"`
-	MagicMcpServerIds *[]string                             `json:"magic_mcp_server_ids,omitempty"`
-	Servers           *[]MagicMcpEndpointsCreateBodyServers `json:"servers,omitempty"`
+	Name              *string                                       `json:"name,omitempty"`
+	Description       *string                                       `json:"description,omitempty"`
+	Metadata          *map[string]any                               `json:"metadata,omitempty"`
+	ConsumerProfileId *string                                       `json:"consumer_profile_id,omitempty"`
+	SkillPluginId     *string                                       `json:"skill_plugin_id,omitempty"`
+	MagicMcpServers   *[]MagicMcpEndpointsCreateBodyMagicMcpServers `json:"magic_mcp_servers,omitempty"`
 }
 
 // MapMagicMcpEndpointsCreateBodyFromJSON deserializes JSON data into a MagicMcpEndpointsCreateBody.

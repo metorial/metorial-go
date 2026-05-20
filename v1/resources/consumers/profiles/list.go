@@ -2,42 +2,7 @@ package profiles
 
 import (
 	"encoding/json"
-	"time"
 )
-
-// ConsumersProfilesListOutputItemsGroupsGroup represents the consumers profiles list output items groups group type.
-type ConsumersProfilesListOutputItemsGroupsGroup struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Status      string    `json:"status"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
-}
-
-// ConsumersProfilesListOutputItemsGroups represents the consumers profiles list output items groups type.
-type ConsumersProfilesListOutputItemsGroups struct {
-	Object      string                                      `json:"object"`
-	Group       ConsumersProfilesListOutputItemsGroupsGroup `json:"group"`
-	AssignedVia string                                      `json:"assigned_via"`
-}
-
-// ConsumersProfilesListOutputItems represents the consumers profiles list output items type.
-type ConsumersProfilesListOutputItems struct {
-	Object     string                                    `json:"object"`
-	Id         string                                    `json:"id"`
-	Name       string                                    `json:"name"`
-	Email      string                                    `json:"email"`
-	ImageUrl   string                                    `json:"image_url"`
-	Groups     *[]ConsumersProfilesListOutputItemsGroups `json:"groups,omitempty"`
-	ConsumerId string                                    `json:"consumer_id"`
-	Status     string                                    `json:"status"`
-	CreatedAt  time.Time                                 `json:"created_at"`
-	UpdatedAt  time.Time                                 `json:"updated_at"`
-}
 
 // ConsumersProfilesListOutputPagination represents the consumers profiles list output pagination type.
 type ConsumersProfilesListOutputPagination struct {
@@ -47,7 +12,7 @@ type ConsumersProfilesListOutputPagination struct {
 
 // ConsumersProfilesListOutput represents the consumers profiles list output type.
 type ConsumersProfilesListOutput struct {
-	Items      []ConsumersProfilesListOutputItems    `json:"items"`
+	Items      []map[string]any                      `json:"items"`
 	Pagination ConsumersProfilesListOutputPagination `json:"pagination"`
 }
 

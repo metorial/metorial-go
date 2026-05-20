@@ -7,20 +7,17 @@ import (
 
 // MagicMcpEndpointsRemoveServersOutput represents the magic mcp endpoints remove servers output type.
 type MagicMcpEndpointsRemoveServersOutput struct {
-	Object            string           `json:"object"`
-	Id                string           `json:"id"`
-	Status            string           `json:"status"`
-	Slug              string           `json:"slug"`
-	Url               string           `json:"url"`
-	ConsumerProfileId *string          `json:"consumer_profile_id,omitempty"`
-	SessionTemplateId *string          `json:"session_template_id,omitempty"`
-	SessionId         *string          `json:"session_id,omitempty"`
-	Servers           []map[string]any `json:"servers"`
-	Name              *string          `json:"name,omitempty"`
-	Description       *string          `json:"description,omitempty"`
-	Metadata          map[string]any   `json:"metadata"`
-	CreatedAt         time.Time        `json:"created_at"`
-	UpdatedAt         time.Time        `json:"updated_at"`
+	Object      string           `json:"object"`
+	Id          string           `json:"id"`
+	Status      string           `json:"status"`
+	Slug        string           `json:"slug"`
+	Url         string           `json:"url"`
+	Servers     []map[string]any `json:"servers"`
+	Name        *string          `json:"name,omitempty"`
+	Description *string          `json:"description,omitempty"`
+	Metadata    map[string]any   `json:"metadata"`
+	CreatedAt   time.Time        `json:"created_at"`
+	UpdatedAt   time.Time        `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsRemoveServersOutputFromJSON deserializes JSON data into a MagicMcpEndpointsRemoveServersOutput.
