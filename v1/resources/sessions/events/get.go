@@ -51,6 +51,8 @@ type SessionsEventsGetOutputConnectionParticipant struct {
 	AgentId         *string `json:"agent_id,omitempty"`
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
+	AgentActorId    *string `json:"agent_actor_id,omitempty"`
 	AgentClientId   *string `json:"agent_client_id,omitempty"`
 	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -176,6 +178,8 @@ type SessionsEventsGetOutputMessageToolCallSenderParticipant struct {
 	AgentId         *string `json:"agent_id,omitempty"`
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
+	AgentActorId    *string `json:"agent_actor_id,omitempty"`
 	AgentClientId   *string `json:"agent_client_id,omitempty"`
 	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -210,6 +214,8 @@ type SessionsEventsGetOutputMessageToolCallResponderParticipant struct {
 	AgentId         *string `json:"agent_id,omitempty"`
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
+	AgentActorId    *string `json:"agent_actor_id,omitempty"`
 	AgentClientId   *string `json:"agent_client_id,omitempty"`
 	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -363,6 +369,8 @@ type SessionsEventsGetOutputMessageSenderParticipant struct {
 	AgentId         *string `json:"agent_id,omitempty"`
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
+	AgentActorId    *string `json:"agent_actor_id,omitempty"`
 	AgentClientId   *string `json:"agent_client_id,omitempty"`
 	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created
@@ -397,6 +405,8 @@ type SessionsEventsGetOutputMessageResponderParticipant struct {
 	AgentId         *string `json:"agent_id,omitempty"`
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
+	AgentActorId    *string `json:"agent_actor_id,omitempty"`
 	AgentClientId   *string `json:"agent_client_id,omitempty"`
 	ConsumerId      *string `json:"consumer_id,omitempty"`
 	// CreatedAt - Timestamp when created

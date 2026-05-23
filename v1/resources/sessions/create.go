@@ -136,7 +136,9 @@ type SessionsCreateOutput struct {
 	// HasErrors - Whether the session has any errors
 	HasErrors bool `json:"has_errors"`
 	// HasWarnings - Whether the session has any warnings
-	HasWarnings bool `json:"has_warnings"`
+	HasWarnings     bool    `json:"has_warnings"`
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	IdentityId      *string `json:"identity_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

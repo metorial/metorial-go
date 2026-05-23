@@ -87,6 +87,18 @@ func (e *CustomProvidersEndpoint) Get(customProviderId string) (*customproviders
 	return &result, nil
 }
 
+// GetEnv retrieves the environment variables for a specific custom provider by ID.
+func (e *CustomProvidersEndpoint) GetEnv(customProviderId string) (*customproviders.CustomProvidersGetEnvOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"custom-providers", customProviderId, "env"},
+	}
+	var result customproviders.CustomProvidersGetEnvOutput
+	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // Create creates a new custom provider.
 func (e *CustomProvidersEndpoint) Create(body *CustomProvidersEndpointCreateBody) (*customproviders.CustomProvidersCreateOutput, error) {
 	req := &endpoint.Request{

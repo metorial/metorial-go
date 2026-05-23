@@ -15,10 +15,16 @@ type PortalsGetOutputSkillConfiguration struct {
 	AllowNonStandardDirectories bool     `json:"allow_non_standard_directories"`
 }
 
+// PortalsGetOutputAuthAllowedRedirectUrlFilters represents the portals get output auth allowed redirect url filters type.
+type PortalsGetOutputAuthAllowedRedirectUrlFilters struct {
+	Url string `json:"url"`
+}
+
 // PortalsGetOutputAuth represents the portals get output auth type.
 type PortalsGetOutputAuth struct {
-	Object                     string  `json:"object"`
-	SessionExpiryTimeInSeconds float64 `json:"session_expiry_time_in_seconds"`
+	Object                     string                                          `json:"object"`
+	SessionExpiryTimeInSeconds float64                                         `json:"session_expiry_time_in_seconds"`
+	AllowedRedirectUrlFilters  []PortalsGetOutputAuthAllowedRedirectUrlFilters `json:"allowed_redirect_url_filters"`
 }
 
 // PortalsGetOutputUrls represents the portals get output urls type.

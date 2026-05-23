@@ -102,6 +102,8 @@ type SessionTemplatesCreateOutput struct {
 	Metadata                   *map[string]any `json:"metadata,omitempty"`
 	IntegrationInstanceId      *string         `json:"integration_instance_id,omitempty"`
 	IntegrationInstanceGroupId *string         `json:"integration_instance_group_id,omitempty"`
+	IdentityActorId            *string         `json:"identity_actor_id,omitempty"`
+	IdentityId                 *string         `json:"identity_id,omitempty"`
 	// Providers - Template providers
 	Providers []SessionTemplatesCreateOutputProviders `json:"providers"`
 	// CreatedAt - Timestamp when created

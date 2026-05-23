@@ -27,6 +27,12 @@ type PortalsConsumerProfilesEndpointListParams struct {
 	Status          *any     `json:"status,omitempty"`
 }
 
+// PortalsConsumerProfilesEndpointCreateBody contains the request body for Create.
+type PortalsConsumerProfilesEndpointCreateBody struct {
+	Email string `json:"email"`
+	Name  string `json:"name"`
+}
+
 // PortalsConsumerProfilesEndpointAssignGroupsBody contains the request body for AssignGroups.
 type PortalsConsumerProfilesEndpointAssignGroupsBody struct {
 	GroupIds []string `json:"group_ids"`
@@ -61,6 +67,19 @@ func (e *PortalsConsumerProfilesEndpoint) Get(instanceId string, portalId string
 	}
 	var result consumerprofiles.PortalsConsumerProfilesGetOutput
 	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Create creates a new portal consumer profile.
+func (e *PortalsConsumerProfilesEndpoint) Create(instanceId string, portalId string, body *PortalsConsumerProfilesEndpointCreateBody) (*consumerprofiles.PortalsConsumerProfilesCreateOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "portals", portalId, "consumer-profile"},
+		Body: body,
+	}
+	var result consumerprofiles.PortalsConsumerProfilesCreateOutput
+	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil
