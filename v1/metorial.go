@@ -38,7 +38,7 @@ type ManagementEndpoints struct {
 	Instance                              *management.InstanceEndpoint
 	Providers                             *management.ProvidersEndpoint
 	ProvidersVersions                     *management.ProvidersVersionsEndpoint
-	ProvidersTools                        *management.ProvidersToolsEndpoint
+	ProviderTools                         *management.ProviderToolsEndpoint
 	ProvidersAuthMethods                  *management.ProvidersAuthMethodsEndpoint
 	ProvidersSpecifications               *management.ProvidersSpecificationsEndpoint
 	Publishers                            *management.PublishersEndpoint
@@ -96,7 +96,7 @@ type MetorialSdk struct {
 	Instances                             *endpoints.InstancesEndpoint
 	Providers                             *endpoints.ProvidersEndpoint
 	ProvidersVersions                     *endpoints.ProvidersVersionsEndpoint
-	ProvidersTools                        *endpoints.ProvidersToolsEndpoint
+	ProviderTools                         *endpoints.ProviderToolsEndpoint
 	ProvidersAuthMethods                  *endpoints.ProvidersAuthMethodsEndpoint
 	ProvidersSpecifications               *endpoints.ProvidersSpecificationsEndpoint
 	Publishers                            *endpoints.PublishersEndpoint
@@ -170,7 +170,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		Instances:                             endpoints.NewInstancesEndpoint(c),
 		Providers:                             endpoints.NewProvidersEndpoint(c),
 		ProvidersVersions:                     endpoints.NewProvidersVersionsEndpoint(c),
-		ProvidersTools:                        endpoints.NewProvidersToolsEndpoint(c),
+		ProviderTools:                         endpoints.NewProviderToolsEndpoint(c),
 		ProvidersAuthMethods:                  endpoints.NewProvidersAuthMethodsEndpoint(c),
 		ProvidersSpecifications:               endpoints.NewProvidersSpecificationsEndpoint(c),
 		Publishers:                            endpoints.NewPublishersEndpoint(c),
@@ -220,7 +220,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		Management: &ManagementEndpoints{
 			Providers:                             management.NewProvidersEndpoint(c),
 			ProvidersVersions:                     management.NewProvidersVersionsEndpoint(c),
-			ProvidersTools:                        management.NewProvidersToolsEndpoint(c),
+			ProviderTools:                         management.NewProviderToolsEndpoint(c),
 			ProvidersAuthMethods:                  management.NewProvidersAuthMethodsEndpoint(c),
 			ProvidersSpecifications:               management.NewProvidersSpecificationsEndpoint(c),
 			Publishers:                            management.NewPublishersEndpoint(c),
