@@ -30,10 +30,11 @@ type ProviderTemplatesEndpointListParams struct {
 
 // ProviderTemplatesEndpointCreateBody contains the request body for Create.
 type ProviderTemplatesEndpointCreateBody struct {
-	Name        string           `json:"name"`
-	Description *string          `json:"description,omitempty"`
-	Metadata    *map[string]any  `json:"metadata,omitempty"`
-	Providers   []map[string]any `json:"providers"`
+	Name          string            `json:"name"`
+	Description   *string           `json:"description,omitempty"`
+	Metadata      *map[string]any   `json:"metadata,omitempty"`
+	Providers     *[]map[string]any `json:"providers,omitempty"`
+	IntegrationId *string           `json:"integration_id,omitempty"`
 }
 
 // ProviderTemplatesEndpointUpdateBody contains the request body for Update.

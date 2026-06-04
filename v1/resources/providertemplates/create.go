@@ -47,10 +47,11 @@ type ProviderTemplatesCreateBodyProviders struct {
 
 // ProviderTemplatesCreateBody represents the provider templates create body type.
 type ProviderTemplatesCreateBody struct {
-	Name        string                                 `json:"name"`
-	Description *string                                `json:"description,omitempty"`
-	Metadata    *map[string]any                        `json:"metadata,omitempty"`
-	Providers   []ProviderTemplatesCreateBodyProviders `json:"providers"`
+	Name          string                                  `json:"name"`
+	Description   *string                                 `json:"description,omitempty"`
+	Metadata      *map[string]any                         `json:"metadata,omitempty"`
+	Providers     *[]ProviderTemplatesCreateBodyProviders `json:"providers,omitempty"`
+	IntegrationId *string                                 `json:"integration_id,omitempty"`
 }
 
 // MapProviderTemplatesCreateBodyFromJSON deserializes JSON data into a ProviderTemplatesCreateBody.
