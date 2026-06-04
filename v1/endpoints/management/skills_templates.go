@@ -56,7 +56,7 @@ func (e *SkillsTemplatesEndpoint) List(instanceId string, params *SkillsTemplate
 		query = endpoint.StructToQuery(params)
 	}
 	req := &endpoint.Request{
-		Path:  []string{"instances", instanceId, "skill-template"},
+		Path:  []string{"instances", instanceId, "skill-templates"},
 		Query: query,
 	}
 	var result templates.SkillsTemplatesListOutput
@@ -69,7 +69,7 @@ func (e *SkillsTemplatesEndpoint) List(instanceId string, params *SkillsTemplate
 // Get retrieves a specific skill template.
 func (e *SkillsTemplatesEndpoint) Get(instanceId string, skillTemplateId string) (*templates.SkillsTemplatesGetOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId},
 	}
 	var result templates.SkillsTemplatesGetOutput
 	if err := e.client.Get(req, &result); err != nil {
@@ -81,7 +81,7 @@ func (e *SkillsTemplatesEndpoint) Get(instanceId string, skillTemplateId string)
 // Create creates a skill template.
 func (e *SkillsTemplatesEndpoint) Create(instanceId string, body *SkillsTemplatesEndpointCreateBody) (*templates.SkillsTemplatesCreateOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template"},
+		Path: []string{"instances", instanceId, "skill-templates"},
 		Body: body,
 	}
 	var result templates.SkillsTemplatesCreateOutput
@@ -94,7 +94,7 @@ func (e *SkillsTemplatesEndpoint) Create(instanceId string, body *SkillsTemplate
 // Update updates a skill template.
 func (e *SkillsTemplatesEndpoint) Update(instanceId string, skillTemplateId string, body *SkillsTemplatesEndpointUpdateBody) (*templates.SkillsTemplatesUpdateOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId},
 		Body: body,
 	}
 	var result templates.SkillsTemplatesUpdateOutput
@@ -107,7 +107,7 @@ func (e *SkillsTemplatesEndpoint) Update(instanceId string, skillTemplateId stri
 // Delete archives a skill template.
 func (e *SkillsTemplatesEndpoint) Delete(instanceId string, skillTemplateId string) (*templates.SkillsTemplatesDeleteOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId},
 	}
 	var result templates.SkillsTemplatesDeleteOutput
 	if err := e.client.Delete(req, &result); err != nil {

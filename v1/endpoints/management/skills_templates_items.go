@@ -31,7 +31,7 @@ func (e *SkillsTemplatesItemsEndpoint) List(instanceId string, skillTemplateId s
 		query = endpoint.StructToQuery(params)
 	}
 	req := &endpoint.Request{
-		Path:  []string{"instances", instanceId, "skill-template", skillTemplateId, "items"},
+		Path:  []string{"instances", instanceId, "skill-templates", skillTemplateId, "items"},
 		Query: query,
 	}
 	var result items.SkillsTemplatesItemsListOutput
@@ -44,7 +44,7 @@ func (e *SkillsTemplatesItemsEndpoint) List(instanceId string, skillTemplateId s
 // Get retrieves a specific skill template item.
 func (e *SkillsTemplatesItemsEndpoint) Get(instanceId string, skillTemplateId string, skillTemplateItemId string) (*items.SkillsTemplatesItemsGetOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId, "items", skillTemplateItemId},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId, "items", skillTemplateItemId},
 	}
 	var result items.SkillsTemplatesItemsGetOutput
 	if err := e.client.Get(req, &result); err != nil {
@@ -56,7 +56,7 @@ func (e *SkillsTemplatesItemsEndpoint) Get(instanceId string, skillTemplateId st
 // Create adds a provider or integration item to a skill template.
 func (e *SkillsTemplatesItemsEndpoint) Create(instanceId string, skillTemplateId string) (*items.SkillsTemplatesItemsCreateOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId, "items"},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId, "items"},
 	}
 	var result items.SkillsTemplatesItemsCreateOutput
 	if err := e.client.Post(req, &result); err != nil {
@@ -68,7 +68,7 @@ func (e *SkillsTemplatesItemsEndpoint) Create(instanceId string, skillTemplateId
 // Delete deletes a skill template item.
 func (e *SkillsTemplatesItemsEndpoint) Delete(instanceId string, skillTemplateId string, skillTemplateItemId string) (*items.SkillsTemplatesItemsDeleteOutput, error) {
 	req := &endpoint.Request{
-		Path: []string{"instances", instanceId, "skill-template", skillTemplateId, "items", skillTemplateItemId},
+		Path: []string{"instances", instanceId, "skill-templates", skillTemplateId, "items", skillTemplateItemId},
 	}
 	var result items.SkillsTemplatesItemsDeleteOutput
 	if err := e.client.Delete(req, &result); err != nil {
