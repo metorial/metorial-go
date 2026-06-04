@@ -5,30 +5,30 @@ import (
 	"time"
 )
 
-// ProviderToolsGetOutputInputSchema represents the provider tools get output input schema type.
-type ProviderToolsGetOutputInputSchema struct {
+// ProvidersToolsGetOutputInputSchema represents the providers tools get output input schema type.
+type ProvidersToolsGetOutputInputSchema struct {
 	Type string `json:"type"`
 	// Schema - JSON Schema defining the tool input parameters
 	Schema map[string]any `json:"schema"`
 }
 
-// ProviderToolsGetOutputOutputSchema represents the provider tools get output output schema type.
-type ProviderToolsGetOutputOutputSchema struct {
+// ProvidersToolsGetOutputOutputSchema represents the providers tools get output output schema type.
+type ProvidersToolsGetOutputOutputSchema struct {
 	Type string `json:"type"`
 	// Schema - JSON Schema defining the tool output format
 	Schema map[string]any `json:"schema"`
 }
 
-// ProviderToolsGetOutputTags represents the provider tools get output tags type.
-type ProviderToolsGetOutputTags struct {
+// ProvidersToolsGetOutputTags represents the providers tools get output tags type.
+type ProvidersToolsGetOutputTags struct {
 	// Destructive - Whether the tool is destructive
 	Destructive *bool `json:"destructive,omitempty"`
 	// ReadOnly - Whether the tool is read-only
 	ReadOnly *bool `json:"read_only,omitempty"`
 }
 
-// ProviderToolsGetOutput represents the provider tools get output type.
-type ProviderToolsGetOutput struct {
+// ProvidersToolsGetOutput represents the providers tools get output type.
+type ProvidersToolsGetOutput struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
 	// Id - Unique tool identifier
@@ -44,10 +44,10 @@ type ProviderToolsGetOutput struct {
 	// Constraints - Tool constraints
 	Constraints []string `json:"constraints"`
 	// Instructions - Tool usage instructions
-	Instructions []string                            `json:"instructions"`
-	InputSchema  *ProviderToolsGetOutputInputSchema  `json:"input_schema,omitempty"`
-	OutputSchema *ProviderToolsGetOutputOutputSchema `json:"output_schema,omitempty"`
-	Tags         *ProviderToolsGetOutputTags         `json:"tags,omitempty"`
+	Instructions []string                             `json:"instructions"`
+	InputSchema  *ProvidersToolsGetOutputInputSchema  `json:"input_schema,omitempty"`
+	OutputSchema *ProvidersToolsGetOutputOutputSchema `json:"output_schema,omitempty"`
+	Tags         *ProvidersToolsGetOutputTags         `json:"tags,omitempty"`
 	// SpecificationId - Specification ID
 	SpecificationId string `json:"specification_id"`
 	// ProviderId - Provider ID
@@ -58,16 +58,16 @@ type ProviderToolsGetOutput struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MapProviderToolsGetOutputFromJSON deserializes JSON data into a ProviderToolsGetOutput.
-func MapProviderToolsGetOutputFromJSON(data []byte) (*ProviderToolsGetOutput, error) {
-	var v ProviderToolsGetOutput
+// MapProvidersToolsGetOutputFromJSON deserializes JSON data into a ProvidersToolsGetOutput.
+func MapProvidersToolsGetOutputFromJSON(data []byte) (*ProvidersToolsGetOutput, error) {
+	var v ProvidersToolsGetOutput
 	if err := json.Unmarshal(data, &v); err != nil {
 		return nil, err
 	}
 	return &v, nil
 }
 
-// MapProviderToolsGetOutputToJSON serializes a ProviderToolsGetOutput to JSON.
-func MapProviderToolsGetOutputToJSON(v *ProviderToolsGetOutput) ([]byte, error) {
+// MapProvidersToolsGetOutputToJSON serializes a ProvidersToolsGetOutput to JSON.
+func MapProvidersToolsGetOutputToJSON(v *ProvidersToolsGetOutput) ([]byte, error) {
 	return json.Marshal(v)
 }

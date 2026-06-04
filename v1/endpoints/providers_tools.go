@@ -2,21 +2,21 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
-	"github.com/metorial/metorial-go/v1/resources/provider/tools"
+	"github.com/metorial/metorial-go/v1/resources/providers/tools"
 )
 
-// ProviderToolsEndpoint provides access to a tool is a single action a provider can perform like 'search_issues' or 'send_message'. Tools are what AI agents call via MCP. By default, tools from the latest provider version are returned. Use the optional version filter to get tools for a specific version.
-type ProviderToolsEndpoint struct {
+// ProvidersToolsEndpoint provides access to a tool is a single action a provider can perform like 'search_issues' or 'send_message'. Tools are what AI agents call via MCP. By default, tools from the latest provider version are returned. Use the optional version filter to get tools for a specific version.
+type ProvidersToolsEndpoint struct {
 	client *endpoint.Client
 }
 
-// NewProviderToolsEndpoint creates a new ProviderToolsEndpoint.
-func NewProviderToolsEndpoint(client *endpoint.Client) *ProviderToolsEndpoint {
-	return &ProviderToolsEndpoint{client: client}
+// NewProvidersToolsEndpoint creates a new ProvidersToolsEndpoint.
+func NewProvidersToolsEndpoint(client *endpoint.Client) *ProvidersToolsEndpoint {
+	return &ProvidersToolsEndpoint{client: client}
 }
 
-// ProviderToolsEndpointListParams contains optional query parameters for List.
-type ProviderToolsEndpointListParams struct {
+// ProvidersToolsEndpointListParams contains optional query parameters for List.
+type ProvidersToolsEndpointListParams struct {
 	Limit             *float64 `json:"limit,omitempty"`
 	After             *string  `json:"after,omitempty"`
 	Before            *string  `json:"before,omitempty"`
@@ -26,7 +26,7 @@ type ProviderToolsEndpointListParams struct {
 }
 
 // List returns a paginated list of provider tools. By default returns tools from the latest version. Use optional filters to get tools for a specific version.
-func (e *ProviderToolsEndpoint) List(params *ProviderToolsEndpointListParams) (*tools.ProviderToolsListOutput, error) {
+func (e *ProvidersToolsEndpoint) List(params *ProvidersToolsEndpointListParams) (*tools.ProvidersToolsListOutput, error) {
 	var query map[string]any
 	if params != nil {
 		query = endpoint.StructToQuery(params)
@@ -35,7 +35,7 @@ func (e *ProviderToolsEndpoint) List(params *ProviderToolsEndpointListParams) (*
 		Path:  []string{"provider-tools"},
 		Query: query,
 	}
-	var result tools.ProviderToolsListOutput
+	var result tools.ProvidersToolsListOutput
 	if err := e.client.Get(req, &result); err != nil {
 		return nil, err
 	}
@@ -43,11 +43,11 @@ func (e *ProviderToolsEndpoint) List(params *ProviderToolsEndpointListParams) (*
 }
 
 // Get retrieves a specific provider tool by ID.
-func (e *ProviderToolsEndpoint) Get(providerToolId string) (*tools.ProviderToolsGetOutput, error) {
+func (e *ProvidersToolsEndpoint) Get(providerToolId string) (*tools.ProvidersToolsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-tools", providerToolId},
 	}
-	var result tools.ProviderToolsGetOutput
+	var result tools.ProvidersToolsGetOutput
 	if err := e.client.Get(req, &result); err != nil {
 		return nil, err
 	}

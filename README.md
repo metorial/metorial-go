@@ -85,7 +85,7 @@ provider, err := sdk.Providers.Get("prov_abc123")
 
 // Access provider sub-resources
 versions, err := sdk.ProvidersVersions.List(nil)
-tools, err := sdk.ProviderTools.List(&endpoints.ProviderToolsEndpointListParams{
+tools, err := sdk.ProvidersTools.List(&endpoints.ProvidersToolsEndpointListParams{
     ProviderVersionId: "pver_abc123",
 })
 ```
