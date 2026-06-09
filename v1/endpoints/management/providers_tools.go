@@ -17,12 +17,13 @@ func NewProvidersToolsEndpoint(client *endpoint.Client) *ProvidersToolsEndpoint 
 
 // ProvidersToolsEndpointListParams contains optional query parameters for List.
 type ProvidersToolsEndpointListParams struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	ProviderVersionId string   `json:"provider_version_id"`
+	Limit                *float64 `json:"limit,omitempty"`
+	After                *string  `json:"after,omitempty"`
+	Before               *string  `json:"before,omitempty"`
+	Cursor               *string  `json:"cursor,omitempty"`
+	Order                *string  `json:"order,omitempty"`
+	ProviderVersionId    string   `json:"provider_version_id"`
+	ProviderAuthMethodId *any     `json:"provider_auth_method_id,omitempty"`
 }
 
 // List returns a paginated list of provider tools. By default returns tools from the latest version. Use optional filters to get tools for a specific version.
