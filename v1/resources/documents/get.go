@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// DocumentsGetOutputCreatedByOrganizationActorMember represents the documents get output created by organization actor member type.
+type DocumentsGetOutputCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // DocumentsGetOutputCreatedByOrganizationActorTeams - The teams the actor belongs to
 type DocumentsGetOutputCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type DocumentsGetOutputCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                              `json:"image_url"`
+	Member   *DocumentsGetOutputCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []DocumentsGetOutputCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type DocumentsGetOutputCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type DocumentsGetOutputCreatedBy struct {
 	Email             *string                                       `json:"email,omitempty"`
 	OrganizationActor *DocumentsGetOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *DocumentsGetOutputCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                               `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsGetOutput represents the documents get output type.

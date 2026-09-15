@@ -46,6 +46,7 @@ type PortalsCreateOutput struct {
 	SkillConfiguration           PortalsCreateOutputSkillConfiguration `json:"skill_configuration"`
 	Auth                         PortalsCreateOutputAuth               `json:"auth"`
 	Urls                         []PortalsCreateOutputUrls             `json:"urls"`
+	MagicMcpUrl                  string                                `json:"magic_mcp_url"`
 	CreatedAt                    time.Time                             `json:"created_at"`
 	UpdatedAt                    time.Time                             `json:"updated_at"`
 }

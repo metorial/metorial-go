@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// ConversationsCreateOutputCreatedByActorOrganizationActorMember represents the conversations create output created by actor organization actor member type.
+type ConversationsCreateOutputCreatedByActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // ConversationsCreateOutputCreatedByActorOrganizationActorTeams - The teams the actor belongs to
 type ConversationsCreateOutputCreatedByActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type ConversationsCreateOutputCreatedByActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                          `json:"image_url"`
+	Member   *ConversationsCreateOutputCreatedByActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []ConversationsCreateOutputCreatedByActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type ConversationsCreateOutputCreatedByActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type ConversationsCreateOutputCreatedByActor struct {
 	Email             *string                                                   `json:"email,omitempty"`
 	OrganizationActor *ConversationsCreateOutputCreatedByActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *ConversationsCreateOutputCreatedByActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                           `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsCreateOutputAssistantDefaultModelProvider represents the conversations create output assistant default model provider type.
@@ -148,8 +163,9 @@ func MapConversationsCreateOutputToJSON(v *ConversationsCreateOutput) ([]byte, e
 
 // ConversationsCreateBody represents the conversations create body type.
 type ConversationsCreateBody struct {
-	AssistantId string  `json:"assistant_id"`
-	Title       *string `json:"title,omitempty"`
+	AssistantId string          `json:"assistant_id"`
+	Title       *string         `json:"title,omitempty"`
+	Input       *map[string]any `json:"input,omitempty"`
 }
 
 // MapConversationsCreateBodyFromJSON deserializes JSON data into a ConversationsCreateBody.

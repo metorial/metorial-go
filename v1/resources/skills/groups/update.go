@@ -26,15 +26,16 @@ type SkillsGroupsUpdateOutputSkills struct {
 
 // SkillsGroupsUpdateOutput represents the skills groups update output type.
 type SkillsGroupsUpdateOutput struct {
-	Object      string                           `json:"object"`
-	Id          string                           `json:"id"`
-	Status      string                           `json:"status"`
-	Name        string                           `json:"name"`
-	Description *string                          `json:"description,omitempty"`
-	Metadata    *map[string]any                  `json:"metadata,omitempty"`
-	Skills      []SkillsGroupsUpdateOutputSkills `json:"skills"`
-	CreatedAt   time.Time                        `json:"created_at"`
-	UpdatedAt   time.Time                        `json:"updated_at"`
+	Object                       string                           `json:"object"`
+	Id                           string                           `json:"id"`
+	Status                       string                           `json:"status"`
+	Name                         string                           `json:"name"`
+	Description                  *string                          `json:"description,omitempty"`
+	Metadata                     *map[string]any                  `json:"metadata,omitempty"`
+	AllowConsumerSkillAssignment bool                             `json:"allow_consumer_skill_assignment"`
+	Skills                       []SkillsGroupsUpdateOutputSkills `json:"skills"`
+	CreatedAt                    time.Time                        `json:"created_at"`
+	UpdatedAt                    time.Time                        `json:"updated_at"`
 }
 
 // MapSkillsGroupsUpdateOutputFromJSON deserializes JSON data into a SkillsGroupsUpdateOutput.
@@ -53,10 +54,11 @@ func MapSkillsGroupsUpdateOutputToJSON(v *SkillsGroupsUpdateOutput) ([]byte, err
 
 // SkillsGroupsUpdateBody represents the skills groups update body type.
 type SkillsGroupsUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	SkillIds    *[]string       `json:"skill_ids,omitempty"`
+	Name                         *string         `json:"name,omitempty"`
+	Description                  *string         `json:"description,omitempty"`
+	Metadata                     *map[string]any `json:"metadata,omitempty"`
+	SkillIds                     *[]string       `json:"skill_ids,omitempty"`
+	AllowConsumerSkillAssignment *bool           `json:"allow_consumer_skill_assignment,omitempty"`
 }
 
 // MapSkillsGroupsUpdateBodyFromJSON deserializes JSON data into a SkillsGroupsUpdateBody.

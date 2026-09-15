@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// ConversationsListOutputItemsCreatedByActorOrganizationActorMember represents the conversations list output items created by actor organization actor member type.
+type ConversationsListOutputItemsCreatedByActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // ConversationsListOutputItemsCreatedByActorOrganizationActorTeams - The teams the actor belongs to
 type ConversationsListOutputItemsCreatedByActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type ConversationsListOutputItemsCreatedByActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                             `json:"image_url"`
+	Member   *ConversationsListOutputItemsCreatedByActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []ConversationsListOutputItemsCreatedByActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type ConversationsListOutputItemsCreatedByActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type ConversationsListOutputItemsCreatedByActor struct {
 	Email             *string                                                      `json:"email,omitempty"`
 	OrganizationActor *ConversationsListOutputItemsCreatedByActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *ConversationsListOutputItemsCreatedByActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                              `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsListOutputItemsAssistantDefaultModelProvider represents the conversations list output items assistant default model provider type.

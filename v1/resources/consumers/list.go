@@ -12,6 +12,7 @@ type ConsumersListOutputItems struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -50,6 +51,7 @@ type ConsumersListQuery struct {
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
 	Search *string  `json:"search,omitempty"`
+	Email  *any     `json:"email,omitempty"`
 	Id     *string  `json:"id,omitempty"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/callbacks"
 )
 
-// CallbacksEndpoint provides access to manage webhook-style callbacks backed by subspace trigger receivers.
+// CallbacksEndpoint provides access to a callback is what receives provider events for an integration provider. Creating one enables callbacks on the integration provider, and Metorial then registers the callback against every matching integration instance. Setting `callbacks.status` on the integration provider itself does the same thing.
 type CallbacksEndpoint struct {
 	client *endpoint.Client
 }
@@ -24,8 +24,12 @@ type CallbacksEndpointListParams struct {
 	Order  *string  `json:"order,omitempty"`
 	// Id - Filter by callback ID(s)
 	Id *any `json:"id,omitempty"`
-	// ProviderDeploymentId - Filter by provider deployment ID(s)
-	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// IntegrationId - Filter by integration ID(s)
+	IntegrationId *any `json:"integration_id,omitempty"`
+	// IntegrationProviderId - Filter by integration provider ID(s)
+	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
+	// ProviderId - Filter by provider ID(s)
+	ProviderId *any `json:"provider_id,omitempty"`
 	// Status - Filter by callback lifecycle status
 	Status *any `json:"status,omitempty"`
 	// CreatedAt - Filter callback creation time by date range
@@ -36,34 +40,24 @@ type CallbacksEndpointListParams struct {
 
 // CallbacksEndpointCreateBody contains the request body for Create.
 type CallbacksEndpointCreateBody struct {
-	// ProviderDeploymentId - Provider deployment that owns the trigger specification for this callback
-	ProviderDeploymentId string `json:"provider_deployment_id"`
-	// Name - Display name for the callback
-	Name string `json:"name"`
-	// Description - Optional callback description
+	// IntegrationId - Integration the integration provider belongs to
+	IntegrationId string `json:"integration_id"`
+	// IntegrationProviderId - Integration provider to enable callbacks for
+	IntegrationProviderId string `json:"integration_provider_id"`
+	// Name - Display name for the callback. Defaults to the name of the integration provider.
+	Name *string `json:"name,omitempty"`
+	// Description - Description for the callback. Defaults to the description of the integration provider.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional callback metadata
-	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PollIntervalSecondsOverride - Optional polling interval override, in seconds, for polling triggers
-	PollIntervalSecondsOverride *float64 `json:"poll_interval_seconds_override,omitempty"`
-	// DestinationIds - Optional callback destination IDs that should receive deliveries. Destinations can also be attached later.
-	DestinationIds *[]string         `json:"destination_ids,omitempty"`
-	Triggers       *[]map[string]any `json:"triggers,omitempty"`
 }
 
 // CallbacksEndpointUpdateBody contains the request body for Update.
 type CallbacksEndpointUpdateBody struct {
-	// Name - Updated callback display name
+	// Name - Updated display name
 	Name *string `json:"name,omitempty"`
-	// Description - Updated callback description
+	// Description - Updated description
 	Description *string `json:"description,omitempty"`
-	// Metadata - Updated custom metadata for the callback
+	// Metadata - Updated custom metadata
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PollIntervalSecondsOverride - Updated polling interval override, in seconds
-	PollIntervalSecondsOverride *float64 `json:"poll_interval_seconds_override,omitempty"`
-	// DestinationIds - Replacement list of callback destination IDs
-	DestinationIds *[]string         `json:"destination_ids,omitempty"`
-	Triggers       *[]map[string]any `json:"triggers,omitempty"`
 }
 
 // List returns a paginated list of callbacks.
@@ -83,19 +77,7 @@ func (e *CallbacksEndpoint) List(params *CallbacksEndpointListParams) (*callback
 	return &result, nil
 }
 
-// Get retrieves a specific callback by ID.
-func (e *CallbacksEndpoint) Get(callbackId string) (*callbacks.CallbacksGetOutput, error) {
-	req := &endpoint.Request{
-		Path: []string{"callbacks", callbackId},
-	}
-	var result callbacks.CallbacksGetOutput
-	if err := e.client.Get(req, &result); err != nil {
-		return nil, err
-	}
-	return &result, nil
-}
-
-// Create creates a new callback definition.
+// Create enables callbacks for an integration provider and returns the callback it created. Only providers whose type reports `triggers.status` as `enabled` support this. Callback instances are then registered for every matching integration instance in the background.
 func (e *CallbacksEndpoint) Create(body *CallbacksEndpointCreateBody) (*callbacks.CallbacksCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"callbacks"},
@@ -108,7 +90,19 @@ func (e *CallbacksEndpoint) Create(body *CallbacksEndpointCreateBody) (*callback
 	return &result, nil
 }
 
-// Update updates a callback definition.
+// Get retrieves a specific callback by ID.
+func (e *CallbacksEndpoint) Get(callbackId string) (*callbacks.CallbacksGetOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"callbacks", callbackId},
+	}
+	var result callbacks.CallbacksGetOutput
+	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Update updates the name, description or metadata of a callback. Everything else about a callback is derived from its integration provider - set `callbacks.status` to `disabled` there to tear it down.
 func (e *CallbacksEndpoint) Update(callbackId string, body *CallbacksEndpointUpdateBody) (*callbacks.CallbacksUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"callbacks", callbackId},
@@ -121,7 +115,7 @@ func (e *CallbacksEndpoint) Update(callbackId string, body *CallbacksEndpointUpd
 	return &result, nil
 }
 
-// Delete archives a callback definition.
+// Delete disables callbacks on the underlying integration provider, tearing down this callback and every callback instance registered for it.
 func (e *CallbacksEndpoint) Delete(callbackId string) (*callbacks.CallbacksDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"callbacks", callbackId},

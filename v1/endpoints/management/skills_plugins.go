@@ -42,6 +42,7 @@ type SkillsPluginsEndpointCreateBody struct {
 	Category             *string `json:"category,omitempty"`
 	ImageFileId          *string `json:"image_file_id,omitempty"`
 	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
+	SkillMarketplaceId   *string `json:"skill_marketplace_id,omitempty"`
 }
 
 // SkillsPluginsEndpointUpdateBody contains the request body for Update.

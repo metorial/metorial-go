@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+// PortalsAccessCreateOutputListing represents the portals access create output listing type.
+type PortalsAccessCreateOutputListing struct {
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+}
+
 // PortalsAccessCreateOutputAccessProviderTemplate represents the portals access create output access provider template type.
 type PortalsAccessCreateOutputAccessProviderTemplate struct {
 	Object        string         `json:"object"`
@@ -61,6 +68,14 @@ type PortalsAccessCreateOutputAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsAccessCreateOutputAccessSkillPlugin represents the portals access create output access skill plugin type.
+type PortalsAccessCreateOutputAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsAccessCreateOutputAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsAccessCreateOutputAccess struct {
@@ -71,6 +86,7 @@ type PortalsAccessCreateOutputAccess struct {
 	SkillTemplate    *PortalsAccessCreateOutputAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsAccessCreateOutputAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsAccessCreateOutputAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsAccessCreateOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsAccessCreateOutputConsumerGroup represents the portals access create output consumer group type.
@@ -81,7 +97,6 @@ type PortalsAccessCreateOutputConsumerGroup struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -90,9 +105,11 @@ type PortalsAccessCreateOutputConsumerGroup struct {
 type PortalsAccessCreateOutput struct {
 	Object        string                                 `json:"object"`
 	Id            string                                 `json:"id"`
+	AccessLevel   *string                                `json:"access_level,omitempty"`
 	Name          string                                 `json:"name"`
 	Description   *string                                `json:"description,omitempty"`
 	Readme        *string                                `json:"readme,omitempty"`
+	Listing       *PortalsAccessCreateOutputListing      `json:"listing,omitempty"`
 	Access        PortalsAccessCreateOutputAccess        `json:"access"`
 	ConsumerGroup PortalsAccessCreateOutputConsumerGroup `json:"consumer_group"`
 	CreatedAt     time.Time                              `json:"created_at"`
@@ -123,6 +140,8 @@ type PortalsAccessCreateBodyAccess struct {
 	SkillTemplateId    *string `json:"skill_template_id,omitempty"`
 	SkillGroupId       *string `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId *string `json:"skill_marketplace_id,omitempty"`
+	Permission         *string `json:"permission,omitempty"`
+	SkillPluginId      *string `json:"skill_plugin_id,omitempty"`
 }
 
 // PortalsAccessCreateBody represents the portals access create body type.

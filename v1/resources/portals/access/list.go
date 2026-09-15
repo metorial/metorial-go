@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+// PortalsAccessListOutputItemsListing represents the portals access list output items listing type.
+type PortalsAccessListOutputItemsListing struct {
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+}
+
 // PortalsAccessListOutputItemsAccessProviderTemplate represents the portals access list output items access provider template type.
 type PortalsAccessListOutputItemsAccessProviderTemplate struct {
 	Object        string         `json:"object"`
@@ -61,6 +68,14 @@ type PortalsAccessListOutputItemsAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsAccessListOutputItemsAccessSkillPlugin represents the portals access list output items access skill plugin type.
+type PortalsAccessListOutputItemsAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsAccessListOutputItemsAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsAccessListOutputItemsAccess struct {
@@ -71,6 +86,7 @@ type PortalsAccessListOutputItemsAccess struct {
 	SkillTemplate    *PortalsAccessListOutputItemsAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsAccessListOutputItemsAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsAccessListOutputItemsAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsAccessListOutputItemsAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsAccessListOutputItemsConsumerGroup represents the portals access list output items consumer group type.
@@ -81,7 +97,6 @@ type PortalsAccessListOutputItemsConsumerGroup struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -90,9 +105,11 @@ type PortalsAccessListOutputItemsConsumerGroup struct {
 type PortalsAccessListOutputItems struct {
 	Object        string                                    `json:"object"`
 	Id            string                                    `json:"id"`
+	AccessLevel   *string                                   `json:"access_level,omitempty"`
 	Name          string                                    `json:"name"`
 	Description   *string                                   `json:"description,omitempty"`
 	Readme        *string                                   `json:"readme,omitempty"`
+	Listing       *PortalsAccessListOutputItemsListing      `json:"listing,omitempty"`
 	Access        PortalsAccessListOutputItemsAccess        `json:"access"`
 	ConsumerGroup PortalsAccessListOutputItemsConsumerGroup `json:"consumer_group"`
 	CreatedAt     time.Time                                 `json:"created_at"`
@@ -140,6 +157,7 @@ type PortalsAccessListQuery struct {
 	SkillTemplateId         *any     `json:"skill_template_id,omitempty"`
 	SkillGroupId            *any     `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId      *any     `json:"skill_marketplace_id,omitempty"`
+	SkillPluginId           *any     `json:"skill_plugin_id,omitempty"`
 	ConsumerAccessListingId *any     `json:"consumer_access_listing_id,omitempty"`
 	Type                    *any     `json:"type,omitempty"`
 }

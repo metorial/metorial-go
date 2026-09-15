@@ -30,6 +30,7 @@ type PortalsAccessEndpointListParams struct {
 	SkillTemplateId         *any     `json:"skill_template_id,omitempty"`
 	SkillGroupId            *any     `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId      *any     `json:"skill_marketplace_id,omitempty"`
+	SkillPluginId           *any     `json:"skill_plugin_id,omitempty"`
 	ConsumerAccessListingId *any     `json:"consumer_access_listing_id,omitempty"`
 	Type                    *any     `json:"type,omitempty"`
 }

@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// SkillsExportsListOutputItemsFileCreatedByOrganizationActorMember represents the skills exports list output items file created by organization actor member type.
+type SkillsExportsListOutputItemsFileCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsExportsListOutputItemsFileCreatedByOrganizationActorTeams - The teams the actor belongs to
 type SkillsExportsListOutputItemsFileCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type SkillsExportsListOutputItemsFileCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                            `json:"image_url"`
+	Member   *SkillsExportsListOutputItemsFileCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsExportsListOutputItemsFileCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type SkillsExportsListOutputItemsFileCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type SkillsExportsListOutputItemsFileCreatedBy struct {
 	Email             *string                                                     `json:"email,omitempty"`
 	OrganizationActor *SkillsExportsListOutputItemsFileCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsExportsListOutputItemsFileCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                             `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsListOutputItemsFile represents the skills exports list output items file type.
@@ -106,6 +121,18 @@ type SkillsExportsListOutputItemsFileLink struct {
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
+// SkillsExportsListOutputItemsCreatedByOrganizationActorMember represents the skills exports list output items created by organization actor member type.
+type SkillsExportsListOutputItemsCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsExportsListOutputItemsCreatedByOrganizationActorTeams - The teams the actor belongs to
 type SkillsExportsListOutputItemsCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -138,6 +165,7 @@ type SkillsExportsListOutputItemsCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                        `json:"image_url"`
+	Member   *SkillsExportsListOutputItemsCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsExportsListOutputItemsCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -152,6 +180,7 @@ type SkillsExportsListOutputItemsCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -164,6 +193,7 @@ type SkillsExportsListOutputItemsCreatedBy struct {
 	Email             *string                                                 `json:"email,omitempty"`
 	OrganizationActor *SkillsExportsListOutputItemsCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsExportsListOutputItemsCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                         `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsListOutputItems represents the skills exports list output items type.

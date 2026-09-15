@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// ConversationsGetOutputCreatedByActorOrganizationActorMember represents the conversations get output created by actor organization actor member type.
+type ConversationsGetOutputCreatedByActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // ConversationsGetOutputCreatedByActorOrganizationActorTeams - The teams the actor belongs to
 type ConversationsGetOutputCreatedByActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type ConversationsGetOutputCreatedByActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                       `json:"image_url"`
+	Member   *ConversationsGetOutputCreatedByActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []ConversationsGetOutputCreatedByActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type ConversationsGetOutputCreatedByActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type ConversationsGetOutputCreatedByActor struct {
 	Email             *string                                                `json:"email,omitempty"`
 	OrganizationActor *ConversationsGetOutputCreatedByActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *ConversationsGetOutputCreatedByActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                        `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsGetOutputAssistantDefaultModelProvider represents the conversations get output assistant default model provider type.

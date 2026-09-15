@@ -46,6 +46,7 @@ type SkillsEndpointCreateBody struct {
 	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
 	ImageFileId       *string         `json:"image_file_id,omitempty"`
 	TemplateId        *string         `json:"template_id,omitempty"`
+	SkillGroupId      *string         `json:"skill_group_id,omitempty"`
 }
 
 // SkillsEndpointUpdateBody contains the request body for Update.
@@ -72,6 +73,13 @@ type SkillsEndpointForkBody struct {
 	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
 	Metadata          *map[string]any `json:"metadata,omitempty"`
 	ImageFileId       *string         `json:"image_file_id,omitempty"`
+}
+
+// SkillsEndpointShareBody contains the request body for Share.
+type SkillsEndpointShareBody struct {
+	ConsumerProfileIds    *[]string `json:"consumer_profile_ids,omitempty"`
+	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
+	Permission            string    `json:"permission"`
 }
 
 // SkillsEndpointDuplicateBody contains the request body for Duplicate.
@@ -172,6 +180,19 @@ func (e *SkillsEndpoint) PublishConsumerSkill(skillId string) (*skills.SkillsPub
 		Path: []string{"skills", skillId, "publish"},
 	}
 	var result skills.SkillsPublishConsumerSkillOutput
+	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Share shares a skill with consumers or organization members.
+func (e *SkillsEndpoint) Share(skillId string, body *SkillsEndpointShareBody) (*skills.SkillsShareOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"skills", skillId, "shares"},
+		Body: body,
+	}
+	var result skills.SkillsShareOutput
 	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}

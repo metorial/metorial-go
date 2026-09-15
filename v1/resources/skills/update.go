@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// SkillsUpdateOutputHierarchyCreatorOrganizationActorMember represents the skills update output hierarchy creator organization actor member type.
+type SkillsUpdateOutputHierarchyCreatorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsUpdateOutputHierarchyCreatorOrganizationActorTeams - The teams the actor belongs to
 type SkillsUpdateOutputHierarchyCreatorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type SkillsUpdateOutputHierarchyCreatorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                     `json:"image_url"`
+	Member   *SkillsUpdateOutputHierarchyCreatorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsUpdateOutputHierarchyCreatorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type SkillsUpdateOutputHierarchyCreatorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,19 @@ type SkillsUpdateOutputHierarchyCreator struct {
 	Email             *string                                              `json:"email,omitempty"`
 	OrganizationActor *SkillsUpdateOutputHierarchyCreatorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsUpdateOutputHierarchyCreatorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                      `json:"consumer_profile,omitempty"`
+}
+
+// SkillsUpdateOutputHierarchyForkCreatorOrganizationActorMember represents the skills update output hierarchy fork creator organization actor member type.
+type SkillsUpdateOutputHierarchyForkCreatorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
 }
 
 // SkillsUpdateOutputHierarchyForkCreatorOrganizationActorTeams - The teams the actor belongs to
@@ -97,6 +124,7 @@ type SkillsUpdateOutputHierarchyForkCreatorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                         `json:"image_url"`
+	Member   *SkillsUpdateOutputHierarchyForkCreatorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsUpdateOutputHierarchyForkCreatorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -111,6 +139,7 @@ type SkillsUpdateOutputHierarchyForkCreatorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -123,6 +152,19 @@ type SkillsUpdateOutputHierarchyForkCreator struct {
 	Email             *string                                                  `json:"email,omitempty"`
 	OrganizationActor *SkillsUpdateOutputHierarchyForkCreatorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsUpdateOutputHierarchyForkCreatorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                          `json:"consumer_profile,omitempty"`
+}
+
+// SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActorMember represents the skills update output hierarchy fork original creator organization actor member type.
+type SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
 }
 
 // SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActorTeams - The teams the actor belongs to
@@ -157,6 +199,7 @@ type SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                                 `json:"image_url"`
+	Member   *SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -171,6 +214,7 @@ type SkillsUpdateOutputHierarchyForkOriginalCreatorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -183,6 +227,7 @@ type SkillsUpdateOutputHierarchyForkOriginalCreator struct {
 	Email             *string                                                          `json:"email,omitempty"`
 	OrganizationActor *SkillsUpdateOutputHierarchyForkOriginalCreatorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsUpdateOutputHierarchyForkOriginalCreatorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                                  `json:"consumer_profile,omitempty"`
 }
 
 // SkillsUpdateOutputHierarchyFork represents the skills update output hierarchy fork type.
@@ -218,9 +263,10 @@ type SkillsUpdateOutputHierarchy struct {
 
 // SkillsUpdateOutputIntegrationsConfiguration represents the skills update output integrations configuration type.
 type SkillsUpdateOutputIntegrationsConfiguration struct {
-	CanAttachCustomToolFilters    bool `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool `json:"can_override_tool_filters"`
+	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
+	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
+	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
+	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // SkillsUpdateOutputIntegrations represents the skills update output integrations type.

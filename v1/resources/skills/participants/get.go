@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// SkillsParticipantsGetOutputActorOrganizationActorMember represents the skills participants get output actor organization actor member type.
+type SkillsParticipantsGetOutputActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsParticipantsGetOutputActorOrganizationActorTeams - The teams the actor belongs to
 type SkillsParticipantsGetOutputActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type SkillsParticipantsGetOutputActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                   `json:"image_url"`
+	Member   *SkillsParticipantsGetOutputActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsParticipantsGetOutputActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type SkillsParticipantsGetOutputActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type SkillsParticipantsGetOutputActor struct {
 	Email             *string                                            `json:"email,omitempty"`
 	OrganizationActor *SkillsParticipantsGetOutputActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsParticipantsGetOutputActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                    `json:"consumer_profile,omitempty"`
 }
 
 // SkillsParticipantsGetOutput represents the skills participants get output type.

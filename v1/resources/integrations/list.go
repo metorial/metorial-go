@@ -7,9 +7,10 @@ import (
 
 // IntegrationsListOutputItemsConfiguration represents the integrations list output items configuration type.
 type IntegrationsListOutputItemsConfiguration struct {
-	CanAttachCustomToolFilters    bool `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool `json:"can_override_tool_filters"`
+	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
+	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
+	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
+	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // IntegrationsListOutputItemsImplementation represents one of several possible types.
@@ -50,6 +51,16 @@ type IntegrationsListOutputItemsProvidersConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// IntegrationsListOutputItemsProvidersCallbacks - Provider callback state for this integration provider
+type IntegrationsListOutputItemsProvidersCallbacks struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Status - Whether this integration provider should receive provider callbacks. Enabling it creates a callback and registers it against every matching integration instance.
+	Status string `json:"status"`
+	// CallbackId - The active callback, once it has been created. Null while callbacks are disabled.
+	CallbackId *string `json:"callback_id,omitempty"`
+}
+
 // IntegrationsListOutputItemsProviders represents the integrations list output items providers type.
 type IntegrationsListOutputItemsProviders struct {
 	Object        string          `json:"object"`
@@ -66,9 +77,11 @@ type IntegrationsListOutputItemsProviders struct {
 	AuthMethodId      *string                                         `json:"auth_method_id,omitempty"`
 	AuthCredentialsId *string                                         `json:"auth_credentials_id,omitempty"`
 	Config            *IntegrationsListOutputItemsProvidersConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                       `json:"created_at"`
-	UpdatedAt         time.Time                                       `json:"updated_at"`
-	ArchivedAt        *time.Time                                      `json:"archived_at,omitempty"`
+	// Callbacks - Provider callback state for this integration provider
+	Callbacks  IntegrationsListOutputItemsProvidersCallbacks `json:"callbacks"`
+	CreatedAt  time.Time                                     `json:"created_at"`
+	UpdatedAt  time.Time                                     `json:"updated_at"`
+	ArchivedAt *time.Time                                    `json:"archived_at,omitempty"`
 }
 
 // IntegrationsListOutputItems represents the integrations list output items type.

@@ -13,7 +13,6 @@ type PortalsConsumerProfilesCreateOutputGroupsGroup struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -33,6 +32,7 @@ type PortalsConsumerProfilesCreateOutput struct {
 	Email      string                                       `json:"email"`
 	ImageUrl   string                                       `json:"image_url"`
 	ConsumerId string                                       `json:"consumer_id"`
+	UserId     *string                                      `json:"user_id,omitempty"`
 	Status     string                                       `json:"status"`
 	CreatedAt  time.Time                                    `json:"created_at"`
 	UpdatedAt  time.Time                                    `json:"updated_at"`

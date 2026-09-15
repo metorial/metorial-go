@@ -27,8 +27,9 @@ type ConversationsEndpointListParams struct {
 
 // ConversationsEndpointCreateBody contains the request body for Create.
 type ConversationsEndpointCreateBody struct {
-	AssistantId string  `json:"assistant_id"`
-	Title       *string `json:"title,omitempty"`
+	AssistantId string          `json:"assistant_id"`
+	Title       *string         `json:"title,omitempty"`
+	Input       *map[string]any `json:"input,omitempty"`
 }
 
 // ConversationsEndpointUpdateBody contains the request body for Update.

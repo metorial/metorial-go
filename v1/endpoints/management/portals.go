@@ -22,6 +22,8 @@ type PortalsEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Search - Search by name or description
+	Search *string `json:"search,omitempty"`
 }
 
 // PortalsEndpointCreateBody contains the request body for Create.

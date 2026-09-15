@@ -108,6 +108,8 @@ type MagicMcpServersCreateOutputProvidersAuthMethod struct {
 	OutputSchema *MagicMcpServersCreateOutputProvidersAuthMethodOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]MagicMcpServersCreateOutputProvidersAuthMethodScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID
@@ -247,11 +249,12 @@ func MapMagicMcpServersCreateOutputToJSON(v *MagicMcpServersCreateOutput) ([]byt
 
 // MagicMcpServersCreateBody represents the magic mcp servers create body type.
 type MagicMcpServersCreateBody struct {
-	Name               *string         `json:"name,omitempty"`
-	Description        *string         `json:"description,omitempty"`
-	Metadata           *map[string]any `json:"metadata,omitempty"`
-	ProviderTemplateId *string         `json:"provider_template_id,omitempty"`
-	ConsumerProfileId  *string         `json:"consumer_profile_id,omitempty"`
+	Name                  *string         `json:"name,omitempty"`
+	Description           *string         `json:"description,omitempty"`
+	Metadata              *map[string]any `json:"metadata,omitempty"`
+	ProviderTemplateId    *string         `json:"provider_template_id,omitempty"`
+	IntegrationInstanceId *string         `json:"integration_instance_id,omitempty"`
+	ConsumerProfileId     *string         `json:"consumer_profile_id,omitempty"`
 }
 
 // MapMagicMcpServersCreateBodyFromJSON deserializes JSON data into a MagicMcpServersCreateBody.

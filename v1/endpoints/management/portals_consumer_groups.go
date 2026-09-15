@@ -28,18 +28,16 @@ type PortalsConsumerGroupsEndpointListParams struct {
 
 // PortalsConsumerGroupsEndpointCreateBody contains the request body for Create.
 type PortalsConsumerGroupsEndpointCreateBody struct {
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	SsoGroupIds *[]string `json:"sso_group_ids,omitempty"`
-	IsDefault   *bool     `json:"is_default,omitempty"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+	IsDefault   *bool   `json:"is_default,omitempty"`
 }
 
 // PortalsConsumerGroupsEndpointUpdateBody contains the request body for Update.
 type PortalsConsumerGroupsEndpointUpdateBody struct {
-	Name        *string   `json:"name,omitempty"`
-	Description *string   `json:"description,omitempty"`
-	SsoGroupIds *[]string `json:"sso_group_ids,omitempty"`
-	IsDefault   *bool     `json:"is_default,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	IsDefault   *bool   `json:"is_default,omitempty"`
 }
 
 // List returns a paginated list of consumer groups for a portal.

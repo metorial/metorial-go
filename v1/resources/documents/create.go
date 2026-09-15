@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// DocumentsCreateOutputCreatedByOrganizationActorMember represents the documents create output created by organization actor member type.
+type DocumentsCreateOutputCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // DocumentsCreateOutputCreatedByOrganizationActorTeams - The teams the actor belongs to
 type DocumentsCreateOutputCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type DocumentsCreateOutputCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                 `json:"image_url"`
+	Member   *DocumentsCreateOutputCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []DocumentsCreateOutputCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type DocumentsCreateOutputCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type DocumentsCreateOutputCreatedBy struct {
 	Email             *string                                          `json:"email,omitempty"`
 	OrganizationActor *DocumentsCreateOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *DocumentsCreateOutputCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                  `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsCreateOutput represents the documents create output type.

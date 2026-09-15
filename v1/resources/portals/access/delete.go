@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+// PortalsAccessDeleteOutputListing represents the portals access delete output listing type.
+type PortalsAccessDeleteOutputListing struct {
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+}
+
 // PortalsAccessDeleteOutputAccessProviderTemplate represents the portals access delete output access provider template type.
 type PortalsAccessDeleteOutputAccessProviderTemplate struct {
 	Object        string         `json:"object"`
@@ -61,6 +68,14 @@ type PortalsAccessDeleteOutputAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsAccessDeleteOutputAccessSkillPlugin represents the portals access delete output access skill plugin type.
+type PortalsAccessDeleteOutputAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsAccessDeleteOutputAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsAccessDeleteOutputAccess struct {
@@ -71,6 +86,7 @@ type PortalsAccessDeleteOutputAccess struct {
 	SkillTemplate    *PortalsAccessDeleteOutputAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsAccessDeleteOutputAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsAccessDeleteOutputAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsAccessDeleteOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsAccessDeleteOutputConsumerGroup represents the portals access delete output consumer group type.
@@ -81,7 +97,6 @@ type PortalsAccessDeleteOutputConsumerGroup struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -90,9 +105,11 @@ type PortalsAccessDeleteOutputConsumerGroup struct {
 type PortalsAccessDeleteOutput struct {
 	Object        string                                 `json:"object"`
 	Id            string                                 `json:"id"`
+	AccessLevel   *string                                `json:"access_level,omitempty"`
 	Name          string                                 `json:"name"`
 	Description   *string                                `json:"description,omitempty"`
 	Readme        *string                                `json:"readme,omitempty"`
+	Listing       *PortalsAccessDeleteOutputListing      `json:"listing,omitempty"`
 	Access        PortalsAccessDeleteOutputAccess        `json:"access"`
 	ConsumerGroup PortalsAccessDeleteOutputConsumerGroup `json:"consumer_group"`
 	CreatedAt     time.Time                              `json:"created_at"`

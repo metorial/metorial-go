@@ -5,21 +5,41 @@ import (
 	"time"
 )
 
+// SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkill represents the skills marketplaces plugins add output skill plugin skills skill type.
+type SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkill struct {
+	Object            string          `json:"object"`
+	Id                string          `json:"id"`
+	Status            string          `json:"status"`
+	Slug              string          `json:"slug"`
+	Name              string          `json:"name"`
+	Description       *string         `json:"description,omitempty"`
+	ImageUrl          string          `json:"image_url"`
+	ClientName        string          `json:"client_name"`
+	ClientDescription *string         `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
+	License           *string         `json:"license,omitempty"`
+	Compatibility     *string         `json:"compatibility,omitempty"`
+	Metadata          *map[string]any `json:"metadata,omitempty"`
+	CreatedAt         time.Time       `json:"created_at"`
+	UpdatedAt         time.Time       `json:"updated_at"`
+}
+
 // SkillsMarketplacesPluginsAddOutputSkillPluginSkills represents the skills marketplaces plugins add output skill plugin skills type.
 type SkillsMarketplacesPluginsAddOutputSkillPluginSkills struct {
-	Object               string          `json:"object"`
-	Id                   string          `json:"id"`
-	Identifier           string          `json:"identifier"`
-	Status               string          `json:"status"`
-	ClientName           *string         `json:"client_name,omitempty"`
-	ClientDescription    *string         `json:"client_description,omitempty"`
-	ClientMetadata       *map[string]any `json:"client_metadata,omitempty"`
-	License              *string         `json:"license,omitempty"`
-	Compatibility        *string         `json:"compatibility,omitempty"`
-	SkillConfigurationId *string         `json:"skill_configuration_id,omitempty"`
-	SkillId              string          `json:"skill_id"`
-	CreatedAt            time.Time       `json:"created_at"`
-	UpdatedAt            time.Time       `json:"updated_at"`
+	Object               string                                                   `json:"object"`
+	Id                   string                                                   `json:"id"`
+	Identifier           string                                                   `json:"identifier"`
+	Status               string                                                   `json:"status"`
+	ClientName           *string                                                  `json:"client_name,omitempty"`
+	ClientDescription    *string                                                  `json:"client_description,omitempty"`
+	ClientMetadata       *map[string]any                                          `json:"client_metadata,omitempty"`
+	License              *string                                                  `json:"license,omitempty"`
+	Compatibility        *string                                                  `json:"compatibility,omitempty"`
+	SkillConfigurationId *string                                                  `json:"skill_configuration_id,omitempty"`
+	SkillId              string                                                   `json:"skill_id"`
+	Skill                SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkill `json:"skill"`
+	CreatedAt            time.Time                                                `json:"created_at"`
+	UpdatedAt            time.Time                                                `json:"updated_at"`
 }
 
 // SkillsMarketplacesPluginsAddOutputSkillPlugin represents the skills marketplaces plugins add output skill plugin type.
@@ -48,7 +68,6 @@ type SkillsMarketplacesPluginsAddOutput struct {
 	Identifier           string                                         `json:"identifier"`
 	SkillConfigurationId *string                                        `json:"skill_configuration_id,omitempty"`
 	SkillMarketplaceId   *string                                        `json:"skill_marketplace_id,omitempty"`
-	SkillPluginId        *string                                        `json:"skill_plugin_id,omitempty"`
 	SkillPlugin          *SkillsMarketplacesPluginsAddOutputSkillPlugin `json:"skill_plugin,omitempty"`
 	CreatedAt            time.Time                                      `json:"created_at"`
 	UpdatedAt            time.Time                                      `json:"updated_at"`

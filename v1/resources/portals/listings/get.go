@@ -61,6 +61,14 @@ type PortalsListingsGetOutputAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsListingsGetOutputAccessSkillPlugin represents the portals listings get output access skill plugin type.
+type PortalsListingsGetOutputAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsListingsGetOutputAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsListingsGetOutputAccess struct {
@@ -71,6 +79,7 @@ type PortalsListingsGetOutputAccess struct {
 	SkillTemplate    *PortalsListingsGetOutputAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsListingsGetOutputAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsListingsGetOutputAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsListingsGetOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsListingsGetOutputGroups represents the portals listings get output groups type.

@@ -150,9 +150,11 @@ type IntegrationsInstancesProvidersListOutputItems struct {
 	IntegrationProvider  IntegrationsInstancesProvidersListOutputItemsIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsInstancesProvidersListOutputItemsConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsInstancesProvidersListOutputItemsAuthConfig         `json:"auth_config,omitempty"`
-	CreatedAt            time.Time                                                        `json:"created_at"`
-	UpdatedAt            time.Time                                                        `json:"updated_at"`
-	ArchivedAt           *time.Time                                                       `json:"archived_at,omitempty"`
+	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
+	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
+	CreatedAt          time.Time  `json:"created_at"`
+	UpdatedAt          time.Time  `json:"updated_at"`
+	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesProvidersListOutputPagination represents the integrations instances providers list output pagination type.

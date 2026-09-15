@@ -34,18 +34,24 @@ type SkillsMarketplacesEndpointListParams struct {
 
 // SkillsMarketplacesEndpointCreateBody contains the request body for Create.
 type SkillsMarketplacesEndpointCreateBody struct {
-	Name                 string  `json:"name"`
-	Description          *string `json:"description,omitempty"`
-	ImageFileId          *string `json:"image_file_id,omitempty"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
+	Name                  string  `json:"name"`
+	Description           *string `json:"description,omitempty"`
+	ImageFileId           *string `json:"image_file_id,omitempty"`
+	SkillConfigurationId  *string `json:"skill_configuration_id,omitempty"`
+	RepositoryAccessMode  *string `json:"repository_access_mode,omitempty"`
+	ForceMergeOrPush      *bool   `json:"force_merge_or_push,omitempty"`
+	MergeBeforeChecksPass *bool   `json:"merge_before_checks_pass,omitempty"`
 }
 
 // SkillsMarketplacesEndpointUpdateBody contains the request body for Update.
 type SkillsMarketplacesEndpointUpdateBody struct {
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	ImageFileId          *string `json:"image_file_id,omitempty"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
+	Name                  *string `json:"name,omitempty"`
+	Description           *string `json:"description,omitempty"`
+	ImageFileId           *string `json:"image_file_id,omitempty"`
+	SkillConfigurationId  *string `json:"skill_configuration_id,omitempty"`
+	RepositoryAccessMode  *string `json:"repository_access_mode,omitempty"`
+	ForceMergeOrPush      *bool   `json:"force_merge_or_push,omitempty"`
+	MergeBeforeChecksPass *bool   `json:"merge_before_checks_pass,omitempty"`
 }
 
 // List returns a paginated list of skill marketplaces.

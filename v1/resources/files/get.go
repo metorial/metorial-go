@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// FilesGetOutputCreatedByOrganizationActorMember represents the files get output created by organization actor member type.
+type FilesGetOutputCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // FilesGetOutputCreatedByOrganizationActorTeams - The teams the actor belongs to
 type FilesGetOutputCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type FilesGetOutputCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                          `json:"image_url"`
+	Member   *FilesGetOutputCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []FilesGetOutputCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type FilesGetOutputCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type FilesGetOutputCreatedBy struct {
 	Email             *string                                   `json:"email,omitempty"`
 	OrganizationActor *FilesGetOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *FilesGetOutputCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                           `json:"consumer_profile,omitempty"`
 }
 
 // FilesGetOutput represents the files get output type.

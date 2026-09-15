@@ -31,6 +31,11 @@ type ConversationsMessagesEndpointCreateBody struct {
 	ModelId         *string        `json:"model_id,omitempty"`
 }
 
+// ConversationsMessagesEndpointHandoffResponsesBody contains the request body for HandoffResponses.
+type ConversationsMessagesEndpointHandoffResponsesBody struct {
+	Responses []map[string]any `json:"responses"`
+}
+
 // List list messages in a specific assistant conversation.
 func (e *ConversationsMessagesEndpoint) List(assistantConversationId string, params *ConversationsMessagesEndpointListParams) (*messages.ConversationsMessagesListOutput, error) {
 	var query map[string]any
@@ -68,6 +73,19 @@ func (e *ConversationsMessagesEndpoint) Get(assistantConversationId string, assi
 	}
 	var result messages.ConversationsMessagesGetOutput
 	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// HandoffResponses submit one or more client handoff tool responses for a waiting message.
+func (e *ConversationsMessagesEndpoint) HandoffResponses(assistantConversationId string, assistantMessageId string, body *ConversationsMessagesEndpointHandoffResponsesBody) (*messages.ConversationsMessagesHandoffResponsesOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"conversations", assistantConversationId, "messages", assistantMessageId, "handoff-responses"},
+		Body: body,
+	}
+	var result messages.ConversationsMessagesHandoffResponsesOutput
+	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

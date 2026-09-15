@@ -156,9 +156,11 @@ type IntegrationsInstancesCreateOutputProviders struct {
 	IntegrationProvider  IntegrationsInstancesCreateOutputProvidersIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsInstancesCreateOutputProvidersConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsInstancesCreateOutputProvidersAuthConfig         `json:"auth_config,omitempty"`
-	CreatedAt            time.Time                                                     `json:"created_at"`
-	UpdatedAt            time.Time                                                     `json:"updated_at"`
-	ArchivedAt           *time.Time                                                    `json:"archived_at,omitempty"`
+	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
+	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
+	CreatedAt          time.Time  `json:"created_at"`
+	UpdatedAt          time.Time  `json:"updated_at"`
+	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesCreateOutput represents the integrations instances create output type.

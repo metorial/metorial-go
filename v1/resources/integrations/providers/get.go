@@ -35,6 +35,16 @@ type IntegrationsProvidersGetOutputConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// IntegrationsProvidersGetOutputCallbacks - Provider callback state for this integration provider
+type IntegrationsProvidersGetOutputCallbacks struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Status - Whether this integration provider should receive provider callbacks. Enabling it creates a callback and registers it against every matching integration instance.
+	Status string `json:"status"`
+	// CallbackId - The active callback, once it has been created. Null while callbacks are disabled.
+	CallbackId *string `json:"callback_id,omitempty"`
+}
+
 // IntegrationsProvidersGetOutput represents the integrations providers get output type.
 type IntegrationsProvidersGetOutput struct {
 	Object        string          `json:"object"`
@@ -51,9 +61,11 @@ type IntegrationsProvidersGetOutput struct {
 	AuthMethodId      *string                                   `json:"auth_method_id,omitempty"`
 	AuthCredentialsId *string                                   `json:"auth_credentials_id,omitempty"`
 	Config            *IntegrationsProvidersGetOutputConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                 `json:"created_at"`
-	UpdatedAt         time.Time                                 `json:"updated_at"`
-	ArchivedAt        *time.Time                                `json:"archived_at,omitempty"`
+	// Callbacks - Provider callback state for this integration provider
+	Callbacks  IntegrationsProvidersGetOutputCallbacks `json:"callbacks"`
+	CreatedAt  time.Time                               `json:"created_at"`
+	UpdatedAt  time.Time                               `json:"updated_at"`
+	ArchivedAt *time.Time                              `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsProvidersGetOutputFromJSON deserializes JSON data into a IntegrationsProvidersGetOutput.

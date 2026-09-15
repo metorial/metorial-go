@@ -53,6 +53,8 @@ type ProviderDeploymentsSetupSessionsDeleteOutputAuthMethod struct {
 	OutputSchema *ProviderDeploymentsSetupSessionsDeleteOutputAuthMethodOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]ProviderDeploymentsSetupSessionsDeleteOutputAuthMethodScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID
@@ -221,6 +223,8 @@ type ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigAuthMethod struct {
 	OutputSchema *ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigAuthMethodOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]ProviderDeploymentsSetupSessionsDeleteOutputAuthConfigAuthMethodScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID

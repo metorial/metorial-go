@@ -26,15 +26,16 @@ type SkillsGroupsListOutputItemsSkills struct {
 
 // SkillsGroupsListOutputItems represents the skills groups list output items type.
 type SkillsGroupsListOutputItems struct {
-	Object      string                              `json:"object"`
-	Id          string                              `json:"id"`
-	Status      string                              `json:"status"`
-	Name        string                              `json:"name"`
-	Description *string                             `json:"description,omitempty"`
-	Metadata    *map[string]any                     `json:"metadata,omitempty"`
-	Skills      []SkillsGroupsListOutputItemsSkills `json:"skills"`
-	CreatedAt   time.Time                           `json:"created_at"`
-	UpdatedAt   time.Time                           `json:"updated_at"`
+	Object                       string                              `json:"object"`
+	Id                           string                              `json:"id"`
+	Status                       string                              `json:"status"`
+	Name                         string                              `json:"name"`
+	Description                  *string                             `json:"description,omitempty"`
+	Metadata                     *map[string]any                     `json:"metadata,omitempty"`
+	AllowConsumerSkillAssignment bool                                `json:"allow_consumer_skill_assignment"`
+	Skills                       []SkillsGroupsListOutputItemsSkills `json:"skills"`
+	CreatedAt                    time.Time                           `json:"created_at"`
+	UpdatedAt                    time.Time                           `json:"updated_at"`
 }
 
 // SkillsGroupsListOutputPagination represents the skills groups list output pagination type.

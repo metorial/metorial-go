@@ -24,6 +24,18 @@ type ConversationsMessagesListOutputItemsModel struct {
 	Provider      ConversationsMessagesListOutputItemsModelProvider `json:"provider"`
 }
 
+// ConversationsMessagesListOutputItemsRequestActorOrganizationActorMember represents the conversations messages list output items request actor organization actor member type.
+type ConversationsMessagesListOutputItemsRequestActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // ConversationsMessagesListOutputItemsRequestActorOrganizationActorTeams - The teams the actor belongs to
 type ConversationsMessagesListOutputItemsRequestActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -56,6 +68,7 @@ type ConversationsMessagesListOutputItemsRequestActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                                   `json:"image_url"`
+	Member   *ConversationsMessagesListOutputItemsRequestActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []ConversationsMessagesListOutputItemsRequestActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -70,6 +83,7 @@ type ConversationsMessagesListOutputItemsRequestActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -82,6 +96,7 @@ type ConversationsMessagesListOutputItemsRequestActor struct {
 	Email             *string                                                            `json:"email,omitempty"`
 	OrganizationActor *ConversationsMessagesListOutputItemsRequestActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *ConversationsMessagesListOutputItemsRequestActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                                    `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsMessagesListOutputItemsRequest represents the conversations messages list output items request type.
@@ -100,6 +115,7 @@ type ConversationsMessagesListOutputItems struct {
 	Id                 string                                      `json:"id"`
 	ConversationItemId string                                      `json:"conversation_item_id"`
 	Type               string                                      `json:"type"`
+	Status             string                                      `json:"status"`
 	AssistantId        *string                                     `json:"assistant_id,omitempty"`
 	ParentMessageId    *string                                     `json:"parent_message_id,omitempty"`
 	Model              *ConversationsMessagesListOutputItemsModel  `json:"model,omitempty"`

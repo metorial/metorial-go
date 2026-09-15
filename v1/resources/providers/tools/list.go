@@ -92,6 +92,8 @@ type ProvidersToolsListQuery struct {
 	Cursor            *string  `json:"cursor,omitempty"`
 	Order             *string  `json:"order,omitempty"`
 	ProviderVersionId string   `json:"provider_version_id"`
+	// ProviderAuthMethodId - Filter to tools compatible with one auth method ID, or the common compatible subset for multiple auth method IDs.
+	ProviderAuthMethodId *any `json:"provider_auth_method_id,omitempty"`
 }
 
 // MapProvidersToolsListQueryFromJSON deserializes JSON data into a ProvidersToolsListQuery.

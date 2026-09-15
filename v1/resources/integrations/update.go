@@ -7,9 +7,10 @@ import (
 
 // IntegrationsUpdateOutputConfiguration represents the integrations update output configuration type.
 type IntegrationsUpdateOutputConfiguration struct {
-	CanAttachCustomToolFilters    bool `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool `json:"can_override_tool_filters"`
+	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
+	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
+	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
+	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // IntegrationsUpdateOutputImplementation represents one of several possible types.
@@ -50,6 +51,16 @@ type IntegrationsUpdateOutputProvidersConfig struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// IntegrationsUpdateOutputProvidersCallbacks - Provider callback state for this integration provider
+type IntegrationsUpdateOutputProvidersCallbacks struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Status - Whether this integration provider should receive provider callbacks. Enabling it creates a callback and registers it against every matching integration instance.
+	Status string `json:"status"`
+	// CallbackId - The active callback, once it has been created. Null while callbacks are disabled.
+	CallbackId *string `json:"callback_id,omitempty"`
+}
+
 // IntegrationsUpdateOutputProviders represents the integrations update output providers type.
 type IntegrationsUpdateOutputProviders struct {
 	Object        string          `json:"object"`
@@ -66,9 +77,11 @@ type IntegrationsUpdateOutputProviders struct {
 	AuthMethodId      *string                                      `json:"auth_method_id,omitempty"`
 	AuthCredentialsId *string                                      `json:"auth_credentials_id,omitempty"`
 	Config            *IntegrationsUpdateOutputProvidersConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                    `json:"created_at"`
-	UpdatedAt         time.Time                                    `json:"updated_at"`
-	ArchivedAt        *time.Time                                   `json:"archived_at,omitempty"`
+	// Callbacks - Provider callback state for this integration provider
+	Callbacks  IntegrationsUpdateOutputProvidersCallbacks `json:"callbacks"`
+	CreatedAt  time.Time                                  `json:"created_at"`
+	UpdatedAt  time.Time                                  `json:"updated_at"`
+	ArchivedAt *time.Time                                 `json:"archived_at,omitempty"`
 }
 
 // IntegrationsUpdateOutput represents the integrations update output type.
@@ -107,6 +120,7 @@ type IntegrationsUpdateBody struct {
 	Name                          *string         `json:"name,omitempty"`
 	Description                   *string         `json:"description,omitempty"`
 	Metadata                      *map[string]any `json:"metadata,omitempty"`
+	UseIntegrationNameInToolNames *bool           `json:"use_integration_name_in_tool_names,omitempty"`
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`

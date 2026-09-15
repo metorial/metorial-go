@@ -150,9 +150,11 @@ type IntegrationsInstancesProvidersGetOutput struct {
 	IntegrationProvider  IntegrationsInstancesProvidersGetOutputIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsInstancesProvidersGetOutputConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsInstancesProvidersGetOutputAuthConfig         `json:"auth_config,omitempty"`
-	CreatedAt            time.Time                                                  `json:"created_at"`
-	UpdatedAt            time.Time                                                  `json:"updated_at"`
-	ArchivedAt           *time.Time                                                 `json:"archived_at,omitempty"`
+	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
+	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
+	CreatedAt          time.Time  `json:"created_at"`
+	UpdatedAt          time.Time  `json:"updated_at"`
+	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstancesProvidersGetOutputFromJSON deserializes JSON data into a IntegrationsInstancesProvidersGetOutput.

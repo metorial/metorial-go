@@ -108,6 +108,8 @@ type MagicMcpServersListOutputItemsProvidersAuthMethod struct {
 	OutputSchema *MagicMcpServersListOutputItemsProvidersAuthMethodOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]MagicMcpServersListOutputItemsProvidersAuthMethodScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID
@@ -259,19 +261,22 @@ func MapMagicMcpServersListOutputToJSON(v *MagicMcpServersListOutput) ([]byte, e
 
 // MagicMcpServersListQuery represents the magic mcp servers list query type.
 type MagicMcpServersListQuery struct {
-	Limit              *float64 `json:"limit,omitempty"`
-	After              *string  `json:"after,omitempty"`
-	Before             *string  `json:"before,omitempty"`
-	Cursor             *string  `json:"cursor,omitempty"`
-	Order              *string  `json:"order,omitempty"`
-	Status             *any     `json:"status,omitempty"`
-	MagicMcpGroupId    *any     `json:"magic_mcp_group_id,omitempty"`
-	ProviderTemplateId *any     `json:"provider_template_id,omitempty"`
-	ConsumerId         *any     `json:"consumer_id,omitempty"`
-	ConsumerProfileId  *any     `json:"consumer_profile_id,omitempty"`
-	Search             *string  `json:"search,omitempty"`
-	Id                 *any     `json:"id,omitempty"`
-	PreconfiguredOnly  *bool    `json:"preconfigured_only,omitempty"`
+	Limit                 *float64 `json:"limit,omitempty"`
+	After                 *string  `json:"after,omitempty"`
+	Before                *string  `json:"before,omitempty"`
+	Cursor                *string  `json:"cursor,omitempty"`
+	Order                 *string  `json:"order,omitempty"`
+	Status                *any     `json:"status,omitempty"`
+	MagicMcpGroupId       *any     `json:"magic_mcp_group_id,omitempty"`
+	ProviderTemplateId    *any     `json:"provider_template_id,omitempty"`
+	IntegrationInstanceId *any     `json:"integration_instance_id,omitempty"`
+	Owner                 *any     `json:"owner,omitempty"`
+	ProviderId            *any     `json:"provider_id,omitempty"`
+	ConsumerId            *any     `json:"consumer_id,omitempty"`
+	ConsumerProfileId     *any     `json:"consumer_profile_id,omitempty"`
+	Search                *string  `json:"search,omitempty"`
+	Id                    *any     `json:"id,omitempty"`
+	PreconfiguredOnly     *bool    `json:"preconfigured_only,omitempty"`
 }
 
 // MapMagicMcpServersListQueryFromJSON deserializes JSON data into a MagicMcpServersListQuery.

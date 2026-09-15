@@ -26,15 +26,16 @@ type SkillsGroupsCreateOutputSkills struct {
 
 // SkillsGroupsCreateOutput represents the skills groups create output type.
 type SkillsGroupsCreateOutput struct {
-	Object      string                           `json:"object"`
-	Id          string                           `json:"id"`
-	Status      string                           `json:"status"`
-	Name        string                           `json:"name"`
-	Description *string                          `json:"description,omitempty"`
-	Metadata    *map[string]any                  `json:"metadata,omitempty"`
-	Skills      []SkillsGroupsCreateOutputSkills `json:"skills"`
-	CreatedAt   time.Time                        `json:"created_at"`
-	UpdatedAt   time.Time                        `json:"updated_at"`
+	Object                       string                           `json:"object"`
+	Id                           string                           `json:"id"`
+	Status                       string                           `json:"status"`
+	Name                         string                           `json:"name"`
+	Description                  *string                          `json:"description,omitempty"`
+	Metadata                     *map[string]any                  `json:"metadata,omitempty"`
+	AllowConsumerSkillAssignment bool                             `json:"allow_consumer_skill_assignment"`
+	Skills                       []SkillsGroupsCreateOutputSkills `json:"skills"`
+	CreatedAt                    time.Time                        `json:"created_at"`
+	UpdatedAt                    time.Time                        `json:"updated_at"`
 }
 
 // MapSkillsGroupsCreateOutputFromJSON deserializes JSON data into a SkillsGroupsCreateOutput.
@@ -53,10 +54,11 @@ func MapSkillsGroupsCreateOutputToJSON(v *SkillsGroupsCreateOutput) ([]byte, err
 
 // SkillsGroupsCreateBody represents the skills groups create body type.
 type SkillsGroupsCreateBody struct {
-	Name        string          `json:"name"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	SkillIds    *[]string       `json:"skill_ids,omitempty"`
+	Name                         string          `json:"name"`
+	Description                  *string         `json:"description,omitempty"`
+	Metadata                     *map[string]any `json:"metadata,omitempty"`
+	SkillIds                     *[]string       `json:"skill_ids,omitempty"`
+	AllowConsumerSkillAssignment *bool           `json:"allow_consumer_skill_assignment,omitempty"`
 }
 
 // MapSkillsGroupsCreateBodyFromJSON deserializes JSON data into a SkillsGroupsCreateBody.

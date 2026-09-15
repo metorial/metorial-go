@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// SkillsExportsCreateOutputFileCreatedByOrganizationActorMember represents the skills exports create output file created by organization actor member type.
+type SkillsExportsCreateOutputFileCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsExportsCreateOutputFileCreatedByOrganizationActorTeams - The teams the actor belongs to
 type SkillsExportsCreateOutputFileCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type SkillsExportsCreateOutputFileCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                         `json:"image_url"`
+	Member   *SkillsExportsCreateOutputFileCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsExportsCreateOutputFileCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type SkillsExportsCreateOutputFileCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type SkillsExportsCreateOutputFileCreatedBy struct {
 	Email             *string                                                  `json:"email,omitempty"`
 	OrganizationActor *SkillsExportsCreateOutputFileCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsExportsCreateOutputFileCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                          `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsCreateOutputFile represents the skills exports create output file type.
@@ -106,6 +121,18 @@ type SkillsExportsCreateOutputFileLink struct {
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
+// SkillsExportsCreateOutputCreatedByOrganizationActorMember represents the skills exports create output created by organization actor member type.
+type SkillsExportsCreateOutputCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // SkillsExportsCreateOutputCreatedByOrganizationActorTeams - The teams the actor belongs to
 type SkillsExportsCreateOutputCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -138,6 +165,7 @@ type SkillsExportsCreateOutputCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                     `json:"image_url"`
+	Member   *SkillsExportsCreateOutputCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []SkillsExportsCreateOutputCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -152,6 +180,7 @@ type SkillsExportsCreateOutputCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -164,6 +193,7 @@ type SkillsExportsCreateOutputCreatedBy struct {
 	Email             *string                                              `json:"email,omitempty"`
 	OrganizationActor *SkillsExportsCreateOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *SkillsExportsCreateOutputCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                      `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsCreateOutput represents the skills exports create output type.

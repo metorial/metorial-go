@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// DocumentsParticipantsGetOutputActorOrganizationActorMember represents the documents participants get output actor organization actor member type.
+type DocumentsParticipantsGetOutputActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // DocumentsParticipantsGetOutputActorOrganizationActorTeams - The teams the actor belongs to
 type DocumentsParticipantsGetOutputActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type DocumentsParticipantsGetOutputActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                      `json:"image_url"`
+	Member   *DocumentsParticipantsGetOutputActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []DocumentsParticipantsGetOutputActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type DocumentsParticipantsGetOutputActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type DocumentsParticipantsGetOutputActor struct {
 	Email             *string                                               `json:"email,omitempty"`
 	OrganizationActor *DocumentsParticipantsGetOutputActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *DocumentsParticipantsGetOutputActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                       `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsParticipantsGetOutput represents the documents participants get output type.

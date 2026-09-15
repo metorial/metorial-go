@@ -156,9 +156,11 @@ type IntegrationsSetupSessionsGetOutputIntegrationInstanceProviders struct {
 	IntegrationProvider  IntegrationsSetupSessionsGetOutputIntegrationInstanceProvidersIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsSetupSessionsGetOutputIntegrationInstanceProvidersConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsSetupSessionsGetOutputIntegrationInstanceProvidersAuthConfig         `json:"auth_config,omitempty"`
-	CreatedAt            time.Time                                                                         `json:"created_at"`
-	UpdatedAt            time.Time                                                                         `json:"updated_at"`
-	ArchivedAt           *time.Time                                                                        `json:"archived_at,omitempty"`
+	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
+	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
+	CreatedAt          time.Time  `json:"created_at"`
+	UpdatedAt          time.Time  `json:"updated_at"`
+	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsGetOutputIntegrationInstance represents the integrations setup sessions get output integration instance type.

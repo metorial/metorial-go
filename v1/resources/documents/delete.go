@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// DocumentsDeleteOutputCreatedByOrganizationActorMember represents the documents delete output created by organization actor member type.
+type DocumentsDeleteOutputCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // DocumentsDeleteOutputCreatedByOrganizationActorTeams - The teams the actor belongs to
 type DocumentsDeleteOutputCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type DocumentsDeleteOutputCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                 `json:"image_url"`
+	Member   *DocumentsDeleteOutputCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []DocumentsDeleteOutputCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type DocumentsDeleteOutputCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type DocumentsDeleteOutputCreatedBy struct {
 	Email             *string                                          `json:"email,omitempty"`
 	OrganizationActor *DocumentsDeleteOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *DocumentsDeleteOutputCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                  `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsDeleteOutput represents the documents delete output type.

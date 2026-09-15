@@ -23,6 +23,7 @@ type PortalsConsumerProfilesEndpointListParams struct {
 	Cursor          *string  `json:"cursor,omitempty"`
 	Order           *string  `json:"order,omitempty"`
 	Search          *string  `json:"search,omitempty"`
+	Email           *any     `json:"email,omitempty"`
 	ConsumerGroupId *string  `json:"consumer_group_id,omitempty"`
 	Status          *any     `json:"status,omitempty"`
 }
@@ -80,6 +81,18 @@ func (e *PortalsConsumerProfilesEndpoint) Create(portalId string, body *PortalsC
 	}
 	var result consumerprofiles.PortalsConsumerProfilesCreateOutput
 	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Delete soft-deletes a portal consumer profile.
+func (e *PortalsConsumerProfilesEndpoint) Delete(portalId string, consumerProfileId string) (*consumerprofiles.PortalsConsumerProfilesDeleteOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"portals", portalId, "consumer-profile", consumerProfileId},
+	}
+	var result consumerprofiles.PortalsConsumerProfilesDeleteOutput
+	if err := e.client.Delete(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

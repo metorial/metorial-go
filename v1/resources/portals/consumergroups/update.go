@@ -13,7 +13,6 @@ type PortalsConsumerGroupsUpdateOutput struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -34,10 +33,9 @@ func MapPortalsConsumerGroupsUpdateOutputToJSON(v *PortalsConsumerGroupsUpdateOu
 
 // PortalsConsumerGroupsUpdateBody represents the portals consumer groups update body type.
 type PortalsConsumerGroupsUpdateBody struct {
-	Name        *string   `json:"name,omitempty"`
-	Description *string   `json:"description,omitempty"`
-	SsoGroupIds *[]string `json:"sso_group_ids,omitempty"`
-	IsDefault   *bool     `json:"is_default,omitempty"`
+	Name        *string `json:"name,omitempty"`
+	Description *string `json:"description,omitempty"`
+	IsDefault   *bool   `json:"is_default,omitempty"`
 }
 
 // MapPortalsConsumerGroupsUpdateBodyFromJSON deserializes JSON data into a PortalsConsumerGroupsUpdateBody.

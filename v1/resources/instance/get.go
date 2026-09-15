@@ -19,8 +19,6 @@ type InstanceGetOutputProject struct {
 	Name string `json:"name"`
 	// OrganizationId - The organization's unique identifier
 	OrganizationId string `json:"organization_id"`
-	// MagicMcpSessionDurationMinutes - How long magic MCP sessions last before they are rotated
-	MagicMcpSessionDurationMinutes float64 `json:"magic_mcp_session_duration_minutes"`
 	// CreatedAt - The project's creation date
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - The project's last update date
@@ -39,6 +37,8 @@ type InstanceGetOutput struct {
 	Name string `json:"name"`
 	// OrganizationId - The organization's unique identifier
 	OrganizationId string `json:"organization_id"`
+	// SandboxId - The sandbox's unique identifier, if this instance is a sandbox
+	SandboxId *string `json:"sandbox_id,omitempty"`
 	// Type - The instance's type
 	Type string `json:"type"`
 	// CreatedAt - The instance's creation date

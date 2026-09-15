@@ -34,18 +34,20 @@ type SkillsGroupsEndpointListParams struct {
 
 // SkillsGroupsEndpointCreateBody contains the request body for Create.
 type SkillsGroupsEndpointCreateBody struct {
-	Name        string          `json:"name"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	SkillIds    *[]string       `json:"skill_ids,omitempty"`
+	Name                         string          `json:"name"`
+	Description                  *string         `json:"description,omitempty"`
+	Metadata                     *map[string]any `json:"metadata,omitempty"`
+	SkillIds                     *[]string       `json:"skill_ids,omitempty"`
+	AllowConsumerSkillAssignment *bool           `json:"allow_consumer_skill_assignment,omitempty"`
 }
 
 // SkillsGroupsEndpointUpdateBody contains the request body for Update.
 type SkillsGroupsEndpointUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	SkillIds    *[]string       `json:"skill_ids,omitempty"`
+	Name                         *string         `json:"name,omitempty"`
+	Description                  *string         `json:"description,omitempty"`
+	Metadata                     *map[string]any `json:"metadata,omitempty"`
+	SkillIds                     *[]string       `json:"skill_ids,omitempty"`
+	AllowConsumerSkillAssignment *bool           `json:"allow_consumer_skill_assignment,omitempty"`
 }
 
 // List returns a paginated list of skill groups.

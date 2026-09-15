@@ -22,6 +22,8 @@ type ToolCallsEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// SessionId - Filter by session ID(s)
+	SessionId *any `json:"session_id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
 	SessionTemplateId *any `json:"session_template_id,omitempty"`
 	// SessionProviderId - Filter by session provider ID(s)

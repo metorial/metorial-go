@@ -23,6 +23,7 @@ type ProvidersAuthMethodsEndpointListParams struct {
 	Cursor            *string  `json:"cursor,omitempty"`
 	Order             *string  `json:"order,omitempty"`
 	ProviderVersionId string   `json:"provider_version_id"`
+	Adapter           *string  `json:"adapter,omitempty"`
 }
 
 // List returns a paginated list of provider auth methods.

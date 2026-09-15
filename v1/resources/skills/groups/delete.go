@@ -26,15 +26,16 @@ type SkillsGroupsDeleteOutputSkills struct {
 
 // SkillsGroupsDeleteOutput represents the skills groups delete output type.
 type SkillsGroupsDeleteOutput struct {
-	Object      string                           `json:"object"`
-	Id          string                           `json:"id"`
-	Status      string                           `json:"status"`
-	Name        string                           `json:"name"`
-	Description *string                          `json:"description,omitempty"`
-	Metadata    *map[string]any                  `json:"metadata,omitempty"`
-	Skills      []SkillsGroupsDeleteOutputSkills `json:"skills"`
-	CreatedAt   time.Time                        `json:"created_at"`
-	UpdatedAt   time.Time                        `json:"updated_at"`
+	Object                       string                           `json:"object"`
+	Id                           string                           `json:"id"`
+	Status                       string                           `json:"status"`
+	Name                         string                           `json:"name"`
+	Description                  *string                          `json:"description,omitempty"`
+	Metadata                     *map[string]any                  `json:"metadata,omitempty"`
+	AllowConsumerSkillAssignment bool                             `json:"allow_consumer_skill_assignment"`
+	Skills                       []SkillsGroupsDeleteOutputSkills `json:"skills"`
+	CreatedAt                    time.Time                        `json:"created_at"`
+	UpdatedAt                    time.Time                        `json:"updated_at"`
 }
 
 // MapSkillsGroupsDeleteOutputFromJSON deserializes JSON data into a SkillsGroupsDeleteOutput.

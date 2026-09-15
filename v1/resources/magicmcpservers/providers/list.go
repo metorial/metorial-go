@@ -101,6 +101,8 @@ type MagicMcpServersProvidersListOutputItemsAuthMethod struct {
 	OutputSchema *MagicMcpServersProvidersListOutputItemsAuthMethodOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]MagicMcpServersProvidersListOutputItemsAuthMethodScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID

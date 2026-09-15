@@ -46,6 +46,7 @@ type PortalsDeleteOutput struct {
 	SkillConfiguration           PortalsDeleteOutputSkillConfiguration `json:"skill_configuration"`
 	Auth                         PortalsDeleteOutputAuth               `json:"auth"`
 	Urls                         []PortalsDeleteOutputUrls             `json:"urls"`
+	MagicMcpUrl                  string                                `json:"magic_mcp_url"`
 	CreatedAt                    time.Time                             `json:"created_at"`
 	UpdatedAt                    time.Time                             `json:"updated_at"`
 }

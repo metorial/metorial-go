@@ -53,6 +53,8 @@ type ProvidersAuthMethodsListOutputItems struct {
 	OutputSchema *ProvidersAuthMethodsListOutputItemsOutputSchema `json:"output_schema,omitempty"`
 	// Scopes - Available OAuth scopes
 	Scopes *[]ProvidersAuthMethodsListOutputItemsScopes `json:"scopes,omitempty"`
+	// Adapters - Adapter IDs this auth method can be used with
+	Adapters *[]string `json:"adapters,omitempty"`
 	// ProviderId - Provider ID
 	ProviderId string `json:"provider_id"`
 	// ProviderSpecificationId - Specification ID
@@ -97,6 +99,7 @@ type ProvidersAuthMethodsListQuery struct {
 	Cursor            *string  `json:"cursor,omitempty"`
 	Order             *string  `json:"order,omitempty"`
 	ProviderVersionId string   `json:"provider_version_id"`
+	Adapter           *string  `json:"adapter,omitempty"`
 }
 
 // MapProvidersAuthMethodsListQueryFromJSON deserializes JSON data into a ProvidersAuthMethodsListQuery.

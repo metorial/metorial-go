@@ -49,6 +49,8 @@ type IntegrationsProvidersEndpointCreateBody struct {
 	Description               *string         `json:"description,omitempty"`
 	Metadata                  *map[string]any `json:"metadata,omitempty"`
 	ToolFilters               *any            `json:"tool_filters,omitempty"`
+	// Callbacks - Provider callback state for this integration provider
+	Callbacks *map[string]any `json:"callbacks,omitempty"`
 }
 
 // IntegrationsProvidersEndpointUpdateBody contains the request body for Update.
@@ -61,6 +63,8 @@ type IntegrationsProvidersEndpointUpdateBody struct {
 	Description               *string         `json:"description,omitempty"`
 	Metadata                  *map[string]any `json:"metadata,omitempty"`
 	ToolFilters               *any            `json:"tool_filters,omitempty"`
+	// Callbacks - Provider callback state for this integration provider
+	Callbacks *map[string]any `json:"callbacks,omitempty"`
 }
 
 // List returns a paginated list of integration providers.

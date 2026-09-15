@@ -24,6 +24,18 @@ type ConversationsMessagesGetOutputModel struct {
 	Provider      ConversationsMessagesGetOutputModelProvider `json:"provider"`
 }
 
+// ConversationsMessagesGetOutputRequestActorOrganizationActorMember represents the conversations messages get output request actor organization actor member type.
+type ConversationsMessagesGetOutputRequestActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // ConversationsMessagesGetOutputRequestActorOrganizationActorTeams - The teams the actor belongs to
 type ConversationsMessagesGetOutputRequestActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -56,6 +68,7 @@ type ConversationsMessagesGetOutputRequestActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                             `json:"image_url"`
+	Member   *ConversationsMessagesGetOutputRequestActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []ConversationsMessagesGetOutputRequestActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -70,6 +83,7 @@ type ConversationsMessagesGetOutputRequestActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -82,6 +96,7 @@ type ConversationsMessagesGetOutputRequestActor struct {
 	Email             *string                                                      `json:"email,omitempty"`
 	OrganizationActor *ConversationsMessagesGetOutputRequestActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *ConversationsMessagesGetOutputRequestActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                              `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsMessagesGetOutputRequest represents the conversations messages get output request type.
@@ -100,6 +115,7 @@ type ConversationsMessagesGetOutput struct {
 	Id                 string                                `json:"id"`
 	ConversationItemId string                                `json:"conversation_item_id"`
 	Type               string                                `json:"type"`
+	Status             string                                `json:"status"`
 	AssistantId        *string                               `json:"assistant_id,omitempty"`
 	ParentMessageId    *string                               `json:"parent_message_id,omitempty"`
 	Model              *ConversationsMessagesGetOutputModel  `json:"model,omitempty"`

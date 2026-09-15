@@ -5,21 +5,41 @@ import (
 	"time"
 )
 
+// SkillsPluginsUpdateOutputSkillsSkill represents the skills plugins update output skills skill type.
+type SkillsPluginsUpdateOutputSkillsSkill struct {
+	Object            string          `json:"object"`
+	Id                string          `json:"id"`
+	Status            string          `json:"status"`
+	Slug              string          `json:"slug"`
+	Name              string          `json:"name"`
+	Description       *string         `json:"description,omitempty"`
+	ImageUrl          string          `json:"image_url"`
+	ClientName        string          `json:"client_name"`
+	ClientDescription *string         `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
+	License           *string         `json:"license,omitempty"`
+	Compatibility     *string         `json:"compatibility,omitempty"`
+	Metadata          *map[string]any `json:"metadata,omitempty"`
+	CreatedAt         time.Time       `json:"created_at"`
+	UpdatedAt         time.Time       `json:"updated_at"`
+}
+
 // SkillsPluginsUpdateOutputSkills represents the skills plugins update output skills type.
 type SkillsPluginsUpdateOutputSkills struct {
-	Object               string          `json:"object"`
-	Id                   string          `json:"id"`
-	Identifier           string          `json:"identifier"`
-	Status               string          `json:"status"`
-	ClientName           *string         `json:"client_name,omitempty"`
-	ClientDescription    *string         `json:"client_description,omitempty"`
-	ClientMetadata       *map[string]any `json:"client_metadata,omitempty"`
-	License              *string         `json:"license,omitempty"`
-	Compatibility        *string         `json:"compatibility,omitempty"`
-	SkillConfigurationId *string         `json:"skill_configuration_id,omitempty"`
-	SkillId              string          `json:"skill_id"`
-	CreatedAt            time.Time       `json:"created_at"`
-	UpdatedAt            time.Time       `json:"updated_at"`
+	Object               string                               `json:"object"`
+	Id                   string                               `json:"id"`
+	Identifier           string                               `json:"identifier"`
+	Status               string                               `json:"status"`
+	ClientName           *string                              `json:"client_name,omitempty"`
+	ClientDescription    *string                              `json:"client_description,omitempty"`
+	ClientMetadata       *map[string]any                      `json:"client_metadata,omitempty"`
+	License              *string                              `json:"license,omitempty"`
+	Compatibility        *string                              `json:"compatibility,omitempty"`
+	SkillConfigurationId *string                              `json:"skill_configuration_id,omitempty"`
+	SkillId              string                               `json:"skill_id"`
+	Skill                SkillsPluginsUpdateOutputSkillsSkill `json:"skill"`
+	CreatedAt            time.Time                            `json:"created_at"`
+	UpdatedAt            time.Time                            `json:"updated_at"`
 }
 
 // SkillsPluginsUpdateOutput represents the skills plugins update output type.

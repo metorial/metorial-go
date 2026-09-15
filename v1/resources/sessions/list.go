@@ -131,8 +131,8 @@ type SessionsListOutputItems struct {
 	Usage        SessionsListOutputItemsUsage `json:"usage"`
 	// Providers - Session providers
 	Providers []SessionsListOutputItemsProviders `json:"providers"`
-	// FromTemplatesIds - Template IDs this session was created from
-	FromTemplatesIds []string `json:"from_templates_ids"`
+	// FromTemplateIds - Template IDs this session was created from
+	FromTemplateIds []string `json:"from_template_ids"`
 	// HasErrors - Whether the session has any errors
 	HasErrors bool `json:"has_errors"`
 	// HasWarnings - Whether the session has any warnings

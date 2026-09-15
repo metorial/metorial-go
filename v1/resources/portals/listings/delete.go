@@ -61,6 +61,14 @@ type PortalsListingsDeleteOutputAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsListingsDeleteOutputAccessSkillPlugin represents the portals listings delete output access skill plugin type.
+type PortalsListingsDeleteOutputAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsListingsDeleteOutputAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsListingsDeleteOutputAccess struct {
@@ -71,6 +79,7 @@ type PortalsListingsDeleteOutputAccess struct {
 	SkillTemplate    *PortalsListingsDeleteOutputAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsListingsDeleteOutputAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsListingsDeleteOutputAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsListingsDeleteOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsListingsDeleteOutputGroups represents the portals listings delete output groups type.

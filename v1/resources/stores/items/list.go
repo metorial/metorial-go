@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// StoresItemsListOutputItemsFileCreatedByOrganizationActorMember represents the stores items list output items file created by organization actor member type.
+type StoresItemsListOutputItemsFileCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // StoresItemsListOutputItemsFileCreatedByOrganizationActorTeams - The teams the actor belongs to
 type StoresItemsListOutputItemsFileCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type StoresItemsListOutputItemsFileCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                          `json:"image_url"`
+	Member   *StoresItemsListOutputItemsFileCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []StoresItemsListOutputItemsFileCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type StoresItemsListOutputItemsFileCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type StoresItemsListOutputItemsFileCreatedBy struct {
 	Email             *string                                                   `json:"email,omitempty"`
 	OrganizationActor *StoresItemsListOutputItemsFileCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *StoresItemsListOutputItemsFileCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                           `json:"consumer_profile,omitempty"`
 }
 
 // StoresItemsListOutputItemsFile represents the stores items list output items file type.
@@ -88,6 +103,18 @@ type StoresItemsListOutputItemsFile struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - The files's last update date
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// StoresItemsListOutputItemsDocumentCreatedByOrganizationActorMember represents the stores items list output items document created by organization actor member type.
+type StoresItemsListOutputItemsDocumentCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
 }
 
 // StoresItemsListOutputItemsDocumentCreatedByOrganizationActorTeams - The teams the actor belongs to
@@ -122,6 +149,7 @@ type StoresItemsListOutputItemsDocumentCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                              `json:"image_url"`
+	Member   *StoresItemsListOutputItemsDocumentCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []StoresItemsListOutputItemsDocumentCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -136,6 +164,7 @@ type StoresItemsListOutputItemsDocumentCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -148,6 +177,7 @@ type StoresItemsListOutputItemsDocumentCreatedBy struct {
 	Email             *string                                                       `json:"email,omitempty"`
 	OrganizationActor *StoresItemsListOutputItemsDocumentCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *StoresItemsListOutputItemsDocumentCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                               `json:"consumer_profile,omitempty"`
 }
 
 // StoresItemsListOutputItemsDocument represents the stores items list output items document type.

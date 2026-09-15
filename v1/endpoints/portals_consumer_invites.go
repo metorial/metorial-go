@@ -23,6 +23,7 @@ type PortalsConsumerInvitesEndpointListParams struct {
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
 	Search *string  `json:"search,omitempty"`
+	Email  *any     `json:"email,omitempty"`
 	Status *any     `json:"status,omitempty"`
 }
 

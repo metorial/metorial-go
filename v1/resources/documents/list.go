@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// DocumentsListOutputItemsCreatedByOrganizationActorMember represents the documents list output items created by organization actor member type.
+type DocumentsListOutputItemsCreatedByOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // DocumentsListOutputItemsCreatedByOrganizationActorTeams - The teams the actor belongs to
 type DocumentsListOutputItemsCreatedByOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type DocumentsListOutputItemsCreatedByOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                    `json:"image_url"`
+	Member   *DocumentsListOutputItemsCreatedByOrganizationActorMember `json:"member,omitempty"`
 	Teams    []DocumentsListOutputItemsCreatedByOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type DocumentsListOutputItemsCreatedByConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type DocumentsListOutputItemsCreatedBy struct {
 	Email             *string                                             `json:"email,omitempty"`
 	OrganizationActor *DocumentsListOutputItemsCreatedByOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *DocumentsListOutputItemsCreatedByConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                     `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsListOutputItems represents the documents list output items type.

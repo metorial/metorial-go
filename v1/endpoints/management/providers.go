@@ -24,6 +24,12 @@ type ProvidersEndpointListParams struct {
 	Order  *string  `json:"order,omitempty"`
 	// Id - Filter by provider ID(s)
 	Id *any `json:"id,omitempty"`
+	// Search - Search providers by name, description, or readme
+	Search *string `json:"search,omitempty"`
+	// AuthMethod - Filter by auth method — matches an auth method ID, auth method global ID, key, name, or type (oauth, token, service_account, custom)
+	AuthMethod *any `json:"auth_method,omitempty"`
+	// AuthSetup - Filter by auth setup status. "configured" matches providers with a token or custom auth method, or with auth credentials already configured. "not_configured" matches providers with only OAuth auth methods and no auth credentials configured.
+	AuthSetup *any `json:"auth_setup,omitempty"`
 }
 
 // List returns a paginated list of providers.

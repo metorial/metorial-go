@@ -124,3 +124,15 @@ func (e *CustomProvidersEndpoint) Update(instanceId string, customProviderId str
 	}
 	return &result, nil
 }
+
+// Archive archives a specific custom provider and disables new connections to it.
+func (e *CustomProvidersEndpoint) Archive(instanceId string, customProviderId string) (*customproviders.CustomProvidersArchiveOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "custom-providers", customProviderId, "archive"},
+	}
+	var result customproviders.CustomProvidersArchiveOutput
+	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}

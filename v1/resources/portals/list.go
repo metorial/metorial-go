@@ -46,6 +46,7 @@ type PortalsListOutputItems struct {
 	SkillConfiguration           PortalsListOutputItemsSkillConfiguration `json:"skill_configuration"`
 	Auth                         PortalsListOutputItemsAuth               `json:"auth"`
 	Urls                         []PortalsListOutputItemsUrls             `json:"urls"`
+	MagicMcpUrl                  string                                   `json:"magic_mcp_url"`
 	CreatedAt                    time.Time                                `json:"created_at"`
 	UpdatedAt                    time.Time                                `json:"updated_at"`
 }
@@ -83,6 +84,8 @@ type PortalsListQuery struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Search - Search by name or description
+	Search *string `json:"search,omitempty"`
 }
 
 // MapPortalsListQueryFromJSON deserializes JSON data into a PortalsListQuery.

@@ -69,6 +69,8 @@ type ProviderDeploymentsEndpointUpdateBody struct {
 	// Metadata - Custom key-value pairs for storing additional information
 	Metadata    *map[string]any `json:"metadata,omitempty"`
 	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// LockedProviderVersionId - Pin this deployment to a specific provider version, or null to follow latest
+	LockedProviderVersionId *string `json:"locked_provider_version_id,omitempty"`
 }
 
 // List returns a paginated list of provider deployments.

@@ -5,6 +5,18 @@ import (
 	"time"
 )
 
+// StoresParticipantsGetOutputActorOrganizationActorMember represents the stores participants get output actor organization actor member type.
+type StoresParticipantsGetOutputActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
 // StoresParticipantsGetOutputActorOrganizationActorTeams - The teams the actor belongs to
 type StoresParticipantsGetOutputActorOrganizationActorTeams struct {
 	// Id - The team ID
@@ -37,6 +49,7 @@ type StoresParticipantsGetOutputActorOrganizationActor struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - The organization member's image URL
 	ImageUrl string                                                   `json:"image_url"`
+	Member   *StoresParticipantsGetOutputActorOrganizationActorMember `json:"member,omitempty"`
 	Teams    []StoresParticipantsGetOutputActorOrganizationActorTeams `json:"teams"`
 	// CreatedAt - The organization member's creation date
 	CreatedAt time.Time `json:"created_at"`
@@ -51,6 +64,7 @@ type StoresParticipantsGetOutputActorConsumer struct {
 	Name      string    `json:"name"`
 	Email     string    `json:"email"`
 	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
 }
@@ -63,6 +77,7 @@ type StoresParticipantsGetOutputActor struct {
 	Email             *string                                            `json:"email,omitempty"`
 	OrganizationActor *StoresParticipantsGetOutputActorOrganizationActor `json:"organization_actor,omitempty"`
 	Consumer          *StoresParticipantsGetOutputActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                    `json:"consumer_profile,omitempty"`
 }
 
 // StoresParticipantsGetOutput represents the stores participants get output type.

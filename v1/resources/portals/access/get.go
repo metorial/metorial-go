@@ -5,6 +5,13 @@ import (
 	"time"
 )
 
+// PortalsAccessGetOutputListing represents the portals access get output listing type.
+type PortalsAccessGetOutputListing struct {
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+}
+
 // PortalsAccessGetOutputAccessProviderTemplate represents the portals access get output access provider template type.
 type PortalsAccessGetOutputAccessProviderTemplate struct {
 	Object        string         `json:"object"`
@@ -61,6 +68,14 @@ type PortalsAccessGetOutputAccessSkillMarketplace struct {
 	Status string `json:"status"`
 }
 
+// PortalsAccessGetOutputAccessSkillPlugin represents the portals access get output access skill plugin type.
+type PortalsAccessGetOutputAccessSkillPlugin struct {
+	Object string  `json:"object"`
+	Id     string  `json:"id"`
+	Status string  `json:"status"`
+	Name   *string `json:"name,omitempty"`
+}
+
 // PortalsAccessGetOutputAccess represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type PortalsAccessGetOutputAccess struct {
@@ -71,6 +86,7 @@ type PortalsAccessGetOutputAccess struct {
 	SkillTemplate    *PortalsAccessGetOutputAccessSkillTemplate    `json:"skill_template,omitempty"`
 	SkillGroup       *PortalsAccessGetOutputAccessSkillGroup       `json:"skill_group,omitempty"`
 	SkillMarketplace *PortalsAccessGetOutputAccessSkillMarketplace `json:"skill_marketplace,omitempty"`
+	SkillPlugin      *PortalsAccessGetOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
 // PortalsAccessGetOutputConsumerGroup represents the portals access get output consumer group type.
@@ -81,7 +97,6 @@ type PortalsAccessGetOutputConsumerGroup struct {
 	Name        string    `json:"name"`
 	Description *string   `json:"description,omitempty"`
 	IsDefault   bool      `json:"is_default"`
-	SsoGroupIds []string  `json:"sso_group_ids"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
@@ -90,9 +105,11 @@ type PortalsAccessGetOutputConsumerGroup struct {
 type PortalsAccessGetOutput struct {
 	Object        string                              `json:"object"`
 	Id            string                              `json:"id"`
+	AccessLevel   *string                             `json:"access_level,omitempty"`
 	Name          string                              `json:"name"`
 	Description   *string                             `json:"description,omitempty"`
 	Readme        *string                             `json:"readme,omitempty"`
+	Listing       *PortalsAccessGetOutputListing      `json:"listing,omitempty"`
 	Access        PortalsAccessGetOutputAccess        `json:"access"`
 	ConsumerGroup PortalsAccessGetOutputConsumerGroup `json:"consumer_group"`
 	CreatedAt     time.Time                           `json:"created_at"`

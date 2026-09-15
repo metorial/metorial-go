@@ -26,15 +26,16 @@ type SkillsGroupsGetOutputSkills struct {
 
 // SkillsGroupsGetOutput represents the skills groups get output type.
 type SkillsGroupsGetOutput struct {
-	Object      string                        `json:"object"`
-	Id          string                        `json:"id"`
-	Status      string                        `json:"status"`
-	Name        string                        `json:"name"`
-	Description *string                       `json:"description,omitempty"`
-	Metadata    *map[string]any               `json:"metadata,omitempty"`
-	Skills      []SkillsGroupsGetOutputSkills `json:"skills"`
-	CreatedAt   time.Time                     `json:"created_at"`
-	UpdatedAt   time.Time                     `json:"updated_at"`
+	Object                       string                        `json:"object"`
+	Id                           string                        `json:"id"`
+	Status                       string                        `json:"status"`
+	Name                         string                        `json:"name"`
+	Description                  *string                       `json:"description,omitempty"`
+	Metadata                     *map[string]any               `json:"metadata,omitempty"`
+	AllowConsumerSkillAssignment bool                          `json:"allow_consumer_skill_assignment"`
+	Skills                       []SkillsGroupsGetOutputSkills `json:"skills"`
+	CreatedAt                    time.Time                     `json:"created_at"`
+	UpdatedAt                    time.Time                     `json:"updated_at"`
 }
 
 // MapSkillsGroupsGetOutputFromJSON deserializes JSON data into a SkillsGroupsGetOutput.

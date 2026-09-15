@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providertemplates"
 )
 
-// ProviderTemplatesEndpoint provides access to provider templates are reusable, consumer-facing wrappers around provider deployments.
+// ProviderTemplatesEndpoint provides access to provider templates are reusable, consumer-facing wrappers around integrations.
 type ProviderTemplatesEndpoint struct {
 	client *endpoint.Client
 }
@@ -30,19 +30,17 @@ type ProviderTemplatesEndpointListParams struct {
 
 // ProviderTemplatesEndpointCreateBody contains the request body for Create.
 type ProviderTemplatesEndpointCreateBody struct {
-	Name          string            `json:"name"`
-	Description   *string           `json:"description,omitempty"`
-	Metadata      *map[string]any   `json:"metadata,omitempty"`
-	Providers     *[]map[string]any `json:"providers,omitempty"`
-	IntegrationId *string           `json:"integration_id,omitempty"`
+	Name          string          `json:"name"`
+	Description   *string         `json:"description,omitempty"`
+	Metadata      *map[string]any `json:"metadata,omitempty"`
+	IntegrationId string          `json:"integration_id"`
 }
 
 // ProviderTemplatesEndpointUpdateBody contains the request body for Update.
 type ProviderTemplatesEndpointUpdateBody struct {
-	Name        *string           `json:"name,omitempty"`
-	Description *string           `json:"description,omitempty"`
-	Metadata    *map[string]any   `json:"metadata,omitempty"`
-	Providers   *[]map[string]any `json:"providers,omitempty"`
+	Name        *string         `json:"name,omitempty"`
+	Description *string         `json:"description,omitempty"`
+	Metadata    *map[string]any `json:"metadata,omitempty"`
 }
 
 // List returns a paginated list of provider templates.
@@ -74,7 +72,7 @@ func (e *ProviderTemplatesEndpoint) Get(instanceId string, providerTemplateId st
 	return &result, nil
 }
 
-// Create creates a new provider template from an existing provider deployment or creates a minimal backing deployment first.
+// Create creates a new provider template from an existing integration.
 func (e *ProviderTemplatesEndpoint) Create(instanceId string, body *ProviderTemplatesEndpointCreateBody) (*providertemplates.ProviderTemplatesCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-templates"},

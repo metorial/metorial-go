@@ -7,9 +7,10 @@ import (
 
 // SkillsTemplatesItemsCreateOutputIntegrationConfiguration represents the skills templates items create output integration configuration type.
 type SkillsTemplatesItemsCreateOutputIntegrationConfiguration struct {
-	CanAttachCustomToolFilters    bool `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool `json:"can_override_tool_filters"`
+	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
+	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
+	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
+	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // SkillsTemplatesItemsCreateOutputIntegration represents the skills templates items create output integration type.

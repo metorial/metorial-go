@@ -38,6 +38,7 @@ type IntegrationsEndpointCreateBody struct {
 	Name                          string          `json:"name"`
 	Description                   *string         `json:"description,omitempty"`
 	Metadata                      *map[string]any `json:"metadata,omitempty"`
+	UseIntegrationNameInToolNames *bool           `json:"use_integration_name_in_tool_names,omitempty"`
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`
@@ -48,6 +49,7 @@ type IntegrationsEndpointUpdateBody struct {
 	Name                          *string         `json:"name,omitempty"`
 	Description                   *string         `json:"description,omitempty"`
 	Metadata                      *map[string]any `json:"metadata,omitempty"`
+	UseIntegrationNameInToolNames *bool           `json:"use_integration_name_in_tool_names,omitempty"`
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`
