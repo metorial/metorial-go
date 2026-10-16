@@ -11,6 +11,8 @@ type SandboxMachinesAccessPortsOutputUrls struct {
 	Type string `json:"type"`
 	// Shell - The WebSocket URL of the shell
 	Shell *string `json:"shell,omitempty"`
+	// Exec - The WebSocket URL for running commands. Shell tokens authorize it alongside the shell.
+	Exec *string `json:"exec,omitempty"`
 	// Files - The WebSocket URL of the file service
 	Files *string `json:"files,omitempty"`
 	// Ports - The URL of each requested port, keyed by port number
