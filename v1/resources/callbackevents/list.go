@@ -5,64 +5,6 @@ import (
 	"time"
 )
 
-// CallbackEventsListOutputItemsDetailsError - The processing failure, if this event failed
-type CallbackEventsListOutputItemsDetailsError struct {
-	// Object - String representing the object's type
-	Object string `json:"object"`
-	// Code - Machine-readable reason this event failed to process
-	Code string `json:"code"`
-	// Message - Human-readable reason this event failed to process
-	Message string `json:"message"`
-}
-
-// CallbackEventsListOutputItemsDetailsWebhookRequestBody - Raw body of the inbound request
-type CallbackEventsListOutputItemsDetailsWebhookRequestBody struct {
-	// Encoding - Encoding used for the request body
-	Encoding string `json:"encoding"`
-	// Content - Base64-encoded request body
-	Content string `json:"content"`
-}
-
-// CallbackEventsListOutputItemsDetailsWebhookRequest - The inbound HTTP request as it was received. Null once the backend has aged the raw request out of hot storage.
-type CallbackEventsListOutputItemsDetailsWebhookRequest struct {
-	// Object - String representing the object's type
-	Object string `json:"object"`
-	// Method - HTTP method of the inbound request
-	Method string `json:"method"`
-	// Url - URL the inbound request was sent to
-	Url string `json:"url"`
-	// Headers - Headers of the inbound request
-	Headers map[string]string `json:"headers"`
-	// Body - Raw body of the inbound request
-	Body *CallbackEventsListOutputItemsDetailsWebhookRequestBody `json:"body,omitempty"`
-}
-
-// CallbackEventsListOutputItemsDetailsWebhook - The inbound webhook delivery behind this event, if there was one
-type CallbackEventsListOutputItemsDetailsWebhook struct {
-	// Object - String representing the object's type
-	Object string `json:"object"`
-	// Status - Processing status of the inbound webhook, as reported by the provider backend
-	Status string `json:"status"`
-	// Request - The inbound HTTP request as it was received. Null once the backend has aged the raw request out of hot storage.
-	Request *CallbackEventsListOutputItemsDetailsWebhookRequest `json:"request,omitempty"`
-	// ReceivedAt - Timestamp when the webhook was received
-	ReceivedAt time.Time `json:"received_at"`
-}
-
-// CallbackEventsListOutputItemsDetails - Enrichment fetched from the provider backend. Only present when fetching a single callback event.
-type CallbackEventsListOutputItemsDetails struct {
-	// Object - String representing the object's type
-	Object string `json:"object"`
-	// Status - Processing status of the trigger invocation, as reported by the provider backend
-	Status string `json:"status"`
-	// Payload - Mapped payload the provider trigger produced for this event
-	Payload *map[string]any `json:"payload,omitempty"`
-	// Error - The processing failure, if this event failed
-	Error *CallbackEventsListOutputItemsDetailsError `json:"error,omitempty"`
-	// Webhook - The inbound webhook delivery behind this event, if there was one
-	Webhook *CallbackEventsListOutputItemsDetailsWebhook `json:"webhook,omitempty"`
-}
-
 // CallbackEventsListOutputItems represents the callback events list output items type.
 type CallbackEventsListOutputItems struct {
 	// Object - String representing the object's type
@@ -83,8 +25,6 @@ type CallbackEventsListOutputItems struct {
 	CallbackId string `json:"callback_id"`
 	// CallbackInstanceId - Callback instance this event was recorded for
 	CallbackInstanceId string `json:"callback_instance_id"`
-	// Details - Enrichment fetched from the provider backend. Only present when fetching a single callback event.
-	Details *CallbackEventsListOutputItemsDetails `json:"details,omitempty"`
 	// OccurredAt - Timestamp when the underlying provider event occurred
 	OccurredAt time.Time `json:"occurred_at"`
 	// CreatedAt - Timestamp when the callback event was recorded

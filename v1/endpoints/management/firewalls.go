@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/firewalls"
 )
 
-// FirewallsEndpoint provides access to manage firewalls and their attached network policies.
+// FirewallsEndpoint provides access to manage firewalls and their attached network policies. Firewalls apply to integration enclaves, providers, and sandbox machines.
 type FirewallsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,18 +17,21 @@ func NewFirewallsEndpoint(client *endpoint.Client) *FirewallsEndpoint {
 
 // FirewallsEndpointListParams contains optional query parameters for List.
 type FirewallsEndpointListParams struct {
-	Limit           *float64 `json:"limit,omitempty"`
-	After           *string  `json:"after,omitempty"`
-	Before          *string  `json:"before,omitempty"`
-	Cursor          *string  `json:"cursor,omitempty"`
-	Order           *string  `json:"order,omitempty"`
-	Id              *any     `json:"id,omitempty"`
-	Slug            *any     `json:"slug,omitempty"`
-	Status          *any     `json:"status,omitempty"`
-	NetworkId       *any     `json:"network_id,omitempty"`
-	EnclaveId       *any     `json:"enclave_id,omitempty"`
-	ProviderId      *any     `json:"provider_id,omitempty"`
-	NetworkPolicyId *any     `json:"network_policy_id,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Search - Search firewalls by name and description
+	Search          *string `json:"search,omitempty"`
+	Id              *any    `json:"id,omitempty"`
+	Slug            *any    `json:"slug,omitempty"`
+	Status          *any    `json:"status,omitempty"`
+	EnclaveId       *any    `json:"enclave_id,omitempty"`
+	ProviderId      *any    `json:"provider_id,omitempty"`
+	NetworkPolicyId *any    `json:"network_policy_id,omitempty"`
+	// MachineId - Only firewalls applied to these sandbox machines
+	MachineId *any `json:"machine_id,omitempty"`
 	// CreatedAt - Filter firewall creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter firewall last update time by date range
@@ -37,12 +40,10 @@ type FirewallsEndpointListParams struct {
 
 // FirewallsEndpointCreateBody contains the request body for Create.
 type FirewallsEndpointCreateBody struct {
-	Name             string            `json:"name"`
-	Description      *string           `json:"description,omitempty"`
-	Slug             *string           `json:"slug,omitempty"`
-	NetworkId        string            `json:"network_id"`
-	Bindings         *[]map[string]any `json:"bindings,omitempty"`
-	NetworkPolicyIds *[]string         `json:"network_policy_ids,omitempty"`
+	Name             string    `json:"name"`
+	Description      *string   `json:"description,omitempty"`
+	Slug             *string   `json:"slug,omitempty"`
+	NetworkPolicyIds *[]string `json:"network_policy_ids,omitempty"`
 }
 
 // FirewallsEndpointUpdateBody contains the request body for Update.

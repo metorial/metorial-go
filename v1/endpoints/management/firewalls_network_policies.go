@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/firewalls/networkpolicies"
 )
 
-// FirewallsNetworkPoliciesEndpoint provides access to manage firewalls and their attached network policies.
+// FirewallsNetworkPoliciesEndpoint provides access to manage firewalls and their attached network policies. Firewalls apply to integration enclaves, providers, and sandbox machines.
 type FirewallsNetworkPoliciesEndpoint struct {
 	client *endpoint.Client
 }

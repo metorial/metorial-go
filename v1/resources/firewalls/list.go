@@ -42,7 +42,6 @@ type FirewallsListOutputItems struct {
 	Name            string                                    `json:"name"`
 	Description     *string                                   `json:"description,omitempty"`
 	Status          string                                    `json:"status"`
-	NetworkId       string                                    `json:"network_id"`
 	NetworkPolicies []FirewallsListOutputItemsNetworkPolicies `json:"network_policies"`
 	CreatedAt       time.Time                                 `json:"created_at"`
 	UpdatedAt       time.Time                                 `json:"updated_at"`
@@ -93,18 +92,21 @@ type FirewallsListQueryUpdatedAt struct {
 
 // FirewallsListQuery represents the firewalls list query type.
 type FirewallsListQuery struct {
-	Limit           *float64 `json:"limit,omitempty"`
-	After           *string  `json:"after,omitempty"`
-	Before          *string  `json:"before,omitempty"`
-	Cursor          *string  `json:"cursor,omitempty"`
-	Order           *string  `json:"order,omitempty"`
-	Id              *any     `json:"id,omitempty"`
-	Slug            *any     `json:"slug,omitempty"`
-	Status          *any     `json:"status,omitempty"`
-	NetworkId       *any     `json:"network_id,omitempty"`
-	EnclaveId       *any     `json:"enclave_id,omitempty"`
-	ProviderId      *any     `json:"provider_id,omitempty"`
-	NetworkPolicyId *any     `json:"network_policy_id,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Search - Search firewalls by name and description
+	Search          *string `json:"search,omitempty"`
+	Id              *any    `json:"id,omitempty"`
+	Slug            *any    `json:"slug,omitempty"`
+	Status          *any    `json:"status,omitempty"`
+	EnclaveId       *any    `json:"enclave_id,omitempty"`
+	ProviderId      *any    `json:"provider_id,omitempty"`
+	NetworkPolicyId *any    `json:"network_policy_id,omitempty"`
+	// MachineId - Only firewalls applied to these sandbox machines
+	MachineId *any `json:"machine_id,omitempty"`
 	// CreatedAt - Filter firewall creation time by date range
 	CreatedAt *FirewallsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter firewall last update time by date range

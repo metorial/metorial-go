@@ -42,7 +42,6 @@ type FirewallsNetworkPoliciesDetachOutput struct {
 	Name            string                                                `json:"name"`
 	Description     *string                                               `json:"description,omitempty"`
 	Status          string                                                `json:"status"`
-	NetworkId       string                                                `json:"network_id"`
 	NetworkPolicies []FirewallsNetworkPoliciesDetachOutputNetworkPolicies `json:"network_policies"`
 	CreatedAt       time.Time                                             `json:"created_at"`
 	UpdatedAt       time.Time                                             `json:"updated_at"`

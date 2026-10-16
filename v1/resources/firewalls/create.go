@@ -42,7 +42,6 @@ type FirewallsCreateOutput struct {
 	Name            string                                 `json:"name"`
 	Description     *string                                `json:"description,omitempty"`
 	Status          string                                 `json:"status"`
-	NetworkId       string                                 `json:"network_id"`
 	NetworkPolicies []FirewallsCreateOutputNetworkPolicies `json:"network_policies"`
 	CreatedAt       time.Time                              `json:"created_at"`
 	UpdatedAt       time.Time                              `json:"updated_at"`
@@ -63,22 +62,12 @@ func MapFirewallsCreateOutputToJSON(v *FirewallsCreateOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// FirewallsCreateBodyBindings represents the firewalls create body bindings type.
-type FirewallsCreateBodyBindings struct {
-	TargetType string  `json:"target_type"`
-	EnclaveId  *string `json:"enclave_id,omitempty"`
-	ProviderId *string `json:"provider_id,omitempty"`
-	NetworkId  *string `json:"network_id,omitempty"`
-}
-
 // FirewallsCreateBody represents the firewalls create body type.
 type FirewallsCreateBody struct {
-	Name             string                         `json:"name"`
-	Description      *string                        `json:"description,omitempty"`
-	Slug             *string                        `json:"slug,omitempty"`
-	NetworkId        string                         `json:"network_id"`
-	Bindings         *[]FirewallsCreateBodyBindings `json:"bindings,omitempty"`
-	NetworkPolicyIds *[]string                      `json:"network_policy_ids,omitempty"`
+	Name             string    `json:"name"`
+	Description      *string   `json:"description,omitempty"`
+	Slug             *string   `json:"slug,omitempty"`
+	NetworkPolicyIds *[]string `json:"network_policy_ids,omitempty"`
 }
 
 // MapFirewallsCreateBodyFromJSON deserializes JSON data into a FirewallsCreateBody.

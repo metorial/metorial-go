@@ -48,6 +48,8 @@ type MagicMcpServersToolsOutputItems struct {
 	InputSchema  *MagicMcpServersToolsOutputItemsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *MagicMcpServersToolsOutputItemsOutputSchema `json:"output_schema,omitempty"`
 	Tags         *MagicMcpServersToolsOutputItemsTags         `json:"tags,omitempty"`
+	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
+	ToolCategoryKeys []string `json:"tool_category_keys"`
 	// SpecificationId - Specification ID
 	SpecificationId string `json:"specification_id"`
 	// ProviderId - Provider ID

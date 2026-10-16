@@ -5,6 +5,40 @@ import (
 	"time"
 )
 
+// ChatsChannelsListOutputItemsRecipient represents the chats channels list output items recipient type.
+type ChatsChannelsListOutputItemsRecipient struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - Unique chat author identifier
+	Id string `json:"id"`
+	// ChatId - The chat this author belongs to
+	ChatId string `json:"chat_id"`
+	// Type - What kind of account this author is on the chat provider
+	Type string `json:"type"`
+	// Role - The role this author holds in the chat workspace
+	Role string `json:"role"`
+	// ProviderType - The provider's own name for this kind of author
+	ProviderType string `json:"provider_type"`
+	// ProviderAuthorId - The author's identifier on the chat provider
+	ProviderAuthorId string `json:"provider_author_id"`
+	// UserName - The author's handle on the chat provider
+	UserName string `json:"user_name"`
+	// FullName - The author's display name
+	FullName string `json:"full_name"`
+	// Email - Email address of the author, if the provider exposes one
+	Email *string `json:"email,omitempty"`
+	// ImageUrl - URL of the author's avatar, if the provider exposes one
+	ImageUrl *string `json:"image_url,omitempty"`
+	// IsSelf - Whether this author is the account the integration itself is authenticated as
+	IsSelf bool `json:"is_self"`
+	// CreatedAt - Timestamp when the author was first seen by Metorial
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Timestamp when the author was last updated
+	UpdatedAt time.Time `json:"updated_at"`
+	// LastInteractionAt - Timestamp of the last activity Metorial saw from this author
+	LastInteractionAt *time.Time `json:"last_interaction_at,omitempty"`
+}
+
 // ChatsChannelsListOutputItemsContextAuthor represents the chats channels list output items context author type.
 type ChatsChannelsListOutputItemsContextAuthor struct {
 	// Id - The actor's identifier on the chat provider
@@ -61,6 +95,9 @@ type ChatsChannelsListOutputItems struct {
 	Topic *string `json:"topic,omitempty"`
 	// Subject - Subject of the channel, for providers that separate it from the topic
 	Subject *string `json:"subject,omitempty"`
+	// HasAccess - Whether the chat integration can read content from this channel
+	HasAccess bool                                   `json:"has_access"`
+	Recipient *ChatsChannelsListOutputItemsRecipient `json:"recipient,omitempty"`
 	// MemberCount - Number of members in the channel, if the provider reports it
 	MemberCount *float64 `json:"member_count,omitempty"`
 	// Permalink - Link to the channel on the chat provider
@@ -114,6 +151,8 @@ type ChatsChannelsListQuery struct {
 	Type *string `json:"type,omitempty"`
 	// Search - Search by channel name or topic
 	Search *string `json:"search,omitempty"`
+	// HasAccess - Whether to return channels the chat integration can or cannot access; defaults to true
+	HasAccess *bool `json:"has_access,omitempty"`
 }
 
 // MapChatsChannelsListQueryFromJSON deserializes JSON data into a ChatsChannelsListQuery.

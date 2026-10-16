@@ -42,6 +42,7 @@ type IntegrationsEndpointCreateBody struct {
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`
+	EnableCallbackTools           *bool           `json:"enable_callback_tools,omitempty"`
 }
 
 // IntegrationsEndpointUpdateBody contains the request body for Update.
@@ -53,6 +54,7 @@ type IntegrationsEndpointUpdateBody struct {
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`
+	EnableCallbackTools           *bool           `json:"enable_callback_tools,omitempty"`
 }
 
 // List returns a paginated list of integrations.

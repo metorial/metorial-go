@@ -48,6 +48,8 @@ type ProvidersSpecificationsListOutputItemsTools struct {
 	InputSchema  *ProvidersSpecificationsListOutputItemsToolsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersSpecificationsListOutputItemsToolsOutputSchema `json:"output_schema,omitempty"`
 	Tags         *ProvidersSpecificationsListOutputItemsToolsTags         `json:"tags,omitempty"`
+	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
+	ToolCategoryKeys []string `json:"tool_category_keys"`
 	// SpecificationId - Specification ID
 	SpecificationId string `json:"specification_id"`
 	// ProviderId - Provider ID
@@ -56,6 +58,22 @@ type ProvidersSpecificationsListOutputItemsTools struct {
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// ProvidersSpecificationsListOutputItemsToolCategories represents the providers specifications list output items tool categories type.
+type ProvidersSpecificationsListOutputItemsToolCategories struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Key - Tool category key
+	Key string `json:"key"`
+	// Name - Display name of the tool category
+	Name string `json:"name"`
+	// Description - Tool category description
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - URL of an icon or logo for the tool category
+	ImageUrl *string `json:"image_url,omitempty"`
+	// ToolCount - Number of tools in this specification that belong to the category
+	ToolCount float64 `json:"tool_count"`
 }
 
 // ProvidersSpecificationsListOutputItemsAuthMethodsInputSchema represents the providers specifications list output items auth methods input schema type.
@@ -136,6 +154,8 @@ type ProvidersSpecificationsListOutputItems struct {
 	ConfigVisibility string `json:"config_visibility"`
 	// Tools - Available tools
 	Tools []ProvidersSpecificationsListOutputItemsTools `json:"tools"`
+	// ToolCategories - Tool categories that group the tools of this specification
+	ToolCategories []ProvidersSpecificationsListOutputItemsToolCategories `json:"tool_categories"`
 	// AuthMethods - Authentication methods
 	AuthMethods []ProvidersSpecificationsListOutputItemsAuthMethods `json:"auth_methods"`
 	// ProviderId - Provider ID

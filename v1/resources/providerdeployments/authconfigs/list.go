@@ -230,6 +230,8 @@ type ProviderDeploymentsAuthConfigsListQuery struct {
 	IdentityId *any `json:"identity_id,omitempty"`
 	// IdentityCredentialId - Filter by identity credential ID(s)
 	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
+	// Adapter - Only return auth configs whose auth method supports this adapter
+	Adapter *string `json:"adapter,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
 	// CreatedAt - Filter provider auth config creation time by date range

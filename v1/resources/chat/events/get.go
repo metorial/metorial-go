@@ -15,8 +15,10 @@ type ChatEventsGetOutput struct {
 	Type string `json:"type"`
 	// Source - How Metorial learned about this event
 	Source string `json:"source"`
-	// ChatId - The chat this event was recorded for
-	ChatId string `json:"chat_id"`
+	// ChatConnectionId - The chat connection this event was recorded for
+	ChatConnectionId string `json:"chat_connection_id"`
+	// ChatId - The chat this event was recorded for. Null for events recorded before any chat exists, such as a connection or instance lifecycle event.
+	ChatId *string `json:"chat_id,omitempty"`
 	// ChannelId - The channel this event happened in. Null when the event is not channel-scoped, or once the channel has been removed.
 	ChannelId *string `json:"channel_id,omitempty"`
 	// ThreadId - The thread this event happened in. Null when the event is not thread-scoped, or once the thread has been removed.

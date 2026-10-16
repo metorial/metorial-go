@@ -10,6 +10,7 @@ type IntegrationsCreateOutputConfiguration struct {
 	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
 	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
 	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
+	EnableCallbackTools           bool  `json:"enable_callback_tools"`
 	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
@@ -124,6 +125,7 @@ type IntegrationsCreateBody struct {
 	CanAttachCustomToolFilters    *bool           `json:"can_attach_custom_tool_filters,omitempty"`
 	CanAttachCustomProviderConfig *bool           `json:"can_attach_custom_provider_config,omitempty"`
 	CanOverrideToolFilters        *bool           `json:"can_override_tool_filters,omitempty"`
+	EnableCallbackTools           *bool           `json:"enable_callback_tools,omitempty"`
 }
 
 // MapIntegrationsCreateBodyFromJSON deserializes JSON data into a IntegrationsCreateBody.

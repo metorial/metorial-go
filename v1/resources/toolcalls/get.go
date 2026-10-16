@@ -120,6 +120,8 @@ type ToolCallsGetOutputTool struct {
 	InputSchema  *ToolCallsGetOutputToolInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ToolCallsGetOutputToolOutputSchema `json:"output_schema,omitempty"`
 	Tags         *ToolCallsGetOutputToolTags         `json:"tags,omitempty"`
+	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
+	ToolCategoryKeys []string `json:"tool_category_keys"`
 	// SpecificationId - Specification ID
 	SpecificationId string `json:"specification_id"`
 	// ProviderId - Provider ID

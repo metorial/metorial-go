@@ -105,6 +105,8 @@ type CallbacksListQuery struct {
 	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// Search - Search callbacks by name
+	Search *string `json:"search,omitempty"`
 	// Status - Filter by callback lifecycle status
 	Status *any `json:"status,omitempty"`
 	// CreatedAt - Filter callback creation time by date range

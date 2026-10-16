@@ -41,6 +41,8 @@ type CallbackEventsGetOutputDetailsWebhookRequest struct {
 type CallbackEventsGetOutputDetailsWebhook struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
+	// Id - Incoming webhook identifier
+	Id string `json:"id"`
 	// Status - Processing status of the inbound webhook, as reported by the provider backend
 	Status string `json:"status"`
 	// Request - The inbound HTTP request as it was received. Null once the backend has aged the raw request out of hot storage.

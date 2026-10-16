@@ -38,7 +38,7 @@ type ManagementEndpoints struct {
 	Instance                              *management.InstanceEndpoint
 	Providers                             *management.ProvidersEndpoint
 	ProvidersVersions                     *management.ProvidersVersionsEndpoint
-	ProvidersTools                         *management.ProvidersToolsEndpoint
+	ProvidersTools                        *management.ProvidersToolsEndpoint
 	ProvidersAuthMethods                  *management.ProvidersAuthMethodsEndpoint
 	ProvidersSpecifications               *management.ProvidersSpecificationsEndpoint
 	Publishers                            *management.PublishersEndpoint
@@ -85,6 +85,39 @@ type ManagementEndpoints struct {
 	MagicMcpServers                       *management.MagicMcpServersEndpoint
 	MagicMcpSessions                      *management.MagicMcpSessionsEndpoint
 	MagicMcpTokens                        *management.MagicMcpTokensEndpoint
+	Callbacks                             *management.CallbacksEndpoint
+	CallbackEvents                        *management.CallbackEventsEndpoint
+	CallbackInstances                     *management.CallbackInstancesEndpoint
+	Chats                                 *management.ChatsEndpoint
+	ChatsChannels                         *management.ChatsChannelsEndpoint
+	ChatsChannelsMembers                  *management.ChatsChannelsMembersEndpoint
+	ChatsChannelsTyping                   *management.ChatsChannelsTypingEndpoint
+	ChatsDms                              *management.ChatsDmsEndpoint
+	ChatsThreads                          *management.ChatsThreadsEndpoint
+	ChatsMessages                         *management.ChatsMessagesEndpoint
+	ChatsMessagesReactions                *management.ChatsMessagesReactionsEndpoint
+	ChatsCommands                         *management.ChatsCommandsEndpoint
+	ChatWorkspaces                        *management.ChatWorkspacesEndpoint
+	ChatConnections                       *management.ChatConnectionsEndpoint
+	ChatEvents                            *management.ChatEventsEndpoint
+	ChatInstances                         *management.ChatInstancesEndpoint
+	ChatInstancesProvider                 *management.ChatInstancesProviderEndpoint
+	SandboxMachines                       *management.SandboxMachinesEndpoint
+	SandboxMachinesAccess                 *management.SandboxMachinesAccessEndpoint
+	SandboxMachinesInstances              *management.SandboxMachinesInstancesEndpoint
+	SandboxMachinesOperations             *management.SandboxMachinesOperationsEndpoint
+	SandboxMachinesEvents                 *management.SandboxMachinesEventsEndpoint
+	SandboxMachinesErrors                 *management.SandboxMachinesErrorsEndpoint
+	SandboxMachinesUsage                  *management.SandboxMachinesUsageEndpoint
+	SandboxImages                         *management.SandboxImagesEndpoint
+	SandboxImagesVersions                 *management.SandboxImagesVersionsEndpoint
+	SandboxImagesBuilds                   *management.SandboxImagesBuildsEndpoint
+	SandboxImageBuilds                    *management.SandboxImageBuildsEndpoint
+	SandboxDisks                          *management.SandboxDisksEndpoint
+	SandboxDisksMounts                    *management.SandboxDisksMountsEndpoint
+	SandboxDisksResizes                   *management.SandboxDisksResizesEndpoint
+	SandboxRegions                        *management.SandboxRegionsEndpoint
+	SandboxSpecs                          *management.SandboxSpecsEndpoint
 }
 
 // MetorialSdk is the main entry point for the Metorial API.
@@ -96,7 +129,7 @@ type MetorialSdk struct {
 	Instances                             *endpoints.InstancesEndpoint
 	Providers                             *endpoints.ProvidersEndpoint
 	ProvidersVersions                     *endpoints.ProvidersVersionsEndpoint
-	ProvidersTools                         *endpoints.ProvidersToolsEndpoint
+	ProvidersTools                        *endpoints.ProvidersToolsEndpoint
 	ProvidersAuthMethods                  *endpoints.ProvidersAuthMethodsEndpoint
 	ProvidersSpecifications               *endpoints.ProvidersSpecificationsEndpoint
 	Publishers                            *endpoints.PublishersEndpoint
@@ -143,6 +176,39 @@ type MetorialSdk struct {
 	MagicMcpServers                       *endpoints.MagicMcpServersEndpoint
 	MagicMcpSessions                      *endpoints.MagicMcpSessionsEndpoint
 	MagicMcpTokens                        *endpoints.MagicMcpTokensEndpoint
+	Callbacks                             *endpoints.CallbacksEndpoint
+	CallbackEvents                        *endpoints.CallbackEventsEndpoint
+	CallbackInstances                     *endpoints.CallbackInstancesEndpoint
+	Chats                                 *endpoints.ChatsEndpoint
+	ChatsChannels                         *endpoints.ChatsChannelsEndpoint
+	ChatsChannelsMembers                  *endpoints.ChatsChannelsMembersEndpoint
+	ChatsChannelsTyping                   *endpoints.ChatsChannelsTypingEndpoint
+	ChatsDms                              *endpoints.ChatsDmsEndpoint
+	ChatsThreads                          *endpoints.ChatsThreadsEndpoint
+	ChatsMessages                         *endpoints.ChatsMessagesEndpoint
+	ChatsMessagesReactions                *endpoints.ChatsMessagesReactionsEndpoint
+	ChatsCommands                         *endpoints.ChatsCommandsEndpoint
+	ChatWorkspaces                        *endpoints.ChatWorkspacesEndpoint
+	ChatConnections                       *endpoints.ChatConnectionsEndpoint
+	ChatEvents                            *endpoints.ChatEventsEndpoint
+	ChatInstances                         *endpoints.ChatInstancesEndpoint
+	ChatInstancesProvider                 *endpoints.ChatInstancesProviderEndpoint
+	SandboxMachines                       *endpoints.SandboxMachinesEndpoint
+	SandboxMachinesAccess                 *endpoints.SandboxMachinesAccessEndpoint
+	SandboxMachinesInstances              *endpoints.SandboxMachinesInstancesEndpoint
+	SandboxMachinesOperations             *endpoints.SandboxMachinesOperationsEndpoint
+	SandboxMachinesEvents                 *endpoints.SandboxMachinesEventsEndpoint
+	SandboxMachinesErrors                 *endpoints.SandboxMachinesErrorsEndpoint
+	SandboxMachinesUsage                  *endpoints.SandboxMachinesUsageEndpoint
+	SandboxImages                         *endpoints.SandboxImagesEndpoint
+	SandboxImagesVersions                 *endpoints.SandboxImagesVersionsEndpoint
+	SandboxImagesBuilds                   *endpoints.SandboxImagesBuildsEndpoint
+	SandboxImageBuilds                    *endpoints.SandboxImageBuildsEndpoint
+	SandboxDisks                          *endpoints.SandboxDisksEndpoint
+	SandboxDisksMounts                    *endpoints.SandboxDisksMountsEndpoint
+	SandboxDisksResizes                   *endpoints.SandboxDisksResizesEndpoint
+	SandboxRegions                        *endpoints.SandboxRegionsEndpoint
+	SandboxSpecs                          *endpoints.SandboxSpecsEndpoint
 
 	// Management provides access to management API endpoints.
 	// These endpoints operate across instances and require an instance ID parameter.
@@ -170,7 +236,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		Instances:                             endpoints.NewInstancesEndpoint(c),
 		Providers:                             endpoints.NewProvidersEndpoint(c),
 		ProvidersVersions:                     endpoints.NewProvidersVersionsEndpoint(c),
-		ProvidersTools:                         endpoints.NewProvidersToolsEndpoint(c),
+		ProvidersTools:                        endpoints.NewProvidersToolsEndpoint(c),
 		ProvidersAuthMethods:                  endpoints.NewProvidersAuthMethodsEndpoint(c),
 		ProvidersSpecifications:               endpoints.NewProvidersSpecificationsEndpoint(c),
 		Publishers:                            endpoints.NewPublishersEndpoint(c),
@@ -217,10 +283,43 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		MagicMcpServers:                       endpoints.NewMagicMcpServersEndpoint(c),
 		MagicMcpSessions:                      endpoints.NewMagicMcpSessionsEndpoint(c),
 		MagicMcpTokens:                        endpoints.NewMagicMcpTokensEndpoint(c),
+		Callbacks:                             endpoints.NewCallbacksEndpoint(c),
+		CallbackEvents:                        endpoints.NewCallbackEventsEndpoint(c),
+		CallbackInstances:                     endpoints.NewCallbackInstancesEndpoint(c),
+		Chats:                                 endpoints.NewChatsEndpoint(c),
+		ChatsChannels:                         endpoints.NewChatsChannelsEndpoint(c),
+		ChatsChannelsMembers:                  endpoints.NewChatsChannelsMembersEndpoint(c),
+		ChatsChannelsTyping:                   endpoints.NewChatsChannelsTypingEndpoint(c),
+		ChatsDms:                              endpoints.NewChatsDmsEndpoint(c),
+		ChatsThreads:                          endpoints.NewChatsThreadsEndpoint(c),
+		ChatsMessages:                         endpoints.NewChatsMessagesEndpoint(c),
+		ChatsMessagesReactions:                endpoints.NewChatsMessagesReactionsEndpoint(c),
+		ChatsCommands:                         endpoints.NewChatsCommandsEndpoint(c),
+		ChatWorkspaces:                        endpoints.NewChatWorkspacesEndpoint(c),
+		ChatConnections:                       endpoints.NewChatConnectionsEndpoint(c),
+		ChatEvents:                            endpoints.NewChatEventsEndpoint(c),
+		ChatInstances:                         endpoints.NewChatInstancesEndpoint(c),
+		ChatInstancesProvider:                 endpoints.NewChatInstancesProviderEndpoint(c),
+		SandboxMachines:                       endpoints.NewSandboxMachinesEndpoint(c),
+		SandboxMachinesAccess:                 endpoints.NewSandboxMachinesAccessEndpoint(c),
+		SandboxMachinesInstances:              endpoints.NewSandboxMachinesInstancesEndpoint(c),
+		SandboxMachinesOperations:             endpoints.NewSandboxMachinesOperationsEndpoint(c),
+		SandboxMachinesEvents:                 endpoints.NewSandboxMachinesEventsEndpoint(c),
+		SandboxMachinesErrors:                 endpoints.NewSandboxMachinesErrorsEndpoint(c),
+		SandboxMachinesUsage:                  endpoints.NewSandboxMachinesUsageEndpoint(c),
+		SandboxImages:                         endpoints.NewSandboxImagesEndpoint(c),
+		SandboxImagesVersions:                 endpoints.NewSandboxImagesVersionsEndpoint(c),
+		SandboxImagesBuilds:                   endpoints.NewSandboxImagesBuildsEndpoint(c),
+		SandboxImageBuilds:                    endpoints.NewSandboxImageBuildsEndpoint(c),
+		SandboxDisks:                          endpoints.NewSandboxDisksEndpoint(c),
+		SandboxDisksMounts:                    endpoints.NewSandboxDisksMountsEndpoint(c),
+		SandboxDisksResizes:                   endpoints.NewSandboxDisksResizesEndpoint(c),
+		SandboxRegions:                        endpoints.NewSandboxRegionsEndpoint(c),
+		SandboxSpecs:                          endpoints.NewSandboxSpecsEndpoint(c),
 		Management: &ManagementEndpoints{
 			Providers:                             management.NewProvidersEndpoint(c),
 			ProvidersVersions:                     management.NewProvidersVersionsEndpoint(c),
-			ProvidersTools:                         management.NewProvidersToolsEndpoint(c),
+			ProvidersTools:                        management.NewProvidersToolsEndpoint(c),
 			ProvidersAuthMethods:                  management.NewProvidersAuthMethodsEndpoint(c),
 			ProvidersSpecifications:               management.NewProvidersSpecificationsEndpoint(c),
 			Publishers:                            management.NewPublishersEndpoint(c),
@@ -267,6 +366,39 @@ func New(opts ...Option) (*MetorialSdk, error) {
 			MagicMcpServers:                       management.NewMagicMcpServersEndpoint(c),
 			MagicMcpSessions:                      management.NewMagicMcpSessionsEndpoint(c),
 			MagicMcpTokens:                        management.NewMagicMcpTokensEndpoint(c),
+			Callbacks:                             management.NewCallbacksEndpoint(c),
+			CallbackEvents:                        management.NewCallbackEventsEndpoint(c),
+			CallbackInstances:                     management.NewCallbackInstancesEndpoint(c),
+			Chats:                                 management.NewChatsEndpoint(c),
+			ChatsChannels:                         management.NewChatsChannelsEndpoint(c),
+			ChatsChannelsMembers:                  management.NewChatsChannelsMembersEndpoint(c),
+			ChatsChannelsTyping:                   management.NewChatsChannelsTypingEndpoint(c),
+			ChatsDms:                              management.NewChatsDmsEndpoint(c),
+			ChatsThreads:                          management.NewChatsThreadsEndpoint(c),
+			ChatsMessages:                         management.NewChatsMessagesEndpoint(c),
+			ChatsMessagesReactions:                management.NewChatsMessagesReactionsEndpoint(c),
+			ChatsCommands:                         management.NewChatsCommandsEndpoint(c),
+			ChatWorkspaces:                        management.NewChatWorkspacesEndpoint(c),
+			ChatConnections:                       management.NewChatConnectionsEndpoint(c),
+			ChatEvents:                            management.NewChatEventsEndpoint(c),
+			ChatInstances:                         management.NewChatInstancesEndpoint(c),
+			ChatInstancesProvider:                 management.NewChatInstancesProviderEndpoint(c),
+			SandboxMachines:                       management.NewSandboxMachinesEndpoint(c),
+			SandboxMachinesAccess:                 management.NewSandboxMachinesAccessEndpoint(c),
+			SandboxMachinesInstances:              management.NewSandboxMachinesInstancesEndpoint(c),
+			SandboxMachinesOperations:             management.NewSandboxMachinesOperationsEndpoint(c),
+			SandboxMachinesEvents:                 management.NewSandboxMachinesEventsEndpoint(c),
+			SandboxMachinesErrors:                 management.NewSandboxMachinesErrorsEndpoint(c),
+			SandboxMachinesUsage:                  management.NewSandboxMachinesUsageEndpoint(c),
+			SandboxImages:                         management.NewSandboxImagesEndpoint(c),
+			SandboxImagesVersions:                 management.NewSandboxImagesVersionsEndpoint(c),
+			SandboxImagesBuilds:                   management.NewSandboxImagesBuildsEndpoint(c),
+			SandboxImageBuilds:                    management.NewSandboxImageBuildsEndpoint(c),
+			SandboxDisks:                          management.NewSandboxDisksEndpoint(c),
+			SandboxDisksMounts:                    management.NewSandboxDisksMountsEndpoint(c),
+			SandboxDisksResizes:                   management.NewSandboxDisksResizesEndpoint(c),
+			SandboxRegions:                        management.NewSandboxRegionsEndpoint(c),
+			SandboxSpecs:                          management.NewSandboxSpecsEndpoint(c),
 		},
 	}, nil
 }

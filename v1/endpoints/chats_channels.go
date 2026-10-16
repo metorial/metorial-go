@@ -28,6 +28,8 @@ type ChatsChannelsEndpointListParams struct {
 	Type *string `json:"type,omitempty"`
 	// Search - Search by channel name or topic
 	Search *string `json:"search,omitempty"`
+	// HasAccess - Whether to return channels the chat integration can or cannot access; defaults to true
+	HasAccess *bool `json:"has_access,omitempty"`
 }
 
 // List returns a paginated list of channels for a chat.
