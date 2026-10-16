@@ -1,8 +1,6 @@
 package metorial
 
 import (
-	"archive/zip"
-	"bytes"
 	"context"
 	"encoding/json"
 	"io"
@@ -75,56 +73,13 @@ func TestUploadFileSendsSmallFilesAsMultipart(t *testing.T) {
 	}
 }
 
-func TestUploadFileZipsDirectories(t *testing.T) {
-	directory := filepath.Join(t.TempDir(), "context")
-	writeTestFile(t, filepath.Join(directory, "Dockerfile"), "FROM alpine")
-	writeTestFile(t, filepath.Join(directory, "src", "main.go"), "package main")
-	if err := os.MkdirAll(filepath.Join(directory, "empty"), 0o755); err != nil {
-		t.Fatal(err)
-	}
-	if err := os.Symlink("Dockerfile", filepath.Join(directory, "link")); err != nil {
-		t.Fatal(err)
-	}
+func TestUploadFileRejectsDirectories(t *testing.T) {
+	directory := t.TempDir()
+	writeTestFile(t, filepath.Join(directory, "notes.txt"), "hello")
 
-	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if err := r.ParseMultipartForm(1 << 20); err != nil {
-			t.Fatal(err)
-		}
-		file, header, err := r.FormFile("file")
-		if err != nil {
-			t.Fatal(err)
-		}
-		if header.Filename != "context.zip" || header.Header.Get("Content-Type") != "application/zip" {
-			t.Errorf("unexpected archive %q (%s)", header.Filename, header.Header.Get("Content-Type"))
-		}
-
-		data, _ := io.ReadAll(file)
-		reader, err := zip.NewReader(bytes.NewReader(data), int64(len(data)))
-		if err != nil {
-			t.Fatal(err)
-		}
-		names := []string{}
-		for _, entry := range reader.File {
-			names = append(names, entry.Name)
-		}
-		slices.Sort(names)
-		if expected := []string{"Dockerfile", "empty/", "src/", "src/main.go"}; !slices.Equal(names, expected) {
-			t.Errorf("expected entries %v, got %v", expected, names)
-		}
-
-		writeTestJSON(w, http.StatusOK, map[string]any{"object": "file", "id": "file_1"})
-	}))
-	defer server.Close()
-
-	if _, err := newTestSdk(t, server.URL).UploadFile(context.Background(), directory, &UploadFileOptions{Purpose: "sandbox_image_build_context"}); err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestUploadFileRejectsDirectoriesWithoutFiles(t *testing.T) {
 	sdk := newTestSdk(t, "http://127.0.0.1:1")
-	if _, err := sdk.UploadFile(context.Background(), t.TempDir(), nil); err == nil || !strings.Contains(err.Error(), "no files") {
-		t.Fatalf("expected an empty directory error, got %v", err)
+	if _, err := sdk.UploadFile(context.Background(), directory, nil); err == nil || !strings.Contains(err.Error(), "is not a file") {
+		t.Fatalf("expected a directory to be rejected, got %v", err)
 	}
 }
 

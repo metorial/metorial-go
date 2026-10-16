@@ -173,13 +173,13 @@ custom, err := sdk.CustomProviders.Get("cp_abc123")
 
 ### Files
 
-Upload a local file, or a directory, which is zipped automatically. Files over 100 MB go through a presigned storage URL.
+Upload a local file. Files over 100 MB go through a presigned storage URL.
 
 ```go
 file, err := sdk.UploadFile(ctx, "./report.pdf", nil)
 
-build, err := sdk.UploadFile(ctx, "./build-context", &metorial.UploadFileOptions{
-    Purpose: "sandbox_image_build_context",
+logo, err := sdk.UploadFile(ctx, "./logo.png", &metorial.UploadFileOptions{
+    Purpose: "organization_image",
 })
 
 file, err := sdk.UploadFileReader(ctx, "notes.txt", reader, size, &metorial.UploadFileOptions{

@@ -1,14 +1,12 @@
 package metorial
 
 import (
-	"archive/zip"
 	"bytes"
 	"context"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
-	"io/fs"
 	"mime"
 	"mime/multipart"
 	"net/http"
@@ -30,8 +28,7 @@ type UploadFileOptions struct {
 	// Purpose defaults to "generic".
 	Purpose string
 	Title   string
-	// FileName overrides the stored file name. UploadFile defaults to the local
-	// file name, or the directory name with a .zip extension.
+	// FileName overrides the stored file name. UploadFile defaults to the local file name.
 	FileName string
 	// ContentType defaults to a guess based on the file name.
 	ContentType string
@@ -49,57 +46,29 @@ type uploadSource struct {
 	size        int64
 }
 
-// UploadFile uploads a local file and returns the created file.
-//
-// Directories are zipped first, with their contents at the root of the archive.
-// Symlinks and special files inside them are skipped. Files over 100 MB are sent
-// to a presigned storage URL instead of through the API.
+// UploadFile uploads a local file and returns the created file. Files over
+// 100 MB are sent to a presigned storage URL instead of through the API.
 func (sdk *MetorialSdk) UploadFile(ctx context.Context, path string, opts *UploadFileOptions) (*files.FilesGetOutput, error) {
 	options := resolveUploadOptions(opts)
 
-	absolute, err := filepath.Abs(path)
-	if err != nil {
-		return nil, fmt.Errorf("metorial: %w", err)
-	}
-	info, err := os.Stat(absolute)
-	if err != nil {
-		return nil, fmt.Errorf("metorial: %w", err)
-	}
-
-	local := absolute
-	if info.IsDir() {
-		archive, err := zipDirectoryToTemp(absolute)
-		if err != nil {
-			return nil, err
-		}
-		defer os.Remove(archive)
-
-		local = archive
-		if options.FileName == "" {
-			options.FileName = filepath.Base(absolute) + ".zip"
-		}
-		if options.ContentType == "" {
-			options.ContentType = "application/zip"
-		}
-	} else if !info.Mode().IsRegular() {
-		return nil, fmt.Errorf("metorial: %s is not a regular file", path)
-	}
-
-	file, err := os.Open(local)
+	file, err := os.Open(path)
 	if err != nil {
 		return nil, fmt.Errorf("metorial: %w", err)
 	}
 	defer file.Close()
 
-	stat, err := file.Stat()
+	info, err := file.Stat()
 	if err != nil {
 		return nil, fmt.Errorf("metorial: %w", err)
 	}
+	if !info.Mode().IsRegular() {
+		return nil, fmt.Errorf("metorial: %s is not a file", path)
+	}
 
 	if options.FileName == "" {
-		options.FileName = filepath.Base(absolute)
+		options.FileName = filepath.Base(path)
 	}
-	return sdk.upload(ctx, uploadSource{reader: file, name: options.FileName, size: stat.Size()}, options)
+	return sdk.upload(ctx, uploadSource{reader: file, name: options.FileName, size: info.Size()}, options)
 }
 
 // UploadFileReader uploads size bytes read from reader as a file called name
@@ -286,83 +255,4 @@ func putToStorage(ctx context.Context, method, url string, source uploadSource) 
 
 	_, _ = io.Copy(io.Discard, response.Body)
 	return nil
-}
-
-func zipDirectoryToTemp(directory string) (string, error) {
-	archive, err := os.CreateTemp("", "metorial-upload-*.zip")
-	if err != nil {
-		return "", fmt.Errorf("metorial: %w", err)
-	}
-
-	count, err := zipDirectory(directory, archive, archive.Name())
-	if closeErr := archive.Close(); err == nil && closeErr != nil {
-		err = closeErr
-	}
-	if err == nil && count == 0 {
-		err = fmt.Errorf("%s has no files to upload", directory)
-	}
-	if err != nil {
-		_ = os.Remove(archive.Name())
-		return "", fmt.Errorf("metorial: failed to zip %s: %w", directory, err)
-	}
-	return archive.Name(), nil
-}
-
-func zipDirectory(directory string, destination io.Writer, exclude string) (int, error) {
-	count := 0
-	archive := zip.NewWriter(destination)
-
-	err := filepath.WalkDir(directory, func(current string, entry fs.DirEntry, err error) error {
-		if err != nil {
-			return err
-		}
-		if current == directory || current == exclude {
-			return nil
-		}
-		if !entry.IsDir() && !entry.Type().IsRegular() {
-			return nil
-		}
-
-		relative, err := filepath.Rel(directory, current)
-		if err != nil {
-			return err
-		}
-		info, err := entry.Info()
-		if err != nil {
-			return err
-		}
-		header, err := zip.FileInfoHeader(info)
-		if err != nil {
-			return err
-		}
-
-		if entry.IsDir() {
-			header.Name = filepath.ToSlash(relative) + "/"
-			_, err := archive.CreateHeader(header)
-			return err
-		}
-
-		header.Name = filepath.ToSlash(relative)
-		header.Method = zip.Deflate
-		writer, err := archive.CreateHeader(header)
-		if err != nil {
-			return err
-		}
-		file, err := os.Open(current)
-		if err != nil {
-			return err
-		}
-		_, err = io.Copy(writer, file)
-		_ = file.Close()
-		if err != nil {
-			return err
-		}
-		count++
-		return nil
-	})
-	if err != nil {
-		return count, err
-	}
-
-	return count, archive.Close()
 }
