@@ -224,3 +224,96 @@ func writeTestJSON(w http.ResponseWriter, status int, value any) {
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(value)
 }
+
+type endlessReader struct{}
+
+func (endlessReader) Read(p []byte) (int, error) {
+	for i := range p {
+		p[i] = 'x'
+	}
+	return len(p), nil
+}
+
+func TestUploadFileReaderSendsOnlyTheDeclaredSize(t *testing.T) {
+	var uploaded string
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if err := r.ParseMultipartForm(1 << 20); err != nil {
+			t.Fatal(err)
+		}
+		file, _, err := r.FormFile("file")
+		if err != nil {
+			t.Fatal(err)
+		}
+		data, _ := io.ReadAll(file)
+		uploaded = string(data)
+		writeTestJSON(w, http.StatusOK, map[string]any{"object": "file", "id": "file_1"})
+	}))
+	defer server.Close()
+
+	if _, err := newTestSdk(t, server.URL).UploadFileReader(context.Background(), "x.txt", endlessReader{}, 5, nil); err != nil {
+		t.Fatal(err)
+	}
+	if uploaded != "xxxxx" {
+		t.Fatalf("expected exactly 5 bytes, got %q", uploaded)
+	}
+}
+
+func TestUploadFileReaderBoundsLargeUploadsToTheDeclaredSize(t *testing.T) {
+	previous := directUploadLimit
+	directUploadLimit = 4
+	t.Cleanup(func() { directUploadLimit = previous })
+
+	var stored string
+	var server *httptest.Server
+	server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method == http.MethodPut {
+			data, _ := io.ReadAll(r.Body)
+			stored = string(data)
+			return
+		}
+		body := map[string]any{}
+		_ = json.NewDecoder(r.Body).Decode(&body)
+		if body["mode"] == "complete" {
+			writeTestJSON(w, http.StatusOK, map[string]any{"object": "file", "id": "file_1"})
+			return
+		}
+		writeTestJSON(w, http.StatusOK, map[string]any{
+			"id":     "fup_1",
+			"upload": map[string]any{"url": server.URL + "/storage", "method": "PUT"},
+		})
+	}))
+	defer server.Close()
+
+	if _, err := newTestSdk(t, server.URL).UploadFileReader(context.Background(), "x.bin", endlessReader{}, 10, nil); err != nil {
+		t.Fatal(err)
+	}
+	if stored != "xxxxxxxxxx" {
+		t.Fatalf("expected exactly 10 bytes, got %q", stored)
+	}
+}
+
+func TestUploadFileReaderFailsWhenTheReaderEndsEarly(t *testing.T) {
+	previous := directUploadLimit
+	t.Cleanup(func() { directUploadLimit = previous })
+
+	for name, limit := range map[string]int64{"direct": previous, "presigned": 4} {
+		t.Run(name, func(t *testing.T) {
+			directUploadLimit = limit
+
+			var server *httptest.Server
+			server = httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				io.Copy(io.Discard, r.Body)
+				writeTestJSON(w, http.StatusOK, map[string]any{
+					"id":     "fup_1",
+					"upload": map[string]any{"url": server.URL + "/storage", "method": "PUT"},
+				})
+			}))
+			defer server.Close()
+
+			_, err := newTestSdk(t, server.URL).UploadFileReader(context.Background(), "x.bin", strings.NewReader("abc"), 10, nil)
+			if err == nil {
+				t.Fatal("expected an error for a reader shorter than the declared size")
+			}
+		})
+	}
+}

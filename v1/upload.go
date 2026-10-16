@@ -110,10 +110,36 @@ func (sdk *MetorialSdk) upload(ctx context.Context, source uploadSource, options
 		source.contentType = "application/octet-stream"
 	}
 
+	source.reader = &exactReader{reader: source.reader, remaining: source.size}
+
 	if source.size <= directUploadLimit {
 		return sdk.uploadDirect(ctx, source, options)
 	}
 	return sdk.uploadWithURL(ctx, source, options)
+}
+
+// exactReader yields exactly the declared size: it never reads past it, so a
+// reader that does not hit EOF cannot block or exceed the direct-upload limit,
+// and a reader that ends early fails instead of sending a truncated file.
+type exactReader struct {
+	reader    io.Reader
+	remaining int64
+}
+
+func (r *exactReader) Read(p []byte) (int, error) {
+	if r.remaining <= 0 {
+		return 0, io.EOF
+	}
+	if int64(len(p)) > r.remaining {
+		p = p[:r.remaining]
+	}
+
+	n, err := r.reader.Read(p)
+	r.remaining -= int64(n)
+	if err == io.EOF && r.remaining > 0 {
+		err = io.ErrUnexpectedEOF
+	}
+	return n, err
 }
 
 func (sdk *MetorialSdk) uploadDirect(ctx context.Context, source uploadSource, options UploadFileOptions) (*files.FilesGetOutput, error) {
@@ -148,7 +174,7 @@ func (sdk *MetorialSdk) uploadDirect(ctx context.Context, source uploadSource, o
 		return nil, fmt.Errorf("metorial: %w", err)
 	}
 	if _, err := io.Copy(part, source.reader); err != nil {
-		return nil, fmt.Errorf("metorial: failed to read %s: %w", source.name, err)
+		return nil, fmt.Errorf("metorial: failed to read %s (expected %d bytes): %w", source.name, source.size, err)
 	}
 	if err := writer.Close(); err != nil {
 		return nil, fmt.Errorf("metorial: %w", err)
