@@ -4,6 +4,7 @@ package endpoint
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -70,6 +71,64 @@ type RawResponse struct {
 // DoRaw performs a raw HTTP request against the configured API host.
 func (c *Client) DoRaw(method string, fullURL string, body []byte, headers map[string]string) (*RawResponse, error) {
 	return c.doRawWithRetry(method, fullURL, body, headers, 0)
+}
+
+// URL returns the absolute URL of an API path.
+func (c *Client) URL(path ...string) string {
+	return c.apiHost + "/" + strings.Join(path, "/")
+}
+
+// DoStream performs an authenticated request whose body is streamed. It skips
+// the client's overall timeout so large uploads are bounded only by ctx, and it
+// is never retried because the body can only be read once.
+func (c *Client) DoStream(ctx context.Context, method string, fullURL string, body io.Reader, contentLength int64, headers map[string]string) (*RawResponse, error) {
+	httpReq, err := http.NewRequestWithContext(ctx, method, fullURL, body)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: failed to create request: %w", err)
+	}
+	httpReq.ContentLength = contentLength
+
+	httpReq.Header.Set("Accept", "application/json")
+	httpReq.Header.Set("Authorization", "Bearer "+c.apiKey)
+	for k, v := range c.headers {
+		httpReq.Header.Set(k, v)
+	}
+	for k, v := range headers {
+		httpReq.Header.Set(k, v)
+	}
+
+	streamClient := &http.Client{Transport: c.httpClient.Transport}
+	resp, err := streamClient.Do(httpReq)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: request failed: %w", err)
+	}
+	defer resp.Body.Close()
+
+	respBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: failed to read response body: %w", err)
+	}
+
+	result := &RawResponse{
+		StatusCode: resp.StatusCode,
+		Status:     resp.Status,
+		Headers:    resp.Header.Clone(),
+		Body:       respBody,
+	}
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		apiErr := &Error{
+			StatusCode: resp.StatusCode,
+			RequestID:  resp.Header.Get("X-Request-ID"),
+		}
+		_ = json.Unmarshal(respBody, apiErr)
+		if apiErr.Message == "" {
+			apiErr.Message = http.StatusText(resp.StatusCode)
+		}
+		return result, apiErr
+	}
+
+	return result, nil
 }
 
 func (c *Client) do(method string, req *Request, result any) error {

@@ -3,8 +3,10 @@
 package endpoint
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -57,6 +59,20 @@ type RawResponse struct {
 
 func (c *Client) DoRaw(method string, fullURL string, body []byte, headers map[string]string) (*RawResponse, error) {
 	return c.doRaw(method, fullURL, body, headers)
+}
+
+func (c *Client) URL(path ...string) string {
+	return c.apiHost + "/" + strings.Join(path, "/")
+}
+
+// DoStream buffers the body because the browser fetch bridge sends whole byte
+// arrays; ctx cancellation is not supported here.
+func (c *Client) DoStream(ctx context.Context, method string, fullURL string, body io.Reader, contentLength int64, headers map[string]string) (*RawResponse, error) {
+	payload, err := io.ReadAll(body)
+	if err != nil {
+		return nil, fmt.Errorf("metorial: failed to read request body: %w", err)
+	}
+	return c.doRaw(method, fullURL, payload, headers)
 }
 
 func (c *Client) do(method string, req *Request, result any) error {

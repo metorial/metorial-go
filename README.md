@@ -171,6 +171,22 @@ customs, err := sdk.CustomProviders.List(nil)
 custom, err := sdk.CustomProviders.Get("cp_abc123")
 ```
 
+### Files
+
+Upload a local file, or a directory, which is zipped automatically. Files over 100 MB go through a presigned storage URL.
+
+```go
+file, err := sdk.UploadFile(ctx, "./report.pdf", nil)
+
+build, err := sdk.UploadFile(ctx, "./build-context", &metorial.UploadFileOptions{
+    Purpose: "sandbox_image_build_context",
+})
+
+file, err := sdk.UploadFileReader(ctx, "notes.txt", reader, size, &metorial.UploadFileOptions{
+    Title: "Notes",
+})
+```
+
 ## Pagination
 
 List endpoints return paginated results. The response includes a `Pagination` field with `HasMoreBefore` and `HasMoreAfter` booleans. Use the `After`, `Before`, or `Cursor` parameters to navigate.
