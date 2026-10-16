@@ -28,6 +28,7 @@ import (
 	"github.com/metorial/metorial-go/v1/endpoints"
 	"github.com/metorial/metorial-go/v1/endpoints/management"
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/sandbox"
 )
 
 const apiVersion = "2026-01-01-magnetar"
@@ -210,6 +211,9 @@ type MetorialSdk struct {
 	SandboxRegions                        *endpoints.SandboxRegionsEndpoint
 	SandboxSpecs                          *endpoints.SandboxSpecsEndpoint
 
+	// Sandbox opens file, command, and port connections to sandbox machines.
+	Sandbox *sandbox.Client
+
 	// Management provides access to management API endpoints.
 	// These endpoints operate across instances and require an instance ID parameter.
 	Management *ManagementEndpoints
@@ -316,6 +320,7 @@ func New(opts ...Option) (*MetorialSdk, error) {
 		SandboxDisksResizes:                   endpoints.NewSandboxDisksResizesEndpoint(c),
 		SandboxRegions:                        endpoints.NewSandboxRegionsEndpoint(c),
 		SandboxSpecs:                          endpoints.NewSandboxSpecsEndpoint(c),
+		Sandbox:                               sandbox.NewClient(endpoints.NewSandboxMachinesAccessEndpoint(c)),
 		Management: &ManagementEndpoints{
 			Providers:                             management.NewProvidersEndpoint(c),
 			ProvidersVersions:                     management.NewProvidersVersionsEndpoint(c),
