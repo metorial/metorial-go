@@ -83,14 +83,15 @@ type DocumentsParticipantsListOutputItemsActor struct {
 // DocumentsParticipantsListOutputItems represents the documents participants list output items type.
 type DocumentsParticipantsListOutputItems struct {
 	// Object - String representing the object's type
-	Object       string                                    `json:"object"`
-	Id           string                                    `json:"id"`
-	Role         string                                    `json:"role"`
-	EditCount    float64                                   `json:"edit_count"`
-	LastEditedAt *time.Time                                `json:"last_edited_at,omitempty"`
-	LastViewedAt *time.Time                                `json:"last_viewed_at,omitempty"`
-	Actor        DocumentsParticipantsListOutputItemsActor `json:"actor"`
-	CreatedAt    time.Time                                 `json:"created_at"`
+	Object             string                                    `json:"object"`
+	Id                 string                                    `json:"id"`
+	Role               string                                    `json:"role"`
+	EditCount          float64                                   `json:"edit_count"`
+	LastEditedAt       *time.Time                                `json:"last_edited_at,omitempty"`
+	LastViewedAt       *time.Time                                `json:"last_viewed_at,omitempty"`
+	Actor              DocumentsParticipantsListOutputItemsActor `json:"actor"`
+	StoreParticipantId *string                                   `json:"store_participant_id,omitempty"`
+	CreatedAt          time.Time                                 `json:"created_at"`
 }
 
 // DocumentsParticipantsListOutputPagination represents the documents participants list output pagination type.

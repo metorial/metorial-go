@@ -104,6 +104,8 @@ type SessionsErrorsListQuery struct {
 	CreatedAt *SessionsErrorsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter session error last update time by date range
 	UpdatedAt *SessionsErrorsListQueryUpdatedAt `json:"updated_at,omitempty"`
+	// Search - Search by session error ID or error code, or by the name of a related provider, deployment, or auth config
+	Search *string `json:"search,omitempty"`
 }
 
 // MapSessionsErrorsListQueryFromJSON deserializes JSON data into a SessionsErrorsListQuery.

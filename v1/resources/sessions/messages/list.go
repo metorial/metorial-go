@@ -228,9 +228,9 @@ type SessionsMessagesListOutputItemsToolCall struct {
 	ResponderParticipant *SessionsMessagesListOutputItemsToolCallResponderParticipant `json:"responder_participant,omitempty"`
 	Tool                 SessionsMessagesListOutputItemsToolCallTool                  `json:"tool"`
 	Error                *SessionsMessagesListOutputItemsToolCallError                `json:"error,omitempty"`
-	// Input - Input data passed to the tool call
+	// Input - Input data passed to the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output data returned from the tool call
+	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
@@ -360,9 +360,9 @@ type SessionsMessagesListOutputItems struct {
 	Hierarchy SessionsMessagesListOutputItemsHierarchy `json:"hierarchy"`
 	// Transport - Transport information
 	Transport SessionsMessagesListOutputItemsTransport `json:"transport"`
-	// Input - Input message data
+	// Input - Input message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output message data
+	// Output - Output message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output               *map[string]any                                      `json:"output,omitempty"`
 	ToolCall             *SessionsMessagesListOutputItemsToolCall             `json:"tool_call,omitempty"`
 	SenderParticipant    SessionsMessagesListOutputItemsSenderParticipant     `json:"sender_participant"`
@@ -427,6 +427,8 @@ type SessionsMessagesListQuery struct {
 	Source *any `json:"source,omitempty"`
 	// Hierarchy - Filter by message hierarchy
 	Hierarchy *any `json:"hierarchy,omitempty"`
+	// Status - Filter by message status(es)
+	Status *any `json:"status,omitempty"`
 	// Id - Filter by message ID(s)
 	Id *any `json:"id,omitempty"`
 	// SessionId - Filter by session ID(s)

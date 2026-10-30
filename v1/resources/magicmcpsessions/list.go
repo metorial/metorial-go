@@ -102,7 +102,7 @@ type MagicMcpSessionsListOutputItemsMagicMcpServerProvidersAuthMethod struct {
 	Name string `json:"name"`
 	// Description - Auth method description
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - Capabilities of this auth method in the provider version the deployment currently uses: its locked version, otherwise the provider's current version. The other fields describe the pinned auth method and may come from an older specification.
 	Capabilities map[string]any                                                                `json:"capabilities"`
 	InputSchema  *MagicMcpSessionsListOutputItemsMagicMcpServerProvidersAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *MagicMcpSessionsListOutputItemsMagicMcpServerProvidersAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -216,11 +216,56 @@ type MagicMcpSessionsListOutputItemsMagicMcpServerProviders struct {
 	ArchivedAt      *time.Time                                                             `json:"archived_at,omitempty"`
 }
 
+// MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerOrganizationMember - Organization member associated with this owner.
+type MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerConsumer - Consumer and profile associated with this owner.
+type MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwner - The actor that owns this resource, if any.
+type MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpServerAccess - Resource ownership and access settings.
+type MagicMcpSessionsListOutputItemsMagicMcpServerAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *MagicMcpSessionsListOutputItemsMagicMcpServerAccessOwner `json:"owner,omitempty"`
+}
+
 // MagicMcpSessionsListOutputItemsMagicMcpServer represents the magic mcp sessions list output items magic mcp server type.
 type MagicMcpSessionsListOutputItemsMagicMcpServer struct {
-	Object                 string                                                   `json:"object"`
-	Id                     string                                                   `json:"id"`
-	Status                 string                                                   `json:"status"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	Status string `json:"status"`
+	// Source - How this Magic MCP server was created or configured
 	Source                 string                                                   `json:"source"`
 	ProviderManagementMode string                                                   `json:"provider_management_mode"`
 	Endpoints              []MagicMcpSessionsListOutputItemsMagicMcpServerEndpoints `json:"endpoints"`
@@ -229,8 +274,54 @@ type MagicMcpSessionsListOutputItemsMagicMcpServer struct {
 	Name                   *string                                                  `json:"name,omitempty"`
 	Description            *string                                                  `json:"description,omitempty"`
 	Metadata               map[string]any                                           `json:"metadata"`
-	CreatedAt              time.Time                                                `json:"created_at"`
-	UpdatedAt              time.Time                                                `json:"updated_at"`
+	// Access - Resource ownership and access settings.
+	Access    MagicMcpSessionsListOutputItemsMagicMcpServerAccess `json:"access"`
+	CreatedAt time.Time                                           `json:"created_at"`
+	UpdatedAt time.Time                                           `json:"updated_at"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerOrganizationMember - Organization member associated with this owner.
+type MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerConsumer - Consumer and profile associated with this owner.
+type MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwner - The actor that owns this resource, if any.
+type MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// MagicMcpSessionsListOutputItemsMagicMcpEndpointAccess - Resource ownership and access settings.
+type MagicMcpSessionsListOutputItemsMagicMcpEndpointAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *MagicMcpSessionsListOutputItemsMagicMcpEndpointAccessOwner `json:"owner,omitempty"`
 }
 
 // MagicMcpSessionsListOutputItemsMagicMcpEndpoint represents the magic mcp sessions list output items magic mcp endpoint type.
@@ -244,8 +335,12 @@ type MagicMcpSessionsListOutputItemsMagicMcpEndpoint struct {
 	Name        *string          `json:"name,omitempty"`
 	Description *string          `json:"description,omitempty"`
 	Metadata    map[string]any   `json:"metadata"`
-	CreatedAt   time.Time        `json:"created_at"`
-	UpdatedAt   time.Time        `json:"updated_at"`
+	// EnableSkillEditing - Whether consumers connecting through this endpoint with a consumer magic MCP token get tools to read and edit the skills they have access to. The tools are hidden while skills are disabled for the instance.
+	EnableSkillEditing bool `json:"enable_skill_editing"`
+	// Access - Resource ownership and access settings.
+	Access    MagicMcpSessionsListOutputItemsMagicMcpEndpointAccess `json:"access"`
+	CreatedAt time.Time                                             `json:"created_at"`
+	UpdatedAt time.Time                                             `json:"updated_at"`
 }
 
 // MagicMcpSessionsListOutputItems represents the magic mcp sessions list output items type.

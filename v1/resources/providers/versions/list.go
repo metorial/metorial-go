@@ -84,6 +84,8 @@ type ProvidersVersionsListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// Search - Match a provider version by its exact ID
+	Search *string `json:"search,omitempty"`
 	// CreatedAt - Filter provider version creation time by date range
 	CreatedAt *ProvidersVersionsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter provider version last update time by date range

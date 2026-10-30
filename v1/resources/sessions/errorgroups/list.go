@@ -66,6 +66,8 @@ type SessionsErrorGroupsListQuery struct {
 	SessionId *any `json:"session_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// Search - Search by error group ID or error code, or by the name of a related provider
+	Search *string `json:"search,omitempty"`
 }
 
 // MapSessionsErrorGroupsListQueryFromJSON deserializes JSON data into a SessionsErrorGroupsListQuery.

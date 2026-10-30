@@ -53,6 +53,7 @@ type MagicMcpGroupsListQuery struct {
 	Order  *string  `json:"order,omitempty"`
 	Status *any     `json:"status,omitempty"`
 	Search *string  `json:"search,omitempty"`
+	Id     *any     `json:"id,omitempty"`
 }
 
 // MapMagicMcpGroupsListQueryFromJSON deserializes JSON data into a MagicMcpGroupsListQuery.

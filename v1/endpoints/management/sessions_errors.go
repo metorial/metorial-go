@@ -44,6 +44,8 @@ type SessionsErrorsEndpointListParams struct {
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter session error last update time by date range
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
+	// Search - Search by session error ID or error code, or by the name of a related provider, deployment, or auth config
+	Search *string `json:"search,omitempty"`
 }
 
 // List returns a paginated list of errors across all sessions.

@@ -254,7 +254,7 @@ type CustomProvidersCreateBodyFrom struct {
 	RemoteUrl *string `json:"remote_url,omitempty"`
 	// OauthConfig - Remote server configuration
 	OauthConfig *map[string]any `json:"oauth_config,omitempty"`
-	// Protocol - MCP protocol to use
+	// Protocol - MCP transport to use: `sse` (HTTP+SSE, 2024-11-05), `streamable_http` (session-based Streamable HTTP, 2025-03-26 to 2025-11-25), or `stateless` (sessionless Streamable HTTP, 2026-07-28)
 	Protocol *string `json:"protocol,omitempty"`
 	// Files - Source files
 	Files *[]CustomProvidersCreateBodyFromFiles `json:"files,omitempty"`

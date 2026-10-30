@@ -80,16 +80,102 @@ type SkillsParticipantsGetOutputActor struct {
 	ConsumerProfile   *map[string]any                                    `json:"consumer_profile,omitempty"`
 }
 
+// SkillsParticipantsGetOutputSurfacesActorOrganizationActorMember represents the skills participants get output surfaces actor organization actor member type.
+type SkillsParticipantsGetOutputSurfacesActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
+// SkillsParticipantsGetOutputSurfacesActorOrganizationActorTeams - The teams the actor belongs to
+type SkillsParticipantsGetOutputSurfacesActorOrganizationActorTeams struct {
+	// Id - The team ID
+	Id string `json:"id"`
+	// Name - The team name
+	Name string `json:"name"`
+	// Slug - The team slug
+	Slug string `json:"slug"`
+	// AssignmentId - The team assignment ID
+	AssignmentId string `json:"assignment_id"`
+	// CreatedAt - The team assignment creation date
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - The team assignment last update date
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// SkillsParticipantsGetOutputSurfacesActorOrganizationActor represents the skills participants get output surfaces actor organization actor type.
+type SkillsParticipantsGetOutputSurfacesActorOrganizationActor struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Type - The organization member's type
+	Type string `json:"type"`
+	// OrganizationId - The organization member's organization ID
+	OrganizationId string `json:"organization_id"`
+	// Name - The organization member's name
+	Name string `json:"name"`
+	// Email - The organization member's email
+	Email *string `json:"email,omitempty"`
+	// ImageUrl - The organization member's image URL
+	ImageUrl string                                                           `json:"image_url"`
+	Member   *SkillsParticipantsGetOutputSurfacesActorOrganizationActorMember `json:"member,omitempty"`
+	Teams    []SkillsParticipantsGetOutputSurfacesActorOrganizationActorTeams `json:"teams"`
+	// CreatedAt - The organization member's creation date
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - The organization member's last update date
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// SkillsParticipantsGetOutputSurfacesActorConsumer represents the skills participants get output surfaces actor consumer type.
+type SkillsParticipantsGetOutputSurfacesActorConsumer struct {
+	Object    string    `json:"object"`
+	Id        string    `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// SkillsParticipantsGetOutputSurfacesActor represents the skills participants get output surfaces actor type.
+type SkillsParticipantsGetOutputSurfacesActor struct {
+	Type              string                                                     `json:"type"`
+	Name              string                                                     `json:"name"`
+	ImageUrl          *string                                                    `json:"image_url,omitempty"`
+	Email             *string                                                    `json:"email,omitempty"`
+	OrganizationActor *SkillsParticipantsGetOutputSurfacesActorOrganizationActor `json:"organization_actor,omitempty"`
+	Consumer          *SkillsParticipantsGetOutputSurfacesActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                            `json:"consumer_profile,omitempty"`
+}
+
+// SkillsParticipantsGetOutputSurfaces represents the skills participants get output surfaces type.
+type SkillsParticipantsGetOutputSurfaces struct {
+	Id           string                                   `json:"id"`
+	Roles        []string                                 `json:"roles"`
+	Actor        SkillsParticipantsGetOutputSurfacesActor `json:"actor"`
+	LastActiveAt *time.Time                               `json:"last_active_at,omitempty"`
+	CreatedAt    time.Time                                `json:"created_at"`
+}
+
 // SkillsParticipantsGetOutput represents the skills participants get output type.
 type SkillsParticipantsGetOutput struct {
 	// Object - String representing the object's type
-	Object    string                           `json:"object"`
-	Id        string                           `json:"id"`
-	SkillId   string                           `json:"skill_id"`
-	Roles     []string                         `json:"roles"`
-	Actor     SkillsParticipantsGetOutputActor `json:"actor"`
-	CreatedAt time.Time                        `json:"created_at"`
-	UpdatedAt time.Time                        `json:"updated_at"`
+	Object       string                                 `json:"object"`
+	Id           string                                 `json:"id"`
+	SkillId      string                                 `json:"skill_id"`
+	Roles        []string                               `json:"roles"`
+	Actor        SkillsParticipantsGetOutputActor       `json:"actor"`
+	Surfaces     *[]SkillsParticipantsGetOutputSurfaces `json:"surfaces,omitempty"`
+	LastActiveAt *time.Time                             `json:"last_active_at,omitempty"`
+	CreatedAt    time.Time                              `json:"created_at"`
+	UpdatedAt    time.Time                              `json:"updated_at"`
 }
 
 // MapSkillsParticipantsGetOutputFromJSON deserializes JSON data into a SkillsParticipantsGetOutput.

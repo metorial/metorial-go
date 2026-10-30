@@ -23,6 +23,10 @@ type IdentityActorsListOutputItems struct {
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// AgentId - Linked agent identifier when this actor represents an agent.
 	AgentId *string `json:"agent_id,omitempty"`
+	// ConsumerId - Identifier of the consumer that owns this actor when its type is consumer.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// DefaultIdentityId - Identifier of the actor's default identity, which is its oldest active identity.
+	DefaultIdentityId *string `json:"default_identity_id,omitempty"`
 	// CreatedAt - Timestamp when the actor was created.
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when the actor was last updated.
@@ -86,6 +90,8 @@ type IdentityActorsListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// AgentId - Filter by linked agent ID or IDs.
 	AgentId *any `json:"agent_id,omitempty"`
+	// ConsumerProfileId - Filter by linked consumer profile ID or IDs.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// ConsumerId - Filter by linked consumer ID or IDs.
 	ConsumerId *any `json:"consumer_id,omitempty"`
 	// CreatedAt - Filter identity actor creation time by date range
