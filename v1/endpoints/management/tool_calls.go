@@ -40,6 +40,8 @@ type ToolCallsEndpointListParams struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by identity actor ID(s)
 	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerProfileId - Filter by the selected consumer profile ID or IDs.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// ConsumerId - Filter by consumer ID(s)
 	ConsumerId *any `json:"consumer_id,omitempty"`
 	// IdentityId - Filter by identity ID(s)
@@ -48,10 +50,14 @@ type ToolCallsEndpointListParams struct {
 	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
+	// Status - Filter by tool call status(es)
+	Status *any `json:"status,omitempty"`
 	// CreatedAt - Filter tool call creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter tool call last update time by date range
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
+	// Search - Search by tool call ID or tool key, or by the name of a related tool, provider, deployment, config, auth config, agent, actor, identity, or consumer
+	Search *string `json:"search,omitempty"`
 }
 
 // ToolCallsEndpointCreateBody contains the request body for Create.

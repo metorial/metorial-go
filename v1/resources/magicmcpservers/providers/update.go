@@ -95,7 +95,7 @@ type MagicMcpServersProvidersUpdateOutputAuthMethod struct {
 	Name string `json:"name"`
 	// Description - Auth method description
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - Capabilities of this auth method in the provider version the deployment currently uses: its locked version, otherwise the provider's current version. The other fields describe the pinned auth method and may come from an older specification.
 	Capabilities map[string]any                                              `json:"capabilities"`
 	InputSchema  *MagicMcpServersProvidersUpdateOutputAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *MagicMcpServersProvidersUpdateOutputAuthMethodOutputSchema `json:"output_schema,omitempty"`

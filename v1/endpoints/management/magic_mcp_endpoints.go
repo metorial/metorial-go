@@ -17,24 +17,28 @@ func NewMagicMcpEndpointsEndpoint(client *endpoint.Client) *MagicMcpEndpointsEnd
 
 // MagicMcpEndpointsEndpointListParams contains optional query parameters for List.
 type MagicMcpEndpointsEndpointListParams struct {
-	Limit            *float64 `json:"limit,omitempty"`
-	After            *string  `json:"after,omitempty"`
-	Before           *string  `json:"before,omitempty"`
-	Cursor           *string  `json:"cursor,omitempty"`
-	Order            *string  `json:"order,omitempty"`
-	Status           *any     `json:"status,omitempty"`
-	MagicMcpServerId *any     `json:"magic_mcp_server_id,omitempty"`
-	Search           *string  `json:"search,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'shared' when ownership is enforced for the project and 'all' otherwise.
+	Ownership        *string `json:"ownership,omitempty"`
+	Status           *any    `json:"status,omitempty"`
+	MagicMcpServerId *any    `json:"magic_mcp_server_id,omitempty"`
+	Search           *string `json:"search,omitempty"`
 }
 
 // MagicMcpEndpointsEndpointCreateBody contains the request body for Create.
 type MagicMcpEndpointsEndpointCreateBody struct {
-	Name              *string           `json:"name,omitempty"`
-	Description       *string           `json:"description,omitempty"`
-	Metadata          *map[string]any   `json:"metadata,omitempty"`
-	ConsumerProfileId *string           `json:"consumer_profile_id,omitempty"`
-	SkillPluginId     *string           `json:"skill_plugin_id,omitempty"`
-	MagicMcpServers   *[]map[string]any `json:"magic_mcp_servers,omitempty"`
+	Name              *string         `json:"name,omitempty"`
+	Description       *string         `json:"description,omitempty"`
+	Metadata          *map[string]any `json:"metadata,omitempty"`
+	ConsumerProfileId *string         `json:"consumer_profile_id,omitempty"`
+	SkillPluginId     *string         `json:"skill_plugin_id,omitempty"`
+	// EnableSkillEditing - Expose skill editing tools on this endpoint so the connecting consumer can read and edit the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the tools; connections using a publishable key do not. Requires skills to be enabled for the instance and consumer skill editing to be allowed for the project. The tools disappear if either is turned off later.
+	EnableSkillEditing *bool             `json:"enable_skill_editing,omitempty"`
+	MagicMcpServers    *[]map[string]any `json:"magic_mcp_servers,omitempty"`
 }
 
 // MagicMcpEndpointsEndpointUpdateBody contains the request body for Update.
@@ -42,6 +46,8 @@ type MagicMcpEndpointsEndpointUpdateBody struct {
 	Name        *string         `json:"name,omitempty"`
 	Description *string         `json:"description,omitempty"`
 	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// EnableSkillEditing - Expose skill editing tools on this endpoint so the connecting consumer can read and edit the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the tools; connections using a publishable key do not. Requires skills to be enabled for the instance and consumer skill editing to be allowed for the project. The tools disappear if either is turned off later.
+	EnableSkillEditing *bool `json:"enable_skill_editing,omitempty"`
 }
 
 // MagicMcpEndpointsEndpointAddServersBody contains the request body for AddServers.

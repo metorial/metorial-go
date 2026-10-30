@@ -30,6 +30,8 @@ type SessionsErrorGroupsEndpointListParams struct {
 	SessionId *any `json:"session_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
+	// Search - Search by error group ID or error code, or by the name of a related provider
+	Search *string `json:"search,omitempty"`
 }
 
 // List returns a paginated list of error groups across all sessions.

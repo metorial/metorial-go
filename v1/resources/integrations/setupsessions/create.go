@@ -5,6 +5,94 @@ import (
 	"time"
 )
 
+// IntegrationsSetupSessionsCreateOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsSetupSessionsCreateOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsSetupSessionsCreateOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsSetupSessionsCreateOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsSetupSessionsCreateOutputAccessOwner - The actor that owns this resource, if any.
+type IntegrationsSetupSessionsCreateOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsSetupSessionsCreateOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsSetupSessionsCreateOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsSetupSessionsCreateOutputAccess - Resource ownership and access settings.
+type IntegrationsSetupSessionsCreateOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsSetupSessionsCreateOutputAccessOwner `json:"owner,omitempty"`
+}
+
+// IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwner - The actor that owns this resource, if any.
+type IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccess - Resource ownership and access settings.
+type IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccessOwner `json:"owner,omitempty"`
+}
+
 // IntegrationsSetupSessionsCreateOutputIntegrationInstanceImplementation represents the integrations setup sessions create output integration instance implementation type.
 type IntegrationsSetupSessionsCreateOutputIntegrationInstanceImplementation struct {
 	Type             string `json:"type"`
@@ -165,34 +253,38 @@ type IntegrationsSetupSessionsCreateOutputIntegrationInstanceProviders struct {
 
 // IntegrationsSetupSessionsCreateOutputIntegrationInstance represents the integrations setup sessions create output integration instance type.
 type IntegrationsSetupSessionsCreateOutputIntegrationInstance struct {
-	Object          string                                                                  `json:"object"`
-	Id              string                                                                  `json:"id"`
-	Status          string                                                                  `json:"status"`
-	Name            string                                                                  `json:"name"`
-	Description     *string                                                                 `json:"description,omitempty"`
-	Metadata        *map[string]any                                                         `json:"metadata,omitempty"`
-	IntegrationId   string                                                                  `json:"integration_id"`
-	IdentityActorId *string                                                                 `json:"identity_actor_id,omitempty"`
-	IdentityId      *string                                                                 `json:"identity_id,omitempty"`
-	Implementation  *IntegrationsSetupSessionsCreateOutputIntegrationInstanceImplementation `json:"implementation,omitempty"`
-	Providers       []IntegrationsSetupSessionsCreateOutputIntegrationInstanceProviders     `json:"providers"`
-	CreatedAt       time.Time                                                               `json:"created_at"`
-	UpdatedAt       time.Time                                                               `json:"updated_at"`
-	ArchivedAt      *time.Time                                                              `json:"archived_at,omitempty"`
+	Object          string          `json:"object"`
+	Id              string          `json:"id"`
+	Status          string          `json:"status"`
+	Name            string          `json:"name"`
+	Description     *string         `json:"description,omitempty"`
+	Metadata        *map[string]any `json:"metadata,omitempty"`
+	IntegrationId   string          `json:"integration_id"`
+	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
+	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access         IntegrationsSetupSessionsCreateOutputIntegrationInstanceAccess          `json:"access"`
+	Implementation *IntegrationsSetupSessionsCreateOutputIntegrationInstanceImplementation `json:"implementation,omitempty"`
+	Providers      []IntegrationsSetupSessionsCreateOutputIntegrationInstanceProviders     `json:"providers"`
+	CreatedAt      time.Time                                                               `json:"created_at"`
+	UpdatedAt      time.Time                                                               `json:"updated_at"`
+	ArchivedAt     *time.Time                                                              `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsCreateOutput represents the integrations setup sessions create output type.
 type IntegrationsSetupSessionsCreateOutput struct {
-	Object              string                                                   `json:"object"`
-	Id                  string                                                   `json:"id"`
-	Status              string                                                   `json:"status"`
-	Url                 string                                                   `json:"url"`
-	Name                *string                                                  `json:"name,omitempty"`
-	Description         *string                                                  `json:"description,omitempty"`
-	Metadata            *map[string]any                                          `json:"metadata,omitempty"`
-	Configuration       *map[string]any                                          `json:"configuration,omitempty"`
-	RedirectUrl         *string                                                  `json:"redirect_url,omitempty"`
-	IntegrationId       string                                                   `json:"integration_id"`
+	Object        string          `json:"object"`
+	Id            string          `json:"id"`
+	Status        string          `json:"status"`
+	Url           string          `json:"url"`
+	Name          *string         `json:"name,omitempty"`
+	Description   *string         `json:"description,omitempty"`
+	Metadata      *map[string]any `json:"metadata,omitempty"`
+	Configuration *map[string]any `json:"configuration,omitempty"`
+	RedirectUrl   *string         `json:"redirect_url,omitempty"`
+	IntegrationId string          `json:"integration_id"`
+	// Access - Resource ownership and access settings.
+	Access              IntegrationsSetupSessionsCreateOutputAccess              `json:"access"`
 	IntegrationInstance IntegrationsSetupSessionsCreateOutputIntegrationInstance `json:"integration_instance"`
 	CreatedAt           time.Time                                                `json:"created_at"`
 	UpdatedAt           time.Time                                                `json:"updated_at"`
@@ -254,15 +346,16 @@ type IntegrationsSetupSessionsCreateBodyConfiguration struct {
 
 // IntegrationsSetupSessionsCreateBody represents the integrations setup sessions create body type.
 type IntegrationsSetupSessionsCreateBody struct {
-	IntegrationId   string                                            `json:"integration_id"`
-	Name            string                                            `json:"name"`
-	Description     *string                                           `json:"description,omitempty"`
-	Metadata        *map[string]any                                   `json:"metadata,omitempty"`
-	IdentityActorId *string                                           `json:"identity_actor_id,omitempty"`
-	IdentityId      *string                                           `json:"identity_id,omitempty"`
-	ExpiresAt       *time.Time                                        `json:"expires_at,omitempty"`
-	RedirectUrl     *string                                           `json:"redirect_url,omitempty"`
-	Configuration   *IntegrationsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
+	IntegrationId         string                                            `json:"integration_id"`
+	IntegrationInstanceId *string                                           `json:"integration_instance_id,omitempty"`
+	Name                  string                                            `json:"name"`
+	Description           *string                                           `json:"description,omitempty"`
+	Metadata              *map[string]any                                   `json:"metadata,omitempty"`
+	IdentityActorId       *string                                           `json:"identity_actor_id,omitempty"`
+	IdentityId            *string                                           `json:"identity_id,omitempty"`
+	ExpiresAt             *time.Time                                        `json:"expires_at,omitempty"`
+	RedirectUrl           *string                                           `json:"redirect_url,omitempty"`
+	Configuration         *IntegrationsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
 }
 
 // MapIntegrationsSetupSessionsCreateBodyFromJSON deserializes JSON data into a IntegrationsSetupSessionsCreateBody.

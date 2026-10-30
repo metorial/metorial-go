@@ -88,6 +88,8 @@ type IdentitiesCredentialsListQuery struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by owner actor ID or IDs.
 	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerProfileId - Filter by the consumer profile that owns the credentials.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// IdentityId - Filter by identity ID or IDs.
 	IdentityId *any `json:"identity_id,omitempty"`
 	// ProviderId - Filter by provider ID or IDs.

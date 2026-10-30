@@ -23,6 +23,10 @@ type IdentityActorsGetOutput struct {
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// AgentId - Linked agent identifier when this actor represents an agent.
 	AgentId *string `json:"agent_id,omitempty"`
+	// ConsumerId - Identifier of the consumer that owns this actor when its type is consumer.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// DefaultIdentityId - Identifier of the actor's default identity, which is its oldest active identity.
+	DefaultIdentityId *string `json:"default_identity_id,omitempty"`
 	// CreatedAt - Timestamp when the actor was created.
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when the actor was last updated.

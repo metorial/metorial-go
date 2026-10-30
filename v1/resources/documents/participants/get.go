@@ -83,14 +83,15 @@ type DocumentsParticipantsGetOutputActor struct {
 // DocumentsParticipantsGetOutput represents the documents participants get output type.
 type DocumentsParticipantsGetOutput struct {
 	// Object - String representing the object's type
-	Object       string                              `json:"object"`
-	Id           string                              `json:"id"`
-	Role         string                              `json:"role"`
-	EditCount    float64                             `json:"edit_count"`
-	LastEditedAt *time.Time                          `json:"last_edited_at,omitempty"`
-	LastViewedAt *time.Time                          `json:"last_viewed_at,omitempty"`
-	Actor        DocumentsParticipantsGetOutputActor `json:"actor"`
-	CreatedAt    time.Time                           `json:"created_at"`
+	Object             string                              `json:"object"`
+	Id                 string                              `json:"id"`
+	Role               string                              `json:"role"`
+	EditCount          float64                             `json:"edit_count"`
+	LastEditedAt       *time.Time                          `json:"last_edited_at,omitempty"`
+	LastViewedAt       *time.Time                          `json:"last_viewed_at,omitempty"`
+	Actor              DocumentsParticipantsGetOutputActor `json:"actor"`
+	StoreParticipantId *string                             `json:"store_participant_id,omitempty"`
+	CreatedAt          time.Time                           `json:"created_at"`
 }
 
 // MapDocumentsParticipantsGetOutputFromJSON deserializes JSON data into a DocumentsParticipantsGetOutput.

@@ -124,6 +124,50 @@ type ProviderDeploymentsAuthConfigsDeleteOutputAuthMethod struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsDeleteOutputAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsAuthConfigsDeleteOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsAuthConfigsDeleteOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsDeleteOutputAccess - Resource ownership and access settings.
+type ProviderDeploymentsAuthConfigsDeleteOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsAuthConfigsDeleteOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsDeleteOutput represents the provider deployments auth configs delete output type.
 type ProviderDeploymentsAuthConfigsDeleteOutput struct {
 	// Object - String representing the object's type
@@ -151,6 +195,8 @@ type ProviderDeploymentsAuthConfigsDeleteOutput struct {
 	Deployment  *ProviderDeploymentsAuthConfigsDeleteOutputDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsDeleteOutputCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsDeleteOutputAuthMethod   `json:"auth_method"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsAuthConfigsDeleteOutputAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

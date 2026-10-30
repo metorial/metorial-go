@@ -5,6 +5,58 @@ import (
 	"time"
 )
 
+// ProviderDeploymentsSetupSessionsListOutputItemsError - The error reported during the OAuth step of this session, or null if none occurred
+type ProviderDeploymentsSetupSessionsListOutputItemsError struct {
+	// Code - Machine-readable error code reported by the OAuth provider or integration
+	Code string `json:"code"`
+	// Message - Human-readable error message
+	Message string `json:"message"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsSetupSessionsListOutputItemsAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsSetupSessionsListOutputItemsAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAccess - Resource ownership and access settings.
+type ProviderDeploymentsSetupSessionsListOutputItemsAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsSetupSessionsListOutputItemsAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsListOutputItemsAuthMethodInputSchema represents the provider deployments setup sessions list output items auth method input schema type.
 type ProviderDeploymentsSetupSessionsListOutputItemsAuthMethodInputSchema struct {
 	Type string `json:"type"`
@@ -235,6 +287,50 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAuthMethod struct 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccess - Resource ownership and access settings.
+type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig represents the provider deployments setup sessions list output items auth config type.
 type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig struct {
 	// Object - String representing the object's type
@@ -262,6 +358,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig struct {
 	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsSetupSessionsListOutputItemsAuthConfigAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
@@ -343,6 +441,50 @@ type ProviderDeploymentsSetupSessionsListOutputItemsConfigFromVault struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsSetupSessionsListOutputItemsConfigAccess - Resource ownership and access settings.
+type ProviderDeploymentsSetupSessionsListOutputItemsConfigAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsSetupSessionsListOutputItemsConfigAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsSetupSessionsListOutputItemsConfig represents the provider deployments setup sessions list output items config type.
 type ProviderDeploymentsSetupSessionsListOutputItemsConfig struct {
 	// Object - String representing the object's type
@@ -367,6 +509,8 @@ type ProviderDeploymentsSetupSessionsListOutputItemsConfig struct {
 	SpecificationId string                                                           `json:"specification_id"`
 	Deployment      *ProviderDeploymentsSetupSessionsListOutputItemsConfigDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsSetupSessionsListOutputItemsConfigFromVault  `json:"from_vault,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsSetupSessionsListOutputItemsConfigAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
@@ -379,12 +523,14 @@ type ProviderDeploymentsSetupSessionsListOutputItems struct {
 	Object string `json:"object"`
 	// Id - Unique setup session identifier
 	Id string `json:"id"`
-	// Type - Setup session type
+	// Type - Setup session type. `admin` sessions produce an admin consent link and complete without creating credentials.
 	Type string `json:"type"`
 	// Status - Session status
 	Status string `json:"status"`
 	// Url - URL where user completes authentication
 	Url string `json:"url"`
+	// Error - The error reported during the OAuth step of this session, or null if none occurred
+	Error *ProviderDeploymentsSetupSessionsListOutputItemsError `json:"error,omitempty"`
 	// Name - Display name
 	Name *string `json:"name,omitempty"`
 	// Description - Description
@@ -398,12 +544,14 @@ type ProviderDeploymentsSetupSessionsListOutputItems struct {
 	// IdentityId - Linked identity ID
 	IdentityId *string `json:"identity_id,omitempty"`
 	// IdentityCredentialId - Identity credential created from this setup session
-	IdentityCredentialId *string                                                     `json:"identity_credential_id,omitempty"`
-	AuthMethod           *ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod  `json:"auth_method,omitempty"`
-	Deployment           *ProviderDeploymentsSetupSessionsListOutputItemsDeployment  `json:"deployment,omitempty"`
-	Credentials          *ProviderDeploymentsSetupSessionsListOutputItemsCredentials `json:"credentials,omitempty"`
-	AuthConfig           *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig  `json:"auth_config,omitempty"`
-	Config               *ProviderDeploymentsSetupSessionsListOutputItemsConfig      `json:"config,omitempty"`
+	IdentityCredentialId *string `json:"identity_credential_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access      ProviderDeploymentsSetupSessionsListOutputItemsAccess       `json:"access"`
+	AuthMethod  *ProviderDeploymentsSetupSessionsListOutputItemsAuthMethod  `json:"auth_method,omitempty"`
+	Deployment  *ProviderDeploymentsSetupSessionsListOutputItemsDeployment  `json:"deployment,omitempty"`
+	Credentials *ProviderDeploymentsSetupSessionsListOutputItemsCredentials `json:"credentials,omitempty"`
+	AuthConfig  *ProviderDeploymentsSetupSessionsListOutputItemsAuthConfig  `json:"auth_config,omitempty"`
+	Config      *ProviderDeploymentsSetupSessionsListOutputItemsConfig      `json:"config,omitempty"`
 	// UiMode - UI mode for setup
 	UiMode string `json:"ui_mode"`
 	// RedirectUrl - URL to redirect after setup
@@ -479,6 +627,8 @@ type ProviderDeploymentsSetupSessionsListQuery struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// Status - Filter by session status (archived, failed, completed, expired, pending)
 	Status *any `json:"status,omitempty"`
+	// Type - Filter by session type (auth_only, config_only, auth_and_config, admin), matching either the requested or the resolved type
+	Type *any `json:"type,omitempty"`
 	// CreatedAt - Filter provider setup session creation time by date range
 	CreatedAt *ProviderDeploymentsSetupSessionsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter provider setup session last update time by date range

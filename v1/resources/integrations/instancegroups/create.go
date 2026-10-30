@@ -40,6 +40,50 @@ type IntegrationsInstanceGroupsCreateOutputProviders struct {
 	ArchivedAt           *time.Time                                                 `json:"archived_at,omitempty"`
 }
 
+// IntegrationsInstanceGroupsCreateOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsInstanceGroupsCreateOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsInstanceGroupsCreateOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsInstanceGroupsCreateOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsInstanceGroupsCreateOutputAccessOwner - The actor that owns this resource, if any.
+type IntegrationsInstanceGroupsCreateOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsInstanceGroupsCreateOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsInstanceGroupsCreateOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsInstanceGroupsCreateOutputAccess - Resource ownership and access settings.
+type IntegrationsInstanceGroupsCreateOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsInstanceGroupsCreateOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // IntegrationsInstanceGroupsCreateOutput represents the integrations instance groups create output type.
 type IntegrationsInstanceGroupsCreateOutput struct {
 	Object         string                                                `json:"object"`
@@ -50,9 +94,11 @@ type IntegrationsInstanceGroupsCreateOutput struct {
 	Metadata       *map[string]any                                       `json:"metadata,omitempty"`
 	Implementation *IntegrationsInstanceGroupsCreateOutputImplementation `json:"implementation,omitempty"`
 	Providers      []IntegrationsInstanceGroupsCreateOutputProviders     `json:"providers"`
-	CreatedAt      time.Time                                             `json:"created_at"`
-	UpdatedAt      time.Time                                             `json:"updated_at"`
-	ArchivedAt     *time.Time                                            `json:"archived_at,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access     IntegrationsInstanceGroupsCreateOutputAccess `json:"access"`
+	CreatedAt  time.Time                                    `json:"created_at"`
+	UpdatedAt  time.Time                                    `json:"updated_at"`
+	ArchivedAt *time.Time                                   `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstanceGroupsCreateOutputFromJSON deserializes JSON data into a IntegrationsInstanceGroupsCreateOutput.

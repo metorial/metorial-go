@@ -5,6 +5,94 @@ import (
 	"time"
 )
 
+// IntegrationsSetupSessionsListOutputItemsAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsSetupSessionsListOutputItemsAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsSetupSessionsListOutputItemsAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsAccessOwner - The actor that owns this resource, if any.
+type IntegrationsSetupSessionsListOutputItemsAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsSetupSessionsListOutputItemsAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsSetupSessionsListOutputItemsAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsAccess - Resource ownership and access settings.
+type IntegrationsSetupSessionsListOutputItemsAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsSetupSessionsListOutputItemsAccessOwner `json:"owner,omitempty"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwner - The actor that owns this resource, if any.
+type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess - Resource ownership and access settings.
+type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwner `json:"owner,omitempty"`
+}
+
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation represents the integrations setup sessions list output items integration instance implementation type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation struct {
 	Type             string `json:"type"`
@@ -165,34 +253,38 @@ type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders struct
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstance represents the integrations setup sessions list output items integration instance type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstance struct {
-	Object          string                                                                     `json:"object"`
-	Id              string                                                                     `json:"id"`
-	Status          string                                                                     `json:"status"`
-	Name            string                                                                     `json:"name"`
-	Description     *string                                                                    `json:"description,omitempty"`
-	Metadata        *map[string]any                                                            `json:"metadata,omitempty"`
-	IntegrationId   string                                                                     `json:"integration_id"`
-	IdentityActorId *string                                                                    `json:"identity_actor_id,omitempty"`
-	IdentityId      *string                                                                    `json:"identity_id,omitempty"`
-	Implementation  *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation `json:"implementation,omitempty"`
-	Providers       []IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders     `json:"providers"`
-	CreatedAt       time.Time                                                                  `json:"created_at"`
-	UpdatedAt       time.Time                                                                  `json:"updated_at"`
-	ArchivedAt      *time.Time                                                                 `json:"archived_at,omitempty"`
+	Object          string          `json:"object"`
+	Id              string          `json:"id"`
+	Status          string          `json:"status"`
+	Name            string          `json:"name"`
+	Description     *string         `json:"description,omitempty"`
+	Metadata        *map[string]any `json:"metadata,omitempty"`
+	IntegrationId   string          `json:"integration_id"`
+	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
+	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access         IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess          `json:"access"`
+	Implementation *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation `json:"implementation,omitempty"`
+	Providers      []IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders     `json:"providers"`
+	CreatedAt      time.Time                                                                  `json:"created_at"`
+	UpdatedAt      time.Time                                                                  `json:"updated_at"`
+	ArchivedAt     *time.Time                                                                 `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsListOutputItems represents the integrations setup sessions list output items type.
 type IntegrationsSetupSessionsListOutputItems struct {
-	Object              string                                                      `json:"object"`
-	Id                  string                                                      `json:"id"`
-	Status              string                                                      `json:"status"`
-	Url                 string                                                      `json:"url"`
-	Name                *string                                                     `json:"name,omitempty"`
-	Description         *string                                                     `json:"description,omitempty"`
-	Metadata            *map[string]any                                             `json:"metadata,omitempty"`
-	Configuration       *map[string]any                                             `json:"configuration,omitempty"`
-	RedirectUrl         *string                                                     `json:"redirect_url,omitempty"`
-	IntegrationId       string                                                      `json:"integration_id"`
+	Object        string          `json:"object"`
+	Id            string          `json:"id"`
+	Status        string          `json:"status"`
+	Url           string          `json:"url"`
+	Name          *string         `json:"name,omitempty"`
+	Description   *string         `json:"description,omitempty"`
+	Metadata      *map[string]any `json:"metadata,omitempty"`
+	Configuration *map[string]any `json:"configuration,omitempty"`
+	RedirectUrl   *string         `json:"redirect_url,omitempty"`
+	IntegrationId string          `json:"integration_id"`
+	// Access - Resource ownership and access settings.
+	Access              IntegrationsSetupSessionsListOutputItemsAccess              `json:"access"`
 	IntegrationInstance IntegrationsSetupSessionsListOutputItemsIntegrationInstance `json:"integration_instance"`
 	CreatedAt           time.Time                                                   `json:"created_at"`
 	UpdatedAt           time.Time                                                   `json:"updated_at"`

@@ -124,6 +124,50 @@ type ProviderDeploymentsAuthConfigsListOutputItemsAuthMethod struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsListOutputItemsAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsAuthConfigsListOutputItemsAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsAuthConfigsListOutputItemsAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsListOutputItemsAccess - Resource ownership and access settings.
+type ProviderDeploymentsAuthConfigsListOutputItemsAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsAuthConfigsListOutputItemsAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsListOutputItems represents the provider deployments auth configs list output items type.
 type ProviderDeploymentsAuthConfigsListOutputItems struct {
 	// Object - String representing the object's type
@@ -151,6 +195,8 @@ type ProviderDeploymentsAuthConfigsListOutputItems struct {
 	Deployment  *ProviderDeploymentsAuthConfigsListOutputItemsDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsListOutputItemsCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsListOutputItemsAuthMethod   `json:"auth_method"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsAuthConfigsListOutputItemsAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
@@ -206,6 +252,8 @@ type ProviderDeploymentsAuthConfigsListQuery struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules: shared (resources without an owner), usable (shared resources plus owned resources the caller may use), or all (everything the caller can see). Defaults to shared when ownership is enforced for the project, and all otherwise.
+	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by auth config ID(s)

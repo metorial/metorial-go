@@ -80,15 +80,103 @@ type StoresParticipantsGetOutputActor struct {
 	ConsumerProfile   *map[string]any                                    `json:"consumer_profile,omitempty"`
 }
 
+// StoresParticipantsGetOutputSurfacesActorOrganizationActorMember represents the stores participants get output surfaces actor organization actor member type.
+type StoresParticipantsGetOutputSurfacesActorOrganizationActorMember struct {
+	// Object - String representing the organization's member preview type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Status - The organization member's status
+	Status string `json:"status"`
+	// Role - The organization member's role
+	Role string `json:"role"`
+}
+
+// StoresParticipantsGetOutputSurfacesActorOrganizationActorTeams - The teams the actor belongs to
+type StoresParticipantsGetOutputSurfacesActorOrganizationActorTeams struct {
+	// Id - The team ID
+	Id string `json:"id"`
+	// Name - The team name
+	Name string `json:"name"`
+	// Slug - The team slug
+	Slug string `json:"slug"`
+	// AssignmentId - The team assignment ID
+	AssignmentId string `json:"assignment_id"`
+	// CreatedAt - The team assignment creation date
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - The team assignment last update date
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// StoresParticipantsGetOutputSurfacesActorOrganizationActor represents the stores participants get output surfaces actor organization actor type.
+type StoresParticipantsGetOutputSurfacesActorOrganizationActor struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Id - The organization member's unique identifier
+	Id string `json:"id"`
+	// Type - The organization member's type
+	Type string `json:"type"`
+	// OrganizationId - The organization member's organization ID
+	OrganizationId string `json:"organization_id"`
+	// Name - The organization member's name
+	Name string `json:"name"`
+	// Email - The organization member's email
+	Email *string `json:"email,omitempty"`
+	// ImageUrl - The organization member's image URL
+	ImageUrl string                                                           `json:"image_url"`
+	Member   *StoresParticipantsGetOutputSurfacesActorOrganizationActorMember `json:"member,omitempty"`
+	Teams    []StoresParticipantsGetOutputSurfacesActorOrganizationActorTeams `json:"teams"`
+	// CreatedAt - The organization member's creation date
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - The organization member's last update date
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// StoresParticipantsGetOutputSurfacesActorConsumer represents the stores participants get output surfaces actor consumer type.
+type StoresParticipantsGetOutputSurfacesActorConsumer struct {
+	Object    string    `json:"object"`
+	Id        string    `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	ImageUrl  string    `json:"image_url"`
+	UserId    *string   `json:"user_id,omitempty"`
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+}
+
+// StoresParticipantsGetOutputSurfacesActor represents the stores participants get output surfaces actor type.
+type StoresParticipantsGetOutputSurfacesActor struct {
+	Type              string                                                     `json:"type"`
+	Name              string                                                     `json:"name"`
+	ImageUrl          *string                                                    `json:"image_url,omitempty"`
+	Email             *string                                                    `json:"email,omitempty"`
+	OrganizationActor *StoresParticipantsGetOutputSurfacesActorOrganizationActor `json:"organization_actor,omitempty"`
+	Consumer          *StoresParticipantsGetOutputSurfacesActorConsumer          `json:"consumer,omitempty"`
+	ConsumerProfile   *map[string]any                                            `json:"consumer_profile,omitempty"`
+}
+
+// StoresParticipantsGetOutputSurfaces represents the stores participants get output surfaces type.
+type StoresParticipantsGetOutputSurfaces struct {
+	Id           string                                   `json:"id"`
+	Roles        []string                                 `json:"roles"`
+	Actor        StoresParticipantsGetOutputSurfacesActor `json:"actor"`
+	LastActiveAt *time.Time                               `json:"last_active_at,omitempty"`
+	CreatedAt    time.Time                                `json:"created_at"`
+}
+
 // StoresParticipantsGetOutput represents the stores participants get output type.
 type StoresParticipantsGetOutput struct {
 	// Object - String representing the object's type
-	Object      string                           `json:"object"`
-	Id          string                           `json:"id"`
-	StoreId     string                           `json:"store_id"`
-	Permissions []string                         `json:"permissions"`
-	Actor       StoresParticipantsGetOutputActor `json:"actor"`
-	CreatedAt   time.Time                        `json:"created_at"`
+	Object       string                                 `json:"object"`
+	Id           string                                 `json:"id"`
+	StoreId      string                                 `json:"store_id"`
+	Permissions  []string                               `json:"permissions"`
+	Roles        []string                               `json:"roles"`
+	Actor        StoresParticipantsGetOutputActor       `json:"actor"`
+	Surfaces     *[]StoresParticipantsGetOutputSurfaces `json:"surfaces,omitempty"`
+	LastActiveAt *time.Time                             `json:"last_active_at,omitempty"`
+	CreatedAt    time.Time                              `json:"created_at"`
+	UpdatedAt    time.Time                              `json:"updated_at"`
 }
 
 // MapStoresParticipantsGetOutputFromJSON deserializes JSON data into a StoresParticipantsGetOutput.

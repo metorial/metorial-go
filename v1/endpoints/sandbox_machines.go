@@ -108,6 +108,18 @@ type SandboxMachinesEndpointUsageParams struct {
 	MachineInstanceId *any     `json:"machine_instance_id,omitempty"`
 }
 
+// SandboxMachinesEndpointExecBody contains the request body for Exec.
+type SandboxMachinesEndpointExecBody struct {
+	// Command - The command to run with /bin/sh -c
+	Command string `json:"command"`
+	// Cwd - The working directory to run the command in
+	Cwd *string `json:"cwd,omitempty"`
+	// Env - Environment variables to set for the command
+	Env *map[string]string `json:"env,omitempty"`
+	// TimeoutSeconds - How long the command may run before it is stopped, in seconds. Defaults to 60, at most 300.
+	TimeoutSeconds *float64 `json:"timeout_seconds,omitempty"`
+}
+
 // List returns a paginated list of machines.
 func (e *SandboxMachinesEndpoint) List(params *SandboxMachinesEndpointListParams) (*machines.SandboxMachinesListOutput, error) {
 	var query map[string]any
@@ -247,6 +259,19 @@ func (e *SandboxMachinesEndpoint) Usage(machineId string, params *SandboxMachine
 	}
 	var result machines.SandboxMachinesUsageOutput
 	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Exec runs a shell command in the machine and returns its exit code and output. Non-interactive; starts the machine if needed.
+func (e *SandboxMachinesEndpoint) Exec(machineId string, body *SandboxMachinesEndpointExecBody) (*machines.SandboxMachinesExecOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"sandbox", "machines", machineId, "exec"},
+		Body: body,
+	}
+	var result machines.SandboxMachinesExecOutput
+	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

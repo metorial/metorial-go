@@ -111,6 +111,8 @@ type ProviderDeploymentsCreateBodyProviderConfig struct {
 	Value *map[string]any `json:"value,omitempty"`
 	// ProviderConfigVaultId - Provider config vault ID
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
+	// ProviderId - Explicitly specify provider ID to associate with this auth config
+	ProviderId *string `json:"provider_id,omitempty"`
 }
 
 // ProviderDeploymentsCreateBody represents the provider deployments create body type.

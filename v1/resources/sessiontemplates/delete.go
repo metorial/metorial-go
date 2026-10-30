@@ -5,6 +5,50 @@ import (
 	"time"
 )
 
+// SessionTemplatesDeleteOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type SessionTemplatesDeleteOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// SessionTemplatesDeleteOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type SessionTemplatesDeleteOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// SessionTemplatesDeleteOutputAccessOwner - The actor that owns this resource, if any.
+type SessionTemplatesDeleteOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *SessionTemplatesDeleteOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *SessionTemplatesDeleteOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// SessionTemplatesDeleteOutputAccess - Resource ownership and access settings.
+type SessionTemplatesDeleteOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *SessionTemplatesDeleteOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // SessionTemplatesDeleteOutputProvidersToolFilter represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type SessionTemplatesDeleteOutputProvidersToolFilter struct {
@@ -103,7 +147,9 @@ type SessionTemplatesDeleteOutput struct {
 	IntegrationInstanceId      *string         `json:"integration_instance_id,omitempty"`
 	IntegrationInstanceGroupId *string         `json:"integration_instance_group_id,omitempty"`
 	IdentityActorId            *string         `json:"identity_actor_id,omitempty"`
-	IdentityId                 *string         `json:"identity_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access     SessionTemplatesDeleteOutputAccess `json:"access"`
+	IdentityId *string                            `json:"identity_id,omitempty"`
 	// Providers - Template providers
 	Providers []SessionTemplatesDeleteOutputProviders `json:"providers"`
 	// CreatedAt - Timestamp when created

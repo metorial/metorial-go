@@ -102,7 +102,7 @@ type MagicMcpServersCreateOutputProvidersAuthMethod struct {
 	Name string `json:"name"`
 	// Description - Auth method description
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - Capabilities of this auth method in the provider version the deployment currently uses: its locked version, otherwise the provider's current version. The other fields describe the pinned auth method and may come from an older specification.
 	Capabilities map[string]any                                              `json:"capabilities"`
 	InputSchema  *MagicMcpServersCreateOutputProvidersAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *MagicMcpServersCreateOutputProvidersAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -216,11 +216,56 @@ type MagicMcpServersCreateOutputProviders struct {
 	ArchivedAt      *time.Time                                           `json:"archived_at,omitempty"`
 }
 
+// MagicMcpServersCreateOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type MagicMcpServersCreateOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// MagicMcpServersCreateOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type MagicMcpServersCreateOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// MagicMcpServersCreateOutputAccessOwner - The actor that owns this resource, if any.
+type MagicMcpServersCreateOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *MagicMcpServersCreateOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *MagicMcpServersCreateOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// MagicMcpServersCreateOutputAccess - Resource ownership and access settings.
+type MagicMcpServersCreateOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *MagicMcpServersCreateOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // MagicMcpServersCreateOutput represents the magic mcp servers create output type.
 type MagicMcpServersCreateOutput struct {
-	Object                 string                                 `json:"object"`
-	Id                     string                                 `json:"id"`
-	Status                 string                                 `json:"status"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	Status string `json:"status"`
+	// Source - How this Magic MCP server was created or configured
 	Source                 string                                 `json:"source"`
 	ProviderManagementMode string                                 `json:"provider_management_mode"`
 	Endpoints              []MagicMcpServersCreateOutputEndpoints `json:"endpoints"`
@@ -229,8 +274,10 @@ type MagicMcpServersCreateOutput struct {
 	Name                   *string                                `json:"name,omitempty"`
 	Description            *string                                `json:"description,omitempty"`
 	Metadata               map[string]any                         `json:"metadata"`
-	CreatedAt              time.Time                              `json:"created_at"`
-	UpdatedAt              time.Time                              `json:"updated_at"`
+	// Access - Resource ownership and access settings.
+	Access    MagicMcpServersCreateOutputAccess `json:"access"`
+	CreatedAt time.Time                         `json:"created_at"`
+	UpdatedAt time.Time                         `json:"updated_at"`
 }
 
 // MapMagicMcpServersCreateOutputFromJSON deserializes JSON data into a MagicMcpServersCreateOutput.
