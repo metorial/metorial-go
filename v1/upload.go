@@ -219,8 +219,9 @@ func (sdk *MetorialSdk) uploadWithURL(ctx context.Context, source uploadSource, 
 	var session struct {
 		Id     string `json:"id"`
 		Upload struct {
-			Url    string `json:"url"`
-			Method string `json:"method"`
+			Url     string            `json:"url"`
+			Method  string            `json:"method"`
+			Headers map[string]string `json:"headers"`
 		} `json:"upload"`
 	}
 	if err := sdk.client.Post(&endpoint.Request{Path: []string{"files"}, Body: request}, &session); err != nil {
@@ -230,7 +231,7 @@ func (sdk *MetorialSdk) uploadWithURL(ctx context.Context, source uploadSource, 
 		return nil, errors.New("metorial: the API did not return an upload URL")
 	}
 
-	if err := putToStorage(ctx, session.Upload.Method, session.Upload.Url, source); err != nil {
+	if err := putToStorage(ctx, session.Upload.Method, session.Upload.Url, session.Upload.Headers, source); err != nil {
 		return nil, err
 	}
 
@@ -252,7 +253,7 @@ func (sdk *MetorialSdk) uploadWithURL(ctx context.Context, source uploadSource, 
 // putToStorage sends the file to a presigned URL. The signature covers the
 // content type, so it must match the declared file_type, and Metorial
 // credentials must not be forwarded to the storage backend.
-func putToStorage(ctx context.Context, method, url string, source uploadSource) error {
+func putToStorage(ctx context.Context, method, url string, headers map[string]string, source uploadSource) error {
 	if method == "" {
 		method = http.MethodPut
 	}
@@ -262,6 +263,9 @@ func putToStorage(ctx context.Context, method, url string, source uploadSource) 
 		return fmt.Errorf("metorial: invalid upload URL: %w", err)
 	}
 	request.ContentLength = source.size
+	for name, value := range headers {
+		request.Header.Set(name, value)
+	}
 	request.Header.Set("Content-Type", source.contentType)
 
 	response, err := http.DefaultClient.Do(request)

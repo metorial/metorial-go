@@ -101,6 +101,9 @@ func TestUploadFileReaderSendsLargeFilesThroughAnUploadURL(t *testing.T) {
 			if got := r.Header.Get("Content-Type"); got != "application/octet-stream" {
 				t.Errorf("expected the declared content type, got %q", got)
 			}
+			if got := r.Header.Get("x-ms-blob-type"); got != "BlockBlob" {
+				t.Errorf("expected the signed headers to be sent, got %q", got)
+			}
 			data, _ := io.ReadAll(r.Body)
 			if string(data) != contents {
 				t.Errorf("unexpected uploaded contents %q", data)
@@ -122,7 +125,11 @@ func TestUploadFileReaderSendsLargeFilesThroughAnUploadURL(t *testing.T) {
 				writeTestJSON(w, http.StatusOK, map[string]any{
 					"object": "file_upload",
 					"id":     "fup_1",
-					"upload": map[string]any{"url": server.URL + "/storage", "method": "PUT"},
+					"upload": map[string]any{
+						"url":     server.URL + "/storage",
+						"method":  "PUT",
+						"headers": map[string]string{"x-ms-blob-type": "BlockBlob"},
+					},
 				})
 			case "complete":
 				steps = append(steps, "complete")
