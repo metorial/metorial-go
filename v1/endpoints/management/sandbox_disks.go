@@ -2,6 +2,7 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/sandbox/disks"
 )
 
@@ -53,7 +54,7 @@ type SandboxDisksEndpointUpdateBody struct {
 	// Metadata - User-defined metadata stored in Metorial. Replaces existing metadata when updated.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Name - A name for the disk. Pass null to remove it.
-	Name *string `json:"name,omitempty"`
+	Name *nullable.Nullable[string] `json:"name,omitempty"`
 }
 
 // SandboxDisksEndpointCloneBody contains the request body for Clone.

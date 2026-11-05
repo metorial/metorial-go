@@ -2,6 +2,7 @@ package files
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -65,7 +66,7 @@ type SkillsFilesPutBody struct {
 	// FileId - The ID of a previously uploaded file to place at the path. Use this for binary files. Files that belong to a document cannot be attached; use content to write markdown documents.
 	FileId *string `json:"file_id,omitempty"`
 	// IfMatch - Only apply the change if the file still has this etag. Pass null to require that no file exists at the path yet. Omit to skip the check.
-	IfMatch *string `json:"if_match,omitempty"`
+	IfMatch *nullable.Nullable[string] `json:"if_match,omitempty"`
 }
 
 // MapSkillsFilesPutBodyFromJSON deserializes JSON data into a SkillsFilesPutBody.

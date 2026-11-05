@@ -2,6 +2,7 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments"
 )
 
@@ -70,7 +71,7 @@ type ProviderDeploymentsEndpointUpdateBody struct {
 	Metadata    *map[string]any `json:"metadata,omitempty"`
 	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version, or null to follow latest
-	LockedProviderVersionId *string `json:"locked_provider_version_id,omitempty"`
+	LockedProviderVersionId *nullable.Nullable[string] `json:"locked_provider_version_id,omitempty"`
 }
 
 // List returns a paginated list of provider deployments.

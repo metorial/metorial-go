@@ -2,6 +2,7 @@ package providerdeployments
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -111,7 +112,7 @@ type ProviderDeploymentsUpdateBody struct {
 	Metadata    *map[string]any `json:"metadata,omitempty"`
 	ToolFilters *any            `json:"tool_filters,omitempty"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version, or null to follow latest
-	LockedProviderVersionId *string `json:"locked_provider_version_id,omitempty"`
+	LockedProviderVersionId *nullable.Nullable[string] `json:"locked_provider_version_id,omitempty"`
 }
 
 // MapProviderDeploymentsUpdateBodyFromJSON deserializes JSON data into a ProviderDeploymentsUpdateBody.

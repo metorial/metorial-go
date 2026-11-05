@@ -2,6 +2,7 @@ package disks
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -71,7 +72,7 @@ type SandboxDisksUpdateBody struct {
 	// Metadata - User-defined metadata stored in Metorial. Replaces existing metadata when updated.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Name - A name for the disk. Pass null to remove it.
-	Name *string `json:"name,omitempty"`
+	Name *nullable.Nullable[string] `json:"name,omitempty"`
 }
 
 // MapSandboxDisksUpdateBodyFromJSON deserializes JSON data into a SandboxDisksUpdateBody.

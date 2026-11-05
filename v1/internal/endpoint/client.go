@@ -24,10 +24,16 @@ type Client struct {
 	apiVersion string
 }
 
+const (
+	defaultTimeout     = 30 * time.Second
+	execDefaultSeconds = 60
+	execTimeoutBuffer  = 30 * time.Second
+)
+
 // NewClient creates a new API client.
 func NewClient(apiHost, apiKey, apiVersion string, headers map[string]string) *Client {
 	return &Client{
-		httpClient: &http.Client{Timeout: 30 * time.Second},
+		httpClient: &http.Client{},
 		apiHost:    strings.TrimRight(apiHost, "/"),
 		apiKey:     apiKey,
 		headers:    headers,
@@ -160,7 +166,10 @@ func (c *Client) doWithRetry(method string, req *Request, result any, tryCount i
 	}
 
 	// Create HTTP request
-	httpReq, err := http.NewRequest(method, fullURL, body)
+	ctx, cancel := context.WithTimeout(context.Background(), requestTimeout(method, req))
+	defer cancel()
+
+	httpReq, err := http.NewRequestWithContext(ctx, method, fullURL, body)
 	if err != nil {
 		return fmt.Errorf("metorial: failed to create request: %w", err)
 	}
@@ -240,7 +249,10 @@ func (c *Client) doRawWithRetry(method string, fullURL string, body []byte, head
 		bodyReader = bytes.NewReader(body)
 	}
 
-	httpReq, err := http.NewRequest(method, fullURL, bodyReader)
+	ctx, cancel := context.WithTimeout(context.Background(), defaultTimeout)
+	defer cancel()
+
+	httpReq, err := http.NewRequestWithContext(ctx, method, fullURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("metorial: failed to create request: %w", err)
 	}
@@ -319,4 +331,21 @@ func queryValue(v any) string {
 	default:
 		return fmt.Sprintf("%v", v)
 	}
+}
+
+// requestTimeout bounds a request. Exec calls wait for the command, so they
+// get the command's own timeout plus headroom for starting the machine.
+func requestTimeout(method string, req *Request) time.Duration {
+	n := len(req.Path)
+	if method != "POST" || n == 0 || req.Path[n-1] != "exec" {
+		return defaultTimeout
+	}
+
+	seconds := float64(execDefaultSeconds)
+	if body := StructToBody(req.Body); body != nil {
+		if v, ok := body["timeout_seconds"].(float64); ok && v > 0 {
+			seconds = v
+		}
+	}
+	return time.Duration(seconds*float64(time.Second)) + execTimeoutBuffer
 }

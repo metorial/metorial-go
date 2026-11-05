@@ -542,3 +542,27 @@ func TestClientTrailingSlashTrimmed(t *testing.T) {
 		t.Fatalf("unexpected error: %v", err)
 	}
 }
+
+func TestRequestTimeout(t *testing.T) {
+	type execBody struct {
+		TimeoutSeconds *float64 `json:"timeout_seconds,omitempty"`
+	}
+	long := 300.0
+
+	cases := []struct {
+		name   string
+		method string
+		req    *Request
+		want   time.Duration
+	}{
+		{"default", "GET", &Request{Path: []string{"sandbox", "machines"}}, 30 * time.Second},
+		{"exec default", "POST", &Request{Path: []string{"sandbox", "machines", "m1", "exec"}, Body: &execBody{}}, 90 * time.Second},
+		{"exec nil body", "POST", &Request{Path: []string{"sandbox", "machines", "m1", "exec"}}, 90 * time.Second},
+		{"exec custom", "POST", &Request{Path: []string{"sandbox", "machines", "m1", "exec"}, Body: &execBody{TimeoutSeconds: &long}}, 330 * time.Second},
+	}
+	for _, c := range cases {
+		if got := requestTimeout(c.method, c.req); got != c.want {
+			t.Errorf("%s: got %s, want %s", c.name, got, c.want)
+		}
+	}
+}
