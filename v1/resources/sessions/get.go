@@ -108,6 +108,50 @@ type SessionsGetOutputProviders struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// SessionsGetOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type SessionsGetOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// SessionsGetOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type SessionsGetOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// SessionsGetOutputAccessOwner - The actor that owns this resource, if any.
+type SessionsGetOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *SessionsGetOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *SessionsGetOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// SessionsGetOutputAccess - Resource ownership and access settings.
+type SessionsGetOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *SessionsGetOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // SessionsGetOutput represents the sessions get output type.
 type SessionsGetOutput struct {
 	// Object - String representing the object's type
@@ -138,7 +182,9 @@ type SessionsGetOutput struct {
 	// HasWarnings - Whether the session has any warnings
 	HasWarnings     bool    `json:"has_warnings"`
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access     SessionsGetOutputAccess `json:"access"`
+	IdentityId *string                 `json:"identity_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

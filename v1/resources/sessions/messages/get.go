@@ -228,9 +228,9 @@ type SessionsMessagesGetOutputToolCall struct {
 	ResponderParticipant *SessionsMessagesGetOutputToolCallResponderParticipant `json:"responder_participant,omitempty"`
 	Tool                 SessionsMessagesGetOutputToolCallTool                  `json:"tool"`
 	Error                *SessionsMessagesGetOutputToolCallError                `json:"error,omitempty"`
-	// Input - Input data passed to the tool call
+	// Input - Input data passed to the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output data returned from the tool call
+	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
@@ -360,9 +360,9 @@ type SessionsMessagesGetOutput struct {
 	Hierarchy SessionsMessagesGetOutputHierarchy `json:"hierarchy"`
 	// Transport - Transport information
 	Transport SessionsMessagesGetOutputTransport `json:"transport"`
-	// Input - Input message data
+	// Input - Input message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output message data
+	// Output - Output message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output               *map[string]any                                `json:"output,omitempty"`
 	ToolCall             *SessionsMessagesGetOutputToolCall             `json:"tool_call,omitempty"`
 	SenderParticipant    SessionsMessagesGetOutputSenderParticipant     `json:"sender_participant"`

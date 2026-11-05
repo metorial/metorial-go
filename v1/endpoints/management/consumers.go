@@ -24,7 +24,7 @@ type ConsumersEndpointListParams struct {
 	Order  *string  `json:"order,omitempty"`
 	Search *string  `json:"search,omitempty"`
 	Email  *any     `json:"email,omitempty"`
-	Id     *string  `json:"id,omitempty"`
+	Id     *any     `json:"id,omitempty"`
 }
 
 // ConsumersEndpointCreateBody contains the request body for Create.

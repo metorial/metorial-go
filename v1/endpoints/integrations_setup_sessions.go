@@ -34,15 +34,16 @@ type IntegrationsSetupSessionsEndpointListParams struct {
 
 // IntegrationsSetupSessionsEndpointCreateBody contains the request body for Create.
 type IntegrationsSetupSessionsEndpointCreateBody struct {
-	IntegrationId   string          `json:"integration_id"`
-	Name            string          `json:"name"`
-	Description     *string         `json:"description,omitempty"`
-	Metadata        *map[string]any `json:"metadata,omitempty"`
-	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
-	IdentityId      *string         `json:"identity_id,omitempty"`
-	ExpiresAt       *string         `json:"expires_at,omitempty"`
-	RedirectUrl     *string         `json:"redirect_url,omitempty"`
-	Configuration   *map[string]any `json:"configuration,omitempty"`
+	IntegrationId         string          `json:"integration_id"`
+	IntegrationInstanceId *string         `json:"integration_instance_id,omitempty"`
+	Name                  string          `json:"name"`
+	Description           *string         `json:"description,omitempty"`
+	Metadata              *map[string]any `json:"metadata,omitempty"`
+	IdentityActorId       *string         `json:"identity_actor_id,omitempty"`
+	IdentityId            *string         `json:"identity_id,omitempty"`
+	ExpiresAt             *string         `json:"expires_at,omitempty"`
+	RedirectUrl           *string         `json:"redirect_url,omitempty"`
+	Configuration         *map[string]any `json:"configuration,omitempty"`
 }
 
 // List returns a paginated list of integration setup sessions.
@@ -74,7 +75,7 @@ func (e *IntegrationsSetupSessionsEndpoint) Get(integrationSetupSessionId string
 	return &result, nil
 }
 
-// Create creates a new integration setup session and draft integration instance.
+// Create creates a new integration setup session. Creates a draft integration instance unless integration_instance_id is given, in which case that instance is reused and its config and auth config are overwritten on completion.
 func (e *IntegrationsSetupSessionsEndpoint) Create(body *IntegrationsSetupSessionsEndpointCreateBody) (*setupsessions.IntegrationsSetupSessionsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"integration-setup-sessions"},

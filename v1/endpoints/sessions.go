@@ -50,6 +50,8 @@ type SessionsEndpointListParams struct {
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter session last update time by date range
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
+	// Search - Search by session ID, or by the name of a related provider, auth method, deployment, config, auth config, agent, actor, identity, or consumer
+	Search *string `json:"search,omitempty"`
 }
 
 // SessionsEndpointCreateBody contains the request body for Create.

@@ -80,6 +80,50 @@ type ProviderDeploymentsConfigsListOutputItemsFromVault struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsConfigsListOutputItemsAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsConfigsListOutputItemsAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsConfigsListOutputItemsAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsConfigsListOutputItemsAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsConfigsListOutputItemsAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsConfigsListOutputItemsAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsConfigsListOutputItemsAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsConfigsListOutputItemsAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsConfigsListOutputItemsAccess - Resource ownership and access settings.
+type ProviderDeploymentsConfigsListOutputItemsAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsConfigsListOutputItemsAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsConfigsListOutputItems represents the provider deployments configs list output items type.
 type ProviderDeploymentsConfigsListOutputItems struct {
 	// Object - String representing the object's type
@@ -104,6 +148,8 @@ type ProviderDeploymentsConfigsListOutputItems struct {
 	SpecificationId string                                               `json:"specification_id"`
 	Deployment      *ProviderDeploymentsConfigsListOutputItemsDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsConfigsListOutputItemsFromVault  `json:"from_vault,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsConfigsListOutputItemsAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated
@@ -159,6 +205,8 @@ type ProviderDeploymentsConfigsListQuery struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'shared' when ownership is enforced for the project and 'all' otherwise.
+	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by config ID(s)

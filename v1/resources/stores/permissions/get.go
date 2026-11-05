@@ -7,8 +7,10 @@ import (
 // StoresPermissionsGetOutput represents the stores permissions get output type.
 type StoresPermissionsGetOutput struct {
 	// Object - String representing the object's type
-	Object           string   `json:"object"`
-	StoreId          string   `json:"store_id"`
+	Object  string `json:"object"`
+	StoreId string `json:"store_id"`
+	// CanManageAccess - Whether the current actor can manage who has access to the skill backed by this store.
+	CanManageAccess  bool     `json:"can_manage_access"`
 	HasFullAccess    bool     `json:"has_full_access"`
 	Permissions      []string `json:"permissions"`
 	RelevantStoreIds []string `json:"relevant_store_ids"`

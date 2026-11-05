@@ -80,6 +80,50 @@ type ProviderDeploymentsConfigsGetOutputFromVault struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsConfigsGetOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsConfigsGetOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsConfigsGetOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsConfigsGetOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsConfigsGetOutputAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsConfigsGetOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsConfigsGetOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsConfigsGetOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsConfigsGetOutputAccess - Resource ownership and access settings.
+type ProviderDeploymentsConfigsGetOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsConfigsGetOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsConfigsGetOutput represents the provider deployments configs get output type.
 type ProviderDeploymentsConfigsGetOutput struct {
 	// Object - String representing the object's type
@@ -104,6 +148,8 @@ type ProviderDeploymentsConfigsGetOutput struct {
 	SpecificationId string                                         `json:"specification_id"`
 	Deployment      *ProviderDeploymentsConfigsGetOutputDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsConfigsGetOutputFromVault  `json:"from_vault,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsConfigsGetOutputAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

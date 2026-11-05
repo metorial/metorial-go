@@ -32,6 +32,8 @@ type SessionsConnectionsEndpointListParams struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by connected identity actor ID(s)
 	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerProfileId - Filter by the selected consumer profile ID or IDs.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// ConsumerId - Filter by connected consumer ID(s)
 	ConsumerId *any `json:"consumer_id,omitempty"`
 	// IdentityId - Filter by connected identity ID(s)

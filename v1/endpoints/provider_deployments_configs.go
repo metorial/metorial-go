@@ -22,6 +22,8 @@ type ProviderDeploymentsConfigsEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'shared' when ownership is enforced for the project and 'all' otherwise.
+	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by config ID(s)

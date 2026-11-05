@@ -22,6 +22,8 @@ type SessionTemplatesEndpointListParams struct {
 	Before *string  `json:"before,omitempty"`
 	Cursor *string  `json:"cursor,omitempty"`
 	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules: shared (resources without an owner), usable (shared resources plus resources the caller can use), or all. Defaults to shared when ownership is enforced for the project and to all otherwise.
+	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by session template ID(s)

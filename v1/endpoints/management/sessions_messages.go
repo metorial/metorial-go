@@ -28,6 +28,8 @@ type SessionsMessagesEndpointListParams struct {
 	Source *any `json:"source,omitempty"`
 	// Hierarchy - Filter by message hierarchy
 	Hierarchy *any `json:"hierarchy,omitempty"`
+	// Status - Filter by message status(es)
+	Status *any `json:"status,omitempty"`
 	// Id - Filter by message ID(s)
 	Id *any `json:"id,omitempty"`
 	// SessionId - Filter by session ID(s)

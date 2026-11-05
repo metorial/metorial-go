@@ -124,6 +124,50 @@ type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAuthMethod struc
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerOrganizationMember - Organization member associated with this owner.
+type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerConsumer - Consumer and profile associated with this owner.
+type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwner - The actor that owns this resource, if any.
+type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccess - Resource ownership and access settings.
+type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccessOwner `json:"owner,omitempty"`
+}
+
 // ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfig represents the provider deployments auth configs exports create output auth config type.
 type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfig struct {
 	// Object - String representing the object's type
@@ -151,6 +195,8 @@ type ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfig struct {
 	Deployment  *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigDeployment  `json:"deployment,omitempty"`
 	Credentials *ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigCredentials `json:"credentials,omitempty"`
 	AuthMethod  ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAuthMethod   `json:"auth_method"`
+	// Access - Resource ownership and access settings.
+	Access ProviderDeploymentsAuthConfigsExportsCreateOutputAuthConfigAccess `json:"access"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when last updated

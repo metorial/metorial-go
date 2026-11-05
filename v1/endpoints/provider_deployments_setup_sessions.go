@@ -36,6 +36,8 @@ type ProviderDeploymentsSetupSessionsEndpointListParams struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// Status - Filter by session status (archived, failed, completed, expired, pending)
 	Status *any `json:"status,omitempty"`
+	// Type - Filter by session type (auth_only, config_only, auth_and_config, admin), matching either the requested or the resolved type
+	Type *any `json:"type,omitempty"`
 	// CreatedAt - Filter provider setup session creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter provider setup session last update time by date range
@@ -61,7 +63,7 @@ type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// ConsumerId - Optional consumer to link this setup session to
 	ConsumerId  *string `json:"consumer_id,omitempty"`
 	RedirectUrl *string `json:"redirect_url,omitempty"`
-	// Type - The type of setup session, determining the flow and outcome of the session
+	// Type - The type of setup session, determining the flow and outcome of the session. `admin` creates an admin consent link for auth methods that support it, never creates credentials or configs, and cannot be bound to an identity, consumer, or config.
 	Type          *string         `json:"type,omitempty"`
 	Configuration *map[string]any `json:"configuration,omitempty"`
 }

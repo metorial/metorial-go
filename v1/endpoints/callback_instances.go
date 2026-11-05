@@ -34,6 +34,8 @@ type CallbackInstancesEndpointListParams struct {
 	IntegrationInstanceProviderId *any `json:"integration_instance_provider_id,omitempty"`
 	// Status - Filter by callback instance lifecycle status
 	Status *any `json:"status,omitempty"`
+	// Search - Match a callback instance by its exact ID
+	Search *string `json:"search,omitempty"`
 	// CreatedAt - Filter callback instance creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter callback instance last update time by date range

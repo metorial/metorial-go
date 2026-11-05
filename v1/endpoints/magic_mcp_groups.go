@@ -24,6 +24,7 @@ type MagicMcpGroupsEndpointListParams struct {
 	Order  *string  `json:"order,omitempty"`
 	Status *any     `json:"status,omitempty"`
 	Search *string  `json:"search,omitempty"`
+	Id     *any     `json:"id,omitempty"`
 }
 
 // MagicMcpGroupsEndpointCreateBody contains the request body for Create.
@@ -92,7 +93,7 @@ func (e *MagicMcpGroupsEndpoint) Create(body *MagicMcpGroupsEndpointCreateBody) 
 	return &result, nil
 }
 
-// Delete deletes a magic MCP group.
+// Delete deletes a magic MCP group. Fails while the group is the only group of an active magic MCP token, so that deleting a group never widens what a token can access.
 func (e *MagicMcpGroupsEndpoint) Delete(magicMcpGroupId string) (*magicmcpgroups.MagicMcpGroupsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"magic-mcp-groups", magicMcpGroupId},

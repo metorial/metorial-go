@@ -17,22 +17,24 @@ func NewIntegrationsInstanceGroupsEndpoint(client *endpoint.Client) *Integration
 
 // IntegrationsInstanceGroupsEndpointListParams contains optional query parameters for List.
 type IntegrationsInstanceGroupsEndpointListParams struct {
-	Limit                         *float64 `json:"limit,omitempty"`
-	After                         *string  `json:"after,omitempty"`
-	Before                        *string  `json:"before,omitempty"`
-	Cursor                        *string  `json:"cursor,omitempty"`
-	Order                         *string  `json:"order,omitempty"`
-	Status                        *any     `json:"status,omitempty"`
-	Id                            *any     `json:"id,omitempty"`
-	IntegrationId                 *any     `json:"integration_id,omitempty"`
-	IntegrationInstanceId         *any     `json:"integration_instance_id,omitempty"`
-	IntegrationInstanceProviderId *any     `json:"integration_instance_provider_id,omitempty"`
-	ProviderId                    *any     `json:"provider_id,omitempty"`
-	IntegrationProviderId         *any     `json:"integration_provider_id,omitempty"`
-	ProviderDeploymentId          *any     `json:"provider_deployment_id,omitempty"`
-	ProviderConfigId              *any     `json:"provider_config_id,omitempty"`
-	ProviderAuthConfigId          *any     `json:"provider_auth_config_id,omitempty"`
-	SessionTemplateId             *any     `json:"session_template_id,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules: shared (not owned by someone else), usable (shared plus ones the caller may use) or all (everything the caller may see). Defaults to shared when ownership is enforced and all otherwise.
+	Ownership                     *string `json:"ownership,omitempty"`
+	Status                        *any    `json:"status,omitempty"`
+	Id                            *any    `json:"id,omitempty"`
+	IntegrationId                 *any    `json:"integration_id,omitempty"`
+	IntegrationInstanceId         *any    `json:"integration_instance_id,omitempty"`
+	IntegrationInstanceProviderId *any    `json:"integration_instance_provider_id,omitempty"`
+	ProviderId                    *any    `json:"provider_id,omitempty"`
+	IntegrationProviderId         *any    `json:"integration_provider_id,omitempty"`
+	ProviderDeploymentId          *any    `json:"provider_deployment_id,omitempty"`
+	ProviderConfigId              *any    `json:"provider_config_id,omitempty"`
+	ProviderAuthConfigId          *any    `json:"provider_auth_config_id,omitempty"`
+	SessionTemplateId             *any    `json:"session_template_id,omitempty"`
 	// CreatedAt - Filter integration instance group creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter integration instance group last update time by date range

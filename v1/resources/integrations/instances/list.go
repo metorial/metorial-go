@@ -5,6 +5,50 @@ import (
 	"time"
 )
 
+// IntegrationsInstancesListOutputItemsAccessOwnerOrganizationMember - Organization member associated with this owner.
+type IntegrationsInstancesListOutputItemsAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// IntegrationsInstancesListOutputItemsAccessOwnerConsumer - Consumer and profile associated with this owner.
+type IntegrationsInstancesListOutputItemsAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// IntegrationsInstancesListOutputItemsAccessOwner - The actor that owns this resource, if any.
+type IntegrationsInstancesListOutputItemsAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *IntegrationsInstancesListOutputItemsAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *IntegrationsInstancesListOutputItemsAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// IntegrationsInstancesListOutputItemsAccess - Resource ownership and access settings.
+type IntegrationsInstancesListOutputItemsAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *IntegrationsInstancesListOutputItemsAccessOwner `json:"owner,omitempty"`
+}
+
 // IntegrationsInstancesListOutputItemsImplementation represents the integrations instances list output items implementation type.
 type IntegrationsInstancesListOutputItemsImplementation struct {
 	Type             string `json:"type"`
@@ -165,20 +209,22 @@ type IntegrationsInstancesListOutputItemsProviders struct {
 
 // IntegrationsInstancesListOutputItems represents the integrations instances list output items type.
 type IntegrationsInstancesListOutputItems struct {
-	Object          string                                              `json:"object"`
-	Id              string                                              `json:"id"`
-	Status          string                                              `json:"status"`
-	Name            string                                              `json:"name"`
-	Description     *string                                             `json:"description,omitempty"`
-	Metadata        *map[string]any                                     `json:"metadata,omitempty"`
-	IntegrationId   string                                              `json:"integration_id"`
-	IdentityActorId *string                                             `json:"identity_actor_id,omitempty"`
-	IdentityId      *string                                             `json:"identity_id,omitempty"`
-	Implementation  *IntegrationsInstancesListOutputItemsImplementation `json:"implementation,omitempty"`
-	Providers       []IntegrationsInstancesListOutputItemsProviders     `json:"providers"`
-	CreatedAt       time.Time                                           `json:"created_at"`
-	UpdatedAt       time.Time                                           `json:"updated_at"`
-	ArchivedAt      *time.Time                                          `json:"archived_at,omitempty"`
+	Object          string          `json:"object"`
+	Id              string          `json:"id"`
+	Status          string          `json:"status"`
+	Name            string          `json:"name"`
+	Description     *string         `json:"description,omitempty"`
+	Metadata        *map[string]any `json:"metadata,omitempty"`
+	IntegrationId   string          `json:"integration_id"`
+	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
+	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Access - Resource ownership and access settings.
+	Access         IntegrationsInstancesListOutputItemsAccess          `json:"access"`
+	Implementation *IntegrationsInstancesListOutputItemsImplementation `json:"implementation,omitempty"`
+	Providers      []IntegrationsInstancesListOutputItemsProviders     `json:"providers"`
+	CreatedAt      time.Time                                           `json:"created_at"`
+	UpdatedAt      time.Time                                           `json:"updated_at"`
+	ArchivedAt     *time.Time                                          `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesListOutputPagination represents the integrations instances list output pagination type.
@@ -225,24 +271,26 @@ type IntegrationsInstancesListQueryUpdatedAt struct {
 
 // IntegrationsInstancesListQuery represents the integrations instances list query type.
 type IntegrationsInstancesListQuery struct {
-	Limit                 *float64 `json:"limit,omitempty"`
-	After                 *string  `json:"after,omitempty"`
-	Before                *string  `json:"before,omitempty"`
-	Cursor                *string  `json:"cursor,omitempty"`
-	Order                 *string  `json:"order,omitempty"`
-	Search                *string  `json:"search,omitempty"`
-	Status                *any     `json:"status,omitempty"`
-	Id                    *any     `json:"id,omitempty"`
-	IntegrationId         *any     `json:"integration_id,omitempty"`
-	ProviderId            *any     `json:"provider_id,omitempty"`
-	IntegrationProviderId *any     `json:"integration_provider_id,omitempty"`
-	IdentityId            *any     `json:"identity_id,omitempty"`
-	IdentityCredentialId  *any     `json:"identity_credential_id,omitempty"`
-	IdentityActorId       *any     `json:"identity_actor_id,omitempty"`
-	ProviderDeploymentId  *any     `json:"provider_deployment_id,omitempty"`
-	ProviderConfigId      *any     `json:"provider_config_id,omitempty"`
-	ProviderAuthConfigId  *any     `json:"provider_auth_config_id,omitempty"`
-	SessionTemplateId     *any     `json:"session_template_id,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules: shared (not owned by someone else), usable (shared plus ones the caller may use) or all (everything the caller may see). Defaults to shared when ownership is enforced and all otherwise.
+	Ownership             *string `json:"ownership,omitempty"`
+	Search                *string `json:"search,omitempty"`
+	Status                *any    `json:"status,omitempty"`
+	Id                    *any    `json:"id,omitempty"`
+	IntegrationId         *any    `json:"integration_id,omitempty"`
+	ProviderId            *any    `json:"provider_id,omitempty"`
+	IntegrationProviderId *any    `json:"integration_provider_id,omitempty"`
+	IdentityId            *any    `json:"identity_id,omitempty"`
+	IdentityCredentialId  *any    `json:"identity_credential_id,omitempty"`
+	IdentityActorId       *any    `json:"identity_actor_id,omitempty"`
+	ProviderDeploymentId  *any    `json:"provider_deployment_id,omitempty"`
+	ProviderConfigId      *any    `json:"provider_config_id,omitempty"`
+	ProviderAuthConfigId  *any    `json:"provider_auth_config_id,omitempty"`
+	SessionTemplateId     *any    `json:"session_template_id,omitempty"`
 	// CreatedAt - Filter integration instance creation time by date range
 	CreatedAt *IntegrationsInstancesListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter integration instance last update time by date range

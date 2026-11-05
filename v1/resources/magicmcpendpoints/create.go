@@ -5,6 +5,61 @@ import (
 	"time"
 )
 
+// MagicMcpEndpointsCreateOutputSkillSelection represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type MagicMcpEndpointsCreateOutputSkillSelection struct {
+	// Type - Only the listed skills and the skills in the listed groups are exposed.
+	Type *string `json:"type,omitempty"`
+	// SkillIds - IDs of the selected skills.
+	SkillIds *[]string `json:"skill_ids,omitempty"`
+	// SkillGroupIds - IDs of the selected skill groups.
+	SkillGroupIds *[]string `json:"skill_group_ids,omitempty"`
+}
+
+// MagicMcpEndpointsCreateOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
+type MagicMcpEndpointsCreateOutputAccessOwnerOrganizationMember struct {
+	// Id - Identifier of the organization member who owns the resource.
+	Id string `json:"id"`
+}
+
+// MagicMcpEndpointsCreateOutputAccessOwnerConsumer - Consumer and profile associated with this owner.
+type MagicMcpEndpointsCreateOutputAccessOwnerConsumer struct {
+	// Id - Identifier of the owning consumer.
+	Id string `json:"id"`
+	// ProfileId - Identifier of the owning consumer profile.
+	ProfileId string `json:"profile_id"`
+	// PortalId - Identifier of the consumer profile’s portal, if any.
+	PortalId *string `json:"portal_id,omitempty"`
+}
+
+// MagicMcpEndpointsCreateOutputAccessOwner - The actor that owns this resource, if any.
+type MagicMcpEndpointsCreateOutputAccessOwner struct {
+	// Type - Type of the owning actor.
+	Type string `json:"type"`
+	// Name - Display name of the owning actor.
+	Name *string `json:"name,omitempty"`
+	// ImageUrl - Avatar image URL of the owning actor, if available.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address of the owning actor, if available.
+	Email *string `json:"email,omitempty"`
+	// OrganizationMember - Organization member associated with this owner.
+	OrganizationMember *MagicMcpEndpointsCreateOutputAccessOwnerOrganizationMember `json:"organization_member,omitempty"`
+	// Consumer - Consumer and profile associated with this owner.
+	Consumer *MagicMcpEndpointsCreateOutputAccessOwnerConsumer `json:"consumer,omitempty"`
+}
+
+// MagicMcpEndpointsCreateOutputAccess - Resource ownership and access settings.
+type MagicMcpEndpointsCreateOutputAccess struct {
+	// Source - Integration resource source, or null when the resource is not from Explorer.
+	Source *string `json:"source,omitempty"`
+	// Type - Whether usage is public or locked to the owner under the project ownership rules.
+	Type string `json:"type"`
+	// Visibility - Whether visibility is unrestricted or limited to the owner under the project ownership rules.
+	Visibility string `json:"visibility"`
+	// Owner - The actor that owns this resource, if any.
+	Owner *MagicMcpEndpointsCreateOutputAccessOwner `json:"owner,omitempty"`
+}
+
 // MagicMcpEndpointsCreateOutput represents the magic mcp endpoints create output type.
 type MagicMcpEndpointsCreateOutput struct {
 	Object      string           `json:"object"`
@@ -16,8 +71,16 @@ type MagicMcpEndpointsCreateOutput struct {
 	Name        *string          `json:"name,omitempty"`
 	Description *string          `json:"description,omitempty"`
 	Metadata    map[string]any   `json:"metadata"`
-	CreatedAt   time.Time        `json:"created_at"`
-	UpdatedAt   time.Time        `json:"updated_at"`
+	// EnableSkillEditing - Whether consumers connecting through this endpoint with a consumer magic MCP token get tools to read and edit the skills they have access to. The tools are hidden while skills are disabled for the instance.
+	EnableSkillEditing bool `json:"enable_skill_editing"`
+	// EnableSkillResources - Whether consumers connecting through this endpoint with a consumer magic MCP token can read the skills they have access to over MCP, as skill:// resources with skills/list and skills/get. Skills are hidden while skills are disabled for the instance.
+	EnableSkillResources bool `json:"enable_skill_resources"`
+	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools.
+	SkillSelection MagicMcpEndpointsCreateOutputSkillSelection `json:"skill_selection"`
+	// Access - Resource ownership and access settings.
+	Access    MagicMcpEndpointsCreateOutputAccess `json:"access"`
+	CreatedAt time.Time                           `json:"created_at"`
+	UpdatedAt time.Time                           `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsCreateOutputFromJSON deserializes JSON data into a MagicMcpEndpointsCreateOutput.
@@ -34,6 +97,17 @@ func MapMagicMcpEndpointsCreateOutputToJSON(v *MagicMcpEndpointsCreateOutput) ([
 	return json.Marshal(v)
 }
 
+// MagicMcpEndpointsCreateBodySkillSelection represents one of several possible types.
+// This is a union type - only one set of fields will be populated.
+type MagicMcpEndpointsCreateBodySkillSelection struct {
+	// Type - Expose only the listed skills and the skills in the listed groups.
+	Type *string `json:"type,omitempty"`
+	// SkillIds - IDs of the skills to expose.
+	SkillIds *[]string `json:"skill_ids,omitempty"`
+	// SkillGroupIds - IDs of the skill groups to expose. Membership is resolved on every request.
+	SkillGroupIds *[]string `json:"skill_group_ids,omitempty"`
+}
+
 // MagicMcpEndpointsCreateBodyMagicMcpServers represents the magic mcp endpoints create body magic mcp servers type.
 type MagicMcpEndpointsCreateBodyMagicMcpServers struct {
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
@@ -42,12 +116,18 @@ type MagicMcpEndpointsCreateBodyMagicMcpServers struct {
 
 // MagicMcpEndpointsCreateBody represents the magic mcp endpoints create body type.
 type MagicMcpEndpointsCreateBody struct {
-	Name              *string                                       `json:"name,omitempty"`
-	Description       *string                                       `json:"description,omitempty"`
-	Metadata          *map[string]any                               `json:"metadata,omitempty"`
-	ConsumerProfileId *string                                       `json:"consumer_profile_id,omitempty"`
-	SkillPluginId     *string                                       `json:"skill_plugin_id,omitempty"`
-	MagicMcpServers   *[]MagicMcpEndpointsCreateBodyMagicMcpServers `json:"magic_mcp_servers,omitempty"`
+	Name              *string         `json:"name,omitempty"`
+	Description       *string         `json:"description,omitempty"`
+	Metadata          *map[string]any `json:"metadata,omitempty"`
+	ConsumerProfileId *string         `json:"consumer_profile_id,omitempty"`
+	SkillPluginId     *string         `json:"skill_plugin_id,omitempty"`
+	// EnableSkillEditing - Expose skill editing tools on this endpoint so the connecting consumer can read and edit the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the tools; connections using a publishable key do not. Requires skills to be enabled for the instance and consumer skill editing to be allowed for the project. The tools disappear if either is turned off later.
+	EnableSkillEditing *bool `json:"enable_skill_editing,omitempty"`
+	// EnableSkillResources - Serve skills on this endpoint over MCP (the skills extension: skill:// resources, skills/list and skills/get) so the connecting consumer can read the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the skills. Requires skills to be enabled for the instance.
+	EnableSkillResources *bool `json:"enable_skill_resources,omitempty"`
+	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to.
+	SkillSelection  *MagicMcpEndpointsCreateBodySkillSelection    `json:"skill_selection,omitempty"`
+	MagicMcpServers *[]MagicMcpEndpointsCreateBodyMagicMcpServers `json:"magic_mcp_servers,omitempty"`
 }
 
 // MapMagicMcpEndpointsCreateBodyFromJSON deserializes JSON data into a MagicMcpEndpointsCreateBody.

@@ -335,9 +335,9 @@ type SessionsEventsGetOutputMessageToolCall struct {
 	ResponderParticipant *SessionsEventsGetOutputMessageToolCallResponderParticipant `json:"responder_participant,omitempty"`
 	Tool                 SessionsEventsGetOutputMessageToolCallTool                  `json:"tool"`
 	Error                *SessionsEventsGetOutputMessageToolCallError                `json:"error,omitempty"`
-	// Input - Input data passed to the tool call
+	// Input - Input data passed to the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output data returned from the tool call
+	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
@@ -467,9 +467,9 @@ type SessionsEventsGetOutputMessage struct {
 	Hierarchy SessionsEventsGetOutputMessageHierarchy `json:"hierarchy"`
 	// Transport - Transport information
 	Transport SessionsEventsGetOutputMessageTransport `json:"transport"`
-	// Input - Input message data
+	// Input - Input message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output message data
+	// Output - Output message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output               *map[string]any                                     `json:"output,omitempty"`
 	ToolCall             *SessionsEventsGetOutputMessageToolCall             `json:"tool_call,omitempty"`
 	SenderParticipant    SessionsEventsGetOutputMessageSenderParticipant     `json:"sender_participant"`

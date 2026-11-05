@@ -190,9 +190,9 @@ type ToolCallsListOutputItems struct {
 	ResponderParticipant *ToolCallsListOutputItemsResponderParticipant `json:"responder_participant,omitempty"`
 	Tool                 ToolCallsListOutputItemsTool                  `json:"tool"`
 	Error                *ToolCallsListOutputItemsError                `json:"error,omitempty"`
-	// Input - Input data passed to the tool call
+	// Input - Input data passed to the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
-	// Output - Output data returned from the tool call
+	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
@@ -265,6 +265,8 @@ type ToolCallsListQuery struct {
 	AgentId *any `json:"agent_id,omitempty"`
 	// ActorId - Filter by identity actor ID(s)
 	ActorId *any `json:"actor_id,omitempty"`
+	// ConsumerProfileId - Filter by the selected consumer profile ID or IDs.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// ConsumerId - Filter by consumer ID(s)
 	ConsumerId *any `json:"consumer_id,omitempty"`
 	// IdentityId - Filter by identity ID(s)
@@ -273,10 +275,14 @@ type ToolCallsListQuery struct {
 	AgentInstanceId *any `json:"agent_instance_id,omitempty"`
 	// ToolId - Filter by tool ID(s)
 	ToolId *any `json:"tool_id,omitempty"`
+	// Status - Filter by tool call status(es)
+	Status *any `json:"status,omitempty"`
 	// CreatedAt - Filter tool call creation time by date range
 	CreatedAt *ToolCallsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter tool call last update time by date range
 	UpdatedAt *ToolCallsListQueryUpdatedAt `json:"updated_at,omitempty"`
+	// Search - Search by tool call ID or tool key, or by the name of a related tool, provider, deployment, config, auth config, agent, actor, identity, or consumer
+	Search *string `json:"search,omitempty"`
 }
 
 // MapToolCallsListQueryFromJSON deserializes JSON data into a ToolCallsListQuery.

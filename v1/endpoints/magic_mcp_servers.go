@@ -17,22 +17,24 @@ func NewMagicMcpServersEndpoint(client *endpoint.Client) *MagicMcpServersEndpoin
 
 // MagicMcpServersEndpointListParams contains optional query parameters for List.
 type MagicMcpServersEndpointListParams struct {
-	Limit                 *float64 `json:"limit,omitempty"`
-	After                 *string  `json:"after,omitempty"`
-	Before                *string  `json:"before,omitempty"`
-	Cursor                *string  `json:"cursor,omitempty"`
-	Order                 *string  `json:"order,omitempty"`
-	Status                *any     `json:"status,omitempty"`
-	MagicMcpGroupId       *any     `json:"magic_mcp_group_id,omitempty"`
-	ProviderTemplateId    *any     `json:"provider_template_id,omitempty"`
-	IntegrationInstanceId *any     `json:"integration_instance_id,omitempty"`
-	Owner                 *any     `json:"owner,omitempty"`
-	ProviderId            *any     `json:"provider_id,omitempty"`
-	ConsumerId            *any     `json:"consumer_id,omitempty"`
-	ConsumerProfileId     *any     `json:"consumer_profile_id,omitempty"`
-	Search                *string  `json:"search,omitempty"`
-	Id                    *any     `json:"id,omitempty"`
-	PreconfiguredOnly     *bool    `json:"preconfigured_only,omitempty"`
+	Limit  *float64 `json:"limit,omitempty"`
+	After  *string  `json:"after,omitempty"`
+	Before *string  `json:"before,omitempty"`
+	Cursor *string  `json:"cursor,omitempty"`
+	Order  *string  `json:"order,omitempty"`
+	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'shared' when ownership is enforced for the project and 'all' otherwise.
+	Ownership             *string `json:"ownership,omitempty"`
+	Status                *any    `json:"status,omitempty"`
+	MagicMcpGroupId       *any    `json:"magic_mcp_group_id,omitempty"`
+	ProviderTemplateId    *any    `json:"provider_template_id,omitempty"`
+	IntegrationInstanceId *any    `json:"integration_instance_id,omitempty"`
+	Owner                 *any    `json:"owner,omitempty"`
+	ProviderId            *any    `json:"provider_id,omitempty"`
+	ConsumerId            *any    `json:"consumer_id,omitempty"`
+	ConsumerProfileId     *any    `json:"consumer_profile_id,omitempty"`
+	Search                *string `json:"search,omitempty"`
+	Id                    *any    `json:"id,omitempty"`
+	PreconfiguredOnly     *bool   `json:"preconfigured_only,omitempty"`
 }
 
 // MagicMcpServersEndpointCreateBody contains the request body for Create.
