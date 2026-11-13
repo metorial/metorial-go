@@ -50,6 +50,8 @@ type CallbacksEndpointCreateBody struct {
 	Name *string `json:"name,omitempty"`
 	// Description - Description for the callback. Defaults to the description of the integration provider.
 	Description *string `json:"description,omitempty"`
+	// TriggerGroupSelections - Resource selections keyed by trigger group key. Each value must match that group’s selection schema. Limited to 64 groups and 64 KiB of JSON.
+	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 }
 
 // CallbacksEndpointUpdateBody contains the request body for Update.
@@ -60,6 +62,8 @@ type CallbacksEndpointUpdateBody struct {
 	Description *string `json:"description,omitempty"`
 	// Metadata - Updated custom metadata
 	Metadata *map[string]any `json:"metadata,omitempty"`
+	// TriggerGroupSelections - Resource selections keyed by trigger group key. Each value must match that group’s selection schema. Limited to 64 groups and 64 KiB of JSON.
+	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 }
 
 // List returns a paginated list of callbacks.
@@ -104,7 +108,7 @@ func (e *CallbacksEndpoint) Get(callbackId string) (*callbacks.CallbacksGetOutpu
 	return &result, nil
 }
 
-// Update updates the name, description or metadata of a callback. Everything else about a callback is derived from its integration provider - set `callbacks.status` to `disabled` there to tear it down.
+// Update updates the name, description, metadata or trigger group selections of a callback. Changing the selections re-registers the affected triggers. Everything else about a callback is derived from its integration provider - set `callbacks.status` to `disabled` there to tear it down.
 func (e *CallbacksEndpoint) Update(callbackId string, body *CallbacksEndpointUpdateBody) (*callbacks.CallbacksUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"callbacks", callbackId},

@@ -23,6 +23,22 @@ type CallbacksListOutputItemsProvider struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// CallbacksListOutputItemsTriggerGroups - A trigger group that accepts a selection
+type CallbacksListOutputItemsTriggerGroups struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Key - Trigger group key to use in `trigger_group_selections`
+	Key string `json:"key"`
+	// Name - Display name of the trigger group
+	Name string `json:"name"`
+	// Description - What the trigger group delivers
+	Description *string `json:"description,omitempty"`
+	// SelectionSchema - JSON Schema the selection for this trigger group must match
+	SelectionSchema map[string]any `json:"selection_schema"`
+	// Status - `selection_required` when the trigger group needs a selection before it delivers events.
+	Status string `json:"status"`
+}
+
 // CallbacksListOutputItems represents the callbacks list output items type.
 type CallbacksListOutputItems struct {
 	// Object - String representing the object's type
@@ -42,6 +58,10 @@ type CallbacksListOutputItems struct {
 	// IntegrationProviderId - Integration provider this callback was created for
 	IntegrationProviderId string                           `json:"integration_provider_id"`
 	Provider              CallbacksListOutputItemsProvider `json:"provider"`
+	// TriggerGroupSelections - Selections for trigger groups that need to know what to watch, keyed by trigger group key
+	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
+	// TriggerGroups - Trigger groups that accept a selection, with their schema and whether one is still required
+	TriggerGroups []CallbacksListOutputItemsTriggerGroups `json:"trigger_groups"`
 	// CreatedAt - Timestamp when the callback was created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when the callback was last updated

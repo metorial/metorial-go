@@ -38,6 +38,11 @@ type ConsumersEndpointGetMemberConsumerBody struct {
 	SurfaceIdentifier *string `json:"surface_identifier,omitempty"`
 }
 
+// ConsumersEndpointCreateMemberSessionBody contains the request body for CreateMemberSession.
+type ConsumersEndpointCreateMemberSessionBody struct {
+	IntegrationId *string `json:"integration_id,omitempty"`
+}
+
 // ConsumersEndpointUpdateBody contains the request body for Update.
 type ConsumersEndpointUpdateBody struct {
 	Name  *string `json:"name,omitempty"`
@@ -93,6 +98,19 @@ func (e *ConsumersEndpoint) GetMemberConsumer(instanceId string, body *Consumers
 		Body: body,
 	}
 	var result consumers.ConsumersGetMemberConsumerOutput
+	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// CreateMemberSession exchanges a CLI sign-in for a short-lived credential for the member’s own consumer profile.
+func (e *ConsumersEndpoint) CreateMemberSession(instanceId string, body *ConsumersEndpointCreateMemberSessionBody) (*consumers.ConsumersCreateMemberSessionOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "member-consumer-session"},
+		Body: body,
+	}
+	var result consumers.ConsumersCreateMemberSessionOutput
 	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
