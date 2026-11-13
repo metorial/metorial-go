@@ -23,6 +23,22 @@ type CallbacksCreateOutputProvider struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
+// CallbacksCreateOutputTriggerGroups - A trigger group that accepts a selection
+type CallbacksCreateOutputTriggerGroups struct {
+	// Object - String representing the object's type
+	Object string `json:"object"`
+	// Key - Trigger group key to use in `trigger_group_selections`
+	Key string `json:"key"`
+	// Name - Display name of the trigger group
+	Name string `json:"name"`
+	// Description - What the trigger group delivers
+	Description *string `json:"description,omitempty"`
+	// SelectionSchema - JSON Schema the selection for this trigger group must match
+	SelectionSchema map[string]any `json:"selection_schema"`
+	// Status - `selection_required` when the trigger group needs a selection before it delivers events.
+	Status string `json:"status"`
+}
+
 // CallbacksCreateOutput represents the callbacks create output type.
 type CallbacksCreateOutput struct {
 	// Object - String representing the object's type
@@ -42,6 +58,10 @@ type CallbacksCreateOutput struct {
 	// IntegrationProviderId - Integration provider this callback was created for
 	IntegrationProviderId string                        `json:"integration_provider_id"`
 	Provider              CallbacksCreateOutputProvider `json:"provider"`
+	// TriggerGroupSelections - Selections for trigger groups that need to know what to watch, keyed by trigger group key
+	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
+	// TriggerGroups - Trigger groups that accept a selection, with their schema and whether one is still required
+	TriggerGroups []CallbacksCreateOutputTriggerGroups `json:"trigger_groups"`
 	// CreatedAt - Timestamp when the callback was created
 	CreatedAt time.Time `json:"created_at"`
 	// UpdatedAt - Timestamp when the callback was last updated
@@ -72,6 +92,8 @@ type CallbacksCreateBody struct {
 	Name *string `json:"name,omitempty"`
 	// Description - Description for the callback. Defaults to the description of the integration provider.
 	Description *string `json:"description,omitempty"`
+	// TriggerGroupSelections - Resource selections keyed by trigger group key. Each value must match that group’s selection schema. Limited to 64 groups and 64 KiB of JSON.
+	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 }
 
 // MapCallbacksCreateBodyFromJSON deserializes JSON data into a CallbacksCreateBody.
