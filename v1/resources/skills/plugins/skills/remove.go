@@ -5,23 +5,32 @@ import (
 	"time"
 )
 
+// SkillsPluginsSkillsRemoveOutputSkillImage represents the skills plugins skills remove output skill image type.
+type SkillsPluginsSkillsRemoveOutputSkillImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsPluginsSkillsRemoveOutputSkill represents the skills plugins skills remove output skill type.
 type SkillsPluginsSkillsRemoveOutputSkill struct {
-	Object            string          `json:"object"`
-	Id                string          `json:"id"`
-	Status            string          `json:"status"`
-	Slug              string          `json:"slug"`
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ImageUrl          string          `json:"image_url"`
-	ClientName        string          `json:"client_name"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
+	Object            string                                    `json:"object"`
+	Id                string                                    `json:"id"`
+	Status            string                                    `json:"status"`
+	Slug              string                                    `json:"slug"`
+	Name              string                                    `json:"name"`
+	Description       *string                                   `json:"description,omitempty"`
+	ImageUrl          string                                    `json:"image_url"`
+	Image             SkillsPluginsSkillsRemoveOutputSkillImage `json:"image"`
+	ClientName        string                                    `json:"client_name"`
+	ClientDescription *string                                   `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any                           `json:"client_metadata,omitempty"`
+	License           *string                                   `json:"license,omitempty"`
+	Compatibility     *string                                   `json:"compatibility,omitempty"`
+	Metadata          *map[string]any                           `json:"metadata,omitempty"`
+	CreatedAt         time.Time                                 `json:"created_at"`
+	UpdatedAt         time.Time                                 `json:"updated_at"`
 }
 
 // SkillsPluginsSkillsRemoveOutput represents the skills plugins skills remove output type.

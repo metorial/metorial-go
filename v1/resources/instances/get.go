@@ -17,6 +17,8 @@ type InstancesGetOutputProject struct {
 	Slug string `json:"slug"`
 	// Name - The project's name
 	Name string `json:"name"`
+	// AssistantEnabled - Whether Metorial Assistant is available in this project, including compliance restrictions.
+	AssistantEnabled bool `json:"assistant_enabled"`
 	// OrganizationId - The organization's unique identifier
 	OrganizationId string `json:"organization_id"`
 	// CreatedAt - The project's creation date

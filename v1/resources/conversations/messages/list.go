@@ -99,14 +99,25 @@ type ConversationsMessagesListOutputItemsRequestActor struct {
 	ConsumerProfile   *map[string]any                                                    `json:"consumer_profile,omitempty"`
 }
 
+// ConversationsMessagesListOutputItemsRequestContext represents the conversations messages list output items request context type.
+type ConversationsMessagesListOutputItemsRequestContext struct {
+	// Mode - The mode the assistant ran in after permission checks
+	Mode string `json:"mode"`
+	// RequestedMode - The mode requested by the client
+	RequestedMode string `json:"requested_mode"`
+	// CanWrite - Whether the assistant could change the underlying resource
+	CanWrite bool `json:"can_write"`
+}
+
 // ConversationsMessagesListOutputItemsRequest represents the conversations messages list output items request type.
 type ConversationsMessagesListOutputItemsRequest struct {
-	Object    string                                            `json:"object"`
-	Id        string                                            `json:"id"`
-	Status    string                                            `json:"status"`
-	Actor     *ConversationsMessagesListOutputItemsRequestActor `json:"actor,omitempty"`
-	CreatedAt time.Time                                         `json:"created_at"`
-	UpdatedAt time.Time                                         `json:"updated_at"`
+	Object    string                                              `json:"object"`
+	Id        string                                              `json:"id"`
+	Status    string                                              `json:"status"`
+	Actor     *ConversationsMessagesListOutputItemsRequestActor   `json:"actor,omitempty"`
+	Context   *ConversationsMessagesListOutputItemsRequestContext `json:"context,omitempty"`
+	CreatedAt time.Time                                           `json:"created_at"`
+	UpdatedAt time.Time                                           `json:"updated_at"`
 }
 
 // ConversationsMessagesListOutputItems represents the conversations messages list output items type.

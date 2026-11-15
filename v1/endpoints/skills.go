@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills"
 )
 
@@ -28,6 +29,8 @@ type SkillsEndpointListParams struct {
 	SkillGroupId  *any     `json:"skill_group_id,omitempty"`
 	IntegrationId *any     `json:"integration_id,omitempty"`
 	ProviderId    *any     `json:"provider_id,omitempty"`
+	// OwnedByMe - Only return skills the caller created or owns, including ones created through their other member or consumer identities
+	OwnedByMe *bool `json:"owned_by_me,omitempty"`
 	// CreatedAt - Filter skill creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter skill last update time by date range
@@ -60,6 +63,8 @@ type SkillsEndpointUpdateBody struct {
 	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
 	Metadata          *map[string]any `json:"metadata,omitempty"`
 	ImageFileId       *string         `json:"image_file_id,omitempty"`
+	// ImageIcon - Use a library icon with a tile color as the skill image. Pass null to reset to the default image. Cannot be combined with image_file_id.
+	ImageIcon *nullable.Nullable[map[string]any] `json:"image_icon,omitempty"`
 }
 
 // SkillsEndpointForkBody contains the request body for Fork.
@@ -79,7 +84,8 @@ type SkillsEndpointForkBody struct {
 type SkillsEndpointShareBody struct {
 	ConsumerProfileIds    *[]string `json:"consumer_profile_ids,omitempty"`
 	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
-	Permission            string    `json:"permission"`
+	// Permission - Access to grant. Owners can always edit the skill and can add other owners; only admins can remove or downgrade an owner. Owners must be consumers.
+	Permission string `json:"permission"`
 }
 
 // SkillsEndpointDuplicateBody contains the request body for Duplicate.

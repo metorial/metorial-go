@@ -80,6 +80,8 @@ type SkillsImportsCreateBodySource struct {
 // SkillsImportsCreateBody represents the skills imports create body type.
 type SkillsImportsCreateBody struct {
 	Source SkillsImportsCreateBodySource `json:"source"`
+	// SkillGroupId - The ID of a skill group that every imported skill is added to.
+	SkillGroupId *string `json:"skill_group_id,omitempty"`
 }
 
 // MapSkillsImportsCreateBodyFromJSON deserializes JSON data into a SkillsImportsCreateBody.

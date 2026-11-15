@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// SkillsShareOutputImage represents the skills share output image type.
+type SkillsShareOutputImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsShareOutputHierarchyCreatorOrganizationActorMember represents the skills share output hierarchy creator organization actor member type.
 type SkillsShareOutputHierarchyCreatorOrganizationActorMember struct {
 	// Object - String representing the organization's member preview type
@@ -311,6 +319,7 @@ type SkillsShareOutput struct {
 	Name              string                          `json:"name"`
 	Description       *string                         `json:"description,omitempty"`
 	ImageUrl          string                          `json:"image_url"`
+	Image             SkillsShareOutputImage          `json:"image"`
 	ClientName        string                          `json:"client_name"`
 	ClientDescription *string                         `json:"client_description,omitempty"`
 	ClientMetadata    *map[string]any                 `json:"client_metadata,omitempty"`
@@ -343,7 +352,8 @@ func MapSkillsShareOutputToJSON(v *SkillsShareOutput) ([]byte, error) {
 type SkillsShareBody struct {
 	ConsumerProfileIds    *[]string `json:"consumer_profile_ids,omitempty"`
 	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
-	Permission            string    `json:"permission"`
+	// Permission - Access to grant. Owners can always edit the skill and can add other owners; only admins can remove or downgrade an owner. Owners must be consumers.
+	Permission string `json:"permission"`
 }
 
 // MapSkillsShareBodyFromJSON deserializes JSON data into a SkillsShareBody.

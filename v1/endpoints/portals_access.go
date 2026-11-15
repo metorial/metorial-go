@@ -49,6 +49,7 @@ type PortalsAccessEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Readme      *string `json:"readme,omitempty"`
+	Permission  *string `json:"permission,omitempty"`
 }
 
 // List returns a paginated list of consumer access rules for a portal.
@@ -93,7 +94,7 @@ func (e *PortalsAccessEndpoint) Create(portalId string, body *PortalsAccessEndpo
 	return &result, nil
 }
 
-// Update updates the shared listing fields for a portal access rule.
+// Update updates the shared listing fields of a portal access rule, and the access level of skill and skill group rules.
 func (e *PortalsAccessEndpoint) Update(portalId string, accessId string, body *PortalsAccessEndpointUpdateBody) (*access.PortalsAccessUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"portals", portalId, "access", accessId},

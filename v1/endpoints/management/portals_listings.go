@@ -31,6 +31,8 @@ type PortalsListingsEndpointListParams struct {
 	SkillGroupId                   *any     `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId             *any     `json:"skill_marketplace_id,omitempty"`
 	Type                           *any     `json:"type,omitempty"`
+	// HasAccess - Only return listings that have at least one consumer access grant (true) or none (false).
+	HasAccess *bool `json:"has_access,omitempty"`
 }
 
 // PortalsListingsEndpointCreateBody contains the request body for Create.
@@ -38,7 +40,9 @@ type PortalsListingsEndpointCreateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Readme      *string `json:"readme,omitempty"`
-	Access      any     `json:"access"`
+	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it. Defaults to true.
+	IsDiscoverable *bool `json:"is_discoverable,omitempty"`
+	Access         any   `json:"access"`
 }
 
 // PortalsListingsEndpointUpdateBody contains the request body for Update.
@@ -46,6 +50,8 @@ type PortalsListingsEndpointUpdateBody struct {
 	Name        *string `json:"name,omitempty"`
 	Description *string `json:"description,omitempty"`
 	Readme      *string `json:"readme,omitempty"`
+	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
+	IsDiscoverable *bool `json:"is_discoverable,omitempty"`
 }
 
 // List returns a paginated list of shared listings for a portal.

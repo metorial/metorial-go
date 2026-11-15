@@ -156,6 +156,8 @@ type ToolCallsGetOutputError struct {
 	GroupId *string `json:"group_id,omitempty"`
 	// SimilarErrorCount - Count of similar errors in the group
 	SimilarErrorCount float64 `json:"similar_error_count"`
+	// IssueId - The provider issue this occurrence is aggregated into
+	IssueId *string `json:"issue_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }

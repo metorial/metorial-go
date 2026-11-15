@@ -92,15 +92,17 @@ type PortalsListingsListOutputItemsGroups struct {
 
 // PortalsListingsListOutputItems represents the portals listings list output items type.
 type PortalsListingsListOutputItems struct {
-	Object      string                                 `json:"object"`
-	Id          string                                 `json:"id"`
-	Name        string                                 `json:"name"`
-	Description *string                                `json:"description,omitempty"`
-	Readme      *string                                `json:"readme,omitempty"`
-	Access      PortalsListingsListOutputItemsAccess   `json:"access"`
-	Groups      []PortalsListingsListOutputItemsGroups `json:"groups"`
-	CreatedAt   time.Time                              `json:"created_at"`
-	UpdatedAt   time.Time                              `json:"updated_at"`
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+	Readme      *string `json:"readme,omitempty"`
+	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
+	IsDiscoverable bool                                   `json:"is_discoverable"`
+	Access         PortalsListingsListOutputItemsAccess   `json:"access"`
+	Groups         []PortalsListingsListOutputItemsGroups `json:"groups"`
+	CreatedAt      time.Time                              `json:"created_at"`
+	UpdatedAt      time.Time                              `json:"updated_at"`
 }
 
 // PortalsListingsListOutputPagination represents the portals listings list output pagination type.
@@ -145,6 +147,8 @@ type PortalsListingsListQuery struct {
 	SkillGroupId                   *any     `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId             *any     `json:"skill_marketplace_id,omitempty"`
 	Type                           *any     `json:"type,omitempty"`
+	// HasAccess - Only return listings that have at least one consumer access grant (true) or none (false).
+	HasAccess *bool `json:"has_access,omitempty"`
 }
 
 // MapPortalsListingsListQueryFromJSON deserializes JSON data into a PortalsListingsListQuery.

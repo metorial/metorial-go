@@ -25,7 +25,9 @@ type SkillsMarketplacesEndpointListParams struct {
 	Id                   *any     `json:"id,omitempty"`
 	Status               *any     `json:"status,omitempty"`
 	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
-	Search               *string  `json:"search,omitempty"`
+	// SkillGroupId - Only return marketplaces that contain an active plugin synced from these skill groups.
+	SkillGroupId *any    `json:"skill_group_id,omitempty"`
+	Search       *string `json:"search,omitempty"`
 	// CreatedAt - Filter skill marketplace creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter skill marketplace last update time by date range

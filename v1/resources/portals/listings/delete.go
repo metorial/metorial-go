@@ -92,15 +92,17 @@ type PortalsListingsDeleteOutputGroups struct {
 
 // PortalsListingsDeleteOutput represents the portals listings delete output type.
 type PortalsListingsDeleteOutput struct {
-	Object      string                              `json:"object"`
-	Id          string                              `json:"id"`
-	Name        string                              `json:"name"`
-	Description *string                             `json:"description,omitempty"`
-	Readme      *string                             `json:"readme,omitempty"`
-	Access      PortalsListingsDeleteOutputAccess   `json:"access"`
-	Groups      []PortalsListingsDeleteOutputGroups `json:"groups"`
-	CreatedAt   time.Time                           `json:"created_at"`
-	UpdatedAt   time.Time                           `json:"updated_at"`
+	Object      string  `json:"object"`
+	Id          string  `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description,omitempty"`
+	Readme      *string `json:"readme,omitempty"`
+	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
+	IsDiscoverable bool                                `json:"is_discoverable"`
+	Access         PortalsListingsDeleteOutputAccess   `json:"access"`
+	Groups         []PortalsListingsDeleteOutputGroups `json:"groups"`
+	CreatedAt      time.Time                           `json:"created_at"`
+	UpdatedAt      time.Time                           `json:"updated_at"`
 }
 
 // MapPortalsListingsDeleteOutputFromJSON deserializes JSON data into a PortalsListingsDeleteOutput.

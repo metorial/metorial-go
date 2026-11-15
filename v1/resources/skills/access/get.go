@@ -12,11 +12,29 @@ type SkillsAccessGetOutputGrantsSubject struct {
 	Name              *string `json:"name,omitempty"`
 }
 
+// SkillsAccessGetOutputGrantsSourceSkillGroup - Set when the access is inherited from a skill group.
+type SkillsAccessGetOutputGrantsSourceSkillGroup struct {
+	// Id - The skill group the access is inherited from.
+	Id string `json:"id"`
+	// Name - The name of the skill group.
+	Name string `json:"name"`
+}
+
+// SkillsAccessGetOutputGrantsSource - Where this access grant comes from.
+type SkillsAccessGetOutputGrantsSource struct {
+	// Type - Whether access was granted on the skill itself or is inherited from a skill group that contains it.
+	Type string `json:"type"`
+	// SkillGroup - Set when the access is inherited from a skill group.
+	SkillGroup *SkillsAccessGetOutputGrantsSourceSkillGroup `json:"skill_group,omitempty"`
+}
+
 // SkillsAccessGetOutputGrants represents the skills access get output grants type.
 type SkillsAccessGetOutputGrants struct {
 	Object  string                             `json:"object"`
 	Level   string                             `json:"level"`
 	Subject SkillsAccessGetOutputGrantsSubject `json:"subject"`
+	// Source - Where this access grant comes from.
+	Source SkillsAccessGetOutputGrantsSource `json:"source"`
 }
 
 // SkillsAccessGetOutput represents the skills access get output type.

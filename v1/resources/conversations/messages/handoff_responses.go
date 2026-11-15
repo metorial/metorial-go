@@ -99,14 +99,25 @@ type ConversationsMessagesHandoffResponsesOutputRequestActor struct {
 	ConsumerProfile   *map[string]any                                                           `json:"consumer_profile,omitempty"`
 }
 
+// ConversationsMessagesHandoffResponsesOutputRequestContext represents the conversations messages handoff responses output request context type.
+type ConversationsMessagesHandoffResponsesOutputRequestContext struct {
+	// Mode - The mode the assistant ran in after permission checks
+	Mode string `json:"mode"`
+	// RequestedMode - The mode requested by the client
+	RequestedMode string `json:"requested_mode"`
+	// CanWrite - Whether the assistant could change the underlying resource
+	CanWrite bool `json:"can_write"`
+}
+
 // ConversationsMessagesHandoffResponsesOutputRequest represents the conversations messages handoff responses output request type.
 type ConversationsMessagesHandoffResponsesOutputRequest struct {
-	Object    string                                                   `json:"object"`
-	Id        string                                                   `json:"id"`
-	Status    string                                                   `json:"status"`
-	Actor     *ConversationsMessagesHandoffResponsesOutputRequestActor `json:"actor,omitempty"`
-	CreatedAt time.Time                                                `json:"created_at"`
-	UpdatedAt time.Time                                                `json:"updated_at"`
+	Object    string                                                     `json:"object"`
+	Id        string                                                     `json:"id"`
+	Status    string                                                     `json:"status"`
+	Actor     *ConversationsMessagesHandoffResponsesOutputRequestActor   `json:"actor,omitempty"`
+	Context   *ConversationsMessagesHandoffResponsesOutputRequestContext `json:"context,omitempty"`
+	CreatedAt time.Time                                                  `json:"created_at"`
+	UpdatedAt time.Time                                                  `json:"updated_at"`
 }
 
 // ConversationsMessagesHandoffResponsesOutput represents the conversations messages handoff responses output type.

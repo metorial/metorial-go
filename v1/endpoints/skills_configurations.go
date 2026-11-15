@@ -20,6 +20,8 @@ type SkillsConfigurationsEndpointCreateBody struct {
 	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
 	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
 	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
+	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }
 
 // SkillsConfigurationsEndpointListParams contains optional query parameters for List.
@@ -36,6 +38,8 @@ type SkillsConfigurationsEndpointUpdateBody struct {
 	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
 	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
 	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
+	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }
 
 // Create creates a new non-default skill configuration.

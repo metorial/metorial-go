@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// SkillsPublishConsumerSkillOutputImage represents the skills publish consumer skill output image type.
+type SkillsPublishConsumerSkillOutputImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsPublishConsumerSkillOutputHierarchyCreatorOrganizationActorMember represents the skills publish consumer skill output hierarchy creator organization actor member type.
 type SkillsPublishConsumerSkillOutputHierarchyCreatorOrganizationActorMember struct {
 	// Object - String representing the organization's member preview type
@@ -311,6 +319,7 @@ type SkillsPublishConsumerSkillOutput struct {
 	Name              string                                         `json:"name"`
 	Description       *string                                        `json:"description,omitempty"`
 	ImageUrl          string                                         `json:"image_url"`
+	Image             SkillsPublishConsumerSkillOutputImage          `json:"image"`
 	ClientName        string                                         `json:"client_name"`
 	ClientDescription *string                                        `json:"client_description,omitempty"`
 	ClientMetadata    *map[string]any                                `json:"client_metadata,omitempty"`

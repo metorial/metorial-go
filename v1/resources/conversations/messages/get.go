@@ -99,14 +99,25 @@ type ConversationsMessagesGetOutputRequestActor struct {
 	ConsumerProfile   *map[string]any                                              `json:"consumer_profile,omitempty"`
 }
 
+// ConversationsMessagesGetOutputRequestContext represents the conversations messages get output request context type.
+type ConversationsMessagesGetOutputRequestContext struct {
+	// Mode - The mode the assistant ran in after permission checks
+	Mode string `json:"mode"`
+	// RequestedMode - The mode requested by the client
+	RequestedMode string `json:"requested_mode"`
+	// CanWrite - Whether the assistant could change the underlying resource
+	CanWrite bool `json:"can_write"`
+}
+
 // ConversationsMessagesGetOutputRequest represents the conversations messages get output request type.
 type ConversationsMessagesGetOutputRequest struct {
-	Object    string                                      `json:"object"`
-	Id        string                                      `json:"id"`
-	Status    string                                      `json:"status"`
-	Actor     *ConversationsMessagesGetOutputRequestActor `json:"actor,omitempty"`
-	CreatedAt time.Time                                   `json:"created_at"`
-	UpdatedAt time.Time                                   `json:"updated_at"`
+	Object    string                                        `json:"object"`
+	Id        string                                        `json:"id"`
+	Status    string                                        `json:"status"`
+	Actor     *ConversationsMessagesGetOutputRequestActor   `json:"actor,omitempty"`
+	Context   *ConversationsMessagesGetOutputRequestContext `json:"context,omitempty"`
+	CreatedAt time.Time                                     `json:"created_at"`
+	UpdatedAt time.Time                                     `json:"updated_at"`
 }
 
 // ConversationsMessagesGetOutput represents the conversations messages get output type.

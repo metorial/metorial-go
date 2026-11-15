@@ -5,23 +5,32 @@ import (
 	"time"
 )
 
+// SkillsPluginsSkillsListOutputItemsSkillImage represents the skills plugins skills list output items skill image type.
+type SkillsPluginsSkillsListOutputItemsSkillImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsPluginsSkillsListOutputItemsSkill represents the skills plugins skills list output items skill type.
 type SkillsPluginsSkillsListOutputItemsSkill struct {
-	Object            string          `json:"object"`
-	Id                string          `json:"id"`
-	Status            string          `json:"status"`
-	Slug              string          `json:"slug"`
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ImageUrl          string          `json:"image_url"`
-	ClientName        string          `json:"client_name"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
+	Object            string                                       `json:"object"`
+	Id                string                                       `json:"id"`
+	Status            string                                       `json:"status"`
+	Slug              string                                       `json:"slug"`
+	Name              string                                       `json:"name"`
+	Description       *string                                      `json:"description,omitempty"`
+	ImageUrl          string                                       `json:"image_url"`
+	Image             SkillsPluginsSkillsListOutputItemsSkillImage `json:"image"`
+	ClientName        string                                       `json:"client_name"`
+	ClientDescription *string                                      `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any                              `json:"client_metadata,omitempty"`
+	License           *string                                      `json:"license,omitempty"`
+	Compatibility     *string                                      `json:"compatibility,omitempty"`
+	Metadata          *map[string]any                              `json:"metadata,omitempty"`
+	CreatedAt         time.Time                                    `json:"created_at"`
+	UpdatedAt         time.Time                                    `json:"updated_at"`
 }
 
 // SkillsPluginsSkillsListOutputItems represents the skills plugins skills list output items type.

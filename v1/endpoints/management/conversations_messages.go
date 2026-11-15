@@ -29,6 +29,8 @@ type ConversationsMessagesEndpointCreateBody struct {
 	Message         map[string]any `json:"message"`
 	ParentMessageId *string        `json:"parent_message_id,omitempty"`
 	ModelId         *string        `json:"model_id,omitempty"`
+	// Context - Assistant-specific request context, such as the editing mode, the frozen selection, or the target block. Validated by the assistant implementation.
+	Context *map[string]any `json:"context,omitempty"`
 }
 
 // ConversationsMessagesEndpointHandoffResponsesBody contains the request body for HandoffResponses.
@@ -85,6 +87,18 @@ func (e *ConversationsMessagesEndpoint) HandoffResponses(instanceId string, assi
 		Body: body,
 	}
 	var result messages.ConversationsMessagesHandoffResponsesOutput
+	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Cancel stop the assistant request that belongs to a message. Work the assistant already finished is kept.
+func (e *ConversationsMessagesEndpoint) Cancel(instanceId string, assistantConversationId string, assistantMessageId string) (*messages.ConversationsMessagesCancelOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "conversations", assistantConversationId, "messages", assistantMessageId, "cancel"},
+	}
+	var result messages.ConversationsMessagesCancelOutput
 	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}

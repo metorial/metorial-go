@@ -22,6 +22,8 @@ type ConsumersProfilesGetOutputGroups struct {
 	Object      string                                `json:"object"`
 	Group       ConsumersProfilesGetOutputGroupsGroup `json:"group"`
 	AssignedVia string                                `json:"assigned_via"`
+	// SsoGroupIds - Identity provider group ids that placed this profile in the group. Empty unless assigned via SSO.
+	SsoGroupIds []string `json:"sso_group_ids"`
 }
 
 // ConsumersProfilesGetOutput represents the consumers profiles get output type.

@@ -10,6 +10,8 @@ type PortalsAccessCreateOutputListing struct {
 	Id          string  `json:"id"`
 	Name        string  `json:"name"`
 	Description *string `json:"description,omitempty"`
+	// IsDiscoverable - Whether every consumer on the portal can find the listing in the catalog and request access.
+	IsDiscoverable bool `json:"is_discoverable"`
 }
 
 // PortalsAccessCreateOutputAccessProviderTemplate represents the portals access create output access provider template type.
@@ -103,8 +105,9 @@ type PortalsAccessCreateOutputConsumerGroup struct {
 
 // PortalsAccessCreateOutput represents the portals access create output type.
 type PortalsAccessCreateOutput struct {
-	Object        string                                 `json:"object"`
-	Id            string                                 `json:"id"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	// AccessLevel - What the consumer group can do with the resource. Skills and skill groups support read, write and manage (share with others); skill marketplaces support read and manage.
 	AccessLevel   *string                                `json:"access_level,omitempty"`
 	Name          string                                 `json:"name"`
 	Description   *string                                `json:"description,omitempty"`
@@ -137,10 +140,10 @@ type PortalsAccessCreateBodyAccess struct {
 	ProviderTemplateId *string `json:"provider_template_id,omitempty"`
 	MagicMcpServerId   *string `json:"magic_mcp_server_id,omitempty"`
 	SkillId            *string `json:"skill_id,omitempty"`
+	Permission         *string `json:"permission,omitempty"`
 	SkillTemplateId    *string `json:"skill_template_id,omitempty"`
 	SkillGroupId       *string `json:"skill_group_id,omitempty"`
 	SkillMarketplaceId *string `json:"skill_marketplace_id,omitempty"`
-	Permission         *string `json:"permission,omitempty"`
 	SkillPluginId      *string `json:"skill_plugin_id,omitempty"`
 }
 

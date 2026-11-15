@@ -29,6 +29,8 @@ type SkillsImportsEndpointListParams struct {
 // SkillsImportsEndpointCreateBody contains the request body for Create.
 type SkillsImportsEndpointCreateBody struct {
 	Source any `json:"source"`
+	// SkillGroupId - The ID of a skill group that every imported skill is added to.
+	SkillGroupId *string `json:"skill_group_id,omitempty"`
 }
 
 // List returns a paginated list of skill imports.

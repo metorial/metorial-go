@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// SkillsDeleteOutputImage represents the skills delete output image type.
+type SkillsDeleteOutputImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsDeleteOutputHierarchyCreatorOrganizationActorMember represents the skills delete output hierarchy creator organization actor member type.
 type SkillsDeleteOutputHierarchyCreatorOrganizationActorMember struct {
 	// Object - String representing the organization's member preview type
@@ -311,6 +319,7 @@ type SkillsDeleteOutput struct {
 	Name              string                           `json:"name"`
 	Description       *string                          `json:"description,omitempty"`
 	ImageUrl          string                           `json:"image_url"`
+	Image             SkillsDeleteOutputImage          `json:"image"`
 	ClientName        string                           `json:"client_name"`
 	ClientDescription *string                          `json:"client_description,omitempty"`
 	ClientMetadata    *map[string]any                  `json:"client_metadata,omitempty"`

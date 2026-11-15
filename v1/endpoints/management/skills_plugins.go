@@ -28,6 +28,8 @@ type SkillsPluginsEndpointListParams struct {
 	Category             *string  `json:"category,omitempty"`
 	Search               *string  `json:"search,omitempty"`
 	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
+	// SkillGroupId - Only return plugins whose skills are synced from these skill groups.
+	SkillGroupId *any `json:"skill_group_id,omitempty"`
 	// CreatedAt - Filter skill plugin creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 	// UpdatedAt - Filter skill plugin last update time by date range
@@ -36,13 +38,16 @@ type SkillsPluginsEndpointListParams struct {
 
 // SkillsPluginsEndpointCreateBody contains the request body for Create.
 type SkillsPluginsEndpointCreateBody struct {
-	Name                 string  `json:"name"`
+	// Name - The plugin name. Required unless skill_group_id is set, in which case it defaults to the group name.
+	Name                 *string `json:"name,omitempty"`
 	Description          *string `json:"description,omitempty"`
 	LongDescription      *string `json:"long_description,omitempty"`
 	Category             *string `json:"category,omitempty"`
 	ImageFileId          *string `json:"image_file_id,omitempty"`
 	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
 	SkillMarketplaceId   *string `json:"skill_marketplace_id,omitempty"`
+	// SkillGroupId - Creates the plugin from a skill group. The group's skills are synced into the plugin automatically and cannot be edited on the plugin directly. Name and description are copied from the group once and can be changed afterwards.
+	SkillGroupId *string `json:"skill_group_id,omitempty"`
 }
 
 // SkillsPluginsEndpointUpdateBody contains the request body for Update.
@@ -117,6 +122,18 @@ func (e *SkillsPluginsEndpoint) Archive(instanceId string, skillPluginId string)
 	}
 	var result plugins.SkillsPluginsArchiveOutput
 	if err := e.client.Delete(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// DetachSkillGroup stops syncing a plugin from its skill group. The plugin keeps its current skills, which can then be edited directly.
+func (e *SkillsPluginsEndpoint) DetachSkillGroup(instanceId string, skillPluginId string) (*plugins.SkillsPluginsDetachSkillGroupOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "skill-plugins", skillPluginId, "detach-skill-group"},
+	}
+	var result plugins.SkillsPluginsDetachSkillGroupOutput
+	if err := e.client.Post(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

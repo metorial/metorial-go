@@ -5,23 +5,40 @@ import (
 	"time"
 )
 
+// SkillsGroupsListOutputItemsImage represents the skills groups list output items image type.
+type SkillsGroupsListOutputItemsImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
+// SkillsGroupsListOutputItemsSkillsImage represents the skills groups list output items skills image type.
+type SkillsGroupsListOutputItemsSkillsImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsGroupsListOutputItemsSkills represents the skills groups list output items skills type.
 type SkillsGroupsListOutputItemsSkills struct {
-	Object            string          `json:"object"`
-	Id                string          `json:"id"`
-	Status            string          `json:"status"`
-	Slug              string          `json:"slug"`
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ImageUrl          string          `json:"image_url"`
-	ClientName        string          `json:"client_name"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
+	Object            string                                 `json:"object"`
+	Id                string                                 `json:"id"`
+	Status            string                                 `json:"status"`
+	Slug              string                                 `json:"slug"`
+	Name              string                                 `json:"name"`
+	Description       *string                                `json:"description,omitempty"`
+	ImageUrl          string                                 `json:"image_url"`
+	Image             SkillsGroupsListOutputItemsSkillsImage `json:"image"`
+	ClientName        string                                 `json:"client_name"`
+	ClientDescription *string                                `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any                        `json:"client_metadata,omitempty"`
+	License           *string                                `json:"license,omitempty"`
+	Compatibility     *string                                `json:"compatibility,omitempty"`
+	Metadata          *map[string]any                        `json:"metadata,omitempty"`
+	CreatedAt         time.Time                              `json:"created_at"`
+	UpdatedAt         time.Time                              `json:"updated_at"`
 }
 
 // SkillsGroupsListOutputItems represents the skills groups list output items type.
@@ -32,6 +49,8 @@ type SkillsGroupsListOutputItems struct {
 	Name                         string                              `json:"name"`
 	Description                  *string                             `json:"description,omitempty"`
 	Metadata                     *map[string]any                     `json:"metadata,omitempty"`
+	ImageUrl                     string                              `json:"image_url"`
+	Image                        SkillsGroupsListOutputItemsImage    `json:"image"`
 	AllowConsumerSkillAssignment bool                                `json:"allow_consumer_skill_assignment"`
 	Skills                       []SkillsGroupsListOutputItemsSkills `json:"skills"`
 	CreatedAt                    time.Time                           `json:"created_at"`

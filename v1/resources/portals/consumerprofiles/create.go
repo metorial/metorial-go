@@ -22,6 +22,8 @@ type PortalsConsumerProfilesCreateOutputGroups struct {
 	Object      string                                         `json:"object"`
 	Group       PortalsConsumerProfilesCreateOutputGroupsGroup `json:"group"`
 	AssignedVia string                                         `json:"assigned_via"`
+	// SsoGroupIds - Identity provider group ids that placed this profile in the group. Empty unless assigned via SSO.
+	SsoGroupIds []string `json:"sso_group_ids"`
 }
 
 // PortalsConsumerProfilesCreateOutput represents the portals consumer profiles create output type.

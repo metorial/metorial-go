@@ -40,6 +40,7 @@ type PortalsConsumerProfilesListQuery struct {
 	Search          *string  `json:"search,omitempty"`
 	Email           *any     `json:"email,omitempty"`
 	ConsumerGroupId *string  `json:"consumer_group_id,omitempty"`
+	Source          *string  `json:"source,omitempty"`
 	Status          *any     `json:"status,omitempty"`
 }
 

@@ -2,8 +2,17 @@ package skills
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
+
+// SkillsUpdateOutputImage represents the skills update output image type.
+type SkillsUpdateOutputImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
 
 // SkillsUpdateOutputHierarchyCreatorOrganizationActorMember represents the skills update output hierarchy creator organization actor member type.
 type SkillsUpdateOutputHierarchyCreatorOrganizationActorMember struct {
@@ -311,6 +320,7 @@ type SkillsUpdateOutput struct {
 	Name              string                           `json:"name"`
 	Description       *string                          `json:"description,omitempty"`
 	ImageUrl          string                           `json:"image_url"`
+	Image             SkillsUpdateOutputImage          `json:"image"`
 	ClientName        string                           `json:"client_name"`
 	ClientDescription *string                          `json:"client_description,omitempty"`
 	ClientMetadata    *map[string]any                  `json:"client_metadata,omitempty"`
@@ -339,6 +349,14 @@ func MapSkillsUpdateOutputToJSON(v *SkillsUpdateOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
+// SkillsUpdateBodyImageIcon - Use a library icon with a tile color as the skill image. Pass null to reset to the default image. Cannot be combined with image_file_id.
+type SkillsUpdateBodyImageIcon struct {
+	// Icon - Library icon id, e.g. rocket-2-line
+	Icon string `json:"icon"`
+	// Color - Tile color: gray, blue, green, yellow, orange, red or purple
+	Color string `json:"color"`
+}
+
 // SkillsUpdateBody represents the skills update body type.
 type SkillsUpdateBody struct {
 	Name              *string         `json:"name,omitempty"`
@@ -350,6 +368,8 @@ type SkillsUpdateBody struct {
 	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
 	Metadata          *map[string]any `json:"metadata,omitempty"`
 	ImageFileId       *string         `json:"image_file_id,omitempty"`
+	// ImageIcon - Use a library icon with a tile color as the skill image. Pass null to reset to the default image. Cannot be combined with image_file_id.
+	ImageIcon *nullable.Nullable[SkillsUpdateBodyImageIcon] `json:"image_icon,omitempty"`
 }
 
 // MapSkillsUpdateBodyFromJSON deserializes JSON data into a SkillsUpdateBody.

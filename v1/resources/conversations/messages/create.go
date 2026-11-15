@@ -99,14 +99,25 @@ type ConversationsMessagesCreateOutputRequestActor struct {
 	ConsumerProfile   *map[string]any                                                 `json:"consumer_profile,omitempty"`
 }
 
+// ConversationsMessagesCreateOutputRequestContext represents the conversations messages create output request context type.
+type ConversationsMessagesCreateOutputRequestContext struct {
+	// Mode - The mode the assistant ran in after permission checks
+	Mode string `json:"mode"`
+	// RequestedMode - The mode requested by the client
+	RequestedMode string `json:"requested_mode"`
+	// CanWrite - Whether the assistant could change the underlying resource
+	CanWrite bool `json:"can_write"`
+}
+
 // ConversationsMessagesCreateOutputRequest represents the conversations messages create output request type.
 type ConversationsMessagesCreateOutputRequest struct {
-	Object    string                                         `json:"object"`
-	Id        string                                         `json:"id"`
-	Status    string                                         `json:"status"`
-	Actor     *ConversationsMessagesCreateOutputRequestActor `json:"actor,omitempty"`
-	CreatedAt time.Time                                      `json:"created_at"`
-	UpdatedAt time.Time                                      `json:"updated_at"`
+	Object    string                                           `json:"object"`
+	Id        string                                           `json:"id"`
+	Status    string                                           `json:"status"`
+	Actor     *ConversationsMessagesCreateOutputRequestActor   `json:"actor,omitempty"`
+	Context   *ConversationsMessagesCreateOutputRequestContext `json:"context,omitempty"`
+	CreatedAt time.Time                                        `json:"created_at"`
+	UpdatedAt time.Time                                        `json:"updated_at"`
 }
 
 // ConversationsMessagesCreateOutput represents the conversations messages create output type.
@@ -148,6 +159,8 @@ type ConversationsMessagesCreateBody struct {
 	Message         ConversationsMessagesCreateBodyMessage `json:"message"`
 	ParentMessageId *string                                `json:"parent_message_id,omitempty"`
 	ModelId         *string                                `json:"model_id,omitempty"`
+	// Context - Assistant-specific request context, such as the editing mode, the frozen selection, or the target block. Validated by the assistant implementation.
+	Context *map[string]any `json:"context,omitempty"`
 }
 
 // MapConversationsMessagesCreateBodyFromJSON deserializes JSON data into a ConversationsMessagesCreateBody.

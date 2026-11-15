@@ -29,6 +29,7 @@ type ProtoGuardAlertsEndpointListParams struct {
 	SessionMessageId    *any     `json:"session_message_id,omitempty"`
 	SessionConnectionId *any     `json:"session_connection_id,omitempty"`
 	ProviderRunId       *any     `json:"provider_run_id,omitempty"`
+	IssueId             *any     `json:"issue_id,omitempty"`
 	// CreatedAt - Filter ProtoGuard alert creation time by date range
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 }

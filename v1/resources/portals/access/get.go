@@ -10,6 +10,8 @@ type PortalsAccessGetOutputListing struct {
 	Id          string  `json:"id"`
 	Name        string  `json:"name"`
 	Description *string `json:"description,omitempty"`
+	// IsDiscoverable - Whether every consumer on the portal can find the listing in the catalog and request access.
+	IsDiscoverable bool `json:"is_discoverable"`
 }
 
 // PortalsAccessGetOutputAccessProviderTemplate represents the portals access get output access provider template type.
@@ -103,8 +105,9 @@ type PortalsAccessGetOutputConsumerGroup struct {
 
 // PortalsAccessGetOutput represents the portals access get output type.
 type PortalsAccessGetOutput struct {
-	Object        string                              `json:"object"`
-	Id            string                              `json:"id"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	// AccessLevel - What the consumer group can do with the resource. Skills and skill groups support read, write and manage (share with others); skill marketplaces support read and manage.
 	AccessLevel   *string                             `json:"access_level,omitempty"`
 	Name          string                              `json:"name"`
 	Description   *string                             `json:"description,omitempty"`

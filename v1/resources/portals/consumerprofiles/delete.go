@@ -22,6 +22,8 @@ type PortalsConsumerProfilesDeleteOutputGroups struct {
 	Object      string                                         `json:"object"`
 	Group       PortalsConsumerProfilesDeleteOutputGroupsGroup `json:"group"`
 	AssignedVia string                                         `json:"assigned_via"`
+	// SsoGroupIds - Identity provider group ids that placed this profile in the group. Empty unless assigned via SSO.
+	SsoGroupIds []string `json:"sso_group_ids"`
 }
 
 // PortalsConsumerProfilesDeleteOutput represents the portals consumer profiles delete output type.

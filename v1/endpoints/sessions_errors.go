@@ -36,6 +36,8 @@ type SessionsErrorsEndpointListParams struct {
 	SessionErrorGroupId *any `json:"session_error_group_id,omitempty"`
 	// ProviderRunId - Filter by provider run ID(s)
 	ProviderRunId *any `json:"provider_run_id,omitempty"`
+	// IssueId - Filter by provider issue ID(s)
+	IssueId *any `json:"issue_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)

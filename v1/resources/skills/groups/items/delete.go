@@ -5,23 +5,32 @@ import (
 	"time"
 )
 
+// SkillsGroupsItemsDeleteOutputSkillImage represents the skills groups items delete output skill image type.
+type SkillsGroupsItemsDeleteOutputSkillImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsGroupsItemsDeleteOutputSkill represents the skills groups items delete output skill type.
 type SkillsGroupsItemsDeleteOutputSkill struct {
-	Object            string          `json:"object"`
-	Id                string          `json:"id"`
-	Status            string          `json:"status"`
-	Slug              string          `json:"slug"`
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ImageUrl          string          `json:"image_url"`
-	ClientName        string          `json:"client_name"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	CreatedAt         time.Time       `json:"created_at"`
-	UpdatedAt         time.Time       `json:"updated_at"`
+	Object            string                                  `json:"object"`
+	Id                string                                  `json:"id"`
+	Status            string                                  `json:"status"`
+	Slug              string                                  `json:"slug"`
+	Name              string                                  `json:"name"`
+	Description       *string                                 `json:"description,omitempty"`
+	ImageUrl          string                                  `json:"image_url"`
+	Image             SkillsGroupsItemsDeleteOutputSkillImage `json:"image"`
+	ClientName        string                                  `json:"client_name"`
+	ClientDescription *string                                 `json:"client_description,omitempty"`
+	ClientMetadata    *map[string]any                         `json:"client_metadata,omitempty"`
+	License           *string                                 `json:"license,omitempty"`
+	Compatibility     *string                                 `json:"compatibility,omitempty"`
+	Metadata          *map[string]any                         `json:"metadata,omitempty"`
+	CreatedAt         time.Time                               `json:"created_at"`
+	UpdatedAt         time.Time                               `json:"updated_at"`
 }
 
 // SkillsGroupsItemsDeleteOutput represents the skills groups items delete output type.

@@ -29,6 +29,8 @@ type SessionsErrorsListOutputItems struct {
 	GroupId *string `json:"group_id,omitempty"`
 	// SimilarErrorCount - Count of similar errors in the group
 	SimilarErrorCount float64 `json:"similar_error_count"`
+	// IssueId - The provider issue this occurrence is aggregated into
+	IssueId *string `json:"issue_id,omitempty"`
 	// CreatedAt - Timestamp when created
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -96,6 +98,8 @@ type SessionsErrorsListQuery struct {
 	SessionErrorGroupId *any `json:"session_error_group_id,omitempty"`
 	// ProviderRunId - Filter by provider run ID(s)
 	ProviderRunId *any `json:"provider_run_id,omitempty"`
+	// IssueId - Filter by provider issue ID(s)
+	IssueId *any `json:"issue_id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)

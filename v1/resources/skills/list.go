@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+// SkillsListOutputItemsImage represents the skills list output items image type.
+type SkillsListOutputItemsImage struct {
+	Object string  `json:"object"`
+	Type   string  `json:"type"`
+	Icon   *string `json:"icon,omitempty"`
+	Color  *string `json:"color,omitempty"`
+}
+
 // SkillsListOutputItemsHierarchyCreatorOrganizationActorMember represents the skills list output items hierarchy creator organization actor member type.
 type SkillsListOutputItemsHierarchyCreatorOrganizationActorMember struct {
 	// Object - String representing the organization's member preview type
@@ -311,6 +319,7 @@ type SkillsListOutputItems struct {
 	Name              string                              `json:"name"`
 	Description       *string                             `json:"description,omitempty"`
 	ImageUrl          string                              `json:"image_url"`
+	Image             SkillsListOutputItemsImage          `json:"image"`
 	ClientName        string                              `json:"client_name"`
 	ClientDescription *string                             `json:"client_description,omitempty"`
 	ClientMetadata    *map[string]any                     `json:"client_metadata,omitempty"`
@@ -380,6 +389,8 @@ type SkillsListQuery struct {
 	SkillGroupId  *any     `json:"skill_group_id,omitempty"`
 	IntegrationId *any     `json:"integration_id,omitempty"`
 	ProviderId    *any     `json:"provider_id,omitempty"`
+	// OwnedByMe - Only return skills the caller created or owns, including ones created through their other member or consumer identities
+	OwnedByMe *bool `json:"owned_by_me,omitempty"`
 	// CreatedAt - Filter skill creation time by date range
 	CreatedAt *SkillsListQueryCreatedAt `json:"created_at,omitempty"`
 	// UpdatedAt - Filter skill last update time by date range

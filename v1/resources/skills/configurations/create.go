@@ -8,15 +8,17 @@ import (
 // SkillsConfigurationsCreateOutput represents the skills configurations create output type.
 type SkillsConfigurationsCreateOutput struct {
 	// Object - String representing the object's type
-	Object                      string     `json:"object"`
-	Id                          string     `json:"id"`
-	IsDefault                   bool       `json:"is_default"`
-	AllowScripts                bool       `json:"allow_scripts"`
-	AllowedFileExtensions       []string   `json:"allowed_file_extensions"`
-	AllowNonStandardDirectories bool       `json:"allow_non_standard_directories"`
-	DeletedAt                   *time.Time `json:"deleted_at,omitempty"`
-	CreatedAt                   time.Time  `json:"created_at"`
-	UpdatedAt                   time.Time  `json:"updated_at"`
+	Object                      string   `json:"object"`
+	Id                          string   `json:"id"`
+	IsDefault                   bool     `json:"is_default"`
+	AllowScripts                bool     `json:"allow_scripts"`
+	AllowedFileExtensions       []string `json:"allowed_file_extensions"`
+	AllowNonStandardDirectories bool     `json:"allow_non_standard_directories"`
+	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports
+	SecurityReviewPolicy string     `json:"security_review_policy"`
+	DeletedAt            *time.Time `json:"deleted_at,omitempty"`
+	CreatedAt            time.Time  `json:"created_at"`
+	UpdatedAt            time.Time  `json:"updated_at"`
 }
 
 // MapSkillsConfigurationsCreateOutputFromJSON deserializes JSON data into a SkillsConfigurationsCreateOutput.
@@ -38,6 +40,8 @@ type SkillsConfigurationsCreateBody struct {
 	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
 	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
 	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
+	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }
 
 // MapSkillsConfigurationsCreateBodyFromJSON deserializes JSON data into a SkillsConfigurationsCreateBody.

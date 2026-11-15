@@ -2,6 +2,7 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/protoguardconfig"
 )
 
@@ -13,6 +14,16 @@ type ProtoGuardConfigEndpoint struct {
 // NewProtoGuardConfigEndpoint creates a new ProtoGuardConfigEndpoint.
 func NewProtoGuardConfigEndpoint(client *endpoint.Client) *ProtoGuardConfigEndpoint {
 	return &ProtoGuardConfigEndpoint{client: client}
+}
+
+// ProtoGuardConfigEndpointUpdateBody contains the request body for Update.
+type ProtoGuardConfigEndpointUpdateBody struct {
+	// Enabled - Whether ProtoGuard analyzes session messages for this instance.
+	Enabled *bool `json:"enabled,omitempty"`
+	// AlertProbabilityThreshold - The combined injection probability, above 0 and at most 1, at which a message raises an alert. Pass null to restore the default.
+	AlertProbabilityThreshold *nullable.Nullable[float64] `json:"alert_probability_threshold,omitempty"`
+	// AlertFilterCountThreshold - The number of triggered filters at which a message raises an alert. Pass null to restore the default.
+	AlertFilterCountThreshold *nullable.Nullable[float64] `json:"alert_filter_count_threshold,omitempty"`
 }
 
 // ProtoGuardConfigEndpointUpdateFilterBody contains the request body for UpdateFilter.
@@ -33,6 +44,19 @@ func (e *ProtoGuardConfigEndpoint) Get(instanceId string) (*protoguardconfig.Pro
 	}
 	var result protoguardconfig.ProtoGuardConfigGetOutput
 	if err := e.client.Get(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
+// Update enables or disables ProtoGuard for this instance and sets its alert thresholds.
+func (e *ProtoGuardConfigEndpoint) Update(instanceId string, body *ProtoGuardConfigEndpointUpdateBody) (*protoguardconfig.ProtoGuardConfigUpdateOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "protoguard-config"},
+		Body: body,
+	}
+	var result protoguardconfig.ProtoGuardConfigUpdateOutput
+	if err := e.client.Patch(req, &result); err != nil {
 		return nil, err
 	}
 	return &result, nil

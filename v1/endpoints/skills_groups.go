@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/groups"
 )
 
@@ -48,6 +49,9 @@ type SkillsGroupsEndpointUpdateBody struct {
 	Metadata                     *map[string]any `json:"metadata,omitempty"`
 	SkillIds                     *[]string       `json:"skill_ids,omitempty"`
 	AllowConsumerSkillAssignment *bool           `json:"allow_consumer_skill_assignment,omitempty"`
+	ImageFileId                  *string         `json:"image_file_id,omitempty"`
+	// ImageIcon - Use a library icon with a tile color as the skill group image. Pass null to reset to the default image. Cannot be combined with image_file_id.
+	ImageIcon *nullable.Nullable[map[string]any] `json:"image_icon,omitempty"`
 }
 
 // List returns a paginated list of skill groups.
