@@ -15,7 +15,7 @@ type ProvidersTriggersGetOutputInputSchema struct {
 // ProvidersTriggersGetOutputOutputSchema represents the providers triggers get output output schema type.
 type ProvidersTriggersGetOutputOutputSchema struct {
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the trigger delivery output shape
+	// Schema - JSON Schema defining the trigger delivery output shape. Fields marked `x-metorial-event-attribute` are stored with each event and can be used to filter the event list with its `attribute` parameter.
 	Schema map[string]any `json:"schema"`
 }
 

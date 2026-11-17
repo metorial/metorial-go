@@ -33,7 +33,7 @@ type CallbacksGetOutputTriggerGroups struct {
 	Name string `json:"name"`
 	// Description - What the trigger group delivers
 	Description *string `json:"description,omitempty"`
-	// SelectionSchema - JSON Schema the selection for this trigger group must match
+	// SelectionSchema - JSON Schema the selection for this trigger group must match. Fields marked `x-metorial-options` have a pick list in the dashboard.
 	SelectionSchema map[string]any `json:"selection_schema"`
 	// Status - `selection_required` when the trigger group needs a selection before it delivers events.
 	Status string `json:"status"`

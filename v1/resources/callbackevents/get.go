@@ -81,6 +81,8 @@ type CallbackEventsGetOutput struct {
 	MappedType *string `json:"mapped_type,omitempty"`
 	// MappedId - Identifier of the resource the provider mapped this event to, if any
 	MappedId *string `json:"mapped_id,omitempty"`
+	// Attributes - Short key/value attributes the provider attached to this event (for example a file id or MIME type), mapping each key to its values. Empty for events without attributes.
+	Attributes map[string][]string `json:"attributes"`
 	// CallbackId - Callback this event was recorded for
 	CallbackId string `json:"callback_id"`
 	// CallbackInstanceId - Callback instance this event was recorded for
