@@ -221,11 +221,16 @@ type MetorialSdk struct {
 
 // New creates a new MetorialSdk with the given options.
 func New(opts ...Option) (*MetorialSdk, error) {
-	o := &options{
-		apiHost: defaultAPIHost,
-	}
+	o := &options{}
 	for _, opt := range opts {
 		opt(o)
+	}
+
+	if !o.apiHostSet {
+		o.apiHost = apiHostFromToken(o.apiKey)
+		if o.apiHost == "" {
+			o.apiHost = defaultAPIHost
+		}
 	}
 
 	if o.apiKey == "" && !browserSessionAuthAvailable() {

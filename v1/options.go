@@ -4,9 +4,10 @@ package metorial
 type Option func(*options)
 
 type options struct {
-	apiKey  string
-	apiHost string
-	headers map[string]string
+	apiKey     string
+	apiHost    string
+	apiHostSet bool
+	headers    map[string]string
 }
 
 const defaultAPIHost = "https://api.metorial.com"
@@ -22,6 +23,7 @@ func WithAPIKey(key string) Option {
 func WithAPIHost(host string) Option {
 	return func(o *options) {
 		o.apiHost = host
+		o.apiHostSet = true
 	}
 }
 
