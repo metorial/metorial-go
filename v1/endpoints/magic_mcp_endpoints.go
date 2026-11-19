@@ -40,7 +40,7 @@ type MagicMcpEndpointsEndpointCreateBody struct {
 	EnableSkillEditing *bool `json:"enable_skill_editing,omitempty"`
 	// EnableSkillResources - Serve skills on this endpoint over MCP (the skills extension: skill:// resources, skills/list and skills/get) so the connecting consumer can read the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the skills. Requires skills to be enabled for the instance.
 	EnableSkillResources *bool `json:"enable_skill_resources,omitempty"`
-	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to.
+	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to. A `selected` selection on a consumer-owned endpoint requires the project to allow skill selection.
 	SkillSelection  *any              `json:"skill_selection,omitempty"`
 	MagicMcpServers *[]map[string]any `json:"magic_mcp_servers,omitempty"`
 }
@@ -54,7 +54,7 @@ type MagicMcpEndpointsEndpointUpdateBody struct {
 	EnableSkillEditing *bool `json:"enable_skill_editing,omitempty"`
 	// EnableSkillResources - Serve skills on this endpoint over MCP (the skills extension: skill:// resources, skills/list and skills/get) so the connecting consumer can read the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the skills. Requires skills to be enabled for the instance.
 	EnableSkillResources *bool `json:"enable_skill_resources,omitempty"`
-	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to.
+	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to. A `selected` selection on a consumer-owned endpoint requires the project to allow skill selection.
 	SkillSelection *any `json:"skill_selection,omitempty"`
 }
 
