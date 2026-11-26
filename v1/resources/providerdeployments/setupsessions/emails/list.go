@@ -9,7 +9,7 @@ import (
 type ProviderDeploymentsSetupSessionsEmailsListOutputItems struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
-	// Id - Unique setup session email identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Deduplicated - True when this recipient was already emailed this setup link in the current fixed 10-minute window, so no new email was queued and the earlier record is returned instead. Only set by the create endpoint; always false when listing.
 	Deduplicated bool `json:"deduplicated"`
@@ -25,12 +25,20 @@ type ProviderDeploymentsSetupSessionsEmailsListOutputItems struct {
 
 // ProviderDeploymentsSetupSessionsEmailsListOutputPagination represents the provider deployments setup sessions emails list output pagination type.
 type ProviderDeploymentsSetupSessionsEmailsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEmailsListOutput represents the provider deployments setup sessions emails list output type.
 type ProviderDeploymentsSetupSessionsEmailsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                                     `json:"object"`
 	Items      []ProviderDeploymentsSetupSessionsEmailsListOutputItems    `json:"items"`
 	Pagination ProviderDeploymentsSetupSessionsEmailsListOutputPagination `json:"pagination"`
 }
@@ -51,11 +59,16 @@ func MapProviderDeploymentsSetupSessionsEmailsListOutputToJSON(v *ProviderDeploy
 
 // ProviderDeploymentsSetupSessionsEmailsListQuery represents the provider deployments setup sessions emails list query type.
 type ProviderDeploymentsSetupSessionsEmailsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
 // MapProviderDeploymentsSetupSessionsEmailsListQueryFromJSON deserializes JSON data into a ProviderDeploymentsSetupSessionsEmailsListQuery.

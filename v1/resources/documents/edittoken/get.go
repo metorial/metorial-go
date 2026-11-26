@@ -7,11 +7,14 @@ import (
 
 // DocumentsEditTokenGetOutput represents the documents edit token get output type.
 type DocumentsEditTokenGetOutput struct {
-	// Object - String representing the object's type
-	Object     string    `json:"object"`
-	Token      string    `json:"token"`
-	ExpiresAt  time.Time `json:"expires_at"`
-	DocumentId string    `json:"document_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Token - Token for establishing a live document session.
+	Token string `json:"token"`
+	// ExpiresAt - When the token stops working.
+	ExpiresAt time.Time `json:"expires_at"`
+	// DocumentId - Document the token grants access to.
+	DocumentId string `json:"document_id"`
 }
 
 // MapDocumentsEditTokenGetOutputFromJSON deserializes JSON data into a DocumentsEditTokenGetOutput.

@@ -15,57 +15,65 @@ type SessionsConnectionsGetOutputUsage struct {
 
 // SessionsConnectionsGetOutputMcp - MCP connection details
 type SessionsConnectionsGetOutputMcp struct {
-	// Capabilities - MCP capabilities
+	// Capabilities - Capabilities the client reported.
 	Capabilities map[string]any `json:"capabilities"`
-	// ProtocolVersion - MCP protocol version
+	// ProtocolVersion - Negotiated MCP version.
 	ProtocolVersion string `json:"protocol_version"`
-	// Transport - MCP transport type
+	// Transport - How the MCP connection is carried.
 	Transport string `json:"transport"`
 }
 
-// SessionsConnectionsGetOutputParticipantData - Participant payload data
+// SessionsConnectionsGetOutputParticipantData - Extra details the participant connected with.
 type SessionsConnectionsGetOutputParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsConnectionsGetOutputParticipant represents the sessions connections get output participant type.
 type SessionsConnectionsGetOutputParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsConnectionsGetOutputParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsConnectionsGetOutput represents the sessions connections get output type.
 type SessionsConnectionsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session connection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ConnectionState - Connection state
+	// ConnectionState - Whether the connection is currently open.
 	ConnectionState string `json:"connection_state"`
 	// Transport - Transport protocol used
 	Transport string `json:"transport"`
@@ -73,18 +81,18 @@ type SessionsConnectionsGetOutput struct {
 	Usage SessionsConnectionsGetOutputUsage `json:"usage"`
 	// Mcp - MCP connection details
 	Mcp *SessionsConnectionsGetOutputMcp `json:"mcp,omitempty"`
-	// SessionId - Parent session ID
+	// SessionId - Session this connection belongs to.
 	SessionId   string                                   `json:"session_id"`
 	Participant *SessionsConnectionsGetOutputParticipant `json:"participant,omitempty"`
-	// HasErrors - Whether the connection has any errors
+	// HasErrors - `true` when the connection has errors.
 	HasErrors bool `json:"has_errors"`
-	// HasWarnings - Whether the connection has any warnings
+	// HasWarnings - `true` when the connection has warnings.
 	HasWarnings bool `json:"has_warnings"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// LastMessageAt - Timestamp of last message
+	// LastMessageAt - When the connection last exchanged a message.
 	LastMessageAt time.Time `json:"last_message_at"`
-	// LastActiveAt - Timestamp when last active
+	// LastActiveAt - Last time the connection showed activity.
 	LastActiveAt *time.Time `json:"last_active_at,omitempty"`
 }
 

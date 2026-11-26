@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/token"
 )
 
-// TokenEndpoint provides access to endpoint for retrieving metadata about the token used for authentication. This is useful for clients to understand the type and capabilities of the token they are using, especially since Metorial supports multiple token types with different permission models.
+// TokenEndpoint provides access to a token is the credential a request authenticates with. This resource describes the calling token’s type and scope.
 type TokenEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewTokenEndpoint(client *endpoint.Client) *TokenEndpoint {
 	return &TokenEndpoint{client: client}
 }
 
-// Get retrieves metadata and configuration details for a specific token.
+// Get retrieves metadata about the calling token.
 func (e *TokenEndpoint) Get() (*token.TokenGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"token"},

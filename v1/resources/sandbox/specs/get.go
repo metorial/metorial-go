@@ -11,7 +11,7 @@ type SandboxSpecsGetOutput struct {
 	Object string `json:"object"`
 	// Id - The spec's unique identifier
 	Id string `json:"id"`
-	// Identifier - The spec's human-readable identifier
+	// Identifier - Stable size label shared across regions.
 	Identifier string `json:"identifier"`
 	// MemoryGib - The memory of machines using this spec, in GiB
 	MemoryGib float64 `json:"memory_gib"`
@@ -21,7 +21,7 @@ type SandboxSpecsGetOutput struct {
 	Available bool `json:"available"`
 	// Regions - The identifiers of the regions this spec is available in
 	Regions []string `json:"regions"`
-	// CreatedAt - The spec's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

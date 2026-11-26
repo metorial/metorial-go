@@ -32,7 +32,7 @@ type SandboxMachinesOperationsGetOutput struct {
 	Kind string `json:"kind"`
 	// Trigger - What requested the operation
 	Trigger string `json:"trigger"`
-	// Outcome - The operation's outcome
+	// Outcome - `active` while the operation runs. `superseded` when a newer operation replaced it.
 	Outcome string                                     `json:"outcome"`
 	Failure *SandboxMachinesOperationsGetOutputFailure `json:"failure,omitempty"`
 	// FromMachineInstanceId - The instance the machine was running on when the operation began

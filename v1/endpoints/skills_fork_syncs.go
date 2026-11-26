@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/forksyncs"
 )
 
-// SkillsForkSyncsEndpoint provides access to synchronize changes from an upstream skill into a fork.
+// SkillsForkSyncsEndpoint provides access to a skill fork sync is a queued update pulling upstream changes into a forked skill.
 type SkillsForkSyncsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,6 +17,7 @@ func NewSkillsForkSyncsEndpoint(client *endpoint.Client) *SkillsForkSyncsEndpoin
 
 // SkillsForkSyncsEndpointCreateBody contains the request body for Create.
 type SkillsForkSyncsEndpointCreateBody struct {
+	// SkillId - Forked skill to sync upstream changes into, by ID.
 	SkillId string `json:"skill_id"`
 }
 

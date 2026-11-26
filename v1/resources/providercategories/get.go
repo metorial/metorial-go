@@ -7,19 +7,19 @@ import (
 
 // ProviderCategoriesGetOutput represents the provider categories get output type.
 type ProviderCategoriesGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique category identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the category
+	// Name - Display name.
 	Name string `json:"name"`
 	// Description - Description of providers in this category
 	Description string `json:"description"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the category.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

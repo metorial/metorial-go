@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/documents/commentthreads/comments"
 )
 
-// DocumentsCommentThreadsCommentsEndpoint provides access to reply to, edit, and delete comments in a document comment thread.
+// DocumentsCommentThreadsCommentsEndpoint provides access to a document comment is a message in a document comment thread.
 type DocumentsCommentThreadsCommentsEndpoint struct {
 	client *endpoint.Client
 }
@@ -27,7 +27,7 @@ type DocumentsCommentThreadsCommentsEndpointUpdateBody struct {
 	Body string `json:"body"`
 }
 
-// Create adds a comment to an existing comment thread.
+// Create creates a comment in a document comment thread.
 func (e *DocumentsCommentThreadsCommentsEndpoint) Create(instanceId string, documentId string, documentCommentThreadId string, body *DocumentsCommentThreadsCommentsEndpointCreateBody) (*comments.DocumentsCommentThreadsCommentsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "documents", documentId, "comment-threads", documentCommentThreadId, "comments"},

@@ -7,9 +7,9 @@ import (
 
 // ChatEventsGetOutput represents the chat events get output type.
 type ChatEventsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat event identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - What happened in the chat
 	Type string `json:"type"`
@@ -41,7 +41,7 @@ type ChatEventsGetOutput struct {
 	Payload *map[string]any `json:"payload,omitempty"`
 	// OccurredAt - Timestamp when the event happened on the chat provider
 	OccurredAt time.Time `json:"occurred_at"`
-	// CreatedAt - Timestamp when the event was recorded by Metorial
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

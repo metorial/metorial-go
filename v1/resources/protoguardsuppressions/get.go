@@ -5,26 +5,29 @@ import (
 	"time"
 )
 
-// ProtoGuardSuppressionsGetOutputFilter represents the proto guard suppressions get output filter type.
+// ProtoGuardSuppressionsGetOutputFilter - Filter the suppression applies to.
 type ProtoGuardSuppressionsGetOutputFilter struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The unique identifier of the filter.
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Key - The stable key of the filter.
 	Key string `json:"key"`
-	// Name - The display name of the filter.
+	// Name - Display name.
 	Name string `json:"name"`
 }
 
 // ProtoGuardSuppressionsGetOutput represents the proto guard suppressions get output type.
 type ProtoGuardSuppressionsGetOutput struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The unique identifier of the suppression.
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Whether the suppression currently hides matching findings.
 	Status string `json:"status"`
 	// Reason - Why the findings are considered benign.
-	Reason *string                               `json:"reason,omitempty"`
+	Reason *string `json:"reason,omitempty"`
+	// Filter - Filter the suppression applies to.
 	Filter ProtoGuardSuppressionsGetOutputFilter `json:"filter"`
 	// ProviderId - The provider whose findings are suppressed, or null to suppress across all providers.
 	ProviderId *string `json:"provider_id,omitempty"`
@@ -34,11 +37,11 @@ type ProtoGuardSuppressionsGetOutput struct {
 	ContentHash *string `json:"content_hash,omitempty"`
 	// ExpiresAt - When the suppression stops applying, or null if it never expires.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
-	// ArchivedAt - When the suppression was archived.
+	// ArchivedAt - When this was archived. `null` while active.
 	ArchivedAt *time.Time `json:"archived_at,omitempty"`
-	// CreatedAt - When the suppression was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - When the suppression was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

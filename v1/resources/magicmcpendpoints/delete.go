@@ -62,15 +62,24 @@ type MagicMcpEndpointsDeleteOutputAccess struct {
 
 // MagicMcpEndpointsDeleteOutput represents the magic mcp endpoints delete output type.
 type MagicMcpEndpointsDeleteOutput struct {
-	Object      string           `json:"object"`
-	Id          string           `json:"id"`
-	Status      string           `json:"status"`
-	Slug        string           `json:"slug"`
-	Url         string           `json:"url"`
-	Servers     []map[string]any `json:"servers"`
-	Name        *string          `json:"name,omitempty"`
-	Description *string          `json:"description,omitempty"`
-	Metadata    map[string]any   `json:"metadata"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you delete the endpoint. Archived endpoints stay listable.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Url - Connection URL for the endpoint.
+	Url string `json:"url"`
+	// Servers - Servers the endpoint routes to.
+	Servers []map[string]any `json:"servers"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
 	// EnableSkillEditing - Whether consumers connecting through this endpoint with a consumer magic MCP token get tools to read and edit the skills they have access to. The tools are hidden while skills are disabled for the instance.
 	EnableSkillEditing bool `json:"enable_skill_editing"`
 	// EnableSkillResources - Whether consumers connecting through this endpoint with a consumer magic MCP token can read the skills they have access to over MCP, as skill:// resources with skills/list and skills/get. Skills are hidden while skills are disabled for the instance.
@@ -78,9 +87,11 @@ type MagicMcpEndpointsDeleteOutput struct {
 	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools.
 	SkillSelection MagicMcpEndpointsDeleteOutputSkillSelection `json:"skill_selection"`
 	// Access - Resource ownership and access settings.
-	Access    MagicMcpEndpointsDeleteOutputAccess `json:"access"`
-	CreatedAt time.Time                           `json:"created_at"`
-	UpdatedAt time.Time                           `json:"updated_at"`
+	Access MagicMcpEndpointsDeleteOutputAccess `json:"access"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsDeleteOutputFromJSON deserializes JSON data into a MagicMcpEndpointsDeleteOutput.

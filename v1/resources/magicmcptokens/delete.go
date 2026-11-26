@@ -7,50 +7,80 @@ import (
 
 // MagicMcpTokensDeleteOutputServer represents the magic mcp tokens delete output server type.
 type MagicMcpTokensDeleteOutputServer struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Status      string  `json:"status"`
-	Name        *string `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the server is deleted.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // MagicMcpTokensDeleteOutputEndpoint represents the magic mcp tokens delete output endpoint type.
 type MagicMcpTokensDeleteOutputEndpoint struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Status      string  `json:"status"`
-	Slug        string  `json:"slug"`
-	Name        *string `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the endpoint is deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // MagicMcpTokensDeleteOutputGroups represents the magic mcp tokens delete output groups type.
 type MagicMcpTokensDeleteOutputGroups struct {
-	Object      string         `json:"object"`
-	Id          string         `json:"id"`
-	Status      string         `json:"status"`
-	Slug        string         `json:"slug"`
-	Name        *string        `json:"name,omitempty"`
-	Description *string        `json:"description,omitempty"`
-	Metadata    map[string]any `json:"metadata"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` once you delete the group.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpTokensDeleteOutput represents the magic mcp tokens delete output type.
 type MagicMcpTokensDeleteOutput struct {
-	Object      string                              `json:"object"`
-	Id          string                              `json:"id"`
-	Status      string                              `json:"status"`
-	Secret      string                              `json:"secret"`
-	Name        *string                             `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` once you delete the token.
+	Status string `json:"status"`
+	// Secret - Bearer token used against the connection API.
+	Secret string `json:"secret"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string                             `json:"description,omitempty"`
 	Server      *MagicMcpTokensDeleteOutputServer   `json:"server,omitempty"`
 	Endpoint    *MagicMcpTokensDeleteOutputEndpoint `json:"endpoint,omitempty"`
-	Groups      []MagicMcpTokensDeleteOutputGroups  `json:"groups"`
-	Metadata    map[string]any                      `json:"metadata"`
-	CreatedAt   time.Time                           `json:"created_at"`
-	UpdatedAt   time.Time                           `json:"updated_at"`
+	// Groups - Groups the token is scoped to. Empty means the token is not scoped.
+	Groups []MagicMcpTokensDeleteOutputGroups `json:"groups"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpTokensDeleteOutputFromJSON deserializes JSON data into a MagicMcpTokensDeleteOutput.

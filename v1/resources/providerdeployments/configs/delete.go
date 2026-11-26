@@ -15,68 +15,68 @@ type ProviderDeploymentsConfigsDeleteOutputToolFilter struct {
 
 // ProviderDeploymentsConfigsDeleteOutputDeployment represents the provider deployments configs delete output deployment type.
 type ProviderDeploymentsConfigsDeleteOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsDeleteOutputFromVaultDeployment represents the provider deployments configs delete output from vault deployment type.
 type ProviderDeploymentsConfigsDeleteOutputFromVaultDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsDeleteOutputFromVault represents the provider deployments configs delete output from vault type.
 type ProviderDeploymentsConfigsDeleteOutputFromVault struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config vault identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Status of the config vault
+	// Status - Archived once the vault is archived. Archived vaults stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this vault belongs to.
 	ProviderId string                                                     `json:"provider_id"`
 	Deployment *ProviderDeploymentsConfigsDeleteOutputFromVaultDeployment `json:"deployment,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -126,33 +126,33 @@ type ProviderDeploymentsConfigsDeleteOutputAccess struct {
 
 // ProviderDeploymentsConfigsDeleteOutput represents the provider deployments configs delete output type.
 type ProviderDeploymentsConfigsDeleteOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Config status
+	// Status - Archived once the config is archived. Archived configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter ProviderDeploymentsConfigsDeleteOutputToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this config follows.
 	SpecificationId string                                            `json:"specification_id"`
 	Deployment      *ProviderDeploymentsConfigsDeleteOutputDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsConfigsDeleteOutputFromVault  `json:"from_vault,omitempty"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsConfigsDeleteOutputAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

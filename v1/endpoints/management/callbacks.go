@@ -2,6 +2,7 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/callbacks"
 )
 
@@ -17,26 +18,31 @@ func NewCallbacksEndpoint(client *endpoint.Client) *CallbacksEndpoint {
 
 // CallbacksEndpointListParams contains optional query parameters for List.
 type CallbacksEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by callback ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return callbacks with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// IntegrationId - Filter by integration ID(s)
+	// IntegrationId - Only return callbacks for one of these integrations.
 	IntegrationId *any `json:"integration_id,omitempty"`
-	// IntegrationProviderId - Filter by integration provider ID(s)
+	// IntegrationProviderId - Only return callbacks for one of these integration providers.
 	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
-	// ProviderId - Filter by provider ID(s)
+	// ProviderId - Only return callbacks for one of these providers.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// Search - Search callbacks by name
+	// Search - Search callbacks by name, description, integration, or provider.
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by callback lifecycle status
+	// Status - Only return callbacks with one of these statuses. `deleted` callbacks are never listed.
 	Status *any `json:"status,omitempty"`
-	// CreatedAt - Filter callback creation time by date range
+	// CreatedAt - Only return results whose callback creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter callback last update time by date range
+	// UpdatedAt - Only return results whose callback last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -58,10 +64,10 @@ type CallbacksEndpointCreateBody struct {
 type CallbacksEndpointUpdateBody struct {
 	// Name - Updated display name
 	Name *string `json:"name,omitempty"`
-	// Description - Updated description
-	Description *string `json:"description,omitempty"`
-	// Metadata - Updated custom metadata
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Description - Updated free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the callback. Replaces existing metadata. `null` clears it.
+	Metadata *nullable.Nullable[map[string]any] `json:"metadata,omitempty"`
 	// TriggerGroupSelections - Resource selections keyed by trigger group key. Each value must match that group’s selection schema. Limited to 64 groups and 64 KiB of JSON.
 	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 }
@@ -96,7 +102,7 @@ func (e *CallbacksEndpoint) Create(instanceId string, body *CallbacksEndpointCre
 	return &result, nil
 }
 
-// Get retrieves a specific callback by ID.
+// Get retrieves a callback.
 func (e *CallbacksEndpoint) Get(instanceId string, callbackId string) (*callbacks.CallbacksGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "callbacks", callbackId},
@@ -108,7 +114,7 @@ func (e *CallbacksEndpoint) Get(instanceId string, callbackId string) (*callback
 	return &result, nil
 }
 
-// Update updates the name, description, metadata or trigger group selections of a callback. Changing the selections re-registers the affected triggers. Everything else about a callback is derived from its integration provider - set `callbacks.status` to `disabled` there to tear it down.
+// Update updates a callback. Omitted fields keep their current value. Changing the selections re-registers the affected triggers. Only an active callback can be updated.
 func (e *CallbacksEndpoint) Update(instanceId string, callbackId string, body *CallbacksEndpointUpdateBody) (*callbacks.CallbacksUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "callbacks", callbackId},
@@ -121,7 +127,7 @@ func (e *CallbacksEndpoint) Update(instanceId string, callbackId string, body *C
 	return &result, nil
 }
 
-// Delete disables callbacks on the underlying integration provider, tearing down this callback and every callback instance registered for it.
+// Delete archives a callback by disabling callbacks on its integration provider. Callback instances are torn down in the background. Only an active callback can be archived.
 func (e *CallbacksEndpoint) Delete(instanceId string, callbackId string) (*callbacks.CallbacksDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "callbacks", callbackId},

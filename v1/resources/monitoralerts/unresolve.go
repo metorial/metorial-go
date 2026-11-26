@@ -7,107 +7,174 @@ import (
 
 // MonitorAlertsUnresolveOutputMonitor represents the monitor alerts unresolve output monitor type.
 type MonitorAlertsUnresolveOutputMonitor struct {
-	Object             string     `json:"object"`
-	Id                 string     `json:"id"`
-	Name               string     `json:"name"`
-	Description        *string    `json:"description,omitempty"`
-	Target             string     `json:"target"`
-	Status             string     `json:"status"`
-	Owner              string     `json:"owner"`
-	ProtoGuardFilterId *string    `json:"proto_guard_filter_id,omitempty"`
-	ProviderId         *string    `json:"provider_id,omitempty"`
-	CreatedAt          time.Time  `json:"created_at"`
-	UpdatedAt          time.Time  `json:"updated_at"`
-	FirstAlertAt       *time.Time `json:"first_alert_at,omitempty"`
-	LastAlertAt        *time.Time `json:"last_alert_at,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Target - What the monitor watches.
+	Target string `json:"target"`
+	// Status - Current status of the monitor. `inactive` monitors raise no alerts.
+	Status string `json:"status"`
+	// Owner - Who manages the monitor. `system` monitors are managed by Metorial.
+	Owner string `json:"owner"`
+	// ProtoGuardFilterId - ProtoGuard filter the monitor watches. `null` unless the target is `protoguard_filter`.
+	ProtoGuardFilterId *string `json:"proto_guard_filter_id,omitempty"`
+	// ProviderId - Provider the monitor watches. `null` unless scoped to a provider.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// FirstAlertAt - When the monitor first raised an alert. `null` when it never has.
+	FirstAlertAt *time.Time `json:"first_alert_at,omitempty"`
+	// LastAlertAt - When the monitor last raised an alert. `null` when it never has.
+	LastAlertAt *time.Time `json:"last_alert_at,omitempty"`
 }
 
-// MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromSpecification represents the monitor alerts unresolve output specification change notification from specification type.
+// MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromSpecification - Specification on one side of the change.
 type MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromSpecification struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MonitorAlertsUnresolveOutputSpecificationChangeNotificationToSpecification represents the monitor alerts unresolve output specification change notification to specification type.
+// MonitorAlertsUnresolveOutputSpecificationChangeNotificationToSpecification - Specification on one side of the change.
 type MonitorAlertsUnresolveOutputSpecificationChangeNotificationToSpecification struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromProviderVersion represents the monitor alerts unresolve output specification change notification from provider version type.
+// MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromProviderVersion - Provider version on one side of the change.
 type MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromProviderVersion struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Version     string    `json:"version"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Version - Release identifier of the provider version.
+	Version string `json:"version"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// MonitorAlertsUnresolveOutputSpecificationChangeNotificationToProviderVersion represents the monitor alerts unresolve output specification change notification to provider version type.
+// MonitorAlertsUnresolveOutputSpecificationChangeNotificationToProviderVersion - Provider version on one side of the change.
 type MonitorAlertsUnresolveOutputSpecificationChangeNotificationToProviderVersion struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Version     string    `json:"version"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Version - Release identifier of the provider version.
+	Version string `json:"version"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MonitorAlertsUnresolveOutputSpecificationChangeNotification represents the monitor alerts unresolve output specification change notification type.
 type MonitorAlertsUnresolveOutputSpecificationChangeNotification struct {
-	Object              string                                                                          `json:"object"`
-	Id                  string                                                                          `json:"id"`
-	ProviderId          string                                                                          `json:"provider_id"`
-	ProviderVersionId   string                                                                          `json:"provider_version_id"`
-	FromSpecification   *MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromSpecification   `json:"from_specification,omitempty"`
-	ToSpecification     *MonitorAlertsUnresolveOutputSpecificationChangeNotificationToSpecification     `json:"to_specification,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// ProviderId - Provider whose specification changed.
+	ProviderId string `json:"provider_id"`
+	// ProviderVersionId - Provider version whose specification changed.
+	ProviderVersionId string `json:"provider_version_id"`
+	// FromSpecification - Specification on one side of the change.
+	FromSpecification *MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromSpecification `json:"from_specification,omitempty"`
+	// ToSpecification - Specification on one side of the change.
+	ToSpecification *MonitorAlertsUnresolveOutputSpecificationChangeNotificationToSpecification `json:"to_specification,omitempty"`
+	// FromProviderVersion - Provider version on one side of the change.
 	FromProviderVersion *MonitorAlertsUnresolveOutputSpecificationChangeNotificationFromProviderVersion `json:"from_provider_version,omitempty"`
-	ToProviderVersion   *MonitorAlertsUnresolveOutputSpecificationChangeNotificationToProviderVersion   `json:"to_provider_version,omitempty"`
-	CreatedAt           time.Time                                                                       `json:"created_at"`
+	// ToProviderVersion - Provider version on one side of the change.
+	ToProviderVersion *MonitorAlertsUnresolveOutputSpecificationChangeNotificationToProviderVersion `json:"to_provider_version,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
-// MonitorAlertsUnresolveOutputRecipients represents the monitor alerts unresolve output recipients type.
+// MonitorAlertsUnresolveOutputRecipients - One actor notified about the alert.
 type MonitorAlertsUnresolveOutputRecipients struct {
-	Object      string     `json:"object"`
-	Id          string     `json:"id"`
-	RecipientId string     `json:"recipient_id"`
-	ViewedAt    *time.Time `json:"viewed_at,omitempty"`
-	CreatedAt   time.Time  `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// RecipientId - Notified actor.
+	RecipientId string `json:"recipient_id"`
+	// ViewedAt - When the recipient viewed the alert. `null` until viewed.
+	ViewedAt *time.Time `json:"viewed_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
-// MonitorAlertsUnresolveOutputEvents represents the monitor alerts unresolve output events type.
+// MonitorAlertsUnresolveOutputEvents - One entry in the history of the alert.
 type MonitorAlertsUnresolveOutputEvents struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Type      string    `json:"type"`
-	ActorId   *string   `json:"actor_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - What happened.
+	Type string `json:"type"`
+	// ActorId - Actor behind the event. `null` when no actor performed it.
+	ActorId *string `json:"actor_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // MonitorAlertsUnresolveOutput represents the monitor alerts unresolve output type.
 type MonitorAlertsUnresolveOutput struct {
-	Object                          string                                                       `json:"object"`
-	Id                              string                                                       `json:"id"`
-	Status                          string                                                       `json:"status"`
-	Monitor                         MonitorAlertsUnresolveOutputMonitor                          `json:"monitor"`
-	ProtoGuardAlertId               *string                                                      `json:"proto_guard_alert_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Current status of the alert. `pending` until you resolve or ignore it.
+	Status  string                              `json:"status"`
+	Monitor MonitorAlertsUnresolveOutputMonitor `json:"monitor"`
+	// ProtoGuardAlertId - ProtoGuard alert behind this alert. `null` for schema-change alerts.
+	ProtoGuardAlertId *string `json:"proto_guard_alert_id,omitempty"`
+	// ProtoGuardRunId - ProtoGuard run behind this alert. `null` for schema-change alerts.
 	ProtoGuardRunId                 *string                                                      `json:"proto_guard_run_id,omitempty"`
 	SpecificationChangeNotification *MonitorAlertsUnresolveOutputSpecificationChangeNotification `json:"specification_change_notification,omitempty"`
-	CreatedAt                       time.Time                                                    `json:"created_at"`
-	ResolvedAt                      *time.Time                                                   `json:"resolved_at,omitempty"`
-	Recipients                      []MonitorAlertsUnresolveOutputRecipients                     `json:"recipients"`
-	Events                          []MonitorAlertsUnresolveOutputEvents                         `json:"events"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// ResolvedAt - When the alert was resolved. `null` while pending.
+	ResolvedAt *time.Time `json:"resolved_at,omitempty"`
+	// Recipients - Actors notified about the alert.
+	Recipients []MonitorAlertsUnresolveOutputRecipients `json:"recipients"`
+	// Events - History of the alert.
+	Events []MonitorAlertsUnresolveOutputEvents `json:"events"`
 }
 
 // MapMonitorAlertsUnresolveOutputFromJSON deserializes JSON data into a MonitorAlertsUnresolveOutput.

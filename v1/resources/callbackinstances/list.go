@@ -7,9 +7,9 @@ import (
 
 // CallbackInstancesListOutputItems represents the callback instances list output items type.
 type CallbackInstancesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique callback instance identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Callback instance lifecycle status. Archived once the callback or the integration instance provider goes away.
 	Status string `json:"status"`
@@ -19,20 +19,28 @@ type CallbackInstancesListOutputItems struct {
 	IntegrationInstanceId string `json:"integration_instance_id"`
 	// IntegrationInstanceProviderId - Integration instance provider this callback instance is registered on
 	IntegrationInstanceProviderId string `json:"integration_instance_provider_id"`
-	// CreatedAt - Timestamp when the callback instance was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the callback instance was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CallbackInstancesListOutputPagination represents the callback instances list output pagination type.
 type CallbackInstancesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // CallbackInstancesListOutput represents the callback instances list output type.
 type CallbackInstancesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                `json:"object"`
 	Items      []CallbackInstancesListOutputItems    `json:"items"`
 	Pagination CallbackInstancesListOutputPagination `json:"pagination"`
 }
@@ -51,46 +59,51 @@ func MapCallbackInstancesListOutputToJSON(v *CallbackInstancesListOutput) ([]byt
 	return json.Marshal(v)
 }
 
-// CallbackInstancesListQueryCreatedAt - Filter callback instance creation time by date range
+// CallbackInstancesListQueryCreatedAt - Only return results whose callback instance creation time is in this range. Set `gt`, `lt`, or both.
 type CallbackInstancesListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for callback instance creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for callback instance creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// CallbackInstancesListQueryUpdatedAt - Filter callback instance last update time by date range
+// CallbackInstancesListQueryUpdatedAt - Only return results whose callback instance last update time is in this range. Set `gt`, `lt`, or both.
 type CallbackInstancesListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for callback instance last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for callback instance last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // CallbackInstancesListQuery represents the callback instances list query type.
 type CallbackInstancesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by callback instance ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return callback instances with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CallbackId - Filter by callback ID(s)
+	// CallbackId - Only return instances of one of these callbacks.
 	CallbackId *any `json:"callback_id,omitempty"`
-	// IntegrationId - Filter by the integration the callback belongs to
+	// IntegrationId - Only return instances of callbacks belonging to one of these integrations.
 	IntegrationId *any `json:"integration_id,omitempty"`
-	// IntegrationInstanceId - Filter by integration instance ID(s)
+	// IntegrationInstanceId - Only return instances listening for one of these integration instances.
 	IntegrationInstanceId *any `json:"integration_instance_id,omitempty"`
-	// IntegrationInstanceProviderId - Filter by integration instance provider ID(s)
+	// IntegrationInstanceProviderId - Only return instances registered on one of these integration instance providers.
 	IntegrationInstanceProviderId *any `json:"integration_instance_provider_id,omitempty"`
-	// Status - Filter by callback instance lifecycle status
+	// Status - Only return callback instances with one of these statuses. `deleted` instances are never listed.
 	Status *any `json:"status,omitempty"`
 	// Search - Match a callback instance by its exact ID
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter callback instance creation time by date range
+	// CreatedAt - Only return results whose callback instance creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *CallbackInstancesListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter callback instance last update time by date range
+	// UpdatedAt - Only return results whose callback instance last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *CallbackInstancesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

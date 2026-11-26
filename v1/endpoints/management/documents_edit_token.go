@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/documents/edittoken"
 )
 
-// DocumentsEditTokenEndpoint provides access to create and manage instance documents backed by Cargo.
+// DocumentsEditTokenEndpoint provides access to a document is rich text with comments, versions, and participants.
 type DocumentsEditTokenEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewDocumentsEditTokenEndpoint(client *endpoint.Client) *DocumentsEditTokenE
 	return &DocumentsEditTokenEndpoint{client: client}
 }
 
-// Get returns a short-lived read or write token for establishing a live document session.
+// Get returns a short-lived read or write token for establishing a live document session. Requires write scopes, even when the issued token only grants read access.
 func (e *DocumentsEditTokenEndpoint) Get(instanceId string, documentId string) (*edittoken.DocumentsEditTokenGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "documents", documentId, "edit-token"},

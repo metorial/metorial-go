@@ -69,16 +69,23 @@ func MapSkillsImportsCreateOutputToJSON(v *SkillsImportsCreateOutput) ([]byte, e
 // SkillsImportsCreateBodySource represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type SkillsImportsCreateBodySource struct {
-	Type          *string `json:"type,omitempty"`
+	// Type - Import from an uploaded file.
+	Type *string `json:"type,omitempty"`
+	// RepositoryUrl - Public repository URL to import from.
 	RepositoryUrl *string `json:"repository_url,omitempty"`
-	Ref           *string `json:"ref,omitempty"`
-	RepositoryId  *string `json:"repository_id,omitempty"`
-	Path          *string `json:"path,omitempty"`
-	FileId        *string `json:"file_id,omitempty"`
+	// Ref - Branch, tag, or commit to import. Defaults to the default branch.
+	Ref *string `json:"ref,omitempty"`
+	// RepositoryId - Connected repository to import from, by ID.
+	RepositoryId *string `json:"repository_id,omitempty"`
+	// Path - Directory within the repository to import.
+	Path *string `json:"path,omitempty"`
+	// FileId - Uploaded file to import, by ID.
+	FileId *string `json:"file_id,omitempty"`
 }
 
 // SkillsImportsCreateBody represents the skills imports create body type.
 type SkillsImportsCreateBody struct {
+	// Source - Where to import skills from.
 	Source SkillsImportsCreateBodySource `json:"source"`
 	// SkillGroupId - The ID of a skill group that every imported skill is added to.
 	SkillGroupId *string `json:"skill_group_id,omitempty"`

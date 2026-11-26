@@ -93,9 +93,11 @@ type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess struct {
 	Owner *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccessOwner `json:"owner,omitempty"`
 }
 
-// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation represents the integrations setup sessions list output items integration instance implementation type.
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation - What backs this instance. `null` for a standalone instance.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation struct {
-	Type             string `json:"type"`
+	// Type - Which kind of backing this is.
+	Type string `json:"type"`
+	// MagicMcpServerId - Magic MCP server backing this instance.
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
 }
 
@@ -109,27 +111,30 @@ type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersToolFil
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersProvider represents the integrations setup sessions list output items integration instance providers provider type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderProviderVersion represents the integrations setup sessions list output items integration instance providers integration provider provider version type.
+// IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderProviderVersion - Version this snapshot was taken from.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderProviderVersion struct {
-	Object string  `json:"object"`
-	Id     string  `json:"id"`
-	Index  float64 `json:"index"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Index - Position of this version, starting at 0.
+	Index float64 `json:"index"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderToolFilter represents one of several possible types.
@@ -142,163 +147,223 @@ type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegra
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderConfig represents the integrations setup sessions list output items integration instance providers integration provider config type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProvider represents the integrations setup sessions list output items integration instance providers integration provider type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProvider struct {
-	Object          string                                                                                                 `json:"object"`
-	Id              string                                                                                                 `json:"id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// ProviderVersion - Version this snapshot was taken from.
 	ProviderVersion IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderProviderVersion `json:"provider_version"`
-	Status          string                                                                                                 `json:"status"`
-	Name            string                                                                                                 `json:"name"`
-	Description     *string                                                                                                `json:"description,omitempty"`
-	Metadata        *map[string]any                                                                                        `json:"metadata,omitempty"`
+	// Status - `archived` once you archive the integration provider.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter        *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
-	ProviderId        string                                                                                             `json:"provider_id"`
-	DeploymentId      string                                                                                             `json:"deployment_id"`
-	AuthMethodId      *string                                                                                            `json:"auth_method_id,omitempty"`
-	AuthCredentialsId *string                                                                                            `json:"auth_credentials_id,omitempty"`
-	Config            *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                                                                          `json:"created_at"`
-	UpdatedAt         time.Time                                                                                          `json:"updated_at"`
-	ArchivedAt        *time.Time                                                                                         `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
+	// ProviderId - Provider this snapshot was taken from.
+	ProviderId string `json:"provider_id"`
+	// DeploymentId - Deployment this snapshot was taken from.
+	DeploymentId string `json:"deployment_id"`
+	// AuthMethodId - Auth method at snapshot time. `null` when none was set.
+	AuthMethodId *string `json:"auth_method_id,omitempty"`
+	// AuthCredentialsId - Credentials at snapshot time. `null` when none were set.
+	AuthCredentialsId *string                                                                                        `json:"auth_credentials_id,omitempty"`
+	Config            *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProviderConfig `json:"config,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersConfig represents the integrations setup sessions list output items integration instance providers config type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersAuthConfig represents the integrations setup sessions list output items integration instance providers auth config type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders represents the integrations setup sessions list output items integration instance providers type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders struct {
-	Object                string          `json:"object"`
-	Id                    string          `json:"id"`
-	Status                string          `json:"status"`
-	Name                  string          `json:"name"`
-	Description           *string         `json:"description,omitempty"`
-	Metadata              *map[string]any `json:"metadata,omitempty"`
-	IntegrationId         string          `json:"integration_id"`
-	IntegrationInstanceId string          `json:"integration_instance_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the entry is archived.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration the instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceId - Integration instance this entry belongs to.
+	IntegrationInstanceId string `json:"integration_instance_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersToolFilter         `json:"tool_filter,omitempty"`
+	ToolFilter *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
 	IsOverrideToolFilter bool                                                                                    `json:"is_override_tool_filter"`
 	Provider             IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersProvider            `json:"provider"`
 	IntegrationProvider  IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProvidersAuthConfig         `json:"auth_config,omitempty"`
 	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
-	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
-	CreatedAt          time.Time  `json:"created_at"`
-	UpdatedAt          time.Time  `json:"updated_at"`
-	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
+	CallbackInstanceId *string `json:"callback_instance_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsListOutputItemsIntegrationInstance represents the integrations setup sessions list output items integration instance type.
 type IntegrationsSetupSessionsListOutputItemsIntegrationInstance struct {
-	Object          string          `json:"object"`
-	Id              string          `json:"id"`
-	Status          string          `json:"status"`
-	Name            string          `json:"name"`
-	Description     *string         `json:"description,omitempty"`
-	Metadata        *map[string]any `json:"metadata,omitempty"`
-	IntegrationId   string          `json:"integration_id"`
-	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
-	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `draft` when created. `archived` once you archive the instance.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IdentityActorId - Identity actor the instance connects as. `null` when none is set.
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	// IdentityId - Identity the instance connects as. `null` when none is set.
+	IdentityId *string `json:"identity_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access         IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess          `json:"access"`
+	Access IntegrationsSetupSessionsListOutputItemsIntegrationInstanceAccess `json:"access"`
+	// Implementation - What backs this instance. `null` for a standalone instance.
 	Implementation *IntegrationsSetupSessionsListOutputItemsIntegrationInstanceImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders     `json:"providers"`
-	CreatedAt      time.Time                                                                  `json:"created_at"`
-	UpdatedAt      time.Time                                                                  `json:"updated_at"`
-	ArchivedAt     *time.Time                                                                 `json:"archived_at,omitempty"`
+	// Providers - Providers set up on this instance.
+	Providers []IntegrationsSetupSessionsListOutputItemsIntegrationInstanceProviders `json:"providers"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsSetupSessionsListOutputItems represents the integrations setup sessions list output items type.
 type IntegrationsSetupSessionsListOutputItems struct {
-	Object        string          `json:"object"`
-	Id            string          `json:"id"`
-	Status        string          `json:"status"`
-	Url           string          `json:"url"`
-	Name          *string         `json:"name,omitempty"`
-	Description   *string         `json:"description,omitempty"`
-	Metadata      *map[string]any `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `pending` until every provider is configured. `successful` once every provider is configured. `expired` past `expires_at` without completion.
+	Status string `json:"status"`
+	// Url - Hosted setup page URL.
+	Url string `json:"url"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Configuration for the setup flow. `null` when none was set.
 	Configuration *map[string]any `json:"configuration,omitempty"`
-	RedirectUrl   *string         `json:"redirect_url,omitempty"`
-	IntegrationId string          `json:"integration_id"`
+	// RedirectUrl - Where to send the user once setup completes. `null` when none was given.
+	RedirectUrl *string `json:"redirect_url,omitempty"`
+	// IntegrationId - Integration being set up.
+	IntegrationId string `json:"integration_id"`
 	// Access - Resource ownership and access settings.
 	Access              IntegrationsSetupSessionsListOutputItemsAccess              `json:"access"`
 	IntegrationInstance IntegrationsSetupSessionsListOutputItemsIntegrationInstance `json:"integration_instance"`
-	CreatedAt           time.Time                                                   `json:"created_at"`
-	UpdatedAt           time.Time                                                   `json:"updated_at"`
-	ExpiresAt           time.Time                                                   `json:"expires_at"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ExpiresAt - When the session expires. Past this time the session reads as `expired`.
+	ExpiresAt time.Time `json:"expires_at"`
 }
 
 // IntegrationsSetupSessionsListOutputPagination represents the integrations setup sessions list output pagination type.
 type IntegrationsSetupSessionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // IntegrationsSetupSessionsListOutput represents the integrations setup sessions list output type.
 type IntegrationsSetupSessionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                        `json:"object"`
 	Items      []IntegrationsSetupSessionsListOutputItems    `json:"items"`
 	Pagination IntegrationsSetupSessionsListOutputPagination `json:"pagination"`
 }
@@ -317,36 +382,45 @@ func MapIntegrationsSetupSessionsListOutputToJSON(v *IntegrationsSetupSessionsLi
 	return json.Marshal(v)
 }
 
-// IntegrationsSetupSessionsListQueryCreatedAt - Filter integration setup session creation time by date range
+// IntegrationsSetupSessionsListQueryCreatedAt - Only return results whose integration setup session creation time is in this range. Set `gt`, `lt`, or both.
 type IntegrationsSetupSessionsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for integration setup session creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for integration setup session creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// IntegrationsSetupSessionsListQueryUpdatedAt - Filter integration setup session last update time by date range
+// IntegrationsSetupSessionsListQueryUpdatedAt - Only return results whose integration setup session last update time is in this range. Set `gt`, `lt`, or both.
 type IntegrationsSetupSessionsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for integration setup session last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for integration setup session last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // IntegrationsSetupSessionsListQuery represents the integrations setup sessions list query type.
 type IntegrationsSetupSessionsListQuery struct {
-	Limit                 *float64 `json:"limit,omitempty"`
-	After                 *string  `json:"after,omitempty"`
-	Before                *string  `json:"before,omitempty"`
-	Cursor                *string  `json:"cursor,omitempty"`
-	Order                 *string  `json:"order,omitempty"`
-	Status                *any     `json:"status,omitempty"`
-	Id                    *any     `json:"id,omitempty"`
-	IntegrationId         *any     `json:"integration_id,omitempty"`
-	IntegrationInstanceId *any     `json:"integration_instance_id,omitempty"`
-	// CreatedAt - Filter integration setup session creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return setup sessions with one of these statuses. `deleted` sessions are never listed.
+	Status *any `json:"status,omitempty"`
+	// Id - Only return setup sessions with one of these IDs.
+	Id *any `json:"id,omitempty"`
+	// IntegrationId - Only return setup sessions for one of these integrations.
+	IntegrationId *any `json:"integration_id,omitempty"`
+	// IntegrationInstanceId - Only return setup sessions for one of these integration instances.
+	IntegrationInstanceId *any `json:"integration_instance_id,omitempty"`
+	// CreatedAt - Only return results whose integration setup session creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *IntegrationsSetupSessionsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter integration setup session last update time by date range
+	// UpdatedAt - Only return results whose integration setup session last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *IntegrationsSetupSessionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

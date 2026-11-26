@@ -5,9 +5,9 @@ import (
 	"time"
 )
 
-// ChatInstancesListOutputItemsIdentity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+// ChatInstancesListOutputItemsIdentity - Account this instance is authorized as on the chat provider. `null` until observed.
 type ChatInstancesListOutputItemsIdentity struct {
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// UserId - The provider-side user or app id this connection is authorized as
 	UserId string `json:"user_id"`
@@ -25,36 +25,44 @@ type ChatInstancesListOutputItemsIdentity struct {
 
 // ChatInstancesListOutputItems represents the chat instances list output items type.
 type ChatInstancesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat instance identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat instance status
+	// Status - `archived` once you archive the instance. Archived instances stay listable.
 	Status string `json:"status"`
 	// ChatConnectionId - The chat connection this instance belongs to
 	ChatConnectionId string `json:"chat_connection_id"`
-	// Name - Display name of the chat instance
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the chat instance
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata set on the chat instance
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata map[string]any `json:"metadata"`
-	// Identity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+	// Identity - Account this instance is authorized as on the chat provider. `null` until observed.
 	Identity *ChatInstancesListOutputItemsIdentity `json:"identity,omitempty"`
-	// CreatedAt - Timestamp when the chat instance was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat instance was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatInstancesListOutputPagination represents the chat instances list output pagination type.
 type ChatInstancesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatInstancesListOutput represents the chat instances list output type.
 type ChatInstancesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                            `json:"object"`
 	Items      []ChatInstancesListOutputItems    `json:"items"`
 	Pagination ChatInstancesListOutputPagination `json:"pagination"`
 }
@@ -73,40 +81,45 @@ func MapChatInstancesListOutputToJSON(v *ChatInstancesListOutput) ([]byte, error
 	return json.Marshal(v)
 }
 
-// ChatInstancesListQueryCreatedAt - Filter chat instance creation time by date range
+// ChatInstancesListQueryCreatedAt - Only return results whose chat instance creation time is in this range. Set `gt`, `lt`, or both.
 type ChatInstancesListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for chat instance creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat instance creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ChatInstancesListQueryUpdatedAt - Filter chat instance last update time by date range
+// ChatInstancesListQueryUpdatedAt - Only return results whose chat instance last update time is in this range. Set `gt`, `lt`, or both.
 type ChatInstancesListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for chat instance last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat instance last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ChatInstancesListQuery represents the chat instances list query type.
 type ChatInstancesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by status
+	// Status - Only return chat instances with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by chat instance ID(s)
+	// Id - Only return chat instances with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// ChatConnectionId - Filter by chat connection ID(s)
+	// ChatConnectionId - Only return chat instances for one of these chat connections.
 	ChatConnectionId *any `json:"chat_connection_id,omitempty"`
-	// CreatedAt - Filter chat instance creation time by date range
+	// CreatedAt - Only return results whose chat instance creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ChatInstancesListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter chat instance last update time by date range
+	// UpdatedAt - Only return results whose chat instance last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ChatInstancesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

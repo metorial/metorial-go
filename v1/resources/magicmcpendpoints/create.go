@@ -62,15 +62,24 @@ type MagicMcpEndpointsCreateOutputAccess struct {
 
 // MagicMcpEndpointsCreateOutput represents the magic mcp endpoints create output type.
 type MagicMcpEndpointsCreateOutput struct {
-	Object      string           `json:"object"`
-	Id          string           `json:"id"`
-	Status      string           `json:"status"`
-	Slug        string           `json:"slug"`
-	Url         string           `json:"url"`
-	Servers     []map[string]any `json:"servers"`
-	Name        *string          `json:"name,omitempty"`
-	Description *string          `json:"description,omitempty"`
-	Metadata    map[string]any   `json:"metadata"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you delete the endpoint. Archived endpoints stay listable.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Url - Connection URL for the endpoint.
+	Url string `json:"url"`
+	// Servers - Servers the endpoint routes to.
+	Servers []map[string]any `json:"servers"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
 	// EnableSkillEditing - Whether consumers connecting through this endpoint with a consumer magic MCP token get tools to read and edit the skills they have access to. The tools are hidden while skills are disabled for the instance.
 	EnableSkillEditing bool `json:"enable_skill_editing"`
 	// EnableSkillResources - Whether consumers connecting through this endpoint with a consumer magic MCP token can read the skills they have access to over MCP, as skill:// resources with skills/list and skills/get. Skills are hidden while skills are disabled for the instance.
@@ -78,9 +87,11 @@ type MagicMcpEndpointsCreateOutput struct {
 	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools.
 	SkillSelection MagicMcpEndpointsCreateOutputSkillSelection `json:"skill_selection"`
 	// Access - Resource ownership and access settings.
-	Access    MagicMcpEndpointsCreateOutputAccess `json:"access"`
-	CreatedAt time.Time                           `json:"created_at"`
-	UpdatedAt time.Time                           `json:"updated_at"`
+	Access MagicMcpEndpointsCreateOutputAccess `json:"access"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpEndpointsCreateOutputFromJSON deserializes JSON data into a MagicMcpEndpointsCreateOutput.
@@ -110,23 +121,31 @@ type MagicMcpEndpointsCreateBodySkillSelection struct {
 
 // MagicMcpEndpointsCreateBodyMagicMcpServers represents the magic mcp endpoints create body magic mcp servers type.
 type MagicMcpEndpointsCreateBodyMagicMcpServers struct {
+	// MagicMcpServerId - Server to route to.
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
-	ToolFilters      *any   `json:"tool_filters,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // MagicMcpEndpointsCreateBody represents the magic mcp endpoints create body type.
 type MagicMcpEndpointsCreateBody struct {
-	Name              *string         `json:"name,omitempty"`
-	Description       *string         `json:"description,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	ConsumerProfileId *string         `json:"consumer_profile_id,omitempty"`
-	SkillPluginId     *string         `json:"skill_plugin_id,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the endpoint. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ConsumerProfileId - Consumer profile that will own the endpoint.
+	ConsumerProfileId *string `json:"consumer_profile_id,omitempty"`
+	// SkillPluginId - Skill plugin the endpoint is created for.
+	SkillPluginId *string `json:"skill_plugin_id,omitempty"`
 	// EnableSkillEditing - Expose skill editing tools on this endpoint so the connecting consumer can read and edit the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the tools; connections using a publishable key do not. Requires skills to be enabled for the instance and consumer skill editing to be allowed for the project. The tools disappear if either is turned off later.
 	EnableSkillEditing *bool `json:"enable_skill_editing,omitempty"`
 	// EnableSkillResources - Serve skills on this endpoint over MCP (the skills extension: skill:// resources, skills/list and skills/get) so the connecting consumer can read the skills they have access to. Only connections authenticated with a magic MCP token bound to a single consumer get the skills. Requires skills to be enabled for the instance.
 	EnableSkillResources *bool `json:"enable_skill_resources,omitempty"`
-	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to.
-	SkillSelection  *MagicMcpEndpointsCreateBodySkillSelection    `json:"skill_selection,omitempty"`
+	// SkillSelection - Which skills the endpoint exposes, both as skill resources and through the skill editing tools. Defaults to all skills the consumer has access to. A `selected` selection on a consumer-owned endpoint requires the project to allow skill selection.
+	SkillSelection *MagicMcpEndpointsCreateBodySkillSelection `json:"skill_selection,omitempty"`
+	// MagicMcpServers - Servers the endpoint routes to.
 	MagicMcpServers *[]MagicMcpEndpointsCreateBodyMagicMcpServers `json:"magic_mcp_servers,omitempty"`
 }
 

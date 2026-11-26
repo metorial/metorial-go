@@ -7,13 +7,21 @@ import (
 
 // ConsumersCreateOutput represents the consumers create output type.
 type ConsumersCreateOutput struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -33,7 +41,9 @@ func MapConsumersCreateOutputToJSON(v *ConsumersCreateOutput) ([]byte, error) {
 
 // ConsumersCreateBody represents the consumers create body type.
 type ConsumersCreateBody struct {
-	Name  string `json:"name"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address. An existing consumer with this email is linked to the instance.
 	Email string `json:"email"`
 }
 

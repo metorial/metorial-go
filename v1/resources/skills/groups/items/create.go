@@ -5,32 +5,52 @@ import (
 	"time"
 )
 
-// SkillsGroupsItemsCreateOutputSkillImage represents the skills groups items create output skill image type.
+// SkillsGroupsItemsCreateOutputSkillImage - Image shown for the skill.
 type SkillsGroupsItemsCreateOutputSkillImage struct {
-	Object string  `json:"object"`
-	Type   string  `json:"type"`
-	Icon   *string `json:"icon,omitempty"`
-	Color  *string `json:"color,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - Where the skill image comes from.
+	Type string `json:"type"`
+	// Icon - Library icon ID. `null` unless `type` is `icon`.
+	Icon *string `json:"icon,omitempty"`
+	// Color - Tile color. `null` unless `type` is `icon`.
+	Color *string `json:"color,omitempty"`
 }
 
 // SkillsGroupsItemsCreateOutputSkill represents the skills groups items create output skill type.
 type SkillsGroupsItemsCreateOutputSkill struct {
-	Object            string                                  `json:"object"`
-	Id                string                                  `json:"id"`
-	Status            string                                  `json:"status"`
-	Slug              string                                  `json:"slug"`
-	Name              string                                  `json:"name"`
-	Description       *string                                 `json:"description,omitempty"`
-	ImageUrl          string                                  `json:"image_url"`
-	Image             SkillsGroupsItemsCreateOutputSkillImage `json:"image"`
-	ClientName        string                                  `json:"client_name"`
-	ClientDescription *string                                 `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any                         `json:"client_metadata,omitempty"`
-	License           *string                                 `json:"license,omitempty"`
-	Compatibility     *string                                 `json:"compatibility,omitempty"`
-	Metadata          *map[string]any                         `json:"metadata,omitempty"`
-	CreatedAt         time.Time                               `json:"created_at"`
-	UpdatedAt         time.Time                               `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Whether the skill is available, archived, or deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - Public URL of the skill image.
+	ImageUrl string `json:"image_url"`
+	// Image - Image shown for the skill.
+	Image SkillsGroupsItemsCreateOutputSkillImage `json:"image"`
+	// ClientName - Client-facing skill name.
+	ClientName string `json:"client_name"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsGroupsItemsCreateOutput represents the skills groups items create output type.
@@ -59,6 +79,7 @@ func MapSkillsGroupsItemsCreateOutputToJSON(v *SkillsGroupsItemsCreateOutput) ([
 
 // SkillsGroupsItemsCreateBody represents the skills groups items create body type.
 type SkillsGroupsItemsCreateBody struct {
+	// SkillId - Skill to add to the group, by ID.
 	SkillId string `json:"skill_id"`
 }
 

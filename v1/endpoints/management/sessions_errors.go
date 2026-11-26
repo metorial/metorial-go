@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/errors"
 )
 
-// SessionsErrorsEndpoint provides access to session errors track errors that occurred during a session. This read-only resource provides visibility into issues that happened during provider execution.
+// SessionsErrorsEndpoint provides access to a session error is an error recorded while running a session. Similar errors group together for review.
 type SessionsErrorsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsErrorsEndpoint(client *endpoint.Client) *SessionsErrorsEndpoint 
 
 // SessionsErrorsEndpointListParams contains optional query parameters for List.
 type SessionsErrorsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by error type(s)
 	Type *any `json:"type,omitempty"`
 	// Id - Filter by session error ID(s)
@@ -42,9 +47,9 @@ type SessionsErrorsEndpointListParams struct {
 	ProviderId *any `json:"provider_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)
 	SessionMessageId *any `json:"session_message_id,omitempty"`
-	// CreatedAt - Filter session error creation time by date range
+	// CreatedAt - Only return results whose session error creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session error last update time by date range
+	// UpdatedAt - Only return results whose session error last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 	// Search - Search by session error ID or error code, or by the name of a related provider, deployment, or auth config
 	Search *string `json:"search,omitempty"`
@@ -67,7 +72,7 @@ func (e *SessionsErrorsEndpoint) List(instanceId string, params *SessionsErrorsE
 	return &result, nil
 }
 
-// Get retrieves a specific error that occurred in a session.
+// Get retrieves a session error.
 func (e *SessionsErrorsEndpoint) Get(instanceId string, sessionErrorId string) (*errors.SessionsErrorsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-errors", sessionErrorId},

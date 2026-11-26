@@ -7,13 +7,19 @@ import (
 
 // StoresUpdateOutput represents the stores update output type.
 type StoresUpdateOutput struct {
-	// Object - String representing the object's type
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Access    string    `json:"access"`
-	ItemCount float64   `json:"item_count"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
+	Access string `json:"access"`
+	// ItemCount - Number of items in the store.
+	ItemCount float64 `json:"item_count"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -33,7 +39,9 @@ func MapStoresUpdateOutputToJSON(v *StoresUpdateOutput) ([]byte, error) {
 
 // StoresUpdateBody represents the stores update body type.
 type StoresUpdateBody struct {
-	Name   *string `json:"name,omitempty"`
+	// Name - Display name for the store.
+	Name *string `json:"name,omitempty"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
 	Access *string `json:"access,omitempty"`
 }
 

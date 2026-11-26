@@ -52,7 +52,7 @@ type ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActorTea
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActor represents the conversations messages handoff responses output request actor organization actor type.
+// ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -76,27 +76,42 @@ type ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActor st
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesHandoffResponsesOutputRequestActorConsumer represents the conversations messages handoff responses output request actor consumer type.
+// ConversationsMessagesHandoffResponsesOutputRequestActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type ConversationsMessagesHandoffResponsesOutputRequestActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesHandoffResponsesOutputRequestActor represents the conversations messages handoff responses output request actor type.
+// ConversationsMessagesHandoffResponsesOutputRequestActor - Actor behind a participant.
 type ConversationsMessagesHandoffResponsesOutputRequestActor struct {
-	Type              string                                                                    `json:"type"`
-	Name              string                                                                    `json:"name"`
-	ImageUrl          *string                                                                   `json:"image_url,omitempty"`
-	Email             *string                                                                   `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *ConversationsMessagesHandoffResponsesOutputRequestActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *ConversationsMessagesHandoffResponsesOutputRequestActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                           `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *ConversationsMessagesHandoffResponsesOutputRequestActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsMessagesHandoffResponsesOutputRequestContext represents the conversations messages handoff responses output request context type.
@@ -111,9 +126,10 @@ type ConversationsMessagesHandoffResponsesOutputRequestContext struct {
 
 // ConversationsMessagesHandoffResponsesOutputRequest represents the conversations messages handoff responses output request type.
 type ConversationsMessagesHandoffResponsesOutputRequest struct {
-	Object    string                                                     `json:"object"`
-	Id        string                                                     `json:"id"`
-	Status    string                                                     `json:"status"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	Status string `json:"status"`
+	// Actor - Actor behind a participant.
 	Actor     *ConversationsMessagesHandoffResponsesOutputRequestActor   `json:"actor,omitempty"`
 	Context   *ConversationsMessagesHandoffResponsesOutputRequestContext `json:"context,omitempty"`
 	CreatedAt time.Time                                                  `json:"created_at"`

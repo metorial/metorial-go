@@ -23,7 +23,7 @@ type SandboxMachinesUsageOutputItems struct {
 	CoresAvailable float64 `json:"cores_available"`
 	// MemoryUsedBytes - Memory in use, in bytes
 	MemoryUsedBytes float64 `json:"memory_used_bytes"`
-	// MemoryTotalBytes - Total memory, in bytes
+	// MemoryTotalBytes - Memory installed on the machine, in bytes
 	MemoryTotalBytes float64 `json:"memory_total_bytes"`
 	// NetworkRxBytes - Total bytes received over the network
 	NetworkRxBytes float64 `json:"network_rx_bytes"`
@@ -37,12 +37,20 @@ type SandboxMachinesUsageOutputItems struct {
 
 // SandboxMachinesUsageOutputPagination represents the sandbox machines usage output pagination type.
 type SandboxMachinesUsageOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SandboxMachinesUsageOutput represents the sandbox machines usage output type.
 type SandboxMachinesUsageOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                               `json:"object"`
 	Items      []SandboxMachinesUsageOutputItems    `json:"items"`
 	Pagination SandboxMachinesUsageOutputPagination `json:"pagination"`
 }
@@ -63,12 +71,17 @@ func MapSandboxMachinesUsageOutputToJSON(v *SandboxMachinesUsageOutput) ([]byte,
 
 // SandboxMachinesUsageQuery represents the sandbox machines usage query type.
 type SandboxMachinesUsageQuery struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	MachineInstanceId *any     `json:"machine_instance_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order             *string `json:"order,omitempty"`
+	MachineInstanceId *any    `json:"machine_instance_id,omitempty"`
 }
 
 // MapSandboxMachinesUsageQueryFromJSON deserializes JSON data into a SandboxMachinesUsageQuery.

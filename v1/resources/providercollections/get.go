@@ -7,19 +7,19 @@ import (
 
 // ProviderCollectionsGetOutput represents the provider collections get output type.
 type ProviderCollectionsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique collection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the collection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the collection
+	// Description - Free-text description.
 	Description string `json:"description"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the collection.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

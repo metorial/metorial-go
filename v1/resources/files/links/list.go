@@ -7,28 +7,36 @@ import (
 
 // FilesLinksListOutputItems represents the files links list output items type.
 type FilesLinksListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The links's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// FileId - The file's unique identifier
+	// FileId - File this link downloads.
 	FileId string `json:"file_id"`
-	// Url - The file's public URL
+	// Url - Public URL for downloading the file.
 	Url string `json:"url"`
-	// CreatedAt - The links's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// ExpiresAt - The file's expiration date
+	// ExpiresAt - When the link stops working. `null` if it never expires.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
 // FilesLinksListOutputPagination represents the files links list output pagination type.
 type FilesLinksListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // FilesLinksListOutput represents the files links list output type.
 type FilesLinksListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                         `json:"object"`
 	Items      []FilesLinksListOutputItems    `json:"items"`
 	Pagination FilesLinksListOutputPagination `json:"pagination"`
 }
@@ -49,12 +57,17 @@ func MapFilesLinksListOutputToJSON(v *FilesLinksListOutput) ([]byte, error) {
 
 // FilesLinksListQuery represents the files links list query type.
 type FilesLinksListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// FileId - Filter by file ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// FileId - Only return links for this file.
 	FileId *string `json:"file_id,omitempty"`
 }
 

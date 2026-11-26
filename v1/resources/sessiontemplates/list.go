@@ -59,113 +59,128 @@ type SessionTemplatesListOutputItemsProvidersToolFilter struct {
 
 // SessionTemplatesListOutputItemsProvidersDeployment represents the session templates list output items providers deployment type.
 type SessionTemplatesListOutputItemsProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionTemplatesListOutputItemsProvidersConfig represents the session templates list output items providers config type.
 type SessionTemplatesListOutputItemsProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionTemplatesListOutputItemsProvidersAuthConfig represents the session templates list output items providers auth config type.
+// SessionTemplatesListOutputItemsProvidersAuthConfig - Auth config the provider runs with. `null` when there is none.
 type SessionTemplatesListOutputItemsProvidersAuthConfig struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
 }
 
 // SessionTemplatesListOutputItemsProviders represents the session templates list output items providers type.
 type SessionTemplatesListOutputItemsProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session template provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Provider status
+	// Status - `archived` once the template provider is removed. Removed template providers stay listable.
 	Status string `json:"status"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter SessionTemplatesListOutputItemsProvidersToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this template provider connects to.
 	ProviderId string `json:"provider_id"`
-	// SessionTemplateId - Parent session template ID
-	SessionTemplateId string                                              `json:"session_template_id"`
-	Deployment        SessionTemplatesListOutputItemsProvidersDeployment  `json:"deployment"`
-	Config            SessionTemplatesListOutputItemsProvidersConfig      `json:"config"`
-	AuthConfig        *SessionTemplatesListOutputItemsProvidersAuthConfig `json:"auth_config,omitempty"`
-	// CreatedAt - Timestamp when created
+	// SessionTemplateId - Template this provider belongs to.
+	SessionTemplateId string                                             `json:"session_template_id"`
+	Deployment        SessionTemplatesListOutputItemsProvidersDeployment `json:"deployment"`
+	Config            SessionTemplatesListOutputItemsProvidersConfig     `json:"config"`
+	// AuthConfig - Auth config the provider runs with. `null` when there is none.
+	AuthConfig *SessionTemplatesListOutputItemsProvidersAuthConfig `json:"auth_config,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionTemplatesListOutputItems represents the session templates list output items type.
 type SessionTemplatesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session template identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Status of the session template
+	// Status - `archived` once the template is deleted. Archived templates stay listable.
 	Status string `json:"status"`
-	// Name - Template name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Template description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs
-	Metadata                   *map[string]any `json:"metadata,omitempty"`
-	IntegrationInstanceId      *string         `json:"integration_instance_id,omitempty"`
-	IntegrationInstanceGroupId *string         `json:"integration_instance_group_id,omitempty"`
-	IdentityActorId            *string         `json:"identity_actor_id,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationInstanceId - Integration instance linked to this template. `null` when there is none.
+	IntegrationInstanceId *string `json:"integration_instance_id,omitempty"`
+	// IntegrationInstanceGroupId - Integration instance group linked to this template. `null` when there is none.
+	IntegrationInstanceGroupId *string `json:"integration_instance_group_id,omitempty"`
+	// IdentityActorId - Identity actor linked to this template. `null` when there is none.
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access     SessionTemplatesListOutputItemsAccess `json:"access"`
-	IdentityId *string                               `json:"identity_id,omitempty"`
-	// Providers - Template providers
+	Access SessionTemplatesListOutputItemsAccess `json:"access"`
+	// IdentityId - Identity linked to this template. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// Providers - Providers that sessions created from this template connect to.
 	Providers []SessionTemplatesListOutputItemsProviders `json:"providers"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionTemplatesListOutputPagination represents the session templates list output pagination type.
 type SessionTemplatesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SessionTemplatesListOutput represents the session templates list output type.
 type SessionTemplatesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                               `json:"object"`
 	Items      []SessionTemplatesListOutputItems    `json:"items"`
 	Pagination SessionTemplatesListOutputPagination `json:"pagination"`
 }
@@ -184,29 +199,34 @@ func MapSessionTemplatesListOutputToJSON(v *SessionTemplatesListOutput) ([]byte,
 	return json.Marshal(v)
 }
 
-// SessionTemplatesListQueryCreatedAt - Filter session template creation time by date range
+// SessionTemplatesListQueryCreatedAt - Only return results whose session template creation time is in this range. Set `gt`, `lt`, or both.
 type SessionTemplatesListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for session template creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session template creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// SessionTemplatesListQueryUpdatedAt - Filter session template last update time by date range
+// SessionTemplatesListQueryUpdatedAt - Only return results whose session template last update time is in this range. Set `gt`, `lt`, or both.
 type SessionTemplatesListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for session template last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session template last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // SessionTemplatesListQuery represents the session templates list query type.
 type SessionTemplatesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Ownership - Which resources to return under the resource ownership rules: shared (resources without an owner), usable (shared resources plus resources the caller can use), or all. Defaults to shared when ownership is enforced for the project and to all otherwise.
 	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
@@ -225,9 +245,9 @@ type SessionTemplatesListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter templates that include provider auth configs with these IDs
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter session template creation time by date range
+	// CreatedAt - Only return results whose session template creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *SessionTemplatesListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session template last update time by date range
+	// UpdatedAt - Only return results whose session template last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *SessionTemplatesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

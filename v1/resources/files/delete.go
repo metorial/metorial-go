@@ -33,7 +33,7 @@ type FilesDeleteOutputCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesDeleteOutputCreatedByOrganizationActor represents the files delete output created by organization actor type.
+// FilesDeleteOutputCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type FilesDeleteOutputCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,51 +57,67 @@ type FilesDeleteOutputCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesDeleteOutputCreatedByConsumer represents the files delete output created by consumer type.
+// FilesDeleteOutputCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type FilesDeleteOutputCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesDeleteOutputCreatedBy represents the files delete output created by type.
+// FilesDeleteOutputCreatedBy - Actor that uploaded the file.
 type FilesDeleteOutputCreatedBy struct {
-	Type              string                                       `json:"type"`
-	Name              string                                       `json:"name"`
-	ImageUrl          *string                                      `json:"image_url,omitempty"`
-	Email             *string                                      `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *FilesDeleteOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *FilesDeleteOutputCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                              `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *FilesDeleteOutputCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // FilesDeleteOutput represents the files delete output type.
 type FilesDeleteOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The files's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The files's status
+	// Status - `deleted` after the file is deleted.
 	Status string `json:"status"`
-	// FileName - The file's name
+	// FileName - Name of the uploaded file.
 	FileName string `json:"file_name"`
-	// FileSize - The file's size in bytes
+	// FileSize - Size of the file in bytes.
 	FileSize float64 `json:"file_size"`
-	// FileType - The file's MIME type
+	// FileType - MIME type of the file.
 	FileType string `json:"file_type"`
-	// Title - The file's title
+	// Title - Label shown for the file.
 	Title string `json:"title"`
-	// Purpose - The file's purpose identifier
-	Purpose   string                      `json:"purpose"`
+	// Purpose - Why the file was uploaded. Controls what it can be used for.
+	Purpose string `json:"purpose"`
+	// CreatedBy - Actor that uploaded the file.
 	CreatedBy *FilesDeleteOutputCreatedBy `json:"created_by,omitempty"`
-	// CreatedAt - The files's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - The files's last update date
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

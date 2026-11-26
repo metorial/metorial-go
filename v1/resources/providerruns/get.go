@@ -7,25 +7,25 @@ import (
 
 // ProviderRunsGetOutput represents the provider runs get output type.
 type ProviderRunsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider run identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Run status
+	// Status - `running` while the provider handles messages. `stopped` once it finishes.
 	Status string `json:"status"`
-	// SessionId - Parent session ID
+	// SessionId - Session the run belongs to.
 	SessionId string `json:"session_id"`
-	// SessionProviderId - Session provider ID
+	// SessionProviderId - Session provider that handled the run.
 	SessionProviderId string `json:"session_provider_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider that ran.
 	ProviderId string `json:"provider_id"`
-	// ConnectionId - Connection ID
+	// ConnectionId - Connection the run used.
 	ConnectionId string `json:"connection_id"`
-	// CompletedAt - Timestamp when run completed
+	// CompletedAt - When the run finished. `null` while it is still running.
 	CompletedAt *time.Time `json:"completed_at,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

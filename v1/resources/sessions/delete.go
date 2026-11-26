@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// SessionsDeleteOutputUsage represents the sessions delete output usage type.
+// SessionsDeleteOutputUsage - Usage statistics.
 type SessionsDeleteOutputUsage struct {
 	// TotalProductiveClientMessageCount - Total productive client messages
 	TotalProductiveClientMessageCount float64 `json:"total_productive_client_message_count"`
@@ -31,80 +31,83 @@ type SessionsDeleteOutputProvidersToolFilter struct {
 
 // SessionsDeleteOutputProvidersDeployment represents the sessions delete output providers deployment type.
 type SessionsDeleteOutputProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionsDeleteOutputProvidersConfig represents the sessions delete output providers config type.
 type SessionsDeleteOutputProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionsDeleteOutputProvidersAuthConfig represents the sessions delete output providers auth config type.
+// SessionsDeleteOutputProvidersAuthConfig - Auth config the provider runs with. `null` when there is none.
 type SessionsDeleteOutputProvidersAuthConfig struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
 }
 
 // SessionsDeleteOutputProviders represents the sessions delete output providers type.
 type SessionsDeleteOutputProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Provider status
+	// Status - `archived` once the session provider is deleted. Archived session providers stay listable.
 	Status string `json:"status"`
 	// Usage - Usage statistics
 	Usage SessionsDeleteOutputProvidersUsage `json:"usage"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter SessionsDeleteOutputProvidersToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this session provider connects to.
 	ProviderId string `json:"provider_id"`
-	// SessionId - Parent session ID
+	// SessionId - Session this provider is connected to.
 	SessionId string `json:"session_id"`
-	// FromTemplateId - Source template ID
+	// FromTemplateId - Template this provider was created from. `null` when it was added directly.
 	FromTemplateId *string `json:"from_template_id,omitempty"`
-	// FromTemplateProviderId - Source template provider ID
-	FromTemplateProviderId *string                                  `json:"from_template_provider_id,omitempty"`
-	Deployment             SessionsDeleteOutputProvidersDeployment  `json:"deployment"`
-	Config                 SessionsDeleteOutputProvidersConfig      `json:"config"`
-	AuthConfig             *SessionsDeleteOutputProvidersAuthConfig `json:"auth_config,omitempty"`
-	// CreatedAt - Timestamp when created
+	// FromTemplateProviderId - Template provider this was created from. `null` when added directly.
+	FromTemplateProviderId *string                                 `json:"from_template_provider_id,omitempty"`
+	Deployment             SessionsDeleteOutputProvidersDeployment `json:"deployment"`
+	Config                 SessionsDeleteOutputProvidersConfig     `json:"config"`
+	// AuthConfig - Auth config the provider runs with. `null` when there is none.
+	AuthConfig *SessionsDeleteOutputProvidersAuthConfig `json:"auth_config,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -154,40 +157,43 @@ type SessionsDeleteOutputAccess struct {
 
 // SessionsDeleteOutput represents the sessions delete output type.
 type SessionsDeleteOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Session status
+	// Status - `archived` once the session is deleted. Archived sessions stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ConnectionState - Session connection state
+	// ConnectionState - Whether the session currently holds an open connection.
 	ConnectionState string `json:"connection_state"`
-	// ConnectionUrl - MCP connection URL for this session
+	// ConnectionUrl - MCP connection URL for this session.
 	ConnectionUrl string `json:"connection_url"`
-	// ClientSecret - Session-scoped fine grained client secret token
-	ClientSecret *string                   `json:"client_secret,omitempty"`
-	Usage        SessionsDeleteOutputUsage `json:"usage"`
-	// Providers - Session providers
+	// ClientSecret - Secret for scoped client access. `null` when the caller cannot use this session.
+	ClientSecret *string `json:"client_secret,omitempty"`
+	// Usage - Usage statistics.
+	Usage SessionsDeleteOutputUsage `json:"usage"`
+	// Providers - Providers connected to this session.
 	Providers []SessionsDeleteOutputProviders `json:"providers"`
-	// FromTemplateIds - Template IDs this session was created from
+	// FromTemplateIds - Templates the session was created from. Empty when created without one.
 	FromTemplateIds []string `json:"from_template_ids"`
-	// HasErrors - Whether the session has any errors
+	// HasErrors - `true` when the session has errors.
 	HasErrors bool `json:"has_errors"`
-	// HasWarnings - Whether the session has any warnings
-	HasWarnings     bool    `json:"has_warnings"`
+	// HasWarnings - `true` when the session has warnings.
+	HasWarnings bool `json:"has_warnings"`
+	// IdentityActorId - Identity actor connected to the session. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access     SessionsDeleteOutputAccess `json:"access"`
-	IdentityId *string                    `json:"identity_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	Access SessionsDeleteOutputAccess `json:"access"`
+	// IdentityId - Identity connected to the session. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

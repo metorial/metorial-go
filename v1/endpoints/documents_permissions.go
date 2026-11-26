@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/documents/permissions"
 )
 
-// DocumentsPermissionsEndpoint provides access to create and manage instance documents backed by Cargo.
+// DocumentsPermissionsEndpoint provides access to a document is rich text with comments, versions, and participants.
 type DocumentsPermissionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewDocumentsPermissionsEndpoint(client *endpoint.Client) *DocumentsPermissi
 	return &DocumentsPermissionsEndpoint{client: client}
 }
 
-// Get returns the effective Cargo permissions for the current actor on a specific document.
+// Get returns what the caller can do with a document.
 func (e *DocumentsPermissionsEndpoint) Get(documentId string) (*permissions.DocumentsPermissionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"documents", documentId, "permissions"},

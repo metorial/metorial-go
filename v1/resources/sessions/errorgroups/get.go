@@ -7,21 +7,21 @@ import (
 
 // SessionsErrorGroupsGetOutput represents the sessions error groups get output type.
 type SessionsErrorGroupsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session error group identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable summary of the failure.
 	Message string `json:"message"`
-	// Data - Error group data from first occurrence
+	// Data - Error group data from the first occurrence.
 	Data map[string]any `json:"data"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider the errors belong to. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// OccurrenceCount - Number of errors in this group
+	// OccurrenceCount - How many errors are in this group.
 	OccurrenceCount float64 `json:"occurrence_count"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

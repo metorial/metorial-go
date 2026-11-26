@@ -7,42 +7,43 @@ import (
 
 // CustomProvidersDeploymentsGetLogsOutputStepsLogs represents the custom providers deployments get logs output steps logs type.
 type CustomProvidersDeploymentsGetLogsOutputStepsLogs struct {
-	// Object - String representing the deployment log entry's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Timestamp - Log entry timestamp
+	// Timestamp - When the log line was emitted.
 	Timestamp time.Time `json:"timestamp"`
-	// Message - Log message
+	// Message - Log line text.
 	Message string `json:"message"`
 }
 
-// CustomProvidersDeploymentsGetLogsOutputSteps represents the custom providers deployments get logs output steps type.
+// CustomProvidersDeploymentsGetLogsOutputSteps - Step of the deployment.
 type CustomProvidersDeploymentsGetLogsOutputSteps struct {
-	// Object - String representing the deployment log step's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Step identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Step name
+	// Name - Name of the step.
 	Name string `json:"name"`
-	// Type - Step type
+	// Type - What kind of work the step does.
 	Type string `json:"type"`
-	// Status - Step status
-	Status string                                             `json:"status"`
-	Logs   []CustomProvidersDeploymentsGetLogsOutputStepsLogs `json:"logs"`
-	// CreatedAt - Timestamp when step was created
+	// Status - Step execution status.
+	Status string `json:"status"`
+	// Logs - Log lines for this step.
+	Logs []CustomProvidersDeploymentsGetLogsOutputStepsLogs `json:"logs"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// StartedAt - Timestamp when step started
+	// StartedAt - When the step started. `null` while `status` is `pending`.
 	StartedAt *time.Time `json:"started_at,omitempty"`
-	// EndedAt - Timestamp when step ended
+	// EndedAt - When the step ended. `null` until the step finishes.
 	EndedAt *time.Time `json:"ended_at,omitempty"`
 }
 
 // CustomProvidersDeploymentsGetLogsOutput represents the custom providers deployments get logs output type.
 type CustomProvidersDeploymentsGetLogsOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// CustomProviderDeploymentId - ID of the deployment these logs belong to
+	// CustomProviderDeploymentId - Deployment these logs belong to.
 	CustomProviderDeploymentId string `json:"custom_provider_deployment_id"`
-	// Steps - Deployment steps with logs
+	// Steps - Steps of the deployment, in order.
 	Steps []CustomProvidersDeploymentsGetLogsOutputSteps `json:"steps"`
 }
 

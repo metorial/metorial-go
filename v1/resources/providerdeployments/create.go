@@ -15,77 +15,77 @@ type ProviderDeploymentsCreateOutputToolFilter struct {
 
 // ProviderDeploymentsCreateOutputLockedVersion represents the provider deployments create output locked version type.
 type ProviderDeploymentsCreateOutputLockedVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsCreateOutputDefaultConfig represents the provider deployments create output default config type.
 type ProviderDeploymentsCreateOutputDefaultConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsCreateOutput represents the provider deployments create output type.
 type ProviderDeploymentsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique deployment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Deployment status
+	// Status - Archived once the deployment is archived. Archived deployments stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter ProviderDeploymentsCreateOutputToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId    string                                        `json:"provider_id"`
 	LockedVersion *ProviderDeploymentsCreateOutputLockedVersion `json:"locked_version,omitempty"`
 	DefaultConfig *ProviderDeploymentsCreateOutputDefaultConfig `json:"default_config,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -106,27 +106,31 @@ func MapProviderDeploymentsCreateOutputToJSON(v *ProviderDeploymentsCreateOutput
 // ProviderDeploymentsCreateBodyProviderConfig represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ProviderDeploymentsCreateBodyProviderConfig struct {
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Value - Provider-specific configuration values
 	Value *map[string]any `json:"value,omitempty"`
-	// ProviderConfigVaultId - Provider config vault ID
+	// ProviderConfigVaultId - Vault to take the values from.
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
-	// ProviderId - Explicitly specify provider ID to associate with this auth config
+	// ProviderId - Explicitly specify provider ID to associate with this config
 	ProviderId *string `json:"provider_id,omitempty"`
 }
 
 // ProviderDeploymentsCreateBody represents the provider deployments create body type.
 type ProviderDeploymentsCreateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider deployment. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// ProviderId - The provider to deploy
 	ProviderId string `json:"provider_id"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version
 	LockedProviderVersionId *string `json:"locked_provider_version_id,omitempty"`
-	// ProviderConfigId - Existing provider config ID
+	// ProviderConfigId - ID of an existing config to use.
 	ProviderConfigId *string                                      `json:"provider_config_id,omitempty"`
 	ProviderConfig   *ProviderDeploymentsCreateBodyProviderConfig `json:"provider_config,omitempty"`
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/customproviders/versions"
 )
 
-// CustomProvidersVersionsEndpoint provides access to versions represent different releases of a custom provider. Each version can be deployed to environments.
+// CustomProvidersVersionsEndpoint provides access to a custom provider version is a release of a custom provider. It is built by a deployment and promoted into environments.
 type CustomProvidersVersionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,14 +17,19 @@ func NewCustomProvidersVersionsEndpoint(client *endpoint.Client) *CustomProvider
 
 // CustomProvidersVersionsEndpointListParams contains optional query parameters for List.
 type CustomProvidersVersionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by deployment status
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return versions with one of these deployment statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by version ID(s)
+	// Id - Only return versions with one of these IDs.
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider IDs (matches providers connected to sessions)
 	ProviderId *any `json:"provider_id,omitempty"`
@@ -36,21 +41,23 @@ type CustomProvidersVersionsEndpointListParams struct {
 	CustomProviderDeploymentId *any `json:"custom_provider_deployment_id,omitempty"`
 	// CustomProviderEnvironmentId - Filter by custom provider environment IDs (matches providers connected to sessions)
 	CustomProviderEnvironmentId *any `json:"custom_provider_environment_id,omitempty"`
-	// CreatedAt - Filter custom provider version creation time by date range
+	// CreatedAt - Only return results whose custom provider version creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter custom provider version last update time by date range
+	// UpdatedAt - Only return results whose custom provider version last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // CustomProvidersVersionsEndpointCreateBody contains the request body for Create.
 type CustomProvidersVersionsEndpointCreateBody struct {
-	// CustomProviderId - Custom provider ID
-	CustomProviderId string          `json:"custom_provider_id"`
-	From             any             `json:"from"`
-	Config           *map[string]any `json:"config,omitempty"`
+	// CustomProviderId - Custom provider to release a new version for.
+	CustomProviderId string `json:"custom_provider_id"`
+	// From - Source the provider runs from.
+	From any `json:"from"`
+	// Config - Configuration schema and transformer for the provider.
+	Config *map[string]any `json:"config,omitempty"`
 }
 
-// List returns a paginated list of versions for a custom provider.
+// List returns a paginated list of custom provider versions.
 func (e *CustomProvidersVersionsEndpoint) List(instanceId string, params *CustomProvidersVersionsEndpointListParams) (*versions.CustomProvidersVersionsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -67,7 +74,7 @@ func (e *CustomProvidersVersionsEndpoint) List(instanceId string, params *Custom
 	return &result, nil
 }
 
-// Get retrieves a specific version of a custom provider.
+// Get retrieves a custom provider version.
 func (e *CustomProvidersVersionsEndpoint) Get(instanceId string, customProviderVersionId string) (*versions.CustomProvidersVersionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "custom-provider-versions", customProviderVersionId},
@@ -79,7 +86,7 @@ func (e *CustomProvidersVersionsEndpoint) Get(instanceId string, customProviderV
 	return &result, nil
 }
 
-// GetEnv retrieves the environment variables for a specific version of a custom provider.
+// GetEnv retrieves the environment variables for a version of a custom provider.
 func (e *CustomProvidersVersionsEndpoint) GetEnv(instanceId string, customProviderVersionId string) (*versions.CustomProvidersVersionsGetEnvOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "custom-provider-versions", customProviderVersionId, "env"},

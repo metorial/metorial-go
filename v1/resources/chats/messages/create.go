@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// ChatsMessagesCreateOutputAuthor represents the chats messages create output author type.
+// ChatsMessagesCreateOutputAuthor - Author who sent the message. `null` when the message was first seen as a deletion, which carries no author.
 type ChatsMessagesCreateOutputAuthor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsMessagesCreateOutputAuthor struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -42,6 +42,7 @@ type ChatsMessagesCreateOutputAuthor struct {
 // ChatsMessagesCreateOutputReactionsEmoji represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsMessagesCreateOutputReactionsEmoji struct {
+	// Type - Provider-specific custom emoji.
 	Type *string `json:"type,omitempty"`
 	// Value - The unicode emoji shortcode
 	Value *string `json:"value,omitempty"`
@@ -73,11 +74,13 @@ type ChatsMessagesCreateOutputReactionsAuthors struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - URL of the author's avatar
 	ImageUrl *string `json:"imageUrl,omitempty"`
-	Raw      *any    `json:"raw,omitempty"`
+	// Raw - Raw reaction payload from the provider.
+	Raw *any `json:"raw,omitempty"`
 }
 
 // ChatsMessagesCreateOutputReactions represents the chats messages create output reactions type.
 type ChatsMessagesCreateOutputReactions struct {
+	// Emoji - Emoji used for the reaction.
 	Emoji ChatsMessagesCreateOutputReactionsEmoji `json:"emoji"`
 	// Count - Number of times this emoji was used to react
 	Count float64 `json:"count"`
@@ -103,11 +106,11 @@ type ChatsMessagesCreateOutputUnfurls struct {
 
 // ChatsMessagesCreateOutputAttachments represents the chats messages create output attachments type.
 type ChatsMessagesCreateOutputAttachments struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat message attachment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ProviderAttachmentId - The attachment's identifier on the chat provider
+	// ProviderAttachmentId - Identifier the chat provider uses for this attachment.
 	ProviderAttachmentId *string `json:"provider_attachment_id,omitempty"`
 	// Type - The kind of content the attachment holds
 	Type string `json:"type"`
@@ -127,15 +130,15 @@ type ChatsMessagesCreateOutputAttachments struct {
 	FileId string `json:"file_id"`
 	// DownloadUrl - Temporary URL the attachment content can be downloaded from. Null while the content is unavailable.
 	DownloadUrl *string `json:"download_url,omitempty"`
-	// CreatedAt - Timestamp when the attachment was recorded
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ChatsMessagesCreateOutput represents the chats messages create output type.
 type ChatsMessagesCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat message identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this message belongs to
 	ChatId string `json:"chat_id"`
@@ -145,11 +148,12 @@ type ChatsMessagesCreateOutput struct {
 	ThreadId *string `json:"thread_id,omitempty"`
 	// ProviderType - The provider's own name for this kind of message
 	ProviderType string `json:"provider_type"`
-	// ProviderMessageId - The message's identifier on the chat provider
+	// ProviderMessageId - Identifier the chat provider uses for this message.
 	ProviderMessageId string `json:"provider_message_id"`
 	// ProviderReplyToMessageId - Provider identifier of the message this one replies to, if it is a reply
-	ProviderReplyToMessageId *string                          `json:"provider_reply_to_message_id,omitempty"`
-	Author                   *ChatsMessagesCreateOutputAuthor `json:"author,omitempty"`
+	ProviderReplyToMessageId *string `json:"provider_reply_to_message_id,omitempty"`
+	// Author - Author who sent the message. `null` when the message was first seen as a deletion, which carries no author.
+	Author *ChatsMessagesCreateOutputAuthor `json:"author,omitempty"`
 	// Body - Structured content of the message. Null once the message has been deleted.
 	Body *map[string]any `json:"body,omitempty"`
 	// Reactions - Reactions left on the message, as reported by the provider
@@ -162,7 +166,7 @@ type ChatsMessagesCreateOutput struct {
 	SentAt time.Time `json:"sent_at"`
 	// Edited - Whether the message has been edited since it was sent
 	Edited bool `json:"edited"`
-	// EditedAt - Timestamp when the message was last edited
+	// EditedAt - When the message was last edited. `null` if never edited.
 	EditedAt *time.Time `json:"edited_at,omitempty"`
 	// CreatedAt - Timestamp when the message was first seen by Metorial
 	CreatedAt time.Time `json:"created_at"`
@@ -198,16 +202,17 @@ type ChatsMessagesCreateBodyAttachments struct {
 type ChatsMessagesCreateBody struct {
 	// ChannelId - The channel to send the message to
 	ChannelId string `json:"channel_id"`
-	// ThreadId - Send the message within this thread
+	// ThreadId - Thread to send the message in.
 	ThreadId *string `json:"thread_id,omitempty"`
 	// Parts - Structured content parts making up the message body
 	Parts []any `json:"parts"`
 	// AltText - Plain-text fallback for the message
-	AltText     *string                               `json:"alt_text,omitempty"`
+	AltText *string `json:"alt_text,omitempty"`
+	// Attachments - Files to attach to the message.
 	Attachments *[]ChatsMessagesCreateBodyAttachments `json:"attachments,omitempty"`
-	// ReplyMessageId - Reply to this message
+	// ReplyMessageId - Message this one replies to.
 	ReplyMessageId *string `json:"reply_message_id,omitempty"`
-	// EphemeralTargetUserId - Send this message so only this user can see it
+	// EphemeralTargetUserId - Only this user can see the message. Omit to send it to the channel.
 	EphemeralTargetUserId *string `json:"ephemeral_target_user_id,omitempty"`
 }
 

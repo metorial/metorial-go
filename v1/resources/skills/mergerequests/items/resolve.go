@@ -33,7 +33,7 @@ type SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActorTeams struc
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActor represents the skills merge requests items resolve output resolved by organization actor type.
+// SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,46 +57,62 @@ type SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsResolveOutputResolvedByConsumer represents the skills merge requests items resolve output resolved by consumer type.
+// SkillsMergeRequestsItemsResolveOutputResolvedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsMergeRequestsItemsResolveOutputResolvedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsResolveOutputResolvedBy represents the skills merge requests items resolve output resolved by type.
+// SkillsMergeRequestsItemsResolveOutputResolvedBy - Actor behind a participant.
 type SkillsMergeRequestsItemsResolveOutputResolvedBy struct {
-	Type              string                                                            `json:"type"`
-	Name              string                                                            `json:"name"`
-	ImageUrl          *string                                                           `json:"image_url,omitempty"`
-	Email             *string                                                           `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsMergeRequestsItemsResolveOutputResolvedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsMergeRequestsItemsResolveOutputResolvedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                   `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsMergeRequestsItemsResolveOutputResolvedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsMergeRequestsItemsResolveOutput represents the skills merge requests items resolve output type.
 type SkillsMergeRequestsItemsResolveOutput struct {
-	Object              string                                           `json:"object"`
-	Id                  string                                           `json:"id"`
-	SkillMergeRequestId string                                           `json:"skill_merge_request_id"`
-	Path                string                                           `json:"path"`
-	Kind                string                                           `json:"kind"`
-	ChangeType          string                                           `json:"change_type"`
-	Status              string                                           `json:"status"`
-	ResolutionType      *string                                          `json:"resolution_type,omitempty"`
-	ConflictReason      *string                                          `json:"conflict_reason,omitempty"`
-	Resolution          *map[string]any                                  `json:"resolution,omitempty"`
-	ResolvedBy          *SkillsMergeRequestsItemsResolveOutputResolvedBy `json:"resolved_by,omitempty"`
-	ResolvedAt          *time.Time                                       `json:"resolved_at,omitempty"`
-	AppliedAt           *time.Time                                       `json:"applied_at,omitempty"`
-	CreatedAt           time.Time                                        `json:"created_at"`
-	UpdatedAt           time.Time                                        `json:"updated_at"`
+	Object              string          `json:"object"`
+	Id                  string          `json:"id"`
+	SkillMergeRequestId string          `json:"skill_merge_request_id"`
+	Path                string          `json:"path"`
+	Kind                string          `json:"kind"`
+	ChangeType          string          `json:"change_type"`
+	Status              string          `json:"status"`
+	ResolutionType      *string         `json:"resolution_type,omitempty"`
+	ConflictReason      *string         `json:"conflict_reason,omitempty"`
+	Resolution          *map[string]any `json:"resolution,omitempty"`
+	// ResolvedBy - Actor behind a participant.
+	ResolvedBy *SkillsMergeRequestsItemsResolveOutputResolvedBy `json:"resolved_by,omitempty"`
+	ResolvedAt *time.Time                                       `json:"resolved_at,omitempty"`
+	AppliedAt  *time.Time                                       `json:"applied_at,omitempty"`
+	CreatedAt  time.Time                                        `json:"created_at"`
+	UpdatedAt  time.Time                                        `json:"updated_at"`
 }
 
 // MapSkillsMergeRequestsItemsResolveOutputFromJSON deserializes JSON data into a SkillsMergeRequestsItemsResolveOutput.
@@ -113,17 +129,22 @@ func MapSkillsMergeRequestsItemsResolveOutputToJSON(v *SkillsMergeRequestsItemsR
 	return json.Marshal(v)
 }
 
-// SkillsMergeRequestsItemsResolveBodyResolution represents the skills merge requests items resolve body resolution type.
+// SkillsMergeRequestsItemsResolveBodyResolution - Custom content for the resolution. Required for `edit_document` and `replace_file`.
 type SkillsMergeRequestsItemsResolveBodyResolution struct {
-	Title   *string `json:"title,omitempty"`
+	// Title - Document title for the resolution.
+	Title *string `json:"title,omitempty"`
+	// Content - Document or file content for the resolution.
 	Content *string `json:"content,omitempty"`
-	FileId  *string `json:"fileId,omitempty"`
+	// FileId - Replacement file for the resolution, by ID.
+	FileId *string `json:"fileId,omitempty"`
 }
 
 // SkillsMergeRequestsItemsResolveBody represents the skills merge requests items resolve body type.
 type SkillsMergeRequestsItemsResolveBody struct {
-	ResolutionType string                                         `json:"resolution_type"`
-	Resolution     *SkillsMergeRequestsItemsResolveBodyResolution `json:"resolution,omitempty"`
+	// ResolutionType - How to resolve the proposed change.
+	ResolutionType string `json:"resolution_type"`
+	// Resolution - Custom content for the resolution. Required for `edit_document` and `replace_file`.
+	Resolution *SkillsMergeRequestsItemsResolveBodyResolution `json:"resolution,omitempty"`
 }
 
 // MapSkillsMergeRequestsItemsResolveBodyFromJSON deserializes JSON data into a SkillsMergeRequestsItemsResolveBody.

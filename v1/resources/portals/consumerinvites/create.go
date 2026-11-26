@@ -5,34 +5,52 @@ import (
 	"time"
 )
 
-// PortalsConsumerInvitesCreateOutputConsumerProfile represents the portals consumer invites create output consumer profile type.
+// PortalsConsumerInvitesCreateOutputConsumerProfile - Consumer the invite was sent to.
 type PortalsConsumerInvitesCreateOutputConsumerProfile struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
-	Name   string `json:"name"`
-	Email  string `json:"email"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address of the consumer.
+	Email string `json:"email"`
 }
 
-// PortalsConsumerInvitesCreateOutputInvitedBy represents the portals consumer invites create output invited by type.
+// PortalsConsumerInvitesCreateOutputInvitedBy - Organization member who sent the invite.
 type PortalsConsumerInvitesCreateOutputInvitedBy struct {
-	Object string  `json:"object"`
-	Id     string  `json:"id"`
-	Name   string  `json:"name"`
-	Email  *string `json:"email,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
 }
 
 // PortalsConsumerInvitesCreateOutput represents the portals consumer invites create output type.
 type PortalsConsumerInvitesCreateOutput struct {
-	Object          string                                            `json:"object"`
-	Id              string                                            `json:"id"`
-	Status          string                                            `json:"status"`
-	PortalUrl       *string                                           `json:"portal_url,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `accepted` once the consumer joins.
+	Status string `json:"status"`
+	// PortalUrl - Where the invited consumer signs up. `null` outside portals.
+	PortalUrl *string `json:"portal_url,omitempty"`
+	// ConsumerProfile - Consumer the invite was sent to.
 	ConsumerProfile PortalsConsumerInvitesCreateOutputConsumerProfile `json:"consumer_profile"`
-	InvitedBy       PortalsConsumerInvitesCreateOutputInvitedBy       `json:"invited_by"`
-	Message         *string                                           `json:"message,omitempty"`
-	AcceptedAt      *time.Time                                        `json:"accepted_at,omitempty"`
-	CreatedAt       time.Time                                         `json:"created_at"`
-	UpdatedAt       time.Time                                         `json:"updated_at"`
+	// InvitedBy - Organization member who sent the invite.
+	InvitedBy PortalsConsumerInvitesCreateOutputInvitedBy `json:"invited_by"`
+	// Message - Personal message included in the invite.
+	Message *string `json:"message,omitempty"`
+	// AcceptedAt - When the invite was accepted. `null` while pending.
+	AcceptedAt *time.Time `json:"accepted_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapPortalsConsumerInvitesCreateOutputFromJSON deserializes JSON data into a PortalsConsumerInvitesCreateOutput.
@@ -51,8 +69,11 @@ func MapPortalsConsumerInvitesCreateOutputToJSON(v *PortalsConsumerInvitesCreate
 
 // PortalsConsumerInvitesCreateBody represents the portals consumer invites create body type.
 type PortalsConsumerInvitesCreateBody struct {
-	Name    string  `json:"name"`
-	Email   string  `json:"email"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address to invite.
+	Email string `json:"email"`
+	// Message - Personal message included in the invite.
 	Message *string `json:"message,omitempty"`
 }
 

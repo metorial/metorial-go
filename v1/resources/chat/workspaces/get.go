@@ -7,15 +7,15 @@ import (
 
 // ChatWorkspacesGetOutput represents the chat workspaces get output type.
 type ChatWorkspacesGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat workspace identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this workspace belongs to
 	ChatId string `json:"chat_id"`
-	// ProviderWorkspaceId - The workspace's identifier on the chat provider
+	// ProviderWorkspaceId - Identifier the chat provider uses for this workspace.
 	ProviderWorkspaceId string `json:"provider_workspace_id"`
-	// Name - Display name of the workspace
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Domain - Domain the workspace is reachable under on the chat provider
 	Domain *string `json:"domain,omitempty"`

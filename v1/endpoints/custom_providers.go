@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/customproviders"
 )
 
-// CustomProvidersEndpoint provides access to custom providers allow you to deploy your own MCP servers. Create providers from container images, remote URLs, or serverless functions.
+// CustomProvidersEndpoint provides access to a custom provider is an MCP server you deploy and use through your instance. It runs from a container image, a remote URL, or serverless function code.
 type CustomProvidersEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,42 +17,53 @@ func NewCustomProvidersEndpoint(client *endpoint.Client) *CustomProvidersEndpoin
 
 // CustomProvidersEndpointListParams contains optional query parameters for List.
 type CustomProvidersEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by status (active, archived)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return custom providers with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Type - Filter by type (container, function, remote)
+	// Type - Only return custom providers with one of these types.
 	Type *any `json:"type,omitempty"`
-	// Id - Filter by custom provider IDs
+	// Id - Only return custom providers with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// ProviderId - Filter by provider IDs (matches providers connected to sessions)
+	// ProviderId - Only return custom providers linked to one of these provider IDs (matches providers connected to sessions).
 	ProviderId *any `json:"provider_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter custom provider creation time by date range
+	// CreatedAt - Only return results whose custom provider creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter custom provider last update time by date range
+	// UpdatedAt - Only return results whose custom provider last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // CustomProvidersEndpointCreateBody contains the request body for Create.
 type CustomProvidersEndpointCreateBody struct {
-	Name        string  `json:"name"`
+	// Name - Display name for the custom provider.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the custom provider.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	From     any             `json:"from"`
-	Config   *map[string]any `json:"config,omitempty"`
+	// From - Source the provider runs from.
+	From any `json:"from"`
+	// Config - Configuration schema and transformer for the provider.
+	Config *map[string]any `json:"config,omitempty"`
 }
 
 // CustomProvidersEndpointUpdateBody contains the request body for Update.
 type CustomProvidersEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name for the custom provider.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the custom provider.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Readme - README content in markdown format
 	Readme *string `json:"readme,omitempty"`
@@ -75,7 +86,7 @@ func (e *CustomProvidersEndpoint) List(params *CustomProvidersEndpointListParams
 	return &result, nil
 }
 
-// Get retrieves a specific custom provider by ID.
+// Get retrieves a custom provider.
 func (e *CustomProvidersEndpoint) Get(customProviderId string) (*customproviders.CustomProvidersGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"custom-providers", customProviderId},
@@ -87,7 +98,7 @@ func (e *CustomProvidersEndpoint) Get(customProviderId string) (*customproviders
 	return &result, nil
 }
 
-// GetEnv retrieves the environment variables for a specific custom provider by ID.
+// GetEnv retrieves the environment variables for a custom provider.
 func (e *CustomProvidersEndpoint) GetEnv(customProviderId string) (*customproviders.CustomProvidersGetEnvOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"custom-providers", customProviderId, "env"},
@@ -112,7 +123,7 @@ func (e *CustomProvidersEndpoint) Create(body *CustomProvidersEndpointCreateBody
 	return &result, nil
 }
 
-// Update updates a specific custom provider.
+// Update updates a custom provider.
 func (e *CustomProvidersEndpoint) Update(customProviderId string, body *CustomProvidersEndpointUpdateBody) (*customproviders.CustomProvidersUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"custom-providers", customProviderId},
@@ -125,7 +136,7 @@ func (e *CustomProvidersEndpoint) Update(customProviderId string, body *CustomPr
 	return &result, nil
 }
 
-// Archive archives a specific custom provider and disables new connections to it.
+// Archive archives a custom provider and disables new connections to it.
 func (e *CustomProvidersEndpoint) Archive(customProviderId string) (*customproviders.CustomProvidersArchiveOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"custom-providers", customProviderId, "archive"},

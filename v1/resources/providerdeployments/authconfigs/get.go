@@ -15,52 +15,55 @@ type ProviderDeploymentsAuthConfigsGetOutputToolFilter struct {
 
 // ProviderDeploymentsAuthConfigsGetOutputDeployment represents the provider deployments auth configs get output deployment type.
 type ProviderDeploymentsAuthConfigsGetOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsAuthConfigsGetOutputCredentials represents the provider deployments auth configs get output credentials type.
 type ProviderDeploymentsAuthConfigsGetOutputCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -80,33 +83,33 @@ type ProviderDeploymentsAuthConfigsGetOutputAuthMethodOutputSchema struct {
 
 // ProviderDeploymentsAuthConfigsGetOutputAuthMethodScopes represents the provider deployments auth configs get output auth method scopes type.
 type ProviderDeploymentsAuthConfigsGetOutputAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsGetOutputAuthMethod represents the provider deployments auth configs get output auth method type.
 type ProviderDeploymentsAuthConfigsGetOutputAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                                 `json:"capabilities"`
 	InputSchema  *ProviderDeploymentsAuthConfigsGetOutputAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProviderDeploymentsAuthConfigsGetOutputAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -114,13 +117,13 @@ type ProviderDeploymentsAuthConfigsGetOutputAuthMethod struct {
 	Scopes *[]ProviderDeploymentsAuthConfigsGetOutputAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -170,25 +173,25 @@ type ProviderDeploymentsAuthConfigsGetOutputAccess struct {
 
 // ProviderDeploymentsAuthConfigsGetOutput represents the provider deployments auth configs get output type.
 type ProviderDeploymentsAuthConfigsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the auth config was created. `oauth_automated` configs are created automatically and cannot be updated.
 	Type string `json:"type"`
-	// Source - Auth config source
+	// Source - Where the auth config was created.
 	Source string `json:"source"`
-	// Status - Auth config status
+	// Status - Archived once the auth config is archived. Archived auth configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default auth config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter  ProviderDeploymentsAuthConfigsGetOutputToolFilter   `json:"tool_filter"`
@@ -197,9 +200,9 @@ type ProviderDeploymentsAuthConfigsGetOutput struct {
 	AuthMethod  ProviderDeploymentsAuthConfigsGetOutputAuthMethod   `json:"auth_method"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsAuthConfigsGetOutputAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

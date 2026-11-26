@@ -7,15 +7,24 @@ import (
 
 // MagicMcpGroupsUpdateOutput represents the magic mcp groups update output type.
 type MagicMcpGroupsUpdateOutput struct {
-	Object      string         `json:"object"`
-	Id          string         `json:"id"`
-	Status      string         `json:"status"`
-	Slug        string         `json:"slug"`
-	Name        *string        `json:"name,omitempty"`
-	Description *string        `json:"description,omitempty"`
-	Metadata    map[string]any `json:"metadata"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` once you delete the group.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpGroupsUpdateOutputFromJSON deserializes JSON data into a MagicMcpGroupsUpdateOutput.
@@ -34,9 +43,12 @@ func MapMagicMcpGroupsUpdateOutputToJSON(v *MagicMcpGroupsUpdateOutput) ([]byte,
 
 // MagicMcpGroupsUpdateBody represents the magic mcp groups update body type.
 type MagicMcpGroupsUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the group. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // MapMagicMcpGroupsUpdateBodyFromJSON deserializes JSON data into a MagicMcpGroupsUpdateBody.

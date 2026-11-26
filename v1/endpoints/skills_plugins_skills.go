@@ -2,10 +2,11 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/plugins/skills"
 )
 
-// SkillsPluginsSkillsEndpoint provides access to manage skill links for skill plugins.
+// SkillsPluginsSkillsEndpoint provides access to a skill plugin skill is one skill in a skill plugin.
 type SkillsPluginsSkillsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,41 +18,64 @@ func NewSkillsPluginsSkillsEndpoint(client *endpoint.Client) *SkillsPluginsSkill
 
 // SkillsPluginsSkillsEndpointListParams contains optional query parameters for List.
 type SkillsPluginsSkillsEndpointListParams struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	SkillId              *any     `json:"skill_id,omitempty"`
-	Status               *any     `json:"status,omitempty"`
-	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
-	// CreatedAt - Filter skill plugin skill creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return plugin skills with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SkillId - Only return links for one of these skills.
+	SkillId *any `json:"skill_id,omitempty"`
+	// Status - Only return plugin skills with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// SkillConfigurationId - Only return plugin skills using one of these skill configurations.
+	SkillConfigurationId *any `json:"skill_configuration_id,omitempty"`
+	// CreatedAt - Only return results whose skill plugin skill creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter skill plugin skill last update time by date range
+	// UpdatedAt - Only return results whose skill plugin skill last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SkillsPluginsSkillsEndpointAddBody contains the request body for Add.
 type SkillsPluginsSkillsEndpointAddBody struct {
-	SkillId              string          `json:"skill_id"`
-	Identifier           *string         `json:"identifier,omitempty"`
-	ClientName           *string         `json:"client_name,omitempty"`
-	ClientDescription    *string         `json:"client_description,omitempty"`
-	ClientMetadata       *map[string]any `json:"client_metadata,omitempty"`
-	License              *string         `json:"license,omitempty"`
-	Compatibility        *string         `json:"compatibility,omitempty"`
-	SkillConfigurationId *string         `json:"skill_configuration_id,omitempty"`
+	// SkillId - Skill to add to the plugin, by ID.
+	SkillId string `json:"skill_id"`
+	// Identifier - Slug identifying the skill in the plugin. Defaults to the skill name.
+	Identifier *string `json:"identifier,omitempty"`
+	// ClientName - Client-facing skill name. `null` clears it.
+	ClientName *nullable.Nullable[string] `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description. `null` clears it.
+	ClientDescription *nullable.Nullable[string] `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill. `null` clears it.
+	ClientMetadata *nullable.Nullable[map[string]any] `json:"client_metadata,omitempty"`
+	// License - License terms for the skill. `null` clears it.
+	License *nullable.Nullable[string] `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill. `null` clears it.
+	Compatibility *nullable.Nullable[string] `json:"compatibility,omitempty"`
+	// SkillConfigurationId - Skill configuration for the plugin skill, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
 }
 
 // SkillsPluginsSkillsEndpointUpdateBody contains the request body for Update.
 type SkillsPluginsSkillsEndpointUpdateBody struct {
-	ClientName           *string         `json:"client_name,omitempty"`
-	ClientDescription    *string         `json:"client_description,omitempty"`
-	ClientMetadata       *map[string]any `json:"client_metadata,omitempty"`
-	License              *string         `json:"license,omitempty"`
-	Compatibility        *string         `json:"compatibility,omitempty"`
-	SkillConfigurationId *string         `json:"skill_configuration_id,omitempty"`
+	// ClientName - Client-facing skill name. `null` clears it.
+	ClientName *nullable.Nullable[string] `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description. `null` clears it.
+	ClientDescription *nullable.Nullable[string] `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill. `null` clears it.
+	ClientMetadata *nullable.Nullable[map[string]any] `json:"client_metadata,omitempty"`
+	// License - License terms for the skill. `null` clears it.
+	License *nullable.Nullable[string] `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill. `null` clears it.
+	Compatibility *nullable.Nullable[string] `json:"compatibility,omitempty"`
+	// SkillConfigurationId - Skill configuration for the plugin skill, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
 }
 
 // List returns skills linked to a skill plugin.
@@ -71,7 +95,7 @@ func (e *SkillsPluginsSkillsEndpoint) List(skillPluginId string, params *SkillsP
 	return &result, nil
 }
 
-// Add adds a skill to a skill plugin.
+// Add adds a skill to a skill plugin. Adding a skill that was removed reactivates its link.
 func (e *SkillsPluginsSkillsEndpoint) Add(skillPluginId string, body *SkillsPluginsSkillsEndpointAddBody) (*skills.SkillsPluginsSkillsAddOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skill-plugins", skillPluginId, "skills"},

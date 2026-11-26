@@ -15,68 +15,68 @@ type ProviderDeploymentsConfigsListOutputItemsToolFilter struct {
 
 // ProviderDeploymentsConfigsListOutputItemsDeployment represents the provider deployments configs list output items deployment type.
 type ProviderDeploymentsConfigsListOutputItemsDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsListOutputItemsFromVaultDeployment represents the provider deployments configs list output items from vault deployment type.
 type ProviderDeploymentsConfigsListOutputItemsFromVaultDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsListOutputItemsFromVault represents the provider deployments configs list output items from vault type.
 type ProviderDeploymentsConfigsListOutputItemsFromVault struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config vault identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Status of the config vault
+	// Status - Archived once the vault is archived. Archived vaults stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this vault belongs to.
 	ProviderId string                                                        `json:"provider_id"`
 	Deployment *ProviderDeploymentsConfigsListOutputItemsFromVaultDeployment `json:"deployment,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -126,44 +126,52 @@ type ProviderDeploymentsConfigsListOutputItemsAccess struct {
 
 // ProviderDeploymentsConfigsListOutputItems represents the provider deployments configs list output items type.
 type ProviderDeploymentsConfigsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Config status
+	// Status - Archived once the config is archived. Archived configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter ProviderDeploymentsConfigsListOutputItemsToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this config follows.
 	SpecificationId string                                               `json:"specification_id"`
 	Deployment      *ProviderDeploymentsConfigsListOutputItemsDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsConfigsListOutputItemsFromVault  `json:"from_vault,omitempty"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsConfigsListOutputItemsAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsListOutputPagination represents the provider deployments configs list output pagination type.
 type ProviderDeploymentsConfigsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProviderDeploymentsConfigsListOutput represents the provider deployments configs list output type.
 type ProviderDeploymentsConfigsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                         `json:"object"`
 	Items      []ProviderDeploymentsConfigsListOutputItems    `json:"items"`
 	Pagination ProviderDeploymentsConfigsListOutputPagination `json:"pagination"`
 }
@@ -182,29 +190,34 @@ func MapProviderDeploymentsConfigsListOutputToJSON(v *ProviderDeploymentsConfigs
 	return json.Marshal(v)
 }
 
-// ProviderDeploymentsConfigsListQueryCreatedAt - Filter provider config creation time by date range
+// ProviderDeploymentsConfigsListQueryCreatedAt - Only return results whose provider config creation time is in this range. Set `gt`, `lt`, or both.
 type ProviderDeploymentsConfigsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for provider config creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider config creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ProviderDeploymentsConfigsListQueryUpdatedAt - Filter provider config last update time by date range
+// ProviderDeploymentsConfigsListQueryUpdatedAt - Only return results whose provider config last update time is in this range. Set `gt`, `lt`, or both.
 type ProviderDeploymentsConfigsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for provider config last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider config last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ProviderDeploymentsConfigsListQuery represents the provider deployments configs list query type.
 type ProviderDeploymentsConfigsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'usable' for consumers, and otherwise to 'shared' when ownership is enforced for the project and 'all' when it isn't.
 	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
@@ -233,9 +246,9 @@ type ProviderDeploymentsConfigsListQuery struct {
 	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider config creation time by date range
+	// CreatedAt - Only return results whose provider config creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ProviderDeploymentsConfigsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider config last update time by date range
+	// UpdatedAt - Only return results whose provider config last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ProviderDeploymentsConfigsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

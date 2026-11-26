@@ -2,6 +2,7 @@ package agents
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -40,9 +41,12 @@ func MapSkillsAgentsCreateOutputToJSON(v *SkillsAgentsCreateOutput) ([]byte, err
 
 // SkillsAgentsCreateBody represents the skills agents create body type.
 type SkillsAgentsCreateBody struct {
-	Name        string  `json:"name"`
-	Description *string `json:"description,omitempty"`
-	Content     *string `json:"content,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Content - Agent document content.
+	Content *string `json:"content,omitempty"`
 }
 
 // MapSkillsAgentsCreateBodyFromJSON deserializes JSON data into a SkillsAgentsCreateBody.

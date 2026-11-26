@@ -31,12 +31,20 @@ type SkillsFilesListOutputItems struct {
 
 // SkillsFilesListOutputPagination represents the skills files list output pagination type.
 type SkillsFilesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsFilesListOutput represents the skills files list output type.
 type SkillsFilesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                          `json:"object"`
 	Items      []SkillsFilesListOutputItems    `json:"items"`
 	Pagination SkillsFilesListOutputPagination `json:"pagination"`
 }

@@ -7,23 +7,23 @@ import (
 
 // ProviderRunsGetLogsOutputLogs represents the provider runs get logs output logs type.
 type ProviderRunsGetLogsOutputLogs struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Timestamp - Log timestamp
+	// Timestamp - When the log entry was written.
 	Timestamp time.Time `json:"timestamp"`
-	// Message - Log message content
+	// Message - Log message content.
 	Message string `json:"message"`
-	// OutputType - Output type of the log entry
+	// OutputType - Which stream the log entry came from.
 	OutputType string `json:"output_type"`
 }
 
 // ProviderRunsGetLogsOutput represents the provider runs get logs output type.
 type ProviderRunsGetLogsOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run the logs belong to.
 	ProviderRunId string `json:"provider_run_id"`
-	// Logs - Array of log entries
+	// Logs - Log entries for the run.
 	Logs []ProviderRunsGetLogsOutputLogs `json:"logs"`
 }
 

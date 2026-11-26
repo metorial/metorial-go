@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/magicmcpsessions"
 )
 
-// MagicMcpSessionsEndpoint provides access to magic MCP sessions map a Magic MCP server to one Subspace session and are created on demand by the MCP connection API.
+// MagicMcpSessionsEndpoint provides access to a magic MCP session is the live connection behind a magic MCP server or endpoint. Sessions are created on demand when a client connects.
 type MagicMcpSessionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,12 +17,18 @@ func NewMagicMcpSessionsEndpoint(client *endpoint.Client) *MagicMcpSessionsEndpo
 
 // MagicMcpSessionsEndpointListParams contains optional query parameters for List.
 type MagicMcpSessionsEndpointListParams struct {
-	Limit            *float64 `json:"limit,omitempty"`
-	After            *string  `json:"after,omitempty"`
-	Before           *string  `json:"before,omitempty"`
-	Cursor           *string  `json:"cursor,omitempty"`
-	Order            *string  `json:"order,omitempty"`
-	MagicMcpServerId *any     `json:"magic_mcp_server_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// MagicMcpServerId - Only return sessions for one of these servers.
+	MagicMcpServerId *any `json:"magic_mcp_server_id,omitempty"`
 }
 
 // List returns a paginated list of magic MCP sessions.

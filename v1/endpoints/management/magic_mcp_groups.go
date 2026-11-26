@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/magicmcpgroups"
 )
 
-// MagicMcpGroupsEndpoint provides access to magic MCP groups categorize servers and can be bound to token access.
+// MagicMcpGroupsEndpoint provides access to a magic MCP group is a set of magic MCP servers that a token can be scoped to.
 type MagicMcpGroupsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,37 +17,53 @@ func NewMagicMcpGroupsEndpoint(client *endpoint.Client) *MagicMcpGroupsEndpoint 
 
 // MagicMcpGroupsEndpointListParams contains optional query parameters for List.
 type MagicMcpGroupsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Status *any     `json:"status,omitempty"`
-	Search *string  `json:"search,omitempty"`
-	Id     *any     `json:"id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return groups with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Search - Search by name or description.
+	Search *string `json:"search,omitempty"`
+	// Id - Only return groups with these IDs.
+	Id *any `json:"id,omitempty"`
 }
 
 // MagicMcpGroupsEndpointCreateBody contains the request body for Create.
 type MagicMcpGroupsEndpointCreateBody struct {
-	Name        string          `json:"name"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the group. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // MagicMcpGroupsEndpointUpdateBody contains the request body for Update.
 type MagicMcpGroupsEndpointUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the group. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // MagicMcpGroupsEndpointAddServersBody contains the request body for AddServers.
 type MagicMcpGroupsEndpointAddServersBody struct {
+	// MagicMcpServerIds - Servers to add to the group.
 	MagicMcpServerIds []string `json:"magic_mcp_server_ids"`
 }
 
 // MagicMcpGroupsEndpointRemoveServersBody contains the request body for RemoveServers.
 type MagicMcpGroupsEndpointRemoveServersBody struct {
+	// MagicMcpServerIds - Servers to remove from the group.
 	MagicMcpServerIds []string `json:"magic_mcp_server_ids"`
 }
 
@@ -105,7 +121,7 @@ func (e *MagicMcpGroupsEndpoint) Delete(instanceId string, magicMcpGroupId strin
 	return &result, nil
 }
 
-// Update updates a magic MCP group.
+// Update updates a magic MCP group. Omitted fields keep their current value.
 func (e *MagicMcpGroupsEndpoint) Update(instanceId string, magicMcpGroupId string, body *MagicMcpGroupsEndpointUpdateBody) (*magicmcpgroups.MagicMcpGroupsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-groups", magicMcpGroupId},

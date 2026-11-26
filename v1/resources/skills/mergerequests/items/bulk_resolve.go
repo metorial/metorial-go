@@ -33,7 +33,7 @@ type SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActorTe
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActor represents the skills merge requests items bulk resolve output items resolved by organization actor type.
+// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,56 +57,80 @@ type SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActor s
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByConsumer represents the skills merge requests items bulk resolve output items resolved by consumer type.
+// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedBy represents the skills merge requests items bulk resolve output items resolved by type.
+// SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedBy - Actor behind a participant.
 type SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedBy struct {
-	Type              string                                                                     `json:"type"`
-	Name              string                                                                     `json:"name"`
-	ImageUrl          *string                                                                    `json:"image_url,omitempty"`
-	Email             *string                                                                    `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                            `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsMergeRequestsItemsBulkResolveOutputItems represents the skills merge requests items bulk resolve output items type.
 type SkillsMergeRequestsItemsBulkResolveOutputItems struct {
-	Object              string                                                    `json:"object"`
-	Id                  string                                                    `json:"id"`
-	SkillMergeRequestId string                                                    `json:"skill_merge_request_id"`
-	Path                string                                                    `json:"path"`
-	Kind                string                                                    `json:"kind"`
-	ChangeType          string                                                    `json:"change_type"`
-	Status              string                                                    `json:"status"`
-	ResolutionType      *string                                                   `json:"resolution_type,omitempty"`
-	ConflictReason      *string                                                   `json:"conflict_reason,omitempty"`
-	Resolution          *map[string]any                                           `json:"resolution,omitempty"`
-	ResolvedBy          *SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedBy `json:"resolved_by,omitempty"`
-	ResolvedAt          *time.Time                                                `json:"resolved_at,omitempty"`
-	AppliedAt           *time.Time                                                `json:"applied_at,omitempty"`
-	CreatedAt           time.Time                                                 `json:"created_at"`
-	UpdatedAt           time.Time                                                 `json:"updated_at"`
+	Object              string          `json:"object"`
+	Id                  string          `json:"id"`
+	SkillMergeRequestId string          `json:"skill_merge_request_id"`
+	Path                string          `json:"path"`
+	Kind                string          `json:"kind"`
+	ChangeType          string          `json:"change_type"`
+	Status              string          `json:"status"`
+	ResolutionType      *string         `json:"resolution_type,omitempty"`
+	ConflictReason      *string         `json:"conflict_reason,omitempty"`
+	Resolution          *map[string]any `json:"resolution,omitempty"`
+	// ResolvedBy - Actor behind a participant.
+	ResolvedBy *SkillsMergeRequestsItemsBulkResolveOutputItemsResolvedBy `json:"resolved_by,omitempty"`
+	ResolvedAt *time.Time                                                `json:"resolved_at,omitempty"`
+	AppliedAt  *time.Time                                                `json:"applied_at,omitempty"`
+	CreatedAt  time.Time                                                 `json:"created_at"`
+	UpdatedAt  time.Time                                                 `json:"updated_at"`
 }
 
 // SkillsMergeRequestsItemsBulkResolveOutputPagination represents the skills merge requests items bulk resolve output pagination type.
 type SkillsMergeRequestsItemsBulkResolveOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsMergeRequestsItemsBulkResolveOutput represents the skills merge requests items bulk resolve output type.
 type SkillsMergeRequestsItemsBulkResolveOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                              `json:"object"`
 	Items      []SkillsMergeRequestsItemsBulkResolveOutputItems    `json:"items"`
 	Pagination SkillsMergeRequestsItemsBulkResolveOutputPagination `json:"pagination"`
 }
@@ -125,22 +149,29 @@ func MapSkillsMergeRequestsItemsBulkResolveOutputToJSON(v *SkillsMergeRequestsIt
 	return json.Marshal(v)
 }
 
-// SkillsMergeRequestsItemsBulkResolveBodyItemsResolution represents the skills merge requests items bulk resolve body items resolution type.
+// SkillsMergeRequestsItemsBulkResolveBodyItemsResolution - Custom content for the resolution. Required for `edit_document` and `replace_file`.
 type SkillsMergeRequestsItemsBulkResolveBodyItemsResolution struct {
-	Title   *string `json:"title,omitempty"`
+	// Title - Document title for the resolution.
+	Title *string `json:"title,omitempty"`
+	// Content - Document or file content for the resolution.
 	Content *string `json:"content,omitempty"`
-	FileId  *string `json:"fileId,omitempty"`
+	// FileId - Replacement file for the resolution, by ID.
+	FileId *string `json:"fileId,omitempty"`
 }
 
 // SkillsMergeRequestsItemsBulkResolveBodyItems represents the skills merge requests items bulk resolve body items type.
 type SkillsMergeRequestsItemsBulkResolveBodyItems struct {
-	ItemId         string                                                  `json:"item_id"`
-	ResolutionType string                                                  `json:"resolution_type"`
-	Resolution     *SkillsMergeRequestsItemsBulkResolveBodyItemsResolution `json:"resolution,omitempty"`
+	// ItemId - Proposed change to resolve, by ID.
+	ItemId string `json:"item_id"`
+	// ResolutionType - How to resolve the proposed change.
+	ResolutionType string `json:"resolution_type"`
+	// Resolution - Custom content for the resolution. Required for `edit_document` and `replace_file`.
+	Resolution *SkillsMergeRequestsItemsBulkResolveBodyItemsResolution `json:"resolution,omitempty"`
 }
 
 // SkillsMergeRequestsItemsBulkResolveBody represents the skills merge requests items bulk resolve body type.
 type SkillsMergeRequestsItemsBulkResolveBody struct {
+	// Items - Resolutions to save.
 	Items []SkillsMergeRequestsItemsBulkResolveBodyItems `json:"items"`
 }
 

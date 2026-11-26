@@ -2,30 +2,31 @@ package callbacks
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
 // CallbacksUpdateOutputProvider represents the callbacks update output provider type.
 type CallbacksUpdateOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CallbacksUpdateOutputTriggerGroups - A trigger group that accepts a selection
 type CallbacksUpdateOutputTriggerGroups struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Key - Trigger group key to use in `trigger_group_selections`
 	Key string `json:"key"`
@@ -41,30 +42,30 @@ type CallbacksUpdateOutputTriggerGroups struct {
 
 // CallbacksUpdateOutput represents the callbacks update output type.
 type CallbacksUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique callback identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Callback lifecycle status. Archived once callbacks are disabled on the integration provider.
 	Status string `json:"status"`
-	// Name - Display name for the callback
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Optional callback description
+	// Description - Free-text description. `null` when none was set.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional callback metadata
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// IntegrationId - Integration this callback belongs to
 	IntegrationId string `json:"integration_id"`
-	// IntegrationProviderId - Integration provider this callback was created for
+	// IntegrationProviderId - Integration provider this callback receives events for.
 	IntegrationProviderId string                        `json:"integration_provider_id"`
 	Provider              CallbacksUpdateOutputProvider `json:"provider"`
 	// TriggerGroupSelections - Selections for trigger groups that need to know what to watch, keyed by trigger group key
 	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 	// TriggerGroups - Trigger groups that accept a selection, with their schema and whether one is still required
 	TriggerGroups []CallbacksUpdateOutputTriggerGroups `json:"trigger_groups"`
-	// CreatedAt - Timestamp when the callback was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the callback was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -86,10 +87,10 @@ func MapCallbacksUpdateOutputToJSON(v *CallbacksUpdateOutput) ([]byte, error) {
 type CallbacksUpdateBody struct {
 	// Name - Updated display name
 	Name *string `json:"name,omitempty"`
-	// Description - Updated description
-	Description *string `json:"description,omitempty"`
-	// Metadata - Updated custom metadata
-	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Description - Updated free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the callback. Replaces existing metadata. `null` clears it.
+	Metadata *nullable.Nullable[map[string]any] `json:"metadata,omitempty"`
 	// TriggerGroupSelections - Resource selections keyed by trigger group key. Each value must match that group’s selection schema. Limited to 64 groups and 64 KiB of JSON.
 	TriggerGroupSelections *map[string]map[string]any `json:"trigger_group_selections,omitempty"`
 }

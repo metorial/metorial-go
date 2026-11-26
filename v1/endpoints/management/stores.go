@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/stores"
 )
 
-// StoresEndpoint provides access to create and manage instance stores backed by Cargo.
+// StoresEndpoint provides access to a store is a shared collection of files and documents. Participants get read or write access to its contents.
 type StoresEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,34 +17,45 @@ func NewStoresEndpoint(client *endpoint.Client) *StoresEndpoint {
 
 // StoresEndpointListParams contains optional query parameters for List.
 type StoresEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by store ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return stores with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose store creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose store last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // StoresEndpointCreateBody contains the request body for Create.
 type StoresEndpointCreateBody struct {
-	Name       string  `json:"name"`
-	Access     *string `json:"access,omitempty"`
+	// Name - Display name for the store.
+	Name string `json:"name"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
+	Access *string `json:"access,omitempty"`
+	// TemplateId - Template to create the store from, by ID. Cannot be combined with `parent_id`.
 	TemplateId *string `json:"template_id,omitempty"`
-	ParentId   *string `json:"parent_id,omitempty"`
+	// ParentId - Store to copy, by ID. Cannot be combined with `template_id`.
+	ParentId *string `json:"parent_id,omitempty"`
 }
 
 // StoresEndpointUpdateBody contains the request body for Update.
 type StoresEndpointUpdateBody struct {
-	Name   *string `json:"name,omitempty"`
+	// Name - Display name for the store.
+	Name *string `json:"name,omitempty"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
 	Access *string `json:"access,omitempty"`
 }
 
-// List returns a paginated list of stores owned by the instance.
+// List returns a paginated list of stores.
 func (e *StoresEndpoint) List(instanceId string, params *StoresEndpointListParams) (*stores.StoresListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -61,7 +72,7 @@ func (e *StoresEndpoint) List(instanceId string, params *StoresEndpointListParam
 	return &result, nil
 }
 
-// Create creates a new store for the instance.
+// Create creates a store.
 func (e *StoresEndpoint) Create(instanceId string, body *StoresEndpointCreateBody) (*stores.StoresCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "stores"},
@@ -74,7 +85,7 @@ func (e *StoresEndpoint) Create(instanceId string, body *StoresEndpointCreateBod
 	return &result, nil
 }
 
-// Get retrieves a store by its ID.
+// Get retrieves a store.
 func (e *StoresEndpoint) Get(instanceId string, storeId string) (*stores.StoresGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "stores", storeId},
@@ -86,7 +97,7 @@ func (e *StoresEndpoint) Get(instanceId string, storeId string) (*stores.StoresG
 	return &result, nil
 }
 
-// Update updates a specific store.
+// Update updates a store.
 func (e *StoresEndpoint) Update(instanceId string, storeId string, body *StoresEndpointUpdateBody) (*stores.StoresUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "stores", storeId},
@@ -99,7 +110,7 @@ func (e *StoresEndpoint) Update(instanceId string, storeId string, body *StoresE
 	return &result, nil
 }
 
-// Delete deletes a specific store.
+// Delete deletes a store.
 func (e *StoresEndpoint) Delete(instanceId string, storeId string) (*stores.StoresDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "stores", storeId},

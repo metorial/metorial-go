@@ -37,9 +37,12 @@ func MapSkillsConfigurationsUpdateOutputToJSON(v *SkillsConfigurationsUpdateOutp
 
 // SkillsConfigurationsUpdateBody represents the skills configurations update body type.
 type SkillsConfigurationsUpdateBody struct {
-	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
-	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
-	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// AllowScripts - Allow skills to run scripts.
+	AllowScripts *bool `json:"allow_scripts,omitempty"`
+	// AllowedFileExtensions - File extensions skills may use.
+	AllowedFileExtensions *[]string `json:"allowed_file_extensions,omitempty"`
+	// AllowNonStandardDirectories - Allow skills to write outside the standard directories.
+	AllowNonStandardDirectories *bool `json:"allow_non_standard_directories,omitempty"`
 	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
 	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }

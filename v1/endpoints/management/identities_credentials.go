@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/identities/credentials"
 )
 
-// IdentitiesCredentialsEndpoint provides access to identity credentials bind an identity to concrete provider deployment, config, and auth resources.
+// IdentitiesCredentialsEndpoint provides access to an identity credential is one provider attachment on an identity. It links the identity to a provider deployment, config, or auth config.
 type IdentitiesCredentialsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,34 +17,39 @@ func NewIdentitiesCredentialsEndpoint(client *endpoint.Client) *IdentitiesCreden
 
 // IdentitiesCredentialsEndpointListParams contains optional query parameters for List.
 type IdentitiesCredentialsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by one or more credential statuses.
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return identity credentials with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by identity credential ID or IDs.
+	// Id - Only return identity credentials with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// AgentId - Filter by owner agent ID or IDs.
+	// AgentId - Only return identity credentials owned by one of these agents.
 	AgentId *any `json:"agent_id,omitempty"`
-	// ActorId - Filter by owner actor ID or IDs.
+	// ActorId - Only return identity credentials owned by one of these identity actors.
 	ActorId *any `json:"actor_id,omitempty"`
-	// ConsumerProfileId - Filter by the consumer profile that owns the credentials.
+	// ConsumerProfileId - Only return identity credentials owned by one of these consumer profiles.
 	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
-	// IdentityId - Filter by identity ID or IDs.
+	// IdentityId - Only return identity credentials attached to one of these identities.
 	IdentityId *any `json:"identity_id,omitempty"`
-	// ProviderId - Filter by provider ID or IDs.
+	// ProviderId - Only return identity credentials for one of these providers.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// ProviderDeploymentId - Filter by provider deployment ID or IDs.
+	// ProviderDeploymentId - Only return identity credentials attached to one of these provider deployments.
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
-	// ProviderConfigId - Filter by provider config ID or IDs.
+	// ProviderConfigId - Only return identity credentials attached to one of these provider configs.
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
-	// ProviderAuthConfigId - Filter by provider auth config ID or IDs.
+	// ProviderAuthConfigId - Only return identity credentials attached to one of these provider auth configs.
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter identity credential creation time by date range
+	// CreatedAt - Only return results whose identity credential creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter identity credential last update time by date range
+	// UpdatedAt - Only return results whose identity credential last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -85,7 +90,7 @@ func (e *IdentitiesCredentialsEndpoint) List(instanceId string, params *Identiti
 	return &result, nil
 }
 
-// Get retrieves a specific identity credential by ID.
+// Get retrieves an identity credential.
 func (e *IdentitiesCredentialsEndpoint) Get(instanceId string, identityCredentialId string) (*credentials.IdentitiesCredentialsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-credentials", identityCredentialId},
@@ -97,7 +102,7 @@ func (e *IdentitiesCredentialsEndpoint) Get(instanceId string, identityCredentia
 	return &result, nil
 }
 
-// Create creates a new credential and attaches it to an identity.
+// Create creates an identity credential.
 func (e *IdentitiesCredentialsEndpoint) Create(instanceId string, body *IdentitiesCredentialsEndpointCreateBody) (*credentials.IdentitiesCredentialsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-credentials"},
@@ -123,7 +128,7 @@ func (e *IdentitiesCredentialsEndpoint) Update(instanceId string, identityCreden
 	return &result, nil
 }
 
-// Delete archives an identity credential.
+// Delete archives an identity credential. It stays listable with `status=archived`.
 func (e *IdentitiesCredentialsEndpoint) Delete(instanceId string, identityCredentialId string) (*credentials.IdentitiesCredentialsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-credentials", identityCredentialId},

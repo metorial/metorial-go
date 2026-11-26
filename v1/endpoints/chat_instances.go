@@ -2,10 +2,11 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/chat/instances"
 )
 
-// ChatInstancesEndpoint provides access to chat instances materialize a chat connection for a specific runtime configuration.
+// ChatInstancesEndpoint provides access to a chat instance is a chat connection running with its own configuration and identity.
 type ChatInstancesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,36 +18,41 @@ func NewChatInstancesEndpoint(client *endpoint.Client) *ChatInstancesEndpoint {
 
 // ChatInstancesEndpointListParams contains optional query parameters for List.
 type ChatInstancesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by status
+	// Status - Only return chat instances with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by chat instance ID(s)
+	// Id - Only return chat instances with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// ChatConnectionId - Filter by chat connection ID(s)
+	// ChatConnectionId - Only return chat instances for one of these chat connections.
 	ChatConnectionId *any `json:"chat_connection_id,omitempty"`
-	// CreatedAt - Filter chat instance creation time by date range
+	// CreatedAt - Only return results whose chat instance creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter chat instance last update time by date range
+	// UpdatedAt - Only return results whose chat instance last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ChatInstancesEndpointCreateBody contains the request body for Create.
 type ChatInstancesEndpointCreateBody struct {
-	// ChatConnectionId - The chat connection to create this instance for
+	// ChatConnectionId - Chat connection to create this instance for.
 	ChatConnectionId string `json:"chat_connection_id"`
-	// Name - Display name of the chat instance
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description of the instance
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata for the instance
+	// Metadata - Custom data to identify or organize the chat instance.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata for the instance
+	// PrivateMetadata - Private data stored with the instance. Never returned by the API.
 	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
 	// IdentityActorId - Identity actor to run this instance as
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
@@ -56,13 +62,13 @@ type ChatInstancesEndpointCreateBody struct {
 
 // ChatInstancesEndpointUpdateBody contains the request body for Update.
 type ChatInstancesEndpointUpdateBody struct {
-	// Name - Display name of the chat instance
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description of the instance
-	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the chat instance. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata
+	// PrivateMetadata - Private data stored with the instance. Never returned by the API.
 	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
 }
 
@@ -83,7 +89,7 @@ func (e *ChatInstancesEndpoint) List(params *ChatInstancesEndpointListParams) (*
 	return &result, nil
 }
 
-// Get retrieves a specific chat instance.
+// Get retrieves a chat instance.
 func (e *ChatInstancesEndpoint) Get(chatInstanceId string) (*instances.ChatInstancesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "instances", chatInstanceId},
@@ -108,7 +114,7 @@ func (e *ChatInstancesEndpoint) Create(body *ChatInstancesEndpointCreateBody) (*
 	return &result, nil
 }
 
-// Update updates a specific chat instance.
+// Update updates a chat instance. Omitted fields keep their current value.
 func (e *ChatInstancesEndpoint) Update(chatInstanceId string, body *ChatInstancesEndpointUpdateBody) (*instances.ChatInstancesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "instances", chatInstanceId},
@@ -121,7 +127,7 @@ func (e *ChatInstancesEndpoint) Update(chatInstanceId string, body *ChatInstance
 	return &result, nil
 }
 
-// Delete archives a specific chat instance.
+// Delete archives a chat instance. It stays listable with `status=archived`.
 func (e *ChatInstancesEndpoint) Delete(chatInstanceId string) (*instances.ChatInstancesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "instances", chatInstanceId},

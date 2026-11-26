@@ -33,7 +33,7 @@ type SkillsMergeRequestsEventsListOutputItemsActorOrganizationActorTeams struct 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsActorOrganizationActor represents the skills merge requests events list output items actor organization actor type.
+// SkillsMergeRequestsEventsListOutputItemsActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsMergeRequestsEventsListOutputItemsActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,27 +57,42 @@ type SkillsMergeRequestsEventsListOutputItemsActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsActorConsumer represents the skills merge requests events list output items actor consumer type.
+// SkillsMergeRequestsEventsListOutputItemsActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsMergeRequestsEventsListOutputItemsActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsActor represents the skills merge requests events list output items actor type.
+// SkillsMergeRequestsEventsListOutputItemsActor - Actor behind a participant.
 type SkillsMergeRequestsEventsListOutputItemsActor struct {
-	Type              string                                                          `json:"type"`
-	Name              string                                                          `json:"name"`
-	ImageUrl          *string                                                         `json:"image_url,omitempty"`
-	Email             *string                                                         `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsMergeRequestsEventsListOutputItemsActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsMergeRequestsEventsListOutputItemsActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                 `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsMergeRequestsEventsListOutputItemsActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActorMember represents the skills merge requests events list output items comment actor organization actor member type.
@@ -108,7 +123,7 @@ type SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActorTeams 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActor represents the skills merge requests events list output items comment actor organization actor type.
+// SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -132,48 +147,65 @@ type SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActor struc
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsCommentActorConsumer represents the skills merge requests events list output items comment actor consumer type.
+// SkillsMergeRequestsEventsListOutputItemsCommentActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsMergeRequestsEventsListOutputItemsCommentActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsEventsListOutputItemsCommentActor represents the skills merge requests events list output items comment actor type.
+// SkillsMergeRequestsEventsListOutputItemsCommentActor - Actor behind a participant.
 type SkillsMergeRequestsEventsListOutputItemsCommentActor struct {
-	Type              string                                                                 `json:"type"`
-	Name              string                                                                 `json:"name"`
-	ImageUrl          *string                                                                `json:"image_url,omitempty"`
-	Email             *string                                                                `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsMergeRequestsEventsListOutputItemsCommentActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsMergeRequestsEventsListOutputItemsCommentActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                        `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsMergeRequestsEventsListOutputItemsCommentActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsMergeRequestsEventsListOutputItemsComment represents the skills merge requests events list output items comment type.
 type SkillsMergeRequestsEventsListOutputItemsComment struct {
-	Object                  string                                               `json:"object"`
-	Id                      string                                               `json:"id"`
-	SkillMergeRequestItemId *string                                              `json:"skill_merge_request_item_id,omitempty"`
-	Actor                   SkillsMergeRequestsEventsListOutputItemsCommentActor `json:"actor"`
-	Body                    string                                               `json:"body"`
-	Path                    *string                                              `json:"path,omitempty"`
-	InReplyToCommentId      *string                                              `json:"in_reply_to_comment_id,omitempty"`
-	DeletedAt               *time.Time                                           `json:"deleted_at,omitempty"`
-	CreatedAt               time.Time                                            `json:"created_at"`
-	UpdatedAt               time.Time                                            `json:"updated_at"`
+	Object                  string  `json:"object"`
+	Id                      string  `json:"id"`
+	SkillMergeRequestItemId *string `json:"skill_merge_request_item_id,omitempty"`
+	// Actor - Actor behind a participant.
+	Actor              SkillsMergeRequestsEventsListOutputItemsCommentActor `json:"actor"`
+	Body               string                                               `json:"body"`
+	Path               *string                                              `json:"path,omitempty"`
+	InReplyToCommentId *string                                              `json:"in_reply_to_comment_id,omitempty"`
+	DeletedAt          *time.Time                                           `json:"deleted_at,omitempty"`
+	CreatedAt          time.Time                                            `json:"created_at"`
+	UpdatedAt          time.Time                                            `json:"updated_at"`
 }
 
 // SkillsMergeRequestsEventsListOutputItems represents the skills merge requests events list output items type.
 type SkillsMergeRequestsEventsListOutputItems struct {
-	Object       string                                           `json:"object"`
-	Id           string                                           `json:"id"`
-	Type         string                                           `json:"type"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	Type   string `json:"type"`
+	// Actor - Actor behind a participant.
 	Actor        *SkillsMergeRequestsEventsListOutputItemsActor   `json:"actor,omitempty"`
 	Comment      *SkillsMergeRequestsEventsListOutputItemsComment `json:"comment,omitempty"`
 	ErrorCode    *string                                          `json:"error_code,omitempty"`
@@ -183,12 +215,20 @@ type SkillsMergeRequestsEventsListOutputItems struct {
 
 // SkillsMergeRequestsEventsListOutputPagination represents the skills merge requests events list output pagination type.
 type SkillsMergeRequestsEventsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsMergeRequestsEventsListOutput represents the skills merge requests events list output type.
 type SkillsMergeRequestsEventsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                        `json:"object"`
 	Items      []SkillsMergeRequestsEventsListOutputItems    `json:"items"`
 	Pagination SkillsMergeRequestsEventsListOutputPagination `json:"pagination"`
 }
@@ -207,23 +247,29 @@ func MapSkillsMergeRequestsEventsListOutputToJSON(v *SkillsMergeRequestsEventsLi
 	return json.Marshal(v)
 }
 
-// SkillsMergeRequestsEventsListQueryCreatedAt - Filter skill merge request event creation time by date range
+// SkillsMergeRequestsEventsListQueryCreatedAt - Only return results whose skill merge request event creation time is in this range. Set `gt`, `lt`, or both.
 type SkillsMergeRequestsEventsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for skill merge request event creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for skill merge request event creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // SkillsMergeRequestsEventsListQuery represents the skills merge requests events list query type.
 type SkillsMergeRequestsEventsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Type   *any     `json:"type,omitempty"`
-	// CreatedAt - Filter skill merge request event creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Type - Only return events of one of these types.
+	Type *any `json:"type,omitempty"`
+	// CreatedAt - Only return results whose skill merge request event creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *SkillsMergeRequestsEventsListQueryCreatedAt `json:"created_at,omitempty"`
 }
 

@@ -18,10 +18,10 @@ type SandboxRegionsListOutputItems struct {
 	Object string `json:"object"`
 	// Id - The region's identifier, used wherever a region is requested
 	Id string `json:"id"`
-	// Name - The region's display name
+	// Name - Display name.
 	Name string                            `json:"name"`
 	Area SandboxRegionsListOutputItemsArea `json:"area"`
-	// IsDefault - Whether this is the default sandbox region for this Metorial region
+	// IsDefault - The default region for new machines in this Metorial region.
 	IsDefault bool `json:"is_default"`
 	// Availability - Whether the region is currently available for new machines
 	Availability string `json:"availability"`
@@ -29,12 +29,20 @@ type SandboxRegionsListOutputItems struct {
 
 // SandboxRegionsListOutputPagination represents the sandbox regions list output pagination type.
 type SandboxRegionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SandboxRegionsListOutput represents the sandbox regions list output type.
 type SandboxRegionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                             `json:"object"`
 	Items      []SandboxRegionsListOutputItems    `json:"items"`
 	Pagination SandboxRegionsListOutputPagination `json:"pagination"`
 }
@@ -55,11 +63,16 @@ func MapSandboxRegionsListOutputToJSON(v *SandboxRegionsListOutput) ([]byte, err
 
 // SandboxRegionsListQuery represents the sandbox regions list query type.
 type SandboxRegionsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
 // MapSandboxRegionsListQueryFromJSON deserializes JSON data into a SandboxRegionsListQuery.

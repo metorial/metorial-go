@@ -7,37 +7,60 @@ import (
 
 // NetworkPoliciesCreateOutputRulesPorts represents the network policies create output rules ports type.
 type NetworkPoliciesCreateOutputRulesPorts struct {
-	Object string  `json:"object"`
-	From   float64 `json:"from"`
-	To     float64 `json:"to"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// From - First port in the range, inclusive.
+	From float64 `json:"from"`
+	// To - Last port in the range, inclusive.
+	To float64 `json:"to"`
 }
 
-// NetworkPoliciesCreateOutputRules represents the network policies create output rules type.
+// NetworkPoliciesCreateOutputRules - Rule in the network policy.
 type NetworkPoliciesCreateOutputRules struct {
-	Object      string                                   `json:"object"`
-	Id          string                                   `json:"id"`
-	Effect      string                                   `json:"effect"`
-	Direction   string                                   `json:"direction"`
-	Cidrs       []string                                 `json:"cidrs"`
-	Description *string                                  `json:"description,omitempty"`
-	Enabled     bool                                     `json:"enabled"`
-	Priority    float64                                  `json:"priority"`
-	Ports       *[]NetworkPoliciesCreateOutputRulesPorts `json:"ports,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Effect - `allow` permits matching traffic. `deny` blocks it.
+	Effect string `json:"effect"`
+	// Direction - `ingress` matches incoming traffic. `egress` matches outgoing traffic.
+	Direction string `json:"direction"`
+	// Cidrs - CIDR ranges the rule matches.
+	Cidrs []string `json:"cidrs"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Enabled - Whether the rule is enforced. Disabled rules are kept but ignored.
+	Enabled bool `json:"enabled"`
+	// Priority - Priority of the rule. Higher values are evaluated first.
+	Priority float64 `json:"priority"`
+	// Ports - Port ranges the rule matches. Omitted matches all ports.
+	Ports *[]NetworkPoliciesCreateOutputRulesPorts `json:"ports,omitempty"`
 }
 
 // NetworkPoliciesCreateOutput represents the network policies create output type.
 type NetworkPoliciesCreateOutput struct {
-	Object      string                             `json:"object"`
-	Id          string                             `json:"id"`
-	Name        string                             `json:"name"`
-	Description *string                            `json:"description,omitempty"`
-	Status      string                             `json:"status"`
-	Version     float64                            `json:"version"`
-	Rules       []NetworkPoliciesCreateOutputRules `json:"rules"`
-	FirewallIds *[]string                          `json:"firewall_ids,omitempty"`
-	CreatedAt   time.Time                          `json:"created_at"`
-	UpdatedAt   time.Time                          `json:"updated_at"`
-	ArchivedAt  *time.Time                         `json:"archived_at,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Status - Current lifecycle status of the network policy. `archived` once you archive the policy.
+	Status string `json:"status"`
+	// Version - Version number of the policy. Increments with every rule change.
+	Version float64 `json:"version"`
+	// Rules - Rules in the current version of the network policy.
+	Rules []NetworkPoliciesCreateOutputRules `json:"rules"`
+	// FirewallIds - Firewalls this policy is attached to.
+	FirewallIds *[]string `json:"firewall_ids,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapNetworkPoliciesCreateOutputFromJSON deserializes JSON data into a NetworkPoliciesCreateOutput.
@@ -56,26 +79,38 @@ func MapNetworkPoliciesCreateOutputToJSON(v *NetworkPoliciesCreateOutput) ([]byt
 
 // NetworkPoliciesCreateBodyRulesPorts represents the network policies create body rules ports type.
 type NetworkPoliciesCreateBodyRulesPorts struct {
+	// From - First port in the range, inclusive.
 	From float64 `json:"from"`
-	To   float64 `json:"to"`
+	// To - Last port in the range, inclusive.
+	To float64 `json:"to"`
 }
 
 // NetworkPoliciesCreateBodyRules represents the network policies create body rules type.
 type NetworkPoliciesCreateBodyRules struct {
-	Effect      string                                 `json:"effect"`
-	Direction   string                                 `json:"direction"`
-	Cidrs       []string                               `json:"cidrs"`
-	Description *string                                `json:"description,omitempty"`
-	Enabled     bool                                   `json:"enabled"`
-	Priority    float64                                `json:"priority"`
-	Ports       *[]NetworkPoliciesCreateBodyRulesPorts `json:"ports,omitempty"`
+	// Effect - `allow` permits matching traffic. `deny` blocks it.
+	Effect string `json:"effect"`
+	// Direction - `ingress` matches incoming traffic. `egress` matches outgoing traffic.
+	Direction string `json:"direction"`
+	// Cidrs - CIDR ranges the rule matches.
+	Cidrs []string `json:"cidrs"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Enabled - Whether the rule is enforced. Disabled rules are kept but ignored.
+	Enabled bool `json:"enabled"`
+	// Priority - Priority of the rule. Higher values are evaluated first.
+	Priority float64 `json:"priority"`
+	// Ports - Port ranges the rule matches. Omitted matches all ports.
+	Ports *[]NetworkPoliciesCreateBodyRulesPorts `json:"ports,omitempty"`
 }
 
 // NetworkPoliciesCreateBody represents the network policies create body type.
 type NetworkPoliciesCreateBody struct {
-	Name        string                            `json:"name"`
-	Description *string                           `json:"description,omitempty"`
-	Rules       *[]NetworkPoliciesCreateBodyRules `json:"rules,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Rules - Rules to create with the network policy.
+	Rules *[]NetworkPoliciesCreateBodyRules `json:"rules,omitempty"`
 }
 
 // MapNetworkPoliciesCreateBodyFromJSON deserializes JSON data into a NetworkPoliciesCreateBody.

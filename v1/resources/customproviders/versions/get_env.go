@@ -6,9 +6,9 @@ import (
 
 // CustomProvidersVersionsGetEnvOutput represents the custom providers versions get env output type.
 type CustomProvidersVersionsGetEnvOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Env - Key-value pairs representing the custom provider environment variables
+	// Env - Environment variables available to the function. `null` unless the provider is a `function` provider.
 	Env *map[string]any `json:"env,omitempty"`
 }
 

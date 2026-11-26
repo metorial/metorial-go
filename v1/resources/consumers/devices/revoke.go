@@ -7,8 +7,9 @@ import (
 
 // ConsumersDevicesRevokeOutputClients represents the consumers devices revoke output clients type.
 type ConsumersDevicesRevokeOutputClients struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Key - The AI tool identifier.
+	// Key - Which AI tool this entry is for.
 	Key string `json:"key"`
 	// Name - The AI tool name.
 	Name string `json:"name"`
@@ -28,8 +29,9 @@ type ConsumersDevicesRevokeOutputClients struct {
 
 // ConsumersDevicesRevokeOutput represents the consumers devices revoke output type.
 type ConsumersDevicesRevokeOutput struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The device ID.
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Whether the device is signed in (`active`), was signed out from the app (`signed_out`), or was revoked from the portal or dashboard (`revoked`).
 	Status string `json:"status"`
@@ -47,11 +49,11 @@ type ConsumersDevicesRevokeOutput struct {
 	Clients []ConsumersDevicesRevokeOutputClients `json:"clients"`
 	// LastSeenAt - When the device last checked in.
 	LastSeenAt time.Time `json:"last_seen_at"`
-	// RevokedAt - When the device was revoked.
+	// RevokedAt - When the device was revoked. Revoked devices stay listable.
 	RevokedAt *time.Time `json:"revoked_at,omitempty"`
-	// CreatedAt - When the device was enrolled.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - When the device was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

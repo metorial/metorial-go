@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/networkpolicies/rules"
 )
 
-// NetworkPoliciesRulesEndpoint provides access to manage reusable network policy definitions and their rules.
+// NetworkPoliciesRulesEndpoint provides access to a network policy is a reusable set of allow and deny rules. Firewalls attach policies to enforce them.
 type NetworkPoliciesRulesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,24 +17,38 @@ func NewNetworkPoliciesRulesEndpoint(client *endpoint.Client) *NetworkPoliciesRu
 
 // NetworkPoliciesRulesEndpointCreateBody contains the request body for Create.
 type NetworkPoliciesRulesEndpointCreateBody struct {
-	Effect      string            `json:"effect"`
-	Direction   string            `json:"direction"`
-	Cidrs       []string          `json:"cidrs"`
-	Description *string           `json:"description,omitempty"`
-	Enabled     bool              `json:"enabled"`
-	Priority    float64           `json:"priority"`
-	Ports       *[]map[string]any `json:"ports,omitempty"`
+	// Effect - `allow` permits matching traffic. `deny` blocks it.
+	Effect string `json:"effect"`
+	// Direction - `ingress` matches incoming traffic. `egress` matches outgoing traffic.
+	Direction string `json:"direction"`
+	// Cidrs - CIDR ranges the rule matches.
+	Cidrs []string `json:"cidrs"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Enabled - Whether the rule is enforced. Disabled rules are kept but ignored.
+	Enabled bool `json:"enabled"`
+	// Priority - Priority of the rule. Higher values are evaluated first.
+	Priority float64 `json:"priority"`
+	// Ports - Port ranges the rule matches. Omitted matches all ports.
+	Ports *[]map[string]any `json:"ports,omitempty"`
 }
 
 // NetworkPoliciesRulesEndpointUpdateBody contains the request body for Update.
 type NetworkPoliciesRulesEndpointUpdateBody struct {
-	Effect      string            `json:"effect"`
-	Direction   string            `json:"direction"`
-	Cidrs       []string          `json:"cidrs"`
-	Description *string           `json:"description,omitempty"`
-	Enabled     bool              `json:"enabled"`
-	Priority    float64           `json:"priority"`
-	Ports       *[]map[string]any `json:"ports,omitempty"`
+	// Effect - `allow` permits matching traffic. `deny` blocks it.
+	Effect string `json:"effect"`
+	// Direction - `ingress` matches incoming traffic. `egress` matches outgoing traffic.
+	Direction string `json:"direction"`
+	// Cidrs - CIDR ranges the rule matches.
+	Cidrs []string `json:"cidrs"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Enabled - Whether the rule is enforced. Disabled rules are kept but ignored.
+	Enabled bool `json:"enabled"`
+	// Priority - Priority of the rule. Higher values are evaluated first.
+	Priority float64 `json:"priority"`
+	// Ports - Port ranges the rule matches. Omitted matches all ports.
+	Ports *[]map[string]any `json:"ports,omitempty"`
 }
 
 // Create adds a rule to a network policy.

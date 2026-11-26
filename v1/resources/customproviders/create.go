@@ -5,123 +5,131 @@ import (
 	"time"
 )
 
-// CustomProvidersCreateOutputDraftContainerImage represents the custom providers create output draft container image type.
+// CustomProvidersCreateOutputDraftContainerImage - Container image this provider deploys. Only set for `container` providers.
 type CustomProvidersCreateOutputDraftContainerImage struct {
-	// Object - String representing the container image draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// ContainerRegistry - URL of the container registry
+	// ContainerRegistry - Registry the image is pulled from.
 	ContainerRegistry string `json:"container_registry"`
-	// ContainerImageTag - Tag of the container image
+	// ContainerImageTag - Tag selecting the image version.
 	ContainerImageTag string `json:"container_image_tag"`
-	// ContainerImage - Name of the container image
+	// ContainerImage - Name of the image in the registry.
 	ContainerImage string `json:"container_image"`
 }
 
-// CustomProvidersCreateOutputDraftRemoteMcpServer represents the custom providers create output draft remote mcp server type.
+// CustomProvidersCreateOutputDraftRemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 type CustomProvidersCreateOutputDraftRemoteMcpServer struct {
-	// Object - String representing the remote MCP server draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Url - URL of the remote MCP server
+	// Url - URL where the remote MCP server is reachable.
 	Url string `json:"url"`
-	// Transport - Transport protocol for connecting to the remote MCP server
+	// Transport - MCP transport the remote server speaks.
 	Transport string `json:"transport"`
 }
 
-// CustomProvidersCreateOutputDraftConfigSchema represents the custom providers create output draft config schema type.
+// CustomProvidersCreateOutputDraftConfigSchema - Configuration fields for the custom provider.
 type CustomProvidersCreateOutputDraftConfigSchema struct {
+	// Type - Format of the configuration schema.
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the configuration fields for the custom provider
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
 }
 
-// CustomProvidersCreateOutputDraftConfig represents the custom providers create output draft config type.
+// CustomProvidersCreateOutputDraftConfig - Configuration for the custom provider.
 type CustomProvidersCreateOutputDraftConfig struct {
-	// Object - String representing the custom provider config draft type
-	Object string                                       `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Schema - Configuration fields for the custom provider.
 	Schema CustomProvidersCreateOutputDraftConfigSchema `json:"schema"`
-	// Transformer - Optional jsonata transformer function for the configuration.
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
-// CustomProvidersCreateOutputDraft represents the custom providers create output draft type.
+// CustomProvidersCreateOutputDraft - Draft source and configuration of the custom provider.
 type CustomProvidersCreateOutputDraft struct {
-	// Object - String representing the draft's type
-	Object          string                                           `json:"object"`
-	ContainerImage  *CustomProvidersCreateOutputDraftContainerImage  `json:"container_image,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// ContainerImage - Container image this provider deploys. Only set for `container` providers.
+	ContainerImage *CustomProvidersCreateOutputDraftContainerImage `json:"container_image,omitempty"`
+	// RemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 	RemoteMcpServer *CustomProvidersCreateOutputDraftRemoteMcpServer `json:"remote_mcp_server,omitempty"`
-	Config          CustomProvidersCreateOutputDraftConfig           `json:"config"`
+	// Config - Configuration for the custom provider.
+	Config CustomProvidersCreateOutputDraftConfig `json:"config"`
 }
 
-// CustomProvidersCreateOutputScmRepoProvider represents the custom providers create output scm repo provider type.
+// CustomProvidersCreateOutputScmRepoProvider - Provider the repository lives on.
 type CustomProvidersCreateOutputScmRepoProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
-// CustomProvidersCreateOutputScmRepo represents the custom providers create output scm repo type.
+// CustomProvidersCreateOutputScmRepo - Repository the provider code is deployed from. `null` when not linked.
 type CustomProvidersCreateOutputScmRepo struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                     `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCreateOutputScmRepoProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCreateOutputProviderPublisher represents the custom providers create output provider publisher type.
 type CustomProvidersCreateOutputProviderPublisher struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique publisher identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the publisher
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the publisher
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of the publisher logo
 	ImageUrl string `json:"image_url"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersCreateOutputProviderCurrentVersion represents the custom providers create output provider current version type.
 type CustomProvidersCreateOutputProviderCurrentVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -135,62 +143,65 @@ type CustomProvidersCreateOutputProviderOauthAutoRegistration struct {
 type CustomProvidersCreateOutputProviderOauth struct {
 	// Status - OAuth status
 	Status string `json:"status"`
-	// CallbackUrl - OAuth callback URL
+	// CallbackUrl - Callback URL to register on your OAuth app.
 	CallbackUrl      *string                                                  `json:"callback_url,omitempty"`
 	AutoRegistration CustomProvidersCreateOutputProviderOauthAutoRegistration `json:"auto_registration"`
 }
 
-// CustomProvidersCreateOutputProvider represents the custom providers create output provider type.
+// CustomProvidersCreateOutputProvider - Session provider backed by this custom provider. `null` when none is linked.
 type CustomProvidersCreateOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Access - Access level of the provider
+	// Access - `public` providers are available to every instance. `tenant` providers are your own.
 	Access string `json:"access"`
-	// Status - Current status of the provider
+	// Status - Archived once the provider is archived.
 	Status         string                                             `json:"status"`
 	Publisher      CustomProvidersCreateOutputProviderPublisher       `json:"publisher"`
 	CurrentVersion *CustomProvidersCreateOutputProviderCurrentVersion `json:"current_version,omitempty"`
 	Oauth          *CustomProvidersCreateOutputProviderOauth          `json:"oauth,omitempty"`
 	// Identifier - Provider identifier
 	Identifier string `json:"identifier"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersCreateOutput represents the custom providers create output type.
 type CustomProvidersCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current status of the custom provider
+	// Status - `archived` once archived. Archived providers reject new connections.
 	Status string `json:"status"`
-	// Type - Type of the custom provider
+	// Type - How the provider runs: `function`, `container`, or `remote`.
 	Type string `json:"type"`
-	// Name - Display name of the custom provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the custom provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any                      `json:"metadata,omitempty"`
-	Draft    CustomProvidersCreateOutputDraft     `json:"draft"`
-	ScmRepo  *CustomProvidersCreateOutputScmRepo  `json:"scm_repo,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Draft - Draft source and configuration of the custom provider.
+	Draft CustomProvidersCreateOutputDraft `json:"draft"`
+	// ScmRepo - Repository the provider code is deployed from. `null` when not linked.
+	ScmRepo *CustomProvidersCreateOutputScmRepo `json:"scm_repo,omitempty"`
+	// Provider - Session provider backed by this custom provider. `null` when none is linked.
 	Provider *CustomProvidersCreateOutputProvider `json:"provider,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -210,76 +221,85 @@ func MapCustomProvidersCreateOutputToJSON(v *CustomProvidersCreateOutput) ([]byt
 
 // CustomProvidersCreateBodyFromFiles represents the custom providers create body from files type.
 type CustomProvidersCreateBodyFromFiles struct {
-	// Filename - File name
+	// Filename - File path within the deployment.
 	Filename string `json:"filename"`
-	// Content - File content
+	// Content - Content of the file.
 	Content string `json:"content"`
-	// Encoding - Content encoding
+	// Encoding - Content encoding.
 	Encoding *string `json:"encoding,omitempty"`
 }
 
 // CustomProvidersCreateBodyFromRuntime represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type CustomProvidersCreateBodyFromRuntime struct {
+	// Identifier - Python runtime.
 	Identifier *string `json:"identifier,omitempty"`
-	// Version - Python version
+	// Version - Python version.
 	Version *string `json:"version,omitempty"`
 }
 
 // CustomProvidersCreateBodyFromRepository represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type CustomProvidersCreateBodyFromRepository struct {
-	// RepositoryId - Repository ID
+	// RepositoryId - Linked SCM repository to deploy, by ID.
 	RepositoryId *string `json:"repository_id,omitempty"`
-	// Branch - Branch name
+	// Branch - Branch to deploy.
 	Branch *string `json:"branch,omitempty"`
-	// Path - Repository path
+	// Path - Subdirectory of the branch to deploy.
 	Path *string `json:"path,omitempty"`
+	// Type - Deploys from a Git repository URL.
 	Type *string `json:"type,omitempty"`
-	// RepositoryUrl - Git repository URL
+	// RepositoryUrl - URL of the Git repository to deploy.
 	RepositoryUrl *string `json:"repository_url,omitempty"`
 }
 
 // CustomProvidersCreateBodyFrom represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type CustomProvidersCreateBodyFrom struct {
+	// Type - Deploys the provider from serverless function code.
 	Type *string `json:"type,omitempty"`
-	// ImageRef - Container image reference
+	// ImageRef - Container image to deploy, with tag.
 	ImageRef *string `json:"image_ref,omitempty"`
-	// Username - Registry username
+	// Username - Username for the container registry. Omit for public images.
 	Username *string `json:"username,omitempty"`
-	// Password - Registry password
+	// Password - Password for the container registry. Omit for public images.
 	Password *string `json:"password,omitempty"`
-	// RemoteUrl - Remote MCP server URL
+	// RemoteUrl - URL of the remote MCP server.
 	RemoteUrl *string `json:"remote_url,omitempty"`
-	// OauthConfig - Remote server configuration
+	// OauthConfig - OAuth configuration sent to the remote server.
 	OauthConfig *map[string]any `json:"oauth_config,omitempty"`
 	// Protocol - MCP transport to use: `sse` (HTTP+SSE, 2024-11-05), `streamable_http` (session-based Streamable HTTP, 2025-03-26 to 2025-11-25), or `stateless` (sessionless Streamable HTTP, 2026-07-28)
 	Protocol *string `json:"protocol,omitempty"`
-	// Files - Source files
+	// Files - Source files to deploy.
 	Files *[]CustomProvidersCreateBodyFromFiles `json:"files,omitempty"`
-	// Env - Environment variables
-	Env        *map[string]string                       `json:"env,omitempty"`
-	Runtime    *CustomProvidersCreateBodyFromRuntime    `json:"runtime,omitempty"`
+	// Env - Environment variables available to the function.
+	Env *map[string]string `json:"env,omitempty"`
+	// Runtime - Runtime the function runs on.
+	Runtime *CustomProvidersCreateBodyFromRuntime `json:"runtime,omitempty"`
+	// Repository - Repository the function code is deployed from.
 	Repository *CustomProvidersCreateBodyFromRepository `json:"repository,omitempty"`
 }
 
-// CustomProvidersCreateBodyConfig represents the custom providers create body config type.
+// CustomProvidersCreateBodyConfig - Configuration schema and transformer for the provider.
 type CustomProvidersCreateBodyConfig struct {
-	// Schema - Configuration JSON schema
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
-	// Transformer - Configuration transformer code
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
 // CustomProvidersCreateBody represents the custom providers create body type.
 type CustomProvidersCreateBody struct {
-	Name        string  `json:"name"`
+	// Name - Display name for the custom provider.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any                  `json:"metadata,omitempty"`
-	From     CustomProvidersCreateBodyFrom    `json:"from"`
-	Config   *CustomProvidersCreateBodyConfig `json:"config,omitempty"`
+	// Metadata - Custom data to identify or organize the custom provider.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// From - Source the provider runs from.
+	From CustomProvidersCreateBodyFrom `json:"from"`
+	// Config - Configuration schema and transformer for the provider.
+	Config *CustomProvidersCreateBodyConfig `json:"config,omitempty"`
 }
 
 // MapCustomProvidersCreateBodyFromJSON deserializes JSON data into a CustomProvidersCreateBody.

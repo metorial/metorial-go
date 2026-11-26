@@ -7,17 +7,17 @@ import (
 
 // FilesLinksCreateOutput represents the files links create output type.
 type FilesLinksCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The links's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// FileId - The file's unique identifier
+	// FileId - File this link downloads.
 	FileId string `json:"file_id"`
-	// Url - The file's public URL
+	// Url - Public URL for downloading the file.
 	Url string `json:"url"`
-	// CreatedAt - The links's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// ExpiresAt - The file's expiration date
+	// ExpiresAt - When the link stops working. `null` if it never expires.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
@@ -37,7 +37,9 @@ func MapFilesLinksCreateOutputToJSON(v *FilesLinksCreateOutput) ([]byte, error) 
 
 // FilesLinksCreateBody represents the files links create body type.
 type FilesLinksCreateBody struct {
-	FileId    string     `json:"file_id"`
+	// FileId - File to share, by ID.
+	FileId string `json:"file_id"`
+	// ExpiresAt - When the link stops working. The link never expires when omitted.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 

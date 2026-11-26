@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/files/links"
 )
 
-// FilesLinksEndpoint provides access to files are private by default. If you want to share a file, you can create a link for it. Links are public and do not require authentication to access, so be careful with what you share.
+// FilesLinksEndpoint provides access to a file link is a public URL for a file. Anyone with the link can download the file without authenticating, until the link expires or is deleted.
 type FilesLinksEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,22 +17,29 @@ func NewFilesLinksEndpoint(client *endpoint.Client) *FilesLinksEndpoint {
 
 // FilesLinksEndpointListParams contains optional query parameters for List.
 type FilesLinksEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// FileId - Filter by file ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// FileId - Only return links for this file.
 	FileId *string `json:"file_id,omitempty"`
 }
 
 // FilesLinksEndpointCreateBody contains the request body for Create.
 type FilesLinksEndpointCreateBody struct {
-	FileId    string  `json:"file_id"`
+	// FileId - File to share, by ID.
+	FileId string `json:"file_id"`
+	// ExpiresAt - When the link stops working. The link never expires when omitted.
 	ExpiresAt *string `json:"expires_at,omitempty"`
 }
 
-// List returns a paginated list of file links owned by the instance organization.
+// List returns a paginated list of file links.
 func (e *FilesLinksEndpoint) List(instanceId string, params *FilesLinksEndpointListParams) (*links.FilesLinksListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -49,7 +56,7 @@ func (e *FilesLinksEndpoint) List(instanceId string, params *FilesLinksEndpointL
 	return &result, nil
 }
 
-// Get retrieves the details of a specific file link by its ID.
+// Get retrieves a file link.
 func (e *FilesLinksEndpoint) Get(instanceId string, linkId string) (*links.FilesLinksGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "file-links", linkId},
@@ -61,7 +68,7 @@ func (e *FilesLinksEndpoint) Get(instanceId string, linkId string) (*links.Files
 	return &result, nil
 }
 
-// Create creates a new link for a specific file.
+// Create creates a link for a file.
 func (e *FilesLinksEndpoint) Create(instanceId string, body *FilesLinksEndpointCreateBody) (*links.FilesLinksCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "file-links"},
@@ -74,7 +81,7 @@ func (e *FilesLinksEndpoint) Create(instanceId string, body *FilesLinksEndpointC
 	return &result, nil
 }
 
-// Delete deletes a specific file link by its ID.
+// Delete deletes a file link. The file itself is kept.
 func (e *FilesLinksEndpoint) Delete(instanceId string, linkId string) (*links.FilesLinksDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "file-links", linkId},

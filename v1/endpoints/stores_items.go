@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/stores/items"
 )
 
-// StoresItemsEndpoint provides access to create and manage instance stores backed by Cargo.
+// StoresItemsEndpoint provides access to a store is a shared collection of files and documents. Participants get read or write access to its contents.
 type StoresItemsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,31 +17,37 @@ func NewStoresItemsEndpoint(client *endpoint.Client) *StoresItemsEndpoint {
 
 // StoresItemsEndpointModifyBody contains the request body for Modify.
 type StoresItemsEndpointModifyBody struct {
+	// Operations - Operations to apply to the store.
 	Operations []map[string]any `json:"operations"`
 }
 
 // StoresItemsEndpointListParams contains optional query parameters for List.
 type StoresItemsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by store item ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return items with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// FileId - Filter by file ID
+	// FileId - Only return items holding one of these files.
 	FileId *any `json:"file_id,omitempty"`
-	// DocumentId - Filter by document ID
+	// DocumentId - Only return items holding one of these documents.
 	DocumentId *any `json:"document_id,omitempty"`
 	// Type - Filter by store item type. Repeat `type` to include multiple values. Defaults to `file` and `document`.
 	Type *any `json:"type,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose item creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose item last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// Modify applies bulk item operations to a specific store.
+// Modify applies a list of add, modify, and remove operations to a store.
 func (e *StoresItemsEndpoint) Modify(storeId string, body *StoresItemsEndpointModifyBody) (*items.StoresItemsModifyOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"stores", storeId, "items"},
@@ -54,7 +60,7 @@ func (e *StoresItemsEndpoint) Modify(storeId string, body *StoresItemsEndpointMo
 	return &result, nil
 }
 
-// List returns a paginated list of items for a specific store.
+// List returns a paginated list of items in a store.
 func (e *StoresItemsEndpoint) List(storeId string, params *StoresItemsEndpointListParams) (*items.StoresItemsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -71,7 +77,7 @@ func (e *StoresItemsEndpoint) List(storeId string, params *StoresItemsEndpointLi
 	return &result, nil
 }
 
-// Get retrieves a specific item within a store.
+// Get retrieves an item in a store.
 func (e *StoresItemsEndpoint) Get(storeId string, itemId string) (*items.StoresItemsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"stores", storeId, "items", itemId},

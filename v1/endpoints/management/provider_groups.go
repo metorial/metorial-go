@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providergroups"
 )
 
-// ProviderGroupsEndpoint provides access to a group is a user-defined custom folder for organizing providers in your instance like 'Sales Tools' or 'Engineering'.
+// ProviderGroupsEndpoint provides access to a provider group is a folder for organizing providers in your instance.
 type ProviderGroupsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,37 +17,47 @@ func NewProviderGroupsEndpoint(client *endpoint.Client) *ProviderGroupsEndpoint 
 
 // ProviderGroupsEndpointListParams contains optional query parameters for List.
 type ProviderGroupsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by group ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
 	// ProviderListingId - Filter by provider listing ID(s)
 	ProviderListingId *any `json:"provider_listing_id,omitempty"`
-	// CreatedAt - Filter provider group creation time by date range
+	// CreatedAt - Only return results whose provider group creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider group last update time by date range
+	// UpdatedAt - Only return results whose provider group last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderGroupsEndpointCreateBody contains the request body for Create.
 type ProviderGroupsEndpointCreateBody struct {
-	Name        string  `json:"name"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderGroupsEndpointUpdateBody contains the request body for Update.
 type ProviderGroupsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderGroupsEndpointAddListingBody contains the request body for AddListing.
 type ProviderGroupsEndpointAddListingBody struct {
+	// ProviderListingId - Listing to add to the group.
 	ProviderListingId string `json:"provider_listing_id"`
 }
 

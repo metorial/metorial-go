@@ -7,91 +7,91 @@ import (
 
 // ChatInstancesProviderSetOutputProvider represents the chat instances provider set output provider type.
 type ChatInstancesProviderSetOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatInstancesProviderSetOutputDeployment represents the chat instances provider set output deployment type.
 type ChatInstancesProviderSetOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatInstancesProviderSetOutputConfig represents the chat instances provider set output config type.
 type ChatInstancesProviderSetOutputConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatInstancesProviderSetOutputAuthConfig represents the chat instances provider set output auth config type.
 type ChatInstancesProviderSetOutputAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ChatInstancesProviderSetOutputIdentity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+// ChatInstancesProviderSetOutputIdentity - Account this instance is authorized as on the chat provider. `null` until observed.
 type ChatInstancesProviderSetOutputIdentity struct {
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// UserId - The provider-side user or app id this connection is authorized as
 	UserId string `json:"user_id"`
@@ -109,11 +109,11 @@ type ChatInstancesProviderSetOutputIdentity struct {
 
 // ChatInstancesProviderSetOutput represents the chat instances provider set output type.
 type ChatInstancesProviderSetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat instance provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat instance provider status
+	// Status - `archived` once the instance is archived.
 	Status string `json:"status"`
 	// ChatInstanceId - The chat instance this provider belongs to
 	ChatInstanceId string `json:"chat_instance_id"`
@@ -123,11 +123,11 @@ type ChatInstancesProviderSetOutput struct {
 	Deployment               *ChatInstancesProviderSetOutputDeployment `json:"deployment,omitempty"`
 	Config                   *ChatInstancesProviderSetOutputConfig     `json:"config,omitempty"`
 	AuthConfig               *ChatInstancesProviderSetOutputAuthConfig `json:"auth_config,omitempty"`
-	// Name - Display name of the provider link
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the provider link
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Identity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+	// Identity - Account this instance is authorized as on the chat provider. `null` until observed.
 	Identity *ChatInstancesProviderSetOutputIdentity `json:"identity,omitempty"`
 	// CreatedAt - Timestamp when the provider was set up
 	CreatedAt time.Time `json:"created_at"`
@@ -151,7 +151,7 @@ func MapChatInstancesProviderSetOutputToJSON(v *ChatInstancesProviderSetOutput) 
 
 // ChatInstancesProviderSetBody represents the chat instances provider set body type.
 type ChatInstancesProviderSetBody struct {
-	// ProviderId - The chat provider to use for this instance
+	// ProviderId - Chat provider to use for this instance.
 	ProviderId string `json:"provider_id"`
 	// ProviderDeploymentId - Provider deployment to use
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`

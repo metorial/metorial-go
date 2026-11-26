@@ -15,52 +15,55 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigToolFilter st
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeployment represents the provider deployments auth configs imports list output items auth config deployment type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigCredentials represents the provider deployments auth configs imports list output items auth config credentials type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -80,33 +83,33 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodOut
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodScopes represents the provider deployments auth configs imports list output items auth config auth method scopes type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod represents the provider deployments auth configs imports list output items auth config auth method type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                                                        `json:"capabilities"`
 	InputSchema  *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -114,13 +117,13 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod st
 	Scopes *[]ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -170,25 +173,25 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAccess struct
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfig represents the provider deployments auth configs imports list output items auth config type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the auth config was created. `oauth_automated` configs are created automatically and cannot be updated.
 	Type string `json:"type"`
-	// Source - Auth config source
+	// Source - Where the auth config was created.
 	Source string `json:"source"`
-	// Status - Auth config status
+	// Status - Archived once the auth config is archived. Archived auth configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default auth config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter  ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigToolFilter   `json:"tool_filter"`
@@ -197,17 +200,17 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfig struct {
 	AuthMethod  ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAuthMethod   `json:"auth_method"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfigAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListOutputItems represents the provider deployments auth configs imports list output items type.
 type ProviderDeploymentsAuthConfigsImportsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth import identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Note - Note explaining the import
 	Note string `json:"note"`
@@ -215,31 +218,39 @@ type ProviderDeploymentsAuthConfigsImportsListOutputItems struct {
 	Ip *string `json:"ip,omitempty"`
 	// UserAgent - User agent of the import request
 	UserAgent *string `json:"user_agent,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata   *map[string]any                                                `json:"metadata,omitempty"`
 	AuthConfig ProviderDeploymentsAuthConfigsImportsListOutputItemsAuthConfig `json:"auth_config"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this import belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderDeploymentId - Deployment ID
+	// ProviderDeploymentId - Deployment the imported credentials were used with. `null` when the auth config isn’t tied to a deployment.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	// AuthMethodId - Auth method ID
+	// AuthMethodId - Auth method the imported credentials belong to.
 	AuthMethodId string `json:"auth_method_id"`
-	// CredentialsId - Auth credentials ID
+	// CredentialsId - Imported credentials, or `null` when the auth config has none.
 	CredentialsId *string `json:"credentials_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// ExpiresAt - Timestamp when the import expires
+	// ExpiresAt - Always `null`. Imports do not expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListOutputPagination represents the provider deployments auth configs imports list output pagination type.
 type ProviderDeploymentsAuthConfigsImportsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListOutput represents the provider deployments auth configs imports list output type.
 type ProviderDeploymentsAuthConfigsImportsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                                    `json:"object"`
 	Items      []ProviderDeploymentsAuthConfigsImportsListOutputItems    `json:"items"`
 	Pagination ProviderDeploymentsAuthConfigsImportsListOutputPagination `json:"pagination"`
 }
@@ -258,29 +269,34 @@ func MapProviderDeploymentsAuthConfigsImportsListOutputToJSON(v *ProviderDeploym
 	return json.Marshal(v)
 }
 
-// ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt - Filter provider auth import creation time by date range
+// ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt - Only return results whose provider auth import creation time is in this range. Set `gt`, `lt`, or both.
 type ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for provider auth import creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider auth import creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt - Filter provider auth import last update time by date range
+// ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt - Only return results whose provider auth import last update time is in this range. Set `gt`, `lt`, or both.
 type ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for provider auth import last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider auth import last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsImportsListQuery represents the provider deployments auth configs imports list query type.
 type ProviderDeploymentsAuthConfigsImportsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by import ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
@@ -291,9 +307,9 @@ type ProviderDeploymentsAuthConfigsImportsListQuery struct {
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
 	// ProviderDeploymentId - Filter by provider deployment ID(s)
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
-	// CreatedAt - Filter provider auth import creation time by date range
+	// CreatedAt - Only return results whose provider auth import creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ProviderDeploymentsAuthConfigsImportsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider auth import last update time by date range
+	// UpdatedAt - Only return results whose provider auth import last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ProviderDeploymentsAuthConfigsImportsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

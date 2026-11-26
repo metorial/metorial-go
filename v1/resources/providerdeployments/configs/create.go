@@ -15,68 +15,68 @@ type ProviderDeploymentsConfigsCreateOutputToolFilter struct {
 
 // ProviderDeploymentsConfigsCreateOutputDeployment represents the provider deployments configs create output deployment type.
 type ProviderDeploymentsConfigsCreateOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsCreateOutputFromVaultDeployment represents the provider deployments configs create output from vault deployment type.
 type ProviderDeploymentsConfigsCreateOutputFromVaultDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsConfigsCreateOutputFromVault represents the provider deployments configs create output from vault type.
 type ProviderDeploymentsConfigsCreateOutputFromVault struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config vault identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Status of the config vault
+	// Status - Archived once the vault is archived. Archived vaults stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this vault belongs to.
 	ProviderId string                                                     `json:"provider_id"`
 	Deployment *ProviderDeploymentsConfigsCreateOutputFromVaultDeployment `json:"deployment,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -126,33 +126,33 @@ type ProviderDeploymentsConfigsCreateOutputAccess struct {
 
 // ProviderDeploymentsConfigsCreateOutput represents the provider deployments configs create output type.
 type ProviderDeploymentsConfigsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Config status
+	// Status - Archived once the config is archived. Archived configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter ProviderDeploymentsConfigsCreateOutputToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this config follows.
 	SpecificationId string                                            `json:"specification_id"`
 	Deployment      *ProviderDeploymentsConfigsCreateOutputDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsConfigsCreateOutputFromVault  `json:"from_vault,omitempty"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsConfigsCreateOutputAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -172,15 +172,18 @@ func MapProviderDeploymentsConfigsCreateOutputToJSON(v *ProviderDeploymentsConfi
 
 // ProviderDeploymentsConfigsCreateBody represents the provider deployments configs create body type.
 type ProviderDeploymentsConfigsCreateBody struct {
-	// ProviderId - Provider ID
+	// ProviderId - Provider to create the config for.
 	ProviderId string `json:"provider_id"`
-	// ProviderDeploymentId - Optional provider deployment ID
+	// ProviderDeploymentId - Deployment the config is locked to.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider config. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// Value - Provider-specific configuration values
 	Value *map[string]any `json:"value,omitempty"`
 	// ProviderConfigVaultId - Config vault ID to use as template

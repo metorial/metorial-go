@@ -2,6 +2,7 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/chat/connections"
 )
 
@@ -17,45 +18,51 @@ func NewChatConnectionsEndpoint(client *endpoint.Client) *ChatConnectionsEndpoin
 
 // ChatConnectionsEndpointListParams contains optional query parameters for List.
 type ChatConnectionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by status
+	// Status - Only return chat connections with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by chat connection ID(s)
+	// Id - Only return chat connections with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CreatedAt - Filter chat connection creation time by date range
+	// CreatedAt - Only return results whose chat connection creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter chat connection last update time by date range
+	// UpdatedAt - Only return results whose chat connection last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ChatConnectionsEndpointCreateBody contains the request body for Create.
 type ChatConnectionsEndpointCreateBody struct {
-	// Name - Display name of the chat connection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the connection
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata for the connection
+	// Metadata - Custom data to identify or organize the chat connection.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata for the connection
+	// PrivateMetadata - Private data stored with the connection. Never returned by the API.
 	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
-	Provider        map[string]any  `json:"provider"`
+	// Provider - Chat provider to link this connection to.
+	Provider map[string]any `json:"provider"`
 }
 
 // ChatConnectionsEndpointUpdateBody contains the request body for Update.
 type ChatConnectionsEndpointUpdateBody struct {
-	// Name - Display name of the chat connection
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description of the connection
-	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the chat connection. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata
+	// PrivateMetadata - Private data stored with the connection. Never returned by the API.
 	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
 }
 
@@ -76,7 +83,7 @@ func (e *ChatConnectionsEndpoint) List(params *ChatConnectionsEndpointListParams
 	return &result, nil
 }
 
-// Get retrieves a specific chat connection.
+// Get retrieves a chat connection.
 func (e *ChatConnectionsEndpoint) Get(chatConnectionId string) (*connections.ChatConnectionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "connections", chatConnectionId},
@@ -101,7 +108,7 @@ func (e *ChatConnectionsEndpoint) Create(body *ChatConnectionsEndpointCreateBody
 	return &result, nil
 }
 
-// Update updates a specific chat connection.
+// Update updates a chat connection. Omitted fields keep their current value.
 func (e *ChatConnectionsEndpoint) Update(chatConnectionId string, body *ChatConnectionsEndpointUpdateBody) (*connections.ChatConnectionsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "connections", chatConnectionId},
@@ -114,7 +121,7 @@ func (e *ChatConnectionsEndpoint) Update(chatConnectionId string, body *ChatConn
 	return &result, nil
 }
 
-// Delete archives a specific chat connection.
+// Delete archives a chat connection. It stays listable with `status=archived`.
 func (e *ChatConnectionsEndpoint) Delete(chatConnectionId string) (*connections.ChatConnectionsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chat", "connections", chatConnectionId},

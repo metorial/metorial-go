@@ -2,10 +2,11 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/plugins"
 )
 
-// SkillsPluginsEndpoint provides access to manage skill plugins for an instance.
+// SkillsPluginsEndpoint provides access to a skill plugin is a set of skills distributed through a skill marketplace.
 type SkillsPluginsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,47 +18,76 @@ func NewSkillsPluginsEndpoint(client *endpoint.Client) *SkillsPluginsEndpoint {
 
 // SkillsPluginsEndpointListParams contains optional query parameters for List.
 type SkillsPluginsEndpointListParams struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	SkillMarketplaceId   *any     `json:"skill_marketplace_id,omitempty"`
-	Status               *any     `json:"status,omitempty"`
-	Category             *string  `json:"category,omitempty"`
-	Search               *string  `json:"search,omitempty"`
-	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return skill plugins with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SkillMarketplaceId - Only return skill plugins in one of these marketplaces.
+	SkillMarketplaceId *any `json:"skill_marketplace_id,omitempty"`
+	// Status - Only return skill plugins with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Category - Only return skill plugins in this category.
+	Category *string `json:"category,omitempty"`
+	// Search - Only return skill plugins matching this search text.
+	Search *string `json:"search,omitempty"`
+	// SkillConfigurationId - Only return skill plugins using one of these skill configurations.
+	SkillConfigurationId *any `json:"skill_configuration_id,omitempty"`
 	// SkillGroupId - Only return plugins whose skills are synced from these skill groups.
 	SkillGroupId *any `json:"skill_group_id,omitempty"`
-	// CreatedAt - Filter skill plugin creation time by date range
+	// CreatedAt - Only return results whose skill plugin creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter skill plugin last update time by date range
+	// UpdatedAt - Only return results whose skill plugin last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SkillsPluginsEndpointCreateBody contains the request body for Create.
 type SkillsPluginsEndpointCreateBody struct {
 	// Name - The plugin name. Required unless skill_group_id is set, in which case it defaults to the group name.
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	LongDescription      *string `json:"long_description,omitempty"`
-	Category             *string `json:"category,omitempty"`
-	ImageFileId          *string `json:"image_file_id,omitempty"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
-	SkillMarketplaceId   *string `json:"skill_marketplace_id,omitempty"`
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// LongDescription - Longer description shown on the marketplace. `null` clears it.
+	LongDescription *nullable.Nullable[string] `json:"long_description,omitempty"`
+	// Category - Category for grouping plugins on the marketplace. `null` clears it.
+	Category *nullable.Nullable[string] `json:"category,omitempty"`
+	// ImageFileId - Image file for the plugin, by ID. `null` resets to the default image.
+	ImageFileId *nullable.Nullable[string] `json:"image_file_id,omitempty"`
+	// SkillConfigurationId - Skill configuration for the plugin, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
+	// SkillMarketplaceId - Marketplace to publish the plugin to, by ID. Required for consumers.
+	SkillMarketplaceId *string `json:"skill_marketplace_id,omitempty"`
 	// SkillGroupId - Creates the plugin from a skill group. The group's skills are synced into the plugin automatically and cannot be edited on the plugin directly. Name and description are copied from the group once and can be changed afterwards.
 	SkillGroupId *string `json:"skill_group_id,omitempty"`
 }
 
 // SkillsPluginsEndpointUpdateBody contains the request body for Update.
 type SkillsPluginsEndpointUpdateBody struct {
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	LongDescription      *string `json:"long_description,omitempty"`
-	Category             *string `json:"category,omitempty"`
-	ImageFileId          *string `json:"image_file_id,omitempty"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// LongDescription - Longer description shown on the marketplace. `null` clears it.
+	LongDescription *nullable.Nullable[string] `json:"long_description,omitempty"`
+	// Category - Category for grouping plugins on the marketplace. `null` clears it.
+	Category *nullable.Nullable[string] `json:"category,omitempty"`
+	// ImageFileId - Image file for the plugin, by ID. `null` resets to the default image.
+	ImageFileId *nullable.Nullable[string] `json:"image_file_id,omitempty"`
+	// SkillConfigurationId - Skill configuration for the plugin, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
+}
+
+// SkillsPluginsEndpointAttachSkillGroupBody contains the request body for AttachSkillGroup.
+type SkillsPluginsEndpointAttachSkillGroupBody struct {
+	// SkillGroupId - Skill group to sync the plugin from.
+	SkillGroupId string `json:"skill_group_id"`
 }
 
 // List returns a paginated list of skill plugins.
@@ -102,7 +132,7 @@ func (e *SkillsPluginsEndpoint) Create(instanceId string, body *SkillsPluginsEnd
 	return &result, nil
 }
 
-// Update updates a skill plugin.
+// Update updates a skill plugin. Omitted fields keep their current value.
 func (e *SkillsPluginsEndpoint) Update(instanceId string, skillPluginId string, body *SkillsPluginsEndpointUpdateBody) (*plugins.SkillsPluginsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skill-plugins", skillPluginId},
@@ -127,6 +157,19 @@ func (e *SkillsPluginsEndpoint) Archive(instanceId string, skillPluginId string)
 	return &result, nil
 }
 
+// AttachSkillGroup starts syncing a plugin from a skill group. The plugin's skills are replaced with the group's skills right away and follow the group from then on.
+func (e *SkillsPluginsEndpoint) AttachSkillGroup(instanceId string, skillPluginId string, body *SkillsPluginsEndpointAttachSkillGroupBody) (*plugins.SkillsPluginsAttachSkillGroupOutput, error) {
+	req := &endpoint.Request{
+		Path: []string{"instances", instanceId, "skill-plugins", skillPluginId, "attach-skill-group"},
+		Body: body,
+	}
+	var result plugins.SkillsPluginsAttachSkillGroupOutput
+	if err := e.client.Post(req, &result); err != nil {
+		return nil, err
+	}
+	return &result, nil
+}
+
 // DetachSkillGroup stops syncing a plugin from its skill group. The plugin keeps its current skills, which can then be edited directly.
 func (e *SkillsPluginsEndpoint) DetachSkillGroup(instanceId string, skillPluginId string) (*plugins.SkillsPluginsDetachSkillGroupOutput, error) {
 	req := &endpoint.Request{
@@ -139,7 +182,7 @@ func (e *SkillsPluginsEndpoint) DetachSkillGroup(instanceId string, skillPluginI
 	return &result, nil
 }
 
-// Sync forces a skill plugin sync.
+// Sync starts a sync of the skill plugin to its linked repositories, even if nothing changed.
 func (e *SkillsPluginsEndpoint) Sync(instanceId string, skillPluginId string) (*plugins.SkillsPluginsSyncOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skill-plugins", skillPluginId, "sync"},

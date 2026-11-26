@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// ChatsChannelsListOutputItemsRecipient represents the chats channels list output items recipient type.
+// ChatsChannelsListOutputItemsRecipient - The DM recipient, when the provider reports one. `null` otherwise.
 type ChatsChannelsListOutputItemsRecipient struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsChannelsListOutputItemsRecipient struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -39,7 +39,7 @@ type ChatsChannelsListOutputItemsRecipient struct {
 	LastInteractionAt *time.Time `json:"last_interaction_at,omitempty"`
 }
 
-// ChatsChannelsListOutputItemsContextAuthor represents the chats channels list output items context author type.
+// ChatsChannelsListOutputItemsContextAuthor - Author of the external resource, as reported by the provider.
 type ChatsChannelsListOutputItemsContextAuthor struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -47,7 +47,7 @@ type ChatsChannelsListOutputItemsContextAuthor struct {
 	Name string `json:"name"`
 }
 
-// ChatsChannelsListOutputItemsContextAssignee represents the chats channels list output items context assignee type.
+// ChatsChannelsListOutputItemsContextAssignee - Assignee of the external resource, as reported by the provider.
 type ChatsChannelsListOutputItemsContextAssignee struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -61,13 +61,15 @@ type ChatsChannelsListOutputItemsContext struct {
 	Type string `json:"type"`
 	// Id - The resource's identifier on the provider
 	Id string `json:"id"`
-	// Description - Description of the resource
+	// Description - Description of the external resource, as reported by the provider.
 	Description *string `json:"description,omitempty"`
 	// Status - Status of the resource, as reported by the provider
 	Status *string `json:"status,omitempty"`
 	// Url - Link to the resource
-	Url      *string                                      `json:"url,omitempty"`
-	Author   *ChatsChannelsListOutputItemsContextAuthor   `json:"author,omitempty"`
+	Url *string `json:"url,omitempty"`
+	// Author - Author of the external resource, as reported by the provider.
+	Author *ChatsChannelsListOutputItemsContextAuthor `json:"author,omitempty"`
+	// Assignee - Assignee of the external resource, as reported by the provider.
 	Assignee *ChatsChannelsListOutputItemsContextAssignee `json:"assignee,omitempty"`
 	// Labels - Labels attached to the resource
 	Labels *[]string `json:"labels,omitempty"`
@@ -75,9 +77,9 @@ type ChatsChannelsListOutputItemsContext struct {
 
 // ChatsChannelsListOutputItems represents the chats channels list output items type.
 type ChatsChannelsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat channel identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this channel belongs to
 	ChatId string `json:"chat_id"`
@@ -87,16 +89,17 @@ type ChatsChannelsListOutputItems struct {
 	Type string `json:"type"`
 	// ProviderType - The provider's own name for this kind of channel
 	ProviderType string `json:"provider_type"`
-	// ProviderChannelId - The channel's identifier on the chat provider
+	// ProviderChannelId - Identifier the chat provider uses for this channel.
 	ProviderChannelId string `json:"provider_channel_id"`
-	// Name - Display name of the channel
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Topic - Topic set on the channel
 	Topic *string `json:"topic,omitempty"`
 	// Subject - Subject of the channel, for providers that separate it from the topic
 	Subject *string `json:"subject,omitempty"`
 	// HasAccess - Whether the chat integration can read content from this channel
-	HasAccess bool                                   `json:"has_access"`
+	HasAccess bool `json:"has_access"`
+	// Recipient - The DM recipient, when the provider reports one. `null` otherwise.
 	Recipient *ChatsChannelsListOutputItemsRecipient `json:"recipient,omitempty"`
 	// MemberCount - Number of members in the channel, if the provider reports it
 	MemberCount *float64 `json:"member_count,omitempty"`
@@ -114,12 +117,20 @@ type ChatsChannelsListOutputItems struct {
 
 // ChatsChannelsListOutputPagination represents the chats channels list output pagination type.
 type ChatsChannelsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatsChannelsListOutput represents the chats channels list output type.
 type ChatsChannelsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                            `json:"object"`
 	Items      []ChatsChannelsListOutputItems    `json:"items"`
 	Pagination ChatsChannelsListOutputPagination `json:"pagination"`
 }
@@ -140,14 +151,19 @@ func MapChatsChannelsListOutputToJSON(v *ChatsChannelsListOutput) ([]byte, error
 
 // ChatsChannelsListQuery represents the chats channels list query type.
 type ChatsChannelsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// WorkspaceId - Filter to channels in this workspace
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// WorkspaceId - Only return channels in this workspace.
 	WorkspaceId *string `json:"workspace_id,omitempty"`
-	// Type - Filter by channel type
+	// Type - Only return channels of this type.
 	Type *string `json:"type,omitempty"`
 	// Search - Search by channel name or topic
 	Search *string `json:"search,omitempty"`

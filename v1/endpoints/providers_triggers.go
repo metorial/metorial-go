@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providers/triggers"
 )
 
-// ProvidersTriggersEndpoint provides access to a provider trigger describes an event source a provider can emit for callbacks. Use triggers to discover which callback subscriptions a provider version supports.
+// ProvidersTriggersEndpoint provides access to a provider trigger is an event a provider can emit for callbacks. Each provider version has its own set of triggers.
 type ProvidersTriggersEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProvidersTriggersEndpoint(client *endpoint.Client) *ProvidersTriggersEnd
 
 // ProvidersTriggersEndpointListParams contains optional query parameters for List.
 type ProvidersTriggersEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ProviderVersionId - Provider version to list triggers for
 	ProviderVersionId string `json:"provider_version_id"`
 }

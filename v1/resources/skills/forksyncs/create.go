@@ -39,6 +39,7 @@ func MapSkillsForkSyncsCreateOutputToJSON(v *SkillsForkSyncsCreateOutput) ([]byt
 
 // SkillsForkSyncsCreateBody represents the skills fork syncs create body type.
 type SkillsForkSyncsCreateBody struct {
+	// SkillId - Forked skill to sync upstream changes into, by ID.
 	SkillId string `json:"skill_id"`
 }
 

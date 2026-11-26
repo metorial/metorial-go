@@ -5,12 +5,16 @@ import (
 	"time"
 )
 
-// SkillsShareOutputImage represents the skills share output image type.
+// SkillsShareOutputImage - Image shown for the skill.
 type SkillsShareOutputImage struct {
-	Object string  `json:"object"`
-	Type   string  `json:"type"`
-	Icon   *string `json:"icon,omitempty"`
-	Color  *string `json:"color,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - Where the skill image comes from.
+	Type string `json:"type"`
+	// Icon - Library icon ID. `null` unless `type` is `icon`.
+	Icon *string `json:"icon,omitempty"`
+	// Color - Tile color. `null` unless `type` is `icon`.
+	Color *string `json:"color,omitempty"`
 }
 
 // SkillsShareOutputHierarchyCreatorOrganizationActorMember represents the skills share output hierarchy creator organization actor member type.
@@ -41,7 +45,7 @@ type SkillsShareOutputHierarchyCreatorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyCreatorOrganizationActor represents the skills share output hierarchy creator organization actor type.
+// SkillsShareOutputHierarchyCreatorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsShareOutputHierarchyCreatorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -65,27 +69,42 @@ type SkillsShareOutputHierarchyCreatorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyCreatorConsumer represents the skills share output hierarchy creator consumer type.
+// SkillsShareOutputHierarchyCreatorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsShareOutputHierarchyCreatorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyCreator represents the skills share output hierarchy creator type.
+// SkillsShareOutputHierarchyCreator - Actor behind a participant.
 type SkillsShareOutputHierarchyCreator struct {
-	Type              string                                              `json:"type"`
-	Name              string                                              `json:"name"`
-	ImageUrl          *string                                             `json:"image_url,omitempty"`
-	Email             *string                                             `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsShareOutputHierarchyCreatorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsShareOutputHierarchyCreatorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                     `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsShareOutputHierarchyCreatorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsShareOutputHierarchyForkCreatorOrganizationActorMember represents the skills share output hierarchy fork creator organization actor member type.
@@ -116,7 +135,7 @@ type SkillsShareOutputHierarchyForkCreatorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkCreatorOrganizationActor represents the skills share output hierarchy fork creator organization actor type.
+// SkillsShareOutputHierarchyForkCreatorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsShareOutputHierarchyForkCreatorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -140,27 +159,42 @@ type SkillsShareOutputHierarchyForkCreatorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkCreatorConsumer represents the skills share output hierarchy fork creator consumer type.
+// SkillsShareOutputHierarchyForkCreatorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsShareOutputHierarchyForkCreatorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkCreator represents the skills share output hierarchy fork creator type.
+// SkillsShareOutputHierarchyForkCreator - Actor behind a participant.
 type SkillsShareOutputHierarchyForkCreator struct {
-	Type              string                                                  `json:"type"`
-	Name              string                                                  `json:"name"`
-	ImageUrl          *string                                                 `json:"image_url,omitempty"`
-	Email             *string                                                 `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsShareOutputHierarchyForkCreatorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsShareOutputHierarchyForkCreatorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                         `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsShareOutputHierarchyForkCreatorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActorMember represents the skills share output hierarchy fork original creator organization actor member type.
@@ -191,7 +225,7 @@ type SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActorTeams struct 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActor represents the skills share output hierarchy fork original creator organization actor type.
+// SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -215,123 +249,192 @@ type SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkOriginalCreatorConsumer represents the skills share output hierarchy fork original creator consumer type.
+// SkillsShareOutputHierarchyForkOriginalCreatorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsShareOutputHierarchyForkOriginalCreatorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchyForkOriginalCreator represents the skills share output hierarchy fork original creator type.
+// SkillsShareOutputHierarchyForkOriginalCreator - Actor behind a participant.
 type SkillsShareOutputHierarchyForkOriginalCreator struct {
-	Type              string                                                          `json:"type"`
-	Name              string                                                          `json:"name"`
-	ImageUrl          *string                                                         `json:"image_url,omitempty"`
-	Email             *string                                                         `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsShareOutputHierarchyForkOriginalCreatorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsShareOutputHierarchyForkOriginalCreatorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                 `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsShareOutputHierarchyForkOriginalCreatorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
-// SkillsShareOutputHierarchyFork represents the skills share output hierarchy fork type.
+// SkillsShareOutputHierarchyFork - Fork details. `null` unless the skill is a fork.
 type SkillsShareOutputHierarchyFork struct {
-	Id              string                                         `json:"id"`
-	ParentSkillId   string                                         `json:"parent_skill_id"`
-	Creator         *SkillsShareOutputHierarchyForkCreator         `json:"creator,omitempty"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// ParentSkillId - Upstream skill the fork was created from, by ID.
+	ParentSkillId string `json:"parent_skill_id"`
+	// Creator - Actor behind a participant.
+	Creator *SkillsShareOutputHierarchyForkCreator `json:"creator,omitempty"`
+	// OriginalCreator - Actor behind a participant.
 	OriginalCreator *SkillsShareOutputHierarchyForkOriginalCreator `json:"original_creator,omitempty"`
-	CreatedAt       time.Time                                      `json:"created_at"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
-// SkillsShareOutputHierarchyEntity represents the skills share output hierarchy entity type.
+// SkillsShareOutputHierarchyEntity - Skill entity the versioned skill content belongs to.
 type SkillsShareOutputHierarchyEntity struct {
-	Object        string    `json:"object"`
-	Id            string    `json:"id"`
-	Name          string    `json:"name"`
-	Slug          string    `json:"slug"`
-	Description   *string   `json:"description,omitempty"`
-	ParentSkillId string    `json:"parent_skill_id"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ParentSkillId - Upstream skill, by ID.
+	ParentSkillId string `json:"parent_skill_id"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsShareOutputHierarchy represents the skills share output hierarchy type.
+// SkillsShareOutputHierarchy - Where the skill came from.
 type SkillsShareOutputHierarchy struct {
-	Object        string                             `json:"object"`
-	Type          string                             `json:"type"`
-	ParentSkillId *string                            `json:"parent_skill_id,omitempty"`
-	Creator       *SkillsShareOutputHierarchyCreator `json:"creator,omitempty"`
-	Fork          *SkillsShareOutputHierarchyFork    `json:"fork,omitempty"`
-	Entity        SkillsShareOutputHierarchyEntity   `json:"entity"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - How the skill was created. `root` for original skills, `fork` for consumer forks, `duplicated` for copies.
+	Type string `json:"type"`
+	// ParentSkillId - Parent skill, by ID. `null` for root skills.
+	ParentSkillId *string `json:"parent_skill_id,omitempty"`
+	// Creator - Actor behind a participant.
+	Creator *SkillsShareOutputHierarchyCreator `json:"creator,omitempty"`
+	// Fork - Fork details. `null` unless the skill is a fork.
+	Fork *SkillsShareOutputHierarchyFork `json:"fork,omitempty"`
+	// Entity - Skill entity the versioned skill content belongs to.
+	Entity SkillsShareOutputHierarchyEntity `json:"entity"`
 }
 
-// SkillsShareOutputIntegrationsConfiguration represents the skills share output integrations configuration type.
+// SkillsShareOutputIntegrationsConfiguration - Which settings integration instances may customize.
 type SkillsShareOutputIntegrationsConfiguration struct {
-	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
-	EnableCallbackTools           bool  `json:"enable_callback_tools"`
+	// CanAttachCustomToolFilters - Lets integration instances attach their own tool filters.
+	CanAttachCustomToolFilters bool `json:"can_attach_custom_tool_filters"`
+	// CanAttachCustomProviderConfig - Lets integration instances use their own provider configs.
+	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
+	// CanOverrideToolFilters - Lets integration instances ignore the integration tool filters.
+	CanOverrideToolFilters bool `json:"can_override_tool_filters"`
+	// EnableCallbackTools - Makes callback event tools available for this integration.
+	EnableCallbackTools bool `json:"enable_callback_tools"`
+	// UseIntegrationNameInToolNames - Names session providers after the integration instead of the provider. `null` uses the default.
 	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // SkillsShareOutputIntegrations represents the skills share output integrations type.
 type SkillsShareOutputIntegrations struct {
-	Object        string                                     `json:"object"`
-	Id            string                                     `json:"id"`
-	Slug          string                                     `json:"slug"`
-	Name          string                                     `json:"name"`
-	Description   *string                                    `json:"description,omitempty"`
-	Metadata      *map[string]any                            `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Slug - URL-safe name, unique across Metorial.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Which settings integration instances may customize.
 	Configuration SkillsShareOutputIntegrationsConfiguration `json:"configuration"`
-	CreatedAt     time.Time                                  `json:"created_at"`
-	UpdatedAt     time.Time                                  `json:"updated_at"`
-	ArchivedAt    *time.Time                                 `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // SkillsShareOutputProviders represents the skills share output providers type.
 type SkillsShareOutputProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsShareOutput represents the skills share output type.
 type SkillsShareOutput struct {
-	Object            string                          `json:"object"`
-	Id                string                          `json:"id"`
-	Status            string                          `json:"status"`
-	Slug              string                          `json:"slug"`
-	Name              string                          `json:"name"`
-	Description       *string                         `json:"description,omitempty"`
-	ImageUrl          string                          `json:"image_url"`
-	Image             SkillsShareOutputImage          `json:"image"`
-	ClientName        string                          `json:"client_name"`
-	ClientDescription *string                         `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any                 `json:"client_metadata,omitempty"`
-	License           *string                         `json:"license,omitempty"`
-	Compatibility     *string                         `json:"compatibility,omitempty"`
-	Metadata          map[string]any                  `json:"metadata"`
-	StoreId           string                          `json:"store_id"`
-	Hierarchy         SkillsShareOutputHierarchy      `json:"hierarchy"`
-	Integrations      []SkillsShareOutputIntegrations `json:"integrations"`
-	Providers         []SkillsShareOutputProviders    `json:"providers"`
-	CreatedAt         time.Time                       `json:"created_at"`
-	UpdatedAt         time.Time                       `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Whether the skill is available, archived, or deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - Public URL of the skill image.
+	ImageUrl string `json:"image_url"`
+	// Image - Image shown for the skill.
+	Image SkillsShareOutputImage `json:"image"`
+	// ClientName - Client-facing skill name.
+	ClientName string `json:"client_name"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// StoreId - Store holding the skill, by ID.
+	StoreId string `json:"store_id"`
+	// Hierarchy - Where the skill came from.
+	Hierarchy SkillsShareOutputHierarchy `json:"hierarchy"`
+	// Integrations - Integrations attached to the skill.
+	Integrations []SkillsShareOutputIntegrations `json:"integrations"`
+	// Providers - Providers attached to the skill.
+	Providers []SkillsShareOutputProviders `json:"providers"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapSkillsShareOutputFromJSON deserializes JSON data into a SkillsShareOutput.
@@ -350,9 +453,11 @@ func MapSkillsShareOutputToJSON(v *SkillsShareOutput) ([]byte, error) {
 
 // SkillsShareBody represents the skills share body type.
 type SkillsShareBody struct {
-	ConsumerProfileIds    *[]string `json:"consumer_profile_ids,omitempty"`
+	// ConsumerProfileIds - Consumers to share the skill with, by ID.
+	ConsumerProfileIds *[]string `json:"consumer_profile_ids,omitempty"`
+	// OrganizationMemberIds - Must be omitted. Organization member access cannot be changed.
 	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
-	// Permission - Access to grant. Owners can always edit the skill and can add other owners; only admins can remove or downgrade an owner. Owners must be consumers.
+	// Permission - For consumers with inherited edit and share access, `write` and `owner` add portal visibility. Consumers must own the skill to grant ownership. Only admins can remove or downgrade an owner.
 	Permission string `json:"permission"`
 }
 

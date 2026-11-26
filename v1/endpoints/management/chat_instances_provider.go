@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/chat/instances/provider"
 )
 
-// ChatInstancesProviderEndpoint provides access to chat instances materialize a chat connection for a specific runtime configuration.
+// ChatInstancesProviderEndpoint provides access to a chat instance is a chat connection running with its own configuration and identity.
 type ChatInstancesProviderEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,7 +17,7 @@ func NewChatInstancesProviderEndpoint(client *endpoint.Client) *ChatInstancesPro
 
 // ChatInstancesProviderEndpointSetBody contains the request body for Set.
 type ChatInstancesProviderEndpointSetBody struct {
-	// ProviderId - The chat provider to use for this instance
+	// ProviderId - Chat provider to use for this instance.
 	ProviderId string `json:"provider_id"`
 	// ProviderDeploymentId - Provider deployment to use
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`

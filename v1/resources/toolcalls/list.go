@@ -5,75 +5,91 @@ import (
 	"time"
 )
 
-// ToolCallsListOutputItemsSenderParticipantData - Participant payload data
+// ToolCallsListOutputItemsSenderParticipantData - Extra details the participant connected with.
 type ToolCallsListOutputItemsSenderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // ToolCallsListOutputItemsSenderParticipant represents the tool calls list output items sender participant type.
 type ToolCallsListOutputItemsSenderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data ToolCallsListOutputItemsSenderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// ToolCallsListOutputItemsResponderParticipantData - Participant payload data
+// ToolCallsListOutputItemsResponderParticipantData - Extra details the participant connected with.
 type ToolCallsListOutputItemsResponderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // ToolCallsListOutputItemsResponderParticipant represents the tool calls list output items responder participant type.
 type ToolCallsListOutputItemsResponderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data ToolCallsListOutputItemsResponderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -93,100 +109,100 @@ type ToolCallsListOutputItemsToolOutputSchema struct {
 
 // ToolCallsListOutputItemsToolTags represents the tool calls list output items tool tags type.
 type ToolCallsListOutputItemsToolTags struct {
-	// Destructive - Whether the tool is destructive
+	// Destructive - Whether the tool changes or deletes data.
 	Destructive *bool `json:"destructive,omitempty"`
-	// ReadOnly - Whether the tool is read-only
+	// ReadOnly - Whether the tool only reads data.
 	ReadOnly *bool `json:"read_only,omitempty"`
 }
 
 // ToolCallsListOutputItemsTool represents the tool calls list output items tool type.
 type ToolCallsListOutputItemsTool struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Key - Tool key
+	// Key - Key used to call the tool over MCP.
 	Key string `json:"key"`
-	// Name - Display name of the tool
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Tool description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Tool capabilities
+	// Capabilities - What the tool can do.
 	Capabilities map[string]any `json:"capabilities"`
-	// Constraints - Tool constraints
+	// Constraints - Rules for using the tool.
 	Constraints []string `json:"constraints"`
-	// Instructions - Tool usage instructions
+	// Instructions - Guidance for calling the tool correctly.
 	Instructions []string                                  `json:"instructions"`
 	InputSchema  *ToolCallsListOutputItemsToolInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ToolCallsListOutputItemsToolOutputSchema `json:"output_schema,omitempty"`
 	Tags         *ToolCallsListOutputItemsToolTags         `json:"tags,omitempty"`
 	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
 	ToolCategoryKeys []string `json:"tool_category_keys"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this tool belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this tool belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ToolCallsListOutputItemsError represents the tool calls list output items error type.
 type ToolCallsListOutputItemsError struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session error identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable summary of the failure.
 	Message string `json:"message"`
-	// Data - Error payload data
+	// Data - Additional error details.
 	Data map[string]any `json:"data"`
 	// Status - Indicates whether the error is still being processed or has been fully processed and grouped.
 	Status string `json:"status"`
-	// SessionId - Parent session ID
+	// SessionId - Session the error occurred in.
 	SessionId string `json:"session_id"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run the error belongs to. `null` when there is none.
 	ProviderRunId *string `json:"provider_run_id,omitempty"`
-	// ConnectionId - Connection ID
+	// ConnectionId - Connection the error belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// GroupId - Error group ID
+	// GroupId - Group this error belongs to. `null` while the error is still processing.
 	GroupId *string `json:"group_id,omitempty"`
-	// SimilarErrorCount - Count of similar errors in the group
+	// SimilarErrorCount - How many errors are in this group.
 	SimilarErrorCount float64 `json:"similar_error_count"`
-	// IssueId - The provider issue this occurrence is aggregated into
+	// IssueId - Provider issue this error is aggregated into. `null` when there is none.
 	IssueId *string `json:"issue_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ToolCallsListOutputItems represents the tool calls list output items type.
 type ToolCallsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool call identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ToolKey - The key identifying the tool that was called
+	// ToolKey - The key identifying the tool that was called.
 	ToolKey string `json:"tool_key"`
-	// Type - The type of the tool call
+	// Type - Always `tool_call`.
 	Type string `json:"type"`
-	// Status - Current status of the tool call
+	// Status - `waiting_for_response` until the tool replies.
 	Status string `json:"status"`
-	// Source - Source of the tool call
+	// Source - Whether the client or the provider made the call.
 	Source string `json:"source"`
 	// Transport - Transport protocol used
 	Transport string `json:"transport"`
-	// SessionId - Parent session ID
+	// SessionId - Session the tool was called in.
 	SessionId string `json:"session_id"`
-	// MessageId - Associated session message ID
+	// MessageId - Message that records this call.
 	MessageId string `json:"message_id"`
-	// SessionProviderId - Session provider ID
+	// SessionProviderId - Session provider that handled the call. `null` when there is none.
 	SessionProviderId *string `json:"session_provider_id,omitempty"`
-	// ConnectionId - Session connection ID
+	// ConnectionId - Connection the call belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run that produced the call. `null` when there is none.
 	ProviderRunId        *string                                       `json:"provider_run_id,omitempty"`
 	SenderParticipant    *ToolCallsListOutputItemsSenderParticipant    `json:"sender_participant,omitempty"`
 	ResponderParticipant *ToolCallsListOutputItemsResponderParticipant `json:"responder_participant,omitempty"`
@@ -196,18 +212,26 @@ type ToolCallsListOutputItems struct {
 	Input *map[string]any `json:"input,omitempty"`
 	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ToolCallsListOutputPagination represents the tool calls list output pagination type.
 type ToolCallsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ToolCallsListOutput represents the tool calls list output type.
 type ToolCallsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                        `json:"object"`
 	Items      []ToolCallsListOutputItems    `json:"items"`
 	Pagination ToolCallsListOutputPagination `json:"pagination"`
 }
@@ -226,29 +250,34 @@ func MapToolCallsListOutputToJSON(v *ToolCallsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// ToolCallsListQueryCreatedAt - Filter tool call creation time by date range
+// ToolCallsListQueryCreatedAt - Only return results whose tool call creation time is in this range. Set `gt`, `lt`, or both.
 type ToolCallsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for tool call creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for tool call creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ToolCallsListQueryUpdatedAt - Filter tool call last update time by date range
+// ToolCallsListQueryUpdatedAt - Only return results whose tool call last update time is in this range. Set `gt`, `lt`, or both.
 type ToolCallsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for tool call last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for tool call last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ToolCallsListQuery represents the tool calls list query type.
 type ToolCallsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// SessionId - Filter by session ID(s)
 	SessionId *any `json:"session_id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
@@ -279,9 +308,9 @@ type ToolCallsListQuery struct {
 	ToolId *any `json:"tool_id,omitempty"`
 	// Status - Filter by tool call status(es)
 	Status *any `json:"status,omitempty"`
-	// CreatedAt - Filter tool call creation time by date range
+	// CreatedAt - Only return results whose tool call creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ToolCallsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter tool call last update time by date range
+	// UpdatedAt - Only return results whose tool call last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ToolCallsListQueryUpdatedAt `json:"updated_at,omitempty"`
 	// Search - Search by tool call ID or tool key, or by the name of a related tool, provider, deployment, config, auth config, agent, actor, identity, or consumer
 	Search *string `json:"search,omitempty"`

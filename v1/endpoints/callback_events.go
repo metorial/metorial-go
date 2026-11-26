@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/callbackevents"
 )
 
-// CallbackEventsEndpoint provides access to a callback event is recorded every time a provider trigger behind one of your callbacks fires. Listing returns the events themselves; fetch a single event to enrich it with the payload the provider produced, and the inbound webhook behind it, if any.
+// CallbackEventsEndpoint provides access to a callback event is recorded every time a provider trigger behind one of your callbacks fires.
 type CallbackEventsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,30 +17,35 @@ func NewCallbackEventsEndpoint(client *endpoint.Client) *CallbackEventsEndpoint 
 
 // CallbackEventsEndpointListParams contains optional query parameters for List.
 type CallbackEventsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// CallbackId - Filter by callback ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// CallbackId - Only return events for one of these callbacks.
 	CallbackId *any `json:"callback_id,omitempty"`
-	// CallbackInstanceId - Filter by callback instance ID(s)
+	// CallbackInstanceId - Only return events for one of these callback instances.
 	CallbackInstanceId *any `json:"callback_instance_id,omitempty"`
-	// IntegrationId - Filter by the integration the callback belongs to
+	// IntegrationId - Only return events for callbacks belonging to one of these integrations.
 	IntegrationId *any `json:"integration_id,omitempty"`
-	// IntegrationProviderId - Filter by the integration provider the callback belongs to
+	// IntegrationProviderId - Only return events for callbacks belonging to one of these integration providers.
 	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
-	// ProviderId - Filter by the provider the callback belongs to
+	// ProviderId - Only return events for callbacks belonging to one of these providers.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// ProviderTriggerKey - Filter by the provider trigger key that produced the event
+	// ProviderTriggerKey - Only return events produced by one of these provider triggers.
 	ProviderTriggerKey *any `json:"provider_trigger_key,omitempty"`
-	// Status - Filter by callback event processing status
+	// Status - Only return events with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Source - Filter by callback event source
+	// Source - Only return events from one of these sources.
 	Source *any `json:"source,omitempty"`
-	// OccurredAt - Filter when the underlying provider event occurred by date range
+	// OccurredAt - Only return results whose provider event time is in this range. Set `gt`, `lt`, or both.
 	OccurredAt *map[string]any `json:"occurred_at,omitempty"`
-	// CreatedAt - Filter callback event creation time by date range
+	// CreatedAt - Only return results whose callback event creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 }
 
@@ -61,7 +66,7 @@ func (e *CallbackEventsEndpoint) List(params *CallbackEventsEndpointListParams) 
 	return &result, nil
 }
 
-// Get retrieves a specific callback event by ID, enriched with the payload the provider produced for it and, if it came from a webhook, the inbound request behind it.
+// Get retrieves a callback event, with the payload the provider produced and the inbound webhook behind it when there is one. The inbound request is `null` once it is past its retention period.
 func (e *CallbackEventsEndpoint) Get(callbackEventId string) (*callbackevents.CallbackEventsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"callback-events", callbackEventId},

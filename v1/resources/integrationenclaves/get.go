@@ -5,27 +5,42 @@ import (
 	"time"
 )
 
-// IntegrationEnclavesGetOutputEnclaveEnvironment represents the integration enclaves get output enclave environment type.
+// IntegrationEnclavesGetOutputEnclaveEnvironment - Environment the enclave runs in.
 type IntegrationEnclavesGetOutputEnclaveEnvironment struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Type      string    `json:"type"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Type - `metorial` for Metorial-hosted environments. `outpost` for environments in your own infrastructure.
+	Type string `json:"type"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // IntegrationEnclavesGetOutput represents the integration enclaves get output type.
 type IntegrationEnclavesGetOutput struct {
-	Object               string                                         `json:"object"`
-	Id                   string                                         `json:"id"`
-	Slug                 string                                         `json:"slug"`
-	Name                 string                                         `json:"name"`
-	Description          *string                                        `json:"description,omitempty"`
-	InternetGatewayId    string                                         `json:"internet_gateway_id"`
-	ProviderDeploymentId string                                         `json:"provider_deployment_id"`
-	EnclaveEnvironment   IntegrationEnclavesGetOutputEnclaveEnvironment `json:"enclave_environment"`
-	CreatedAt            time.Time                                      `json:"created_at"`
-	LastUsedAt           *time.Time                                     `json:"last_used_at,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// InternetGatewayId - Internet gateway the enclave uses.
+	InternetGatewayId string `json:"internet_gateway_id"`
+	// ProviderDeploymentId - Provider deployment running in the enclave.
+	ProviderDeploymentId string `json:"provider_deployment_id"`
+	// EnclaveEnvironment - Environment the enclave runs in.
+	EnclaveEnvironment IntegrationEnclavesGetOutputEnclaveEnvironment `json:"enclave_environment"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// LastUsedAt - When the enclave was last used. `null` when never used.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
 }
 
 // MapIntegrationEnclavesGetOutputFromJSON deserializes JSON data into a IntegrationEnclavesGetOutput.

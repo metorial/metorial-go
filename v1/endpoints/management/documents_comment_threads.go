@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/documents/commentthreads"
 )
 
-// DocumentsCommentThreadsEndpoint provides access to discuss selected text in a document through comment threads.
+// DocumentsCommentThreadsEndpoint provides access to a document comment thread is a discussion anchored to a text selection in a document.
 type DocumentsCommentThreadsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,18 +17,23 @@ func NewDocumentsCommentThreadsEndpoint(client *endpoint.Client) *DocumentsComme
 
 // DocumentsCommentThreadsEndpointListParams contains optional query parameters for List.
 type DocumentsCommentThreadsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by comment thread ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return threads with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// Status - Filter by thread status
+	// Status - Only return threads with one of these statuses.
 	Status *any `json:"status,omitempty"`
 	// AnchorStatus - Filter by whether the commented text still exists
 	AnchorStatus *any `json:"anchor_status,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose thread creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 }
 
@@ -42,10 +47,11 @@ type DocumentsCommentThreadsEndpointCreateBody struct {
 
 // DocumentsCommentThreadsEndpointUpdateBody contains the request body for Update.
 type DocumentsCommentThreadsEndpointUpdateBody struct {
+	// Status - New status for the thread.
 	Status *string `json:"status,omitempty"`
 }
 
-// List returns a paginated list of comment threads for a specific document.
+// List returns a paginated list of comment threads in a document.
 func (e *DocumentsCommentThreadsEndpoint) List(instanceId string, documentId string, params *DocumentsCommentThreadsEndpointListParams) (*commentthreads.DocumentsCommentThreadsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -62,7 +68,7 @@ func (e *DocumentsCommentThreadsEndpoint) List(instanceId string, documentId str
 	return &result, nil
 }
 
-// Get retrieves a specific comment thread with its comments.
+// Get retrieves a document comment thread with its comments.
 func (e *DocumentsCommentThreadsEndpoint) Get(instanceId string, documentId string, documentCommentThreadId string) (*commentthreads.DocumentsCommentThreadsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "documents", documentId, "comment-threads", documentCommentThreadId},

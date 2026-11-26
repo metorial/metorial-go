@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/connections"
 )
 
-// SessionsConnectionsEndpoint provides access to session connections represent the MCP connections established within a session. This read-only resource provides visibility into the connection state and capabilities.
+// SessionsConnectionsEndpoint provides access to a session connection is one MCP connection in a session. Connections report their state, transport, and capabilities.
 type SessionsConnectionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsConnectionsEndpoint(client *endpoint.Client) *SessionsConnection
 
 // SessionsConnectionsEndpointListParams contains optional query parameters for List.
 type SessionsConnectionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Filter by connection status
 	Status *any `json:"status,omitempty"`
 	// ConnectionState - Filter by connection state
@@ -46,13 +51,13 @@ type SessionsConnectionsEndpointListParams struct {
 	SessionProviderId *any `json:"session_provider_id,omitempty"`
 	// ParticipantId - Filter by participant ID(s)
 	ParticipantId *any `json:"participant_id,omitempty"`
-	// CreatedAt - Filter session connection creation time by date range
+	// CreatedAt - Only return results whose session connection creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session connection last update time by date range
+	// UpdatedAt - Only return results whose session connection last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// List returns a paginated list of connections for a session.
+// List returns a paginated list of session connections.
 func (e *SessionsConnectionsEndpoint) List(params *SessionsConnectionsEndpointListParams) (*connections.SessionsConnectionsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -69,7 +74,7 @@ func (e *SessionsConnectionsEndpoint) List(params *SessionsConnectionsEndpointLi
 	return &result, nil
 }
 
-// Get retrieves a specific connection from a session.
+// Get retrieves a session connection.
 func (e *SessionsConnectionsEndpoint) Get(sessionConnectionId string) (*connections.SessionsConnectionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-connections", sessionConnectionId},

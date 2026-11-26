@@ -7,15 +7,15 @@ import (
 
 // ChatWorkspacesListOutputItems represents the chat workspaces list output items type.
 type ChatWorkspacesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat workspace identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this workspace belongs to
 	ChatId string `json:"chat_id"`
-	// ProviderWorkspaceId - The workspace's identifier on the chat provider
+	// ProviderWorkspaceId - Identifier the chat provider uses for this workspace.
 	ProviderWorkspaceId string `json:"provider_workspace_id"`
-	// Name - Display name of the workspace
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Domain - Domain the workspace is reachable under on the chat provider
 	Domain *string `json:"domain,omitempty"`
@@ -29,12 +29,20 @@ type ChatWorkspacesListOutputItems struct {
 
 // ChatWorkspacesListOutputPagination represents the chat workspaces list output pagination type.
 type ChatWorkspacesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatWorkspacesListOutput represents the chat workspaces list output type.
 type ChatWorkspacesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                             `json:"object"`
 	Items      []ChatWorkspacesListOutputItems    `json:"items"`
 	Pagination ChatWorkspacesListOutputPagination `json:"pagination"`
 }
@@ -55,11 +63,16 @@ func MapChatWorkspacesListOutputToJSON(v *ChatWorkspacesListOutput) ([]byte, err
 
 // ChatWorkspacesListQuery represents the chat workspaces list query type.
 type ChatWorkspacesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ChatInstanceId - The chat instance to list workspaces for
 	ChatInstanceId string `json:"chat_instance_id"`
 	// Search - Search by workspace name

@@ -33,7 +33,7 @@ type DocumentsParticipantsGetOutputActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsGetOutputActorOrganizationActor represents the documents participants get output actor organization actor type.
+// DocumentsParticipantsGetOutputActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsParticipantsGetOutputActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,41 +57,64 @@ type DocumentsParticipantsGetOutputActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsGetOutputActorConsumer represents the documents participants get output actor consumer type.
+// DocumentsParticipantsGetOutputActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsParticipantsGetOutputActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsGetOutputActor represents the documents participants get output actor type.
+// DocumentsParticipantsGetOutputActor - Actor behind a participant.
 type DocumentsParticipantsGetOutputActor struct {
-	Type              string                                                `json:"type"`
-	Name              string                                                `json:"name"`
-	ImageUrl          *string                                               `json:"image_url,omitempty"`
-	Email             *string                                               `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsParticipantsGetOutputActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsParticipantsGetOutputActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                       `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsParticipantsGetOutputActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsParticipantsGetOutput represents the documents participants get output type.
 type DocumentsParticipantsGetOutput struct {
-	// Object - String representing the object's type
-	Object             string                              `json:"object"`
-	Id                 string                              `json:"id"`
-	Role               string                              `json:"role"`
-	EditCount          float64                             `json:"edit_count"`
-	LastEditedAt       *time.Time                          `json:"last_edited_at,omitempty"`
-	LastViewedAt       *time.Time                          `json:"last_viewed_at,omitempty"`
-	Actor              DocumentsParticipantsGetOutputActor `json:"actor"`
-	StoreParticipantId *string                             `json:"store_participant_id,omitempty"`
-	CreatedAt          time.Time                           `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Role - What the participant can do in the document.
+	Role string `json:"role"`
+	// EditCount - Number of edits the participant has made.
+	EditCount float64 `json:"edit_count"`
+	// LastEditedAt - When the participant last changed the document.
+	LastEditedAt *time.Time `json:"last_edited_at,omitempty"`
+	// LastViewedAt - When the participant last opened the document.
+	LastViewedAt *time.Time `json:"last_viewed_at,omitempty"`
+	// Actor - Actor behind a participant.
+	Actor DocumentsParticipantsGetOutputActor `json:"actor"`
+	// StoreParticipantId - Linked store participant, by ID.
+	StoreParticipantId *string `json:"store_participant_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // MapDocumentsParticipantsGetOutputFromJSON deserializes JSON data into a DocumentsParticipantsGetOutput.

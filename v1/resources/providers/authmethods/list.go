@@ -21,33 +21,33 @@ type ProvidersAuthMethodsListOutputItemsOutputSchema struct {
 
 // ProvidersAuthMethodsListOutputItemsScopes represents the providers auth methods list output items scopes type.
 type ProvidersAuthMethodsListOutputItemsScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProvidersAuthMethodsListOutputItems represents the providers auth methods list output items type.
 type ProvidersAuthMethodsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                   `json:"capabilities"`
 	InputSchema  *ProvidersAuthMethodsListOutputItemsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersAuthMethodsListOutputItemsOutputSchema `json:"output_schema,omitempty"`
@@ -55,24 +55,32 @@ type ProvidersAuthMethodsListOutputItems struct {
 	Scopes *[]ProvidersAuthMethodsListOutputItemsScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProvidersAuthMethodsListOutputPagination represents the providers auth methods list output pagination type.
 type ProvidersAuthMethodsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProvidersAuthMethodsListOutput represents the providers auth methods list output type.
 type ProvidersAuthMethodsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                   `json:"object"`
 	Items      []ProvidersAuthMethodsListOutputItems    `json:"items"`
 	Pagination ProvidersAuthMethodsListOutputPagination `json:"pagination"`
 }
@@ -93,13 +101,20 @@ func MapProvidersAuthMethodsListOutputToJSON(v *ProvidersAuthMethodsListOutput) 
 
 // ProvidersAuthMethodsListQuery represents the providers auth methods list query type.
 type ProvidersAuthMethodsListQuery struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	ProviderVersionId string   `json:"provider_version_id"`
-	Adapter           *string  `json:"adapter,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// ProviderVersionId - Provider version to list auth methods for.
+	ProviderVersionId string `json:"provider_version_id"`
+	// Adapter - Only return auth methods supporting this adapter.
+	Adapter *string `json:"adapter,omitempty"`
 }
 
 // MapProvidersAuthMethodsListQueryFromJSON deserializes JSON data into a ProvidersAuthMethodsListQuery.

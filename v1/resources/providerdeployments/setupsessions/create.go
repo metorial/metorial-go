@@ -73,33 +73,33 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthMethodOutputSchema struct {
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthMethodScopes represents the provider deployments setup sessions create output auth method scopes type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthMethod represents the provider deployments setup sessions create output auth method type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                                      `json:"capabilities"`
 	InputSchema  *ProviderDeploymentsSetupSessionsCreateOutputAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProviderDeploymentsSetupSessionsCreateOutputAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -107,64 +107,67 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthMethod struct {
 	Scopes *[]ProviderDeploymentsSetupSessionsCreateOutputAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputDeployment represents the provider deployments setup sessions create output deployment type.
 type ProviderDeploymentsSetupSessionsCreateOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputCredentials represents the provider deployments setup sessions create output credentials type.
 type ProviderDeploymentsSetupSessionsCreateOutputCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -178,52 +181,55 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigToolFilter struct {
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfigDeployment represents the provider deployments setup sessions create output auth config deployment type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfigCredentials represents the provider deployments setup sessions create output auth config credentials type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -243,33 +249,33 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodOutputSchem
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodScopes represents the provider deployments setup sessions create output auth config auth method scopes type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethod represents the provider deployments setup sessions create output auth config auth method type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                                                `json:"capabilities"`
 	InputSchema  *ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodOutputSchema `json:"output_schema,omitempty"`
@@ -277,13 +283,13 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethod struct {
 	Scopes *[]ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -333,25 +339,25 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAccess struct {
 
 // ProviderDeploymentsSetupSessionsCreateOutputAuthConfig represents the provider deployments setup sessions create output auth config type.
 type ProviderDeploymentsSetupSessionsCreateOutputAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the auth config was created. `oauth_automated` configs are created automatically and cannot be updated.
 	Type string `json:"type"`
-	// Source - Auth config source
+	// Source - Where the auth config was created.
 	Source string `json:"source"`
-	// Status - Auth config status
+	// Status - Archived once the auth config is archived. Archived auth configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default auth config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter  ProviderDeploymentsSetupSessionsCreateOutputAuthConfigToolFilter   `json:"tool_filter"`
@@ -360,9 +366,9 @@ type ProviderDeploymentsSetupSessionsCreateOutputAuthConfig struct {
 	AuthMethod  ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAuthMethod   `json:"auth_method"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsSetupSessionsCreateOutputAuthConfigAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -376,68 +382,68 @@ type ProviderDeploymentsSetupSessionsCreateOutputConfigToolFilter struct {
 
 // ProviderDeploymentsSetupSessionsCreateOutputConfigDeployment represents the provider deployments setup sessions create output config deployment type.
 type ProviderDeploymentsSetupSessionsCreateOutputConfigDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputConfigFromVaultDeployment represents the provider deployments setup sessions create output config from vault deployment type.
 type ProviderDeploymentsSetupSessionsCreateOutputConfigFromVaultDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutputConfigFromVault represents the provider deployments setup sessions create output config from vault type.
 type ProviderDeploymentsSetupSessionsCreateOutputConfigFromVault struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config vault identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Status of the config vault
+	// Status - Archived once the vault is archived. Archived vaults stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this vault belongs to.
 	ProviderId string                                                                 `json:"provider_id"`
 	Deployment *ProviderDeploymentsSetupSessionsCreateOutputConfigFromVaultDeployment `json:"deployment,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -487,61 +493,61 @@ type ProviderDeploymentsSetupSessionsCreateOutputConfigAccess struct {
 
 // ProviderDeploymentsSetupSessionsCreateOutputConfig represents the provider deployments setup sessions create output config type.
 type ProviderDeploymentsSetupSessionsCreateOutputConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique config identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Config status
+	// Status - Archived once the config is archived. Archived configs stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter ProviderDeploymentsSetupSessionsCreateOutputConfigToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this config follows.
 	SpecificationId string                                                        `json:"specification_id"`
 	Deployment      *ProviderDeploymentsSetupSessionsCreateOutputConfigDeployment `json:"deployment,omitempty"`
 	FromVault       *ProviderDeploymentsSetupSessionsCreateOutputConfigFromVault  `json:"from_vault,omitempty"`
 	// Access - Resource ownership and access settings.
 	Access ProviderDeploymentsSetupSessionsCreateOutputConfigAccess `json:"access"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateOutput represents the provider deployments setup sessions create output type.
 type ProviderDeploymentsSetupSessionsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique setup session identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - Setup session type. `admin` sessions produce an admin consent link and complete without creating credentials.
 	Type string `json:"type"`
-	// Status - Session status
+	// Status - Session status. `pending` until the flow completes. Reads as `expired` once past `expires_at`. `archived` once the session is archived.
 	Status string `json:"status"`
-	// Url - URL where user completes authentication
+	// Url - URL where the user completes this session.
 	Url string `json:"url"`
 	// Error - The error reported during the OAuth step of this session, or null if none occurred
 	Error *ProviderDeploymentsSetupSessionsCreateOutputError `json:"error,omitempty"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// Configuration - Setup session configuration
+	// Configuration - Options shaping the session flow, like provider search filters and UI layout.
 	Configuration *map[string]any `json:"configuration,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider the session sets up, or `null` when none was chosen.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// IdentityId - Linked identity ID
+	// IdentityId - Identity the session is linked to. `null` when unlinked.
 	IdentityId *string `json:"identity_id,omitempty"`
 	// IdentityCredentialId - Identity credential created from this setup session
 	IdentityCredentialId *string `json:"identity_credential_id,omitempty"`
@@ -552,15 +558,15 @@ type ProviderDeploymentsSetupSessionsCreateOutput struct {
 	Credentials *ProviderDeploymentsSetupSessionsCreateOutputCredentials `json:"credentials,omitempty"`
 	AuthConfig  *ProviderDeploymentsSetupSessionsCreateOutputAuthConfig  `json:"auth_config,omitempty"`
 	Config      *ProviderDeploymentsSetupSessionsCreateOutputConfig      `json:"config,omitempty"`
-	// UiMode - UI mode for setup
+	// UiMode - How the session UI is presented.
 	UiMode string `json:"ui_mode"`
 	// RedirectUrl - URL to redirect after setup
 	RedirectUrl *string `json:"redirect_url,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
-	// ExpiresAt - Timestamp when the session expires
+	// ExpiresAt - When the session expires. `pending` sessions read as `expired` past this time.
 	ExpiresAt time.Time `json:"expires_at"`
 }
 
@@ -580,52 +586,65 @@ func MapProviderDeploymentsSetupSessionsCreateOutputToJSON(v *ProviderDeployment
 
 // ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups represents the provider deployments setup sessions create body configuration provider search groups type.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups struct {
+	// GroupId - Group to include.
 	GroupId string `json:"group_id"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections represents the provider deployments setup sessions create body configuration provider search collections type.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections struct {
+	// CollectionId - Collection to include.
 	CollectionId string `json:"collection_id"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories represents the provider deployments setup sessions create body configuration provider search categories type.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories struct {
+	// CategoryId - Category to include.
 	CategoryId string `json:"category_id"`
 }
 
-// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch represents the provider deployments setup sessions create body configuration provider search type.
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch - Limit the providers the user can pick from.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch struct {
-	Groups      *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups      `json:"groups,omitempty"`
+	// Groups - Only show providers in these groups.
+	Groups *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchGroups `json:"groups,omitempty"`
+	// Collections - Only show providers in these collections.
 	Collections *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCollections `json:"collections,omitempty"`
-	Categories  *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories  `json:"categories,omitempty"`
+	// Categories - Only show providers in these categories.
+	Categories *[]ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearchCategories `json:"categories,omitempty"`
 }
 
-// ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters represents the provider deployments setup sessions create body configuration tool filters type.
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters - Whether the user can filter tools in the session UI.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters struct {
+	// Enabled - Show the tool filter step.
 	Enabled *bool `json:"enabled,omitempty"`
 }
 
-// ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi represents the provider deployments setup sessions create body configuration ui type.
+// ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi - How the session UI looks.
 type ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi struct {
+	// Layout - Layout of the session UI.
 	Layout *string `json:"layout,omitempty"`
 }
 
-// ProviderDeploymentsSetupSessionsCreateBodyConfiguration represents the provider deployments setup sessions create body configuration type.
+// ProviderDeploymentsSetupSessionsCreateBodyConfiguration - Options shaping the session flow.
 type ProviderDeploymentsSetupSessionsCreateBodyConfiguration struct {
+	// ProviderSearch - Limit the providers the user can pick from.
 	ProviderSearch *ProviderDeploymentsSetupSessionsCreateBodyConfigurationProviderSearch `json:"provider_search,omitempty"`
-	ToolFilters    *ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters    `json:"tool_filters,omitempty"`
-	Ui             *ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi             `json:"ui,omitempty"`
+	// ToolFilters - Whether the user can filter tools in the session UI.
+	ToolFilters *ProviderDeploymentsSetupSessionsCreateBodyConfigurationToolFilters `json:"tool_filters,omitempty"`
+	// Ui - How the session UI looks.
+	Ui *ProviderDeploymentsSetupSessionsCreateBodyConfigurationUi `json:"ui,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsCreateBody represents the provider deployments setup sessions create body type.
 type ProviderDeploymentsSetupSessionsCreateBody struct {
-	// ProviderId - The provider ID
+	// ProviderId - Provider to set up.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// ProviderDeploymentId - Optional provider deployment ID
+	// ProviderDeploymentId - Deployment to set up.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider setup session. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
@@ -634,10 +653,12 @@ type ProviderDeploymentsSetupSessionsCreateBody struct {
 	// IdentityId - Optional identity to link this setup session to
 	IdentityId *string `json:"identity_id,omitempty"`
 	// ConsumerId - Optional consumer to link this setup session to
-	ConsumerId  *string `json:"consumer_id,omitempty"`
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// RedirectUrl - URL to redirect to after setup.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 	// Type - The type of setup session, determining the flow and outcome of the session. `admin` creates an admin consent link for auth methods that support it, never creates credentials or configs, and cannot be bound to an identity, consumer, or config.
-	Type          *string                                                  `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// Configuration - Options shaping the session flow.
 	Configuration *ProviderDeploymentsSetupSessionsCreateBodyConfiguration `json:"configuration,omitempty"`
 }
 

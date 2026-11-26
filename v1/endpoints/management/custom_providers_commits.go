@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/customproviders/commits"
 )
 
-// CustomProvidersCommitsEndpoint provides access to commits represent version promotions between environments. Merge versions from one environment to another or rollback to a previous version.
+// CustomProvidersCommitsEndpoint provides access to a custom provider commit is a promotion of a version into an environment, or a rollback to a previous version.
 type CustomProvidersCommitsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,24 +17,29 @@ func NewCustomProvidersCommitsEndpoint(client *endpoint.Client) *CustomProviders
 
 // CustomProvidersCommitsEndpointListParams contains optional query parameters for List.
 type CustomProvidersCommitsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by commit IDs
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return commits with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CustomProviderVersionId - Filter by version IDs
+	// CustomProviderVersionId - Only return commits for one of these custom provider versions.
 	CustomProviderVersionId *any `json:"custom_provider_version_id,omitempty"`
-	// CustomProviderEnvironmentId - Filter by environment IDs
+	// CustomProviderEnvironmentId - Only return commits for one of these custom provider environments.
 	CustomProviderEnvironmentId *any `json:"custom_provider_environment_id,omitempty"`
-	// CustomProviderId - Filter by custom provider IDs
+	// CustomProviderId - Only return commits for one of these custom providers.
 	CustomProviderId *any `json:"custom_provider_id,omitempty"`
-	// ProviderId - Filter by provider ID(s)
+	// ProviderId - Only return commits for one of these provider IDs.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// CreatedAt - Filter custom provider commit creation time by date range
+	// CreatedAt - Only return results whose custom provider commit creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter custom provider commit last update time by date range
+	// UpdatedAt - Only return results whose custom provider commit last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -46,7 +51,7 @@ type CustomProvidersCommitsEndpointCreateBody struct {
 	Action any `json:"action"`
 }
 
-// List returns a paginated list of commits for a custom provider.
+// List returns a paginated list of custom provider commits.
 func (e *CustomProvidersCommitsEndpoint) List(instanceId string, params *CustomProvidersCommitsEndpointListParams) (*commits.CustomProvidersCommitsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -63,7 +68,7 @@ func (e *CustomProvidersCommitsEndpoint) List(instanceId string, params *CustomP
 	return &result, nil
 }
 
-// Get retrieves a specific commit.
+// Get retrieves a custom provider commit.
 func (e *CustomProvidersCommitsEndpoint) Get(instanceId string, customProviderCommitId string) (*commits.CustomProvidersCommitsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "custom-provider-commits", customProviderCommitId},

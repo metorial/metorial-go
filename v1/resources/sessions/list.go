@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// SessionsListOutputItemsUsage represents the sessions list output items usage type.
+// SessionsListOutputItemsUsage - Usage statistics.
 type SessionsListOutputItemsUsage struct {
 	// TotalProductiveClientMessageCount - Total productive client messages
 	TotalProductiveClientMessageCount float64 `json:"total_productive_client_message_count"`
@@ -31,80 +31,83 @@ type SessionsListOutputItemsProvidersToolFilter struct {
 
 // SessionsListOutputItemsProvidersDeployment represents the sessions list output items providers deployment type.
 type SessionsListOutputItemsProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionsListOutputItemsProvidersConfig represents the sessions list output items providers config type.
 type SessionsListOutputItemsProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionsListOutputItemsProvidersAuthConfig represents the sessions list output items providers auth config type.
+// SessionsListOutputItemsProvidersAuthConfig - Auth config the provider runs with. `null` when there is none.
 type SessionsListOutputItemsProvidersAuthConfig struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
 }
 
 // SessionsListOutputItemsProviders represents the sessions list output items providers type.
 type SessionsListOutputItemsProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Provider status
+	// Status - `archived` once the session provider is deleted. Archived session providers stay listable.
 	Status string `json:"status"`
 	// Usage - Usage statistics
 	Usage SessionsListOutputItemsProvidersUsage `json:"usage"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter SessionsListOutputItemsProvidersToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this session provider connects to.
 	ProviderId string `json:"provider_id"`
-	// SessionId - Parent session ID
+	// SessionId - Session this provider is connected to.
 	SessionId string `json:"session_id"`
-	// FromTemplateId - Source template ID
+	// FromTemplateId - Template this provider was created from. `null` when it was added directly.
 	FromTemplateId *string `json:"from_template_id,omitempty"`
-	// FromTemplateProviderId - Source template provider ID
-	FromTemplateProviderId *string                                     `json:"from_template_provider_id,omitempty"`
-	Deployment             SessionsListOutputItemsProvidersDeployment  `json:"deployment"`
-	Config                 SessionsListOutputItemsProvidersConfig      `json:"config"`
-	AuthConfig             *SessionsListOutputItemsProvidersAuthConfig `json:"auth_config,omitempty"`
-	// CreatedAt - Timestamp when created
+	// FromTemplateProviderId - Template provider this was created from. `null` when added directly.
+	FromTemplateProviderId *string                                    `json:"from_template_provider_id,omitempty"`
+	Deployment             SessionsListOutputItemsProvidersDeployment `json:"deployment"`
+	Config                 SessionsListOutputItemsProvidersConfig     `json:"config"`
+	// AuthConfig - Auth config the provider runs with. `null` when there is none.
+	AuthConfig *SessionsListOutputItemsProvidersAuthConfig `json:"auth_config,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -154,51 +157,62 @@ type SessionsListOutputItemsAccess struct {
 
 // SessionsListOutputItems represents the sessions list output items type.
 type SessionsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Session status
+	// Status - `archived` once the session is deleted. Archived sessions stay listable.
 	Status string `json:"status"`
-	// Name - Display name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ConnectionState - Session connection state
+	// ConnectionState - Whether the session currently holds an open connection.
 	ConnectionState string `json:"connection_state"`
-	// ConnectionUrl - MCP connection URL for this session
+	// ConnectionUrl - MCP connection URL for this session.
 	ConnectionUrl string `json:"connection_url"`
-	// ClientSecret - Session-scoped fine grained client secret token
-	ClientSecret *string                      `json:"client_secret,omitempty"`
-	Usage        SessionsListOutputItemsUsage `json:"usage"`
-	// Providers - Session providers
+	// ClientSecret - Secret for scoped client access. `null` when the caller cannot use this session.
+	ClientSecret *string `json:"client_secret,omitempty"`
+	// Usage - Usage statistics.
+	Usage SessionsListOutputItemsUsage `json:"usage"`
+	// Providers - Providers connected to this session.
 	Providers []SessionsListOutputItemsProviders `json:"providers"`
-	// FromTemplateIds - Template IDs this session was created from
+	// FromTemplateIds - Templates the session was created from. Empty when created without one.
 	FromTemplateIds []string `json:"from_template_ids"`
-	// HasErrors - Whether the session has any errors
+	// HasErrors - `true` when the session has errors.
 	HasErrors bool `json:"has_errors"`
-	// HasWarnings - Whether the session has any warnings
-	HasWarnings     bool    `json:"has_warnings"`
+	// HasWarnings - `true` when the session has warnings.
+	HasWarnings bool `json:"has_warnings"`
+	// IdentityActorId - Identity actor connected to the session. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access     SessionsListOutputItemsAccess `json:"access"`
-	IdentityId *string                       `json:"identity_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	Access SessionsListOutputItemsAccess `json:"access"`
+	// IdentityId - Identity connected to the session. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionsListOutputPagination represents the sessions list output pagination type.
 type SessionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SessionsListOutput represents the sessions list output type.
 type SessionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                       `json:"object"`
 	Items      []SessionsListOutputItems    `json:"items"`
 	Pagination SessionsListOutputPagination `json:"pagination"`
 }
@@ -217,29 +231,34 @@ func MapSessionsListOutputToJSON(v *SessionsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// SessionsListQueryCreatedAt - Filter session creation time by date range
+// SessionsListQueryCreatedAt - Only return results whose session creation time is in this range. Set `gt`, `lt`, or both.
 type SessionsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for session creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// SessionsListQueryUpdatedAt - Filter session last update time by date range
+// SessionsListQueryUpdatedAt - Only return results whose session last update time is in this range. Set `gt`, `lt`, or both.
 type SessionsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for session last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // SessionsListQuery represents the sessions list query type.
 type SessionsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by session ID(s)
@@ -264,9 +283,9 @@ type SessionsListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter session creation time by date range
+	// CreatedAt - Only return results whose session creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *SessionsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session last update time by date range
+	// UpdatedAt - Only return results whose session last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *SessionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 	// Search - Search by session ID, or by the name of a related provider, auth method, deployment, config, auth config, agent, actor, identity, or consumer
 	Search *string `json:"search,omitempty"`

@@ -15,41 +15,41 @@ type MagicMcpServersProvidersDeleteOutputToolFilter struct {
 
 // MagicMcpServersProvidersDeleteOutputProvider represents the magic mcp servers providers delete output provider type.
 type MagicMcpServersProvidersDeleteOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersProvidersDeleteOutputDeployment represents the magic mcp servers providers delete output deployment type.
 type MagicMcpServersProvidersDeleteOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -69,31 +69,31 @@ type MagicMcpServersProvidersDeleteOutputAuthMethodOutputSchema struct {
 
 // MagicMcpServersProvidersDeleteOutputAuthMethodScopes represents the magic mcp servers providers delete output auth method scopes type.
 type MagicMcpServersProvidersDeleteOutputAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // MagicMcpServersProvidersDeleteOutputAuthMethod represents the magic mcp servers providers delete output auth method type.
 type MagicMcpServersProvidersDeleteOutputAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// Capabilities - Capabilities of this auth method in the provider version the deployment currently uses: its locked version, otherwise the provider's current version. The other fields describe the pinned auth method and may come from an older specification.
 	Capabilities map[string]any                                              `json:"capabilities"`
@@ -103,99 +103,110 @@ type MagicMcpServersProvidersDeleteOutputAuthMethod struct {
 	Scopes *[]MagicMcpServersProvidersDeleteOutputAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersProvidersDeleteOutputAuthCredentials represents the magic mcp servers providers delete output auth credentials type.
 type MagicMcpServersProvidersDeleteOutputAuthCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersProvidersDeleteOutputConfig represents the magic mcp servers providers delete output config type.
 type MagicMcpServersProvidersDeleteOutputConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersProvidersDeleteOutputAuthConfig represents the magic mcp servers providers delete output auth config type.
 type MagicMcpServersProvidersDeleteOutputAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersProvidersDeleteOutput represents the magic mcp servers providers delete output type.
 type MagicMcpServersProvidersDeleteOutput struct {
-	Object                 string          `json:"object"`
-	Id                     string          `json:"id"`
-	Status                 string          `json:"status"`
-	MagicMcpServerId       string          `json:"magic_mcp_server_id"`
-	ProviderManagementMode string          `json:"provider_management_mode"`
-	Name                   string          `json:"name"`
-	Description            *string         `json:"description,omitempty"`
-	Metadata               *map[string]any `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you remove the provider from the server.
+	Status string `json:"status"`
+	// MagicMcpServerId - Server the provider belongs to.
+	MagicMcpServerId string `json:"magic_mcp_server_id"`
+	// ProviderManagementMode - Whether the provider is managed here or inherited.
+	ProviderManagementMode string `json:"provider_management_mode"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter      *MagicMcpServersProvidersDeleteOutputToolFilter      `json:"tool_filter,omitempty"`
 	Provider        MagicMcpServersProvidersDeleteOutputProvider         `json:"provider"`
@@ -204,9 +215,12 @@ type MagicMcpServersProvidersDeleteOutput struct {
 	AuthCredentials *MagicMcpServersProvidersDeleteOutputAuthCredentials `json:"auth_credentials,omitempty"`
 	Config          *MagicMcpServersProvidersDeleteOutputConfig          `json:"config,omitempty"`
 	AuthConfig      *MagicMcpServersProvidersDeleteOutputAuthConfig      `json:"auth_config,omitempty"`
-	CreatedAt       time.Time                                            `json:"created_at"`
-	UpdatedAt       time.Time                                            `json:"updated_at"`
-	ArchivedAt      *time.Time                                           `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapMagicMcpServersProvidersDeleteOutputFromJSON deserializes JSON data into a MagicMcpServersProvidersDeleteOutput.

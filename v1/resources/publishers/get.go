@@ -7,19 +7,19 @@ import (
 
 // PublishersGetOutput represents the publishers get output type.
 type PublishersGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique publisher identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the publisher
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the publisher
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of the publisher logo
 	ImageUrl string `json:"image_url"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

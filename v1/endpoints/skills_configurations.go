@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/configurations"
 )
 
-// SkillsConfigurationsEndpoint provides access to manage configuration profiles for skill execution.
+// SkillsConfigurationsEndpoint provides access to a skill configuration is a profile controlling how skills execute.
 type SkillsConfigurationsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,27 +17,38 @@ func NewSkillsConfigurationsEndpoint(client *endpoint.Client) *SkillsConfigurati
 
 // SkillsConfigurationsEndpointCreateBody contains the request body for Create.
 type SkillsConfigurationsEndpointCreateBody struct {
-	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
-	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
-	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// AllowScripts - Allow skills to run scripts.
+	AllowScripts *bool `json:"allow_scripts,omitempty"`
+	// AllowedFileExtensions - File extensions skills may use.
+	AllowedFileExtensions *[]string `json:"allowed_file_extensions,omitempty"`
+	// AllowNonStandardDirectories - Allow skills to write outside the standard directories.
+	AllowNonStandardDirectories *bool `json:"allow_non_standard_directories,omitempty"`
 	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
 	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }
 
 // SkillsConfigurationsEndpointListParams contains optional query parameters for List.
 type SkillsConfigurationsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
 // SkillsConfigurationsEndpointUpdateBody contains the request body for Update.
 type SkillsConfigurationsEndpointUpdateBody struct {
-	AllowScripts                *bool     `json:"allow_scripts,omitempty"`
-	AllowedFileExtensions       *[]string `json:"allowed_file_extensions,omitempty"`
-	AllowNonStandardDirectories *bool     `json:"allow_non_standard_directories,omitempty"`
+	// AllowScripts - Allow skills to run scripts.
+	AllowScripts *bool `json:"allow_scripts,omitempty"`
+	// AllowedFileExtensions - File extensions skills may use.
+	AllowedFileExtensions *[]string `json:"allowed_file_extensions,omitempty"`
+	// AllowNonStandardDirectories - Allow skills to write outside the standard directories.
+	AllowNonStandardDirectories *bool `json:"allow_non_standard_directories,omitempty"`
 	// SecurityReviewPolicy - How security reviews affect distribution: `warn` flags failing skills, `block` withholds them from syncs and exports. The strictest policy of all applicable configurations wins.
 	SecurityReviewPolicy *string `json:"security_review_policy,omitempty"`
 }
@@ -72,7 +83,7 @@ func (e *SkillsConfigurationsEndpoint) List(params *SkillsConfigurationsEndpoint
 	return &result, nil
 }
 
-// Get retrieves a specific skill configuration by ID, or the default.
+// Get retrieves a skill configuration. Pass `default` for the default configuration.
 func (e *SkillsConfigurationsEndpoint) Get(skillConfigurationId string) (*configurations.SkillsConfigurationsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", "configurations", skillConfigurationId},
@@ -84,7 +95,7 @@ func (e *SkillsConfigurationsEndpoint) Get(skillConfigurationId string) (*config
 	return &result, nil
 }
 
-// Update updates a specific skill configuration. Updating default creates it first if needed.
+// Update updates a skill configuration. Omitted fields keep their current value. Updating `default` creates it first if needed.
 func (e *SkillsConfigurationsEndpoint) Update(skillConfigurationId string, body *SkillsConfigurationsEndpointUpdateBody) (*configurations.SkillsConfigurationsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", "configurations", skillConfigurationId},
@@ -97,7 +108,7 @@ func (e *SkillsConfigurationsEndpoint) Update(skillConfigurationId string, body 
 	return &result, nil
 }
 
-// Delete soft deletes a specific non-internal skill configuration.
+// Delete deletes a skill configuration. The default and internal configurations cannot be deleted.
 func (e *SkillsConfigurationsEndpoint) Delete(skillConfigurationId string) (*configurations.SkillsConfigurationsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", "configurations", skillConfigurationId},

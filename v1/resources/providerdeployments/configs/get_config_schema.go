@@ -14,18 +14,18 @@ type ProviderDeploymentsConfigsGetConfigSchemaOutputSchema struct {
 
 // ProviderDeploymentsConfigsGetConfigSchemaOutput represents the provider deployments configs get config schema output type.
 type ProviderDeploymentsConfigsGetConfigSchemaOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string                                                 `json:"object"`
 	Schema *ProviderDeploymentsConfigsGetConfigSchemaOutputSchema `json:"schema,omitempty"`
-	// Visibility - Visibility of the config data
+	// Visibility - Whether config values are stored encrypted or in plain text.
 	Visibility string `json:"visibility"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this schema belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this schema belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -45,9 +45,13 @@ func MapProviderDeploymentsConfigsGetConfigSchemaOutputToJSON(v *ProviderDeploym
 
 // ProviderDeploymentsConfigsGetConfigSchemaQuery represents the provider deployments configs get config schema query type.
 type ProviderDeploymentsConfigsGetConfigSchemaQuery struct {
-	ProviderId           *string `json:"provider_id,omitempty"`
-	ProviderConfigId     *string `json:"provider_config_id,omitempty"`
-	ProviderVersionId    *string `json:"provider_version_id,omitempty"`
+	// ProviderId - Provider to resolve the schema for.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ProviderConfigId - Config to resolve the schema for.
+	ProviderConfigId *string `json:"provider_config_id,omitempty"`
+	// ProviderVersionId - Version to resolve the schema for.
+	ProviderVersionId *string `json:"provider_version_id,omitempty"`
+	// ProviderDeploymentId - Deployment to resolve the schema for.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
 }
 

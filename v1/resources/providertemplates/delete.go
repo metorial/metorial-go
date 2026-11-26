@@ -7,15 +7,24 @@ import (
 
 // ProviderTemplatesDeleteOutput represents the provider templates delete output type.
 type ProviderTemplatesDeleteOutput struct {
-	Object        string         `json:"object"`
-	Id            string         `json:"id"`
-	Status        string         `json:"status"`
-	Name          string         `json:"name"`
-	Description   *string        `json:"description,omitempty"`
-	Metadata      map[string]any `json:"metadata"`
-	IntegrationId *string        `json:"integration_id,omitempty"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the template.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// IntegrationId - Integration the template was created from. `null` when it wasn’t created from one.
+	IntegrationId *string `json:"integration_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapProviderTemplatesDeleteOutputFromJSON deserializes JSON data into a ProviderTemplatesDeleteOutput.

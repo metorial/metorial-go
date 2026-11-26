@@ -15,57 +15,65 @@ type SessionsConnectionsListOutputItemsUsage struct {
 
 // SessionsConnectionsListOutputItemsMcp - MCP connection details
 type SessionsConnectionsListOutputItemsMcp struct {
-	// Capabilities - MCP capabilities
+	// Capabilities - Capabilities the client reported.
 	Capabilities map[string]any `json:"capabilities"`
-	// ProtocolVersion - MCP protocol version
+	// ProtocolVersion - Negotiated MCP version.
 	ProtocolVersion string `json:"protocol_version"`
-	// Transport - MCP transport type
+	// Transport - How the MCP connection is carried.
 	Transport string `json:"transport"`
 }
 
-// SessionsConnectionsListOutputItemsParticipantData - Participant payload data
+// SessionsConnectionsListOutputItemsParticipantData - Extra details the participant connected with.
 type SessionsConnectionsListOutputItemsParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsConnectionsListOutputItemsParticipant represents the sessions connections list output items participant type.
 type SessionsConnectionsListOutputItemsParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsConnectionsListOutputItemsParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsConnectionsListOutputItems represents the sessions connections list output items type.
 type SessionsConnectionsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session connection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ConnectionState - Connection state
+	// ConnectionState - Whether the connection is currently open.
 	ConnectionState string `json:"connection_state"`
 	// Transport - Transport protocol used
 	Transport string `json:"transport"`
@@ -73,29 +81,37 @@ type SessionsConnectionsListOutputItems struct {
 	Usage SessionsConnectionsListOutputItemsUsage `json:"usage"`
 	// Mcp - MCP connection details
 	Mcp *SessionsConnectionsListOutputItemsMcp `json:"mcp,omitempty"`
-	// SessionId - Parent session ID
+	// SessionId - Session this connection belongs to.
 	SessionId   string                                         `json:"session_id"`
 	Participant *SessionsConnectionsListOutputItemsParticipant `json:"participant,omitempty"`
-	// HasErrors - Whether the connection has any errors
+	// HasErrors - `true` when the connection has errors.
 	HasErrors bool `json:"has_errors"`
-	// HasWarnings - Whether the connection has any warnings
+	// HasWarnings - `true` when the connection has warnings.
 	HasWarnings bool `json:"has_warnings"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// LastMessageAt - Timestamp of last message
+	// LastMessageAt - When the connection last exchanged a message.
 	LastMessageAt time.Time `json:"last_message_at"`
-	// LastActiveAt - Timestamp when last active
+	// LastActiveAt - Last time the connection showed activity.
 	LastActiveAt *time.Time `json:"last_active_at,omitempty"`
 }
 
 // SessionsConnectionsListOutputPagination represents the sessions connections list output pagination type.
 type SessionsConnectionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SessionsConnectionsListOutput represents the sessions connections list output type.
 type SessionsConnectionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                  `json:"object"`
 	Items      []SessionsConnectionsListOutputItems    `json:"items"`
 	Pagination SessionsConnectionsListOutputPagination `json:"pagination"`
 }
@@ -114,29 +130,34 @@ func MapSessionsConnectionsListOutputToJSON(v *SessionsConnectionsListOutput) ([
 	return json.Marshal(v)
 }
 
-// SessionsConnectionsListQueryCreatedAt - Filter session connection creation time by date range
+// SessionsConnectionsListQueryCreatedAt - Only return results whose session connection creation time is in this range. Set `gt`, `lt`, or both.
 type SessionsConnectionsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for session connection creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session connection creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// SessionsConnectionsListQueryUpdatedAt - Filter session connection last update time by date range
+// SessionsConnectionsListQueryUpdatedAt - Only return results whose session connection last update time is in this range. Set `gt`, `lt`, or both.
 type SessionsConnectionsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for session connection last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for session connection last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // SessionsConnectionsListQuery represents the sessions connections list query type.
 type SessionsConnectionsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Filter by connection status
 	Status *any `json:"status,omitempty"`
 	// ConnectionState - Filter by connection state
@@ -161,9 +182,9 @@ type SessionsConnectionsListQuery struct {
 	SessionProviderId *any `json:"session_provider_id,omitempty"`
 	// ParticipantId - Filter by participant ID(s)
 	ParticipantId *any `json:"participant_id,omitempty"`
-	// CreatedAt - Filter session connection creation time by date range
+	// CreatedAt - Only return results whose session connection creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *SessionsConnectionsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session connection last update time by date range
+	// UpdatedAt - Only return results whose session connection last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *SessionsConnectionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

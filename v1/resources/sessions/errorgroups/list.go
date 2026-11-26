@@ -7,32 +7,40 @@ import (
 
 // SessionsErrorGroupsListOutputItems represents the sessions error groups list output items type.
 type SessionsErrorGroupsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session error group identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable summary of the failure.
 	Message string `json:"message"`
-	// Data - Error group data from first occurrence
+	// Data - Error group data from the first occurrence.
 	Data map[string]any `json:"data"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider the errors belong to. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// OccurrenceCount - Number of errors in this group
+	// OccurrenceCount - How many errors are in this group.
 	OccurrenceCount float64 `json:"occurrence_count"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsErrorGroupsListOutputPagination represents the sessions error groups list output pagination type.
 type SessionsErrorGroupsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SessionsErrorGroupsListOutput represents the sessions error groups list output type.
 type SessionsErrorGroupsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                  `json:"object"`
 	Items      []SessionsErrorGroupsListOutputItems    `json:"items"`
 	Pagination SessionsErrorGroupsListOutputPagination `json:"pagination"`
 }
@@ -53,11 +61,16 @@ func MapSessionsErrorGroupsListOutputToJSON(v *SessionsErrorGroupsListOutput) ([
 
 // SessionsErrorGroupsListQuery represents the sessions error groups list query type.
 type SessionsErrorGroupsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by error type(s)
 	Type *any `json:"type,omitempty"`
 	// Id - Filter by error group ID(s)

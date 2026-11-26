@@ -2,6 +2,7 @@ package marketplaces
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -36,32 +37,52 @@ type SkillsMarketplacesUpdateOutputPluginsSkillPluginSource struct {
 	LastSyncedAt *time.Time `json:"last_synced_at,omitempty"`
 }
 
-// SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkillImage represents the skills marketplaces update output plugins skill plugin skills skill image type.
+// SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkillImage - Image shown for the skill.
 type SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkillImage struct {
-	Object string  `json:"object"`
-	Type   string  `json:"type"`
-	Icon   *string `json:"icon,omitempty"`
-	Color  *string `json:"color,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - Where the skill image comes from.
+	Type string `json:"type"`
+	// Icon - Library icon ID. `null` unless `type` is `icon`.
+	Icon *string `json:"icon,omitempty"`
+	// Color - Tile color. `null` unless `type` is `icon`.
+	Color *string `json:"color,omitempty"`
 }
 
 // SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkill represents the skills marketplaces update output plugins skill plugin skills skill type.
 type SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkill struct {
-	Object            string                                                           `json:"object"`
-	Id                string                                                           `json:"id"`
-	Status            string                                                           `json:"status"`
-	Slug              string                                                           `json:"slug"`
-	Name              string                                                           `json:"name"`
-	Description       *string                                                          `json:"description,omitempty"`
-	ImageUrl          string                                                           `json:"image_url"`
-	Image             SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkillImage `json:"image"`
-	ClientName        string                                                           `json:"client_name"`
-	ClientDescription *string                                                          `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any                                                  `json:"client_metadata,omitempty"`
-	License           *string                                                          `json:"license,omitempty"`
-	Compatibility     *string                                                          `json:"compatibility,omitempty"`
-	Metadata          *map[string]any                                                  `json:"metadata,omitempty"`
-	CreatedAt         time.Time                                                        `json:"created_at"`
-	UpdatedAt         time.Time                                                        `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Whether the skill is available, archived, or deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - Public URL of the skill image.
+	ImageUrl string `json:"image_url"`
+	// Image - Image shown for the skill.
+	Image SkillsMarketplacesUpdateOutputPluginsSkillPluginSkillsSkillImage `json:"image"`
+	// ClientName - Client-facing skill name.
+	ClientName string `json:"client_name"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsMarketplacesUpdateOutputPluginsSkillPluginSkills represents the skills marketplaces update output plugins skill plugin skills type.
@@ -150,13 +171,20 @@ func MapSkillsMarketplacesUpdateOutputToJSON(v *SkillsMarketplacesUpdateOutput) 
 
 // SkillsMarketplacesUpdateBody represents the skills marketplaces update body type.
 type SkillsMarketplacesUpdateBody struct {
-	Name                  *string `json:"name,omitempty"`
-	Description           *string `json:"description,omitempty"`
-	ImageFileId           *string `json:"image_file_id,omitempty"`
-	SkillConfigurationId  *string `json:"skill_configuration_id,omitempty"`
-	RepositoryAccessMode  *string `json:"repository_access_mode,omitempty"`
-	ForceMergeOrPush      *bool   `json:"force_merge_or_push,omitempty"`
-	MergeBeforeChecksPass *bool   `json:"merge_before_checks_pass,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// ImageFileId - Image file for the marketplace, by ID. `null` resets to the default image.
+	ImageFileId *nullable.Nullable[string] `json:"image_file_id,omitempty"`
+	// SkillConfigurationId - Skill configuration for the marketplace, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
+	// RepositoryAccessMode - How syncs reach linked repositories. `pull_request` opens a pull request, `default_branch` pushes directly.
+	RepositoryAccessMode *string `json:"repository_access_mode,omitempty"`
+	// ForceMergeOrPush - Merge or push even when the repository changed unexpectedly.
+	ForceMergeOrPush *bool `json:"force_merge_or_push,omitempty"`
+	// MergeBeforeChecksPass - Merge pull requests before checks pass. Only applies to `pull_request` mode.
+	MergeBeforeChecksPass *bool `json:"merge_before_checks_pass,omitempty"`
 }
 
 // MapSkillsMarketplacesUpdateBodyFromJSON deserializes JSON data into a SkillsMarketplacesUpdateBody.

@@ -5,10 +5,13 @@ import (
 	"time"
 )
 
-// PortalsAccessGetOutputListing represents the portals access get output listing type.
+// PortalsAccessGetOutputListing - Shared listing this rule was created from, if any.
 type PortalsAccessGetOutputListing struct {
-	Id          string  `json:"id"`
-	Name        string  `json:"name"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// IsDiscoverable - Whether every consumer on the portal can find the listing in the catalog and request access.
 	IsDiscoverable bool `json:"is_discoverable"`
@@ -16,23 +19,37 @@ type PortalsAccessGetOutputListing struct {
 
 // PortalsAccessGetOutputAccessProviderTemplate represents the portals access get output access provider template type.
 type PortalsAccessGetOutputAccessProviderTemplate struct {
-	Object        string         `json:"object"`
-	Id            string         `json:"id"`
-	Status        string         `json:"status"`
-	Name          string         `json:"name"`
-	Description   *string        `json:"description,omitempty"`
-	Metadata      map[string]any `json:"metadata"`
-	IntegrationId *string        `json:"integration_id,omitempty"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the template.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// IntegrationId - Integration the template was created from. `null` when it wasn’t created from one.
+	IntegrationId *string `json:"integration_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // PortalsAccessGetOutputAccessMagicMcpServer represents the portals access get output access magic mcp server type.
 type PortalsAccessGetOutputAccessMagicMcpServer struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Status      string  `json:"status"`
-	Name        *string `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the server is deleted.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
@@ -93,30 +110,47 @@ type PortalsAccessGetOutputAccess struct {
 
 // PortalsAccessGetOutputConsumerGroup represents the portals access get output consumer group type.
 type PortalsAccessGetOutputConsumerGroup struct {
-	Object      string    `json:"object"`
-	Id          string    `json:"id"`
-	Status      string    `json:"status"`
-	Name        string    `json:"name"`
-	Description *string   `json:"description,omitempty"`
-	IsDefault   bool      `json:"is_default"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you delete the group. Archived groups stay listable.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// IsDefault - Whether this is a default group on the portal.
+	IsDefault bool `json:"is_default"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // PortalsAccessGetOutput represents the portals access get output type.
 type PortalsAccessGetOutput struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
 	// AccessLevel - What the consumer group can do with the resource. Skills and skill groups support read, write and manage (share with others); skill marketplaces support read and manage.
-	AccessLevel   *string                             `json:"access_level,omitempty"`
-	Name          string                              `json:"name"`
-	Description   *string                             `json:"description,omitempty"`
-	Readme        *string                             `json:"readme,omitempty"`
-	Listing       *PortalsAccessGetOutputListing      `json:"listing,omitempty"`
+	AccessLevel *string `json:"access_level,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
+	// Listing - Shared listing this rule was created from, if any.
+	Listing *PortalsAccessGetOutputListing `json:"listing,omitempty"`
+	// Access - The integration, skill, or skill set the group can access.
 	Access        PortalsAccessGetOutputAccess        `json:"access"`
 	ConsumerGroup PortalsAccessGetOutputConsumerGroup `json:"consumer_group"`
-	CreatedAt     time.Time                           `json:"created_at"`
-	UpdatedAt     time.Time                           `json:"updated_at"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapPortalsAccessGetOutputFromJSON deserializes JSON data into a PortalsAccessGetOutput.

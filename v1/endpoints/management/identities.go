@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/identities"
 )
 
-// IdentitiesEndpoint provides access to identities bundle credentials under a single owner actor so provider access can be managed and delegated consistently.
+// IdentitiesEndpoint provides access to an identity is a set of provider credentials owned by one actor. It lets you manage and delegate provider access consistently.
 type IdentitiesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,24 +17,29 @@ func NewIdentitiesEndpoint(client *endpoint.Client) *IdentitiesEndpoint {
 
 // IdentitiesEndpointListParams contains optional query parameters for List.
 type IdentitiesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Filter identities by name or description.
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by one or more identity statuses.
+	// Status - Only return identities with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by identity ID or IDs.
+	// Id - Only return identities with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// AgentId - Filter by owner agent ID or IDs.
+	// AgentId - Only return identities owned by one of these agents.
 	AgentId *any `json:"agent_id,omitempty"`
-	// ActorId - Filter by owner identity actor ID or IDs.
+	// ActorId - Only return identities owned by one of these identity actors.
 	ActorId *any `json:"actor_id,omitempty"`
-	// CreatedAt - Filter identity creation time by date range
+	// CreatedAt - Only return results whose identity creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter identity last update time by date range
+	// UpdatedAt - Only return results whose identity last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -42,11 +47,11 @@ type IdentitiesEndpointListParams struct {
 type IdentitiesEndpointCreateBody struct {
 	// ActorId - Identity actor that will own the new identity.
 	ActorId string `json:"actor_id"`
-	// Name - Optional display name for the identity.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Optional description of the identity.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata to store on the identity.
+	// Metadata - Custom data to identify or organize the identity.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Credentials - Credentials to create and attach as part of identity creation.
 	Credentials *[]map[string]any `json:"credentials,omitempty"`
@@ -54,11 +59,11 @@ type IdentitiesEndpointCreateBody struct {
 
 // IdentitiesEndpointUpdateBody contains the request body for Update.
 type IdentitiesEndpointUpdateBody struct {
-	// Name - Updated display name for the identity.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Updated description for the identity.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Updated metadata for the identity.
+	// Metadata - Custom data to identify or organize the identity. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -79,7 +84,7 @@ func (e *IdentitiesEndpoint) List(instanceId string, params *IdentitiesEndpointL
 	return &result, nil
 }
 
-// Get retrieves a specific identity by ID.
+// Get retrieves an identity.
 func (e *IdentitiesEndpoint) Get(instanceId string, identityId string) (*identities.IdentitiesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identities", identityId},
@@ -91,7 +96,7 @@ func (e *IdentitiesEndpoint) Get(instanceId string, identityId string) (*identit
 	return &result, nil
 }
 
-// Create creates a new identity owned by an existing identity actor.
+// Create creates an identity.
 func (e *IdentitiesEndpoint) Create(instanceId string, body *IdentitiesEndpointCreateBody) (*identities.IdentitiesCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identities"},
@@ -104,7 +109,7 @@ func (e *IdentitiesEndpoint) Create(instanceId string, body *IdentitiesEndpointC
 	return &result, nil
 }
 
-// Update updates mutable fields on an existing identity.
+// Update updates an identity. Omitted fields keep their current value.
 func (e *IdentitiesEndpoint) Update(instanceId string, identityId string, body *IdentitiesEndpointUpdateBody) (*identities.IdentitiesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identities", identityId},
@@ -117,7 +122,7 @@ func (e *IdentitiesEndpoint) Update(instanceId string, identityId string, body *
 	return &result, nil
 }
 
-// Delete archives an identity.
+// Delete archives an identity. It stays listable with `status=archived`.
 func (e *IdentitiesEndpoint) Delete(instanceId string, identityId string) (*identities.IdentitiesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identities", identityId},

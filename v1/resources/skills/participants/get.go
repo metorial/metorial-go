@@ -33,7 +33,7 @@ type SkillsParticipantsGetOutputActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputActorOrganizationActor represents the skills participants get output actor organization actor type.
+// SkillsParticipantsGetOutputActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsParticipantsGetOutputActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,27 +57,42 @@ type SkillsParticipantsGetOutputActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputActorConsumer represents the skills participants get output actor consumer type.
+// SkillsParticipantsGetOutputActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsParticipantsGetOutputActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputActor represents the skills participants get output actor type.
+// SkillsParticipantsGetOutputActor - Actor behind a participant.
 type SkillsParticipantsGetOutputActor struct {
-	Type              string                                             `json:"type"`
-	Name              string                                             `json:"name"`
-	ImageUrl          *string                                            `json:"image_url,omitempty"`
-	Email             *string                                            `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsParticipantsGetOutputActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsParticipantsGetOutputActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                    `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsParticipantsGetOutputActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsParticipantsGetOutputSurfacesActorOrganizationActorMember represents the skills participants get output surfaces actor organization actor member type.
@@ -108,7 +123,7 @@ type SkillsParticipantsGetOutputSurfacesActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputSurfacesActorOrganizationActor represents the skills participants get output surfaces actor organization actor type.
+// SkillsParticipantsGetOutputSurfacesActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsParticipantsGetOutputSurfacesActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -132,45 +147,66 @@ type SkillsParticipantsGetOutputSurfacesActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputSurfacesActorConsumer represents the skills participants get output surfaces actor consumer type.
+// SkillsParticipantsGetOutputSurfacesActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsParticipantsGetOutputSurfacesActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsParticipantsGetOutputSurfacesActor represents the skills participants get output surfaces actor type.
+// SkillsParticipantsGetOutputSurfacesActor - Actor behind a participant.
 type SkillsParticipantsGetOutputSurfacesActor struct {
-	Type              string                                                     `json:"type"`
-	Name              string                                                     `json:"name"`
-	ImageUrl          *string                                                    `json:"image_url,omitempty"`
-	Email             *string                                                    `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsParticipantsGetOutputSurfacesActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsParticipantsGetOutputSurfacesActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                            `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsParticipantsGetOutputSurfacesActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
-// SkillsParticipantsGetOutputSurfaces represents the skills participants get output surfaces type.
+// SkillsParticipantsGetOutputSurfaces - Identity linked to a store participant.
 type SkillsParticipantsGetOutputSurfaces struct {
-	Id           string                                   `json:"id"`
-	Roles        []string                                 `json:"roles"`
-	Actor        SkillsParticipantsGetOutputSurfacesActor `json:"actor"`
-	LastActiveAt *time.Time                               `json:"last_active_at,omitempty"`
-	CreatedAt    time.Time                                `json:"created_at"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Roles - Roles the participant holds.
+	Roles []string `json:"roles"`
+	// Actor - Actor behind a participant.
+	Actor SkillsParticipantsGetOutputSurfacesActor `json:"actor"`
+	// LastActiveAt - When this identity was last active.
+	LastActiveAt *time.Time `json:"last_active_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // SkillsParticipantsGetOutput represents the skills participants get output type.
 type SkillsParticipantsGetOutput struct {
 	// Object - String representing the object's type
-	Object       string                                 `json:"object"`
-	Id           string                                 `json:"id"`
-	SkillId      string                                 `json:"skill_id"`
-	Roles        []string                               `json:"roles"`
+	Object  string   `json:"object"`
+	Id      string   `json:"id"`
+	SkillId string   `json:"skill_id"`
+	Roles   []string `json:"roles"`
+	// Actor - Actor behind a participant.
 	Actor        SkillsParticipantsGetOutputActor       `json:"actor"`
 	Surfaces     *[]SkillsParticipantsGetOutputSurfaces `json:"surfaces,omitempty"`
 	LastActiveAt *time.Time                             `json:"last_active_at,omitempty"`

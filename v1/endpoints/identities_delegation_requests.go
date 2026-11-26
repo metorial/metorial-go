@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/identities/delegationrequests"
 )
 
-// IdentitiesDelegationRequestsEndpoint provides access to identity delegation requests represent approval workflows for creating delegations that require consent.
+// IdentitiesDelegationRequestsEndpoint provides access to an identity delegation request is an approval workflow for a delegation that needs consent. Approving it creates the delegation.
 type IdentitiesDelegationRequestsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,22 +17,27 @@ func NewIdentitiesDelegationRequestsEndpoint(client *endpoint.Client) *Identitie
 
 // IdentitiesDelegationRequestsEndpointListParams contains optional query parameters for List.
 type IdentitiesDelegationRequestsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by one or more delegation request statuses.
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return identity delegation requests with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by delegation request ID or IDs.
+	// Id - Only return identity delegation requests with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// ActorId - Filter by requester actor ID or IDs.
+	// ActorId - Only return identity delegation requests from one of these requesters.
 	ActorId *any `json:"actor_id,omitempty"`
-	// IdentityId - Filter by identity ID or IDs.
+	// IdentityId - Only return identity delegation requests for one of these identities.
 	IdentityId *any `json:"identity_id,omitempty"`
-	// CreatedAt - Filter identity delegation request creation time by date range
+	// CreatedAt - Only return results whose identity delegation request creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter identity delegation request last update time by date range
+	// UpdatedAt - Only return results whose identity delegation request last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -52,7 +57,7 @@ type IdentitiesDelegationRequestsEndpointCreateBody struct {
 	DelegatorActorId *string `json:"delegator_actor_id,omitempty"`
 	// Permissions - Permissions being requested.
 	Permissions *[]string `json:"permissions,omitempty"`
-	// ExpiresAt - Timestamp when the request should expire.
+	// ExpiresAt - Deadline for approving or denying the request.
 	ExpiresAt string `json:"expires_at"`
 	// DelegationConfigId - Delegation config to use for the resulting delegation.
 	DelegationConfigId *string `json:"delegation_config_id,omitempty"`
@@ -60,7 +65,7 @@ type IdentitiesDelegationRequestsEndpointCreateBody struct {
 	CredentialOverrides *[]map[string]any `json:"credential_overrides,omitempty"`
 	// Note - Optional human-readable note for the request.
 	Note *string `json:"note,omitempty"`
-	// Metadata - Additional metadata to store on the request.
+	// Metadata - Custom data to identify or organize the identity delegation request.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -93,7 +98,7 @@ func (e *IdentitiesDelegationRequestsEndpoint) List(params *IdentitiesDelegation
 	return &result, nil
 }
 
-// Get retrieves a specific identity delegation request by ID.
+// Get retrieves an identity delegation request.
 func (e *IdentitiesDelegationRequestsEndpoint) Get(identityDelegationRequestId string, params *IdentitiesDelegationRequestsEndpointGetParams) (*delegationrequests.IdentitiesDelegationRequestsGetOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -110,7 +115,7 @@ func (e *IdentitiesDelegationRequestsEndpoint) Get(identityDelegationRequestId s
 	return &result, nil
 }
 
-// Create creates a new identity delegation request.
+// Create creates an identity delegation request.
 func (e *IdentitiesDelegationRequestsEndpoint) Create(body *IdentitiesDelegationRequestsEndpointCreateBody) (*delegationrequests.IdentitiesDelegationRequestsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"identity-delegation-requests"},
@@ -123,7 +128,7 @@ func (e *IdentitiesDelegationRequestsEndpoint) Create(body *IdentitiesDelegation
 	return &result, nil
 }
 
-// Approve approves an existing identity delegation request.
+// Approve approves an identity delegation request.
 func (e *IdentitiesDelegationRequestsEndpoint) Approve(identityDelegationRequestId string, params *IdentitiesDelegationRequestsEndpointApproveParams) (*delegationrequests.IdentitiesDelegationRequestsApproveOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -140,7 +145,7 @@ func (e *IdentitiesDelegationRequestsEndpoint) Approve(identityDelegationRequest
 	return &result, nil
 }
 
-// Deny denies an existing identity delegation request.
+// Deny denies an identity delegation request.
 func (e *IdentitiesDelegationRequestsEndpoint) Deny(identityDelegationRequestId string, params *IdentitiesDelegationRequestsEndpointDenyParams) (*delegationrequests.IdentitiesDelegationRequestsDenyOutput, error) {
 	var query map[string]any
 	if params != nil {

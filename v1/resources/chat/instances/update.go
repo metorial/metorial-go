@@ -2,12 +2,13 @@ package instances
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
-// ChatInstancesUpdateOutputIdentity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+// ChatInstancesUpdateOutputIdentity - Account this instance is authorized as on the chat provider. `null` until observed.
 type ChatInstancesUpdateOutputIdentity struct {
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// UserId - The provider-side user or app id this connection is authorized as
 	UserId string `json:"user_id"`
@@ -25,25 +26,25 @@ type ChatInstancesUpdateOutputIdentity struct {
 
 // ChatInstancesUpdateOutput represents the chat instances update output type.
 type ChatInstancesUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat instance identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat instance status
+	// Status - `archived` once you archive the instance. Archived instances stay listable.
 	Status string `json:"status"`
 	// ChatConnectionId - The chat connection this instance belongs to
 	ChatConnectionId string `json:"chat_connection_id"`
-	// Name - Display name of the chat instance
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the chat instance
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata set on the chat instance
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata map[string]any `json:"metadata"`
-	// Identity - The identity this connection is authorized as on the chat provider (e.g. the connected bot or user). Null until this account has been observed on the provider (e.g. through a synced message or channel membership).
+	// Identity - Account this instance is authorized as on the chat provider. `null` until observed.
 	Identity *ChatInstancesUpdateOutputIdentity `json:"identity,omitempty"`
-	// CreatedAt - Timestamp when the chat instance was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat instance was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -63,13 +64,13 @@ func MapChatInstancesUpdateOutputToJSON(v *ChatInstancesUpdateOutput) ([]byte, e
 
 // ChatInstancesUpdateBody represents the chat instances update body type.
 type ChatInstancesUpdateBody struct {
-	// Name - Display name of the chat instance
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description of the instance
-	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the chat instance. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata
+	// PrivateMetadata - Private data stored with the instance. Never returned by the API.
 	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
 }
 

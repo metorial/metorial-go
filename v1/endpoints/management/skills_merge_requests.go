@@ -2,10 +2,11 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/mergerequests"
 )
 
-// SkillsMergeRequestsEndpoint provides access to review, resolve, and apply changes between skills.
+// SkillsMergeRequestsEndpoint provides access to a skill merge request is a proposed change from one skill into another.
 type SkillsMergeRequestsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,26 +18,40 @@ func NewSkillsMergeRequestsEndpoint(client *endpoint.Client) *SkillsMergeRequest
 
 // SkillsMergeRequestsEndpointListParams contains optional query parameters for List.
 type SkillsMergeRequestsEndpointListParams struct {
-	Limit            *float64 `json:"limit,omitempty"`
-	After            *string  `json:"after,omitempty"`
-	Before           *string  `json:"before,omitempty"`
-	Cursor           *string  `json:"cursor,omitempty"`
-	Order            *string  `json:"order,omitempty"`
-	Id               *any     `json:"id,omitempty"`
-	SourceSkillId    *any     `json:"source_skill_id,omitempty"`
-	TargetSkillId    *any     `json:"target_skill_id,omitempty"`
-	Status           *any     `json:"status,omitempty"`
-	CreatedByActorId *any     `json:"created_by_actor_id,omitempty"`
-	// CreatedAt - Filter skill merge request creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return merge requests with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SourceSkillId - Only return merge requests from one of these source skills.
+	SourceSkillId *any `json:"source_skill_id,omitempty"`
+	// TargetSkillId - Only return merge requests into one of these target skills.
+	TargetSkillId *any `json:"target_skill_id,omitempty"`
+	// Status - Only return merge requests with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// CreatedByActorId - Only return merge requests created by one of these actors.
+	CreatedByActorId *any `json:"created_by_actor_id,omitempty"`
+	// CreatedAt - Only return results whose skill merge request creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 }
 
 // SkillsMergeRequestsEndpointCreateBody contains the request body for Create.
 type SkillsMergeRequestsEndpointCreateBody struct {
-	SourceSkillId string  `json:"source_skill_id"`
+	// SourceSkillId - Skill to merge from, by ID.
+	SourceSkillId string `json:"source_skill_id"`
+	// TargetSkillId - Skill to merge into, by ID. Defaults to the upstream skill of the source skill.
 	TargetSkillId *string `json:"target_skill_id,omitempty"`
-	Title         string  `json:"title"`
-	Description   *string `json:"description,omitempty"`
+	// Title - Display name.
+	Title string `json:"title"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
 }
 
 // List returns a paginated list of skill merge requests.

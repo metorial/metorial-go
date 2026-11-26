@@ -7,45 +7,72 @@ import (
 
 // FirewallsCreateOutputNetworkPoliciesRulesPorts represents the firewalls create output network policies rules ports type.
 type FirewallsCreateOutputNetworkPoliciesRulesPorts struct {
-	Object string  `json:"object"`
-	From   float64 `json:"from"`
-	To     float64 `json:"to"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// From - First port in the range, inclusive.
+	From float64 `json:"from"`
+	// To - Last port in the range, inclusive.
+	To float64 `json:"to"`
 }
 
 // FirewallsCreateOutputNetworkPoliciesRules represents the firewalls create output network policies rules type.
 type FirewallsCreateOutputNetworkPoliciesRules struct {
-	Object      string                                            `json:"object"`
-	Id          string                                            `json:"id"`
-	Effect      string                                            `json:"effect"`
-	Direction   string                                            `json:"direction"`
-	Cidrs       []string                                          `json:"cidrs"`
-	Description *string                                           `json:"description,omitempty"`
-	Enabled     bool                                              `json:"enabled"`
-	Priority    float64                                           `json:"priority"`
-	Ports       *[]FirewallsCreateOutputNetworkPoliciesRulesPorts `json:"ports,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Effect - `allow` permits matching traffic. `deny` blocks it.
+	Effect string `json:"effect"`
+	// Direction - `ingress` matches incoming traffic. `egress` matches outgoing traffic.
+	Direction string `json:"direction"`
+	// Cidrs - CIDR ranges the rule matches.
+	Cidrs []string `json:"cidrs"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Enabled - Whether the rule is enforced. Disabled rules are kept but ignored.
+	Enabled bool `json:"enabled"`
+	// Priority - Priority of the rule. Higher values are evaluated first.
+	Priority float64 `json:"priority"`
+	// Ports - Port ranges the rule matches. Omitted matches all ports.
+	Ports *[]FirewallsCreateOutputNetworkPoliciesRulesPorts `json:"ports,omitempty"`
 }
 
-// FirewallsCreateOutputNetworkPolicies represents the firewalls create output network policies type.
+// FirewallsCreateOutputNetworkPolicies - Network policy attached to the firewall.
 type FirewallsCreateOutputNetworkPolicies struct {
-	Object  string                                      `json:"object"`
-	Id      string                                      `json:"id"`
-	Name    string                                      `json:"name"`
-	Version float64                                     `json:"version"`
-	Rules   []FirewallsCreateOutputNetworkPoliciesRules `json:"rules"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Version - Version number of the policy. Increments with every rule change.
+	Version float64 `json:"version"`
+	// Rules - Rules in the attached network policy.
+	Rules []FirewallsCreateOutputNetworkPoliciesRules `json:"rules"`
 }
 
 // FirewallsCreateOutput represents the firewalls create output type.
 type FirewallsCreateOutput struct {
-	Object          string                                 `json:"object"`
-	Id              string                                 `json:"id"`
-	Slug            string                                 `json:"slug"`
-	Name            string                                 `json:"name"`
-	Description     *string                                `json:"description,omitempty"`
-	Status          string                                 `json:"status"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Status - Current lifecycle status of the firewall. `archived` once you archive the firewall.
+	Status string `json:"status"`
+	// NetworkPolicies - Network policies attached to the firewall, in position order.
 	NetworkPolicies []FirewallsCreateOutputNetworkPolicies `json:"network_policies"`
-	CreatedAt       time.Time                              `json:"created_at"`
-	UpdatedAt       time.Time                              `json:"updated_at"`
-	ArchivedAt      *time.Time                             `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapFirewallsCreateOutputFromJSON deserializes JSON data into a FirewallsCreateOutput.
@@ -64,9 +91,13 @@ func MapFirewallsCreateOutputToJSON(v *FirewallsCreateOutput) ([]byte, error) {
 
 // FirewallsCreateBody represents the firewalls create body type.
 type FirewallsCreateBody struct {
-	Name             string    `json:"name"`
-	Description      *string   `json:"description,omitempty"`
-	Slug             *string   `json:"slug,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Slug - URL-safe name, unique within the instance. Generated from the name when omitted.
+	Slug *string `json:"slug,omitempty"`
+	// NetworkPolicyIds - Network policies to attach to the firewall, in order.
 	NetworkPolicyIds *[]string `json:"network_policy_ids,omitempty"`
 }
 

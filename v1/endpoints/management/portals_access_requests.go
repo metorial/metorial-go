@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/portals/accessrequests"
 )
 
-// PortalsAccessRequestsEndpoint provides access to review and resolve access requests for a portal.
+// PortalsAccessRequestsEndpoint provides access to a portal access request is a consumer's request for access to a listing. Approving it grants access through a consumer group.
 type PortalsAccessRequestsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,21 +17,32 @@ func NewPortalsAccessRequestsEndpoint(client *endpoint.Client) *PortalsAccessReq
 
 // PortalsAccessRequestsEndpointListParams contains optional query parameters for List.
 type PortalsAccessRequestsEndpointListParams struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	Status            *any     `json:"status,omitempty"`
-	ConsumerProfileId *any     `json:"consumer_profile_id,omitempty"`
-	Search            *string  `json:"search,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return requests with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// ConsumerProfileId - Only return requests from these consumer profiles.
+	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
+	// Search - Search by name or description.
+	Search *string `json:"search,omitempty"`
 }
 
 // PortalsAccessRequestsEndpointUpdateBody contains the request body for Update.
 type PortalsAccessRequestsEndpointUpdateBody struct {
-	Status            string  `json:"status"`
+	// Status - Whether to approve or reject the request.
+	Status string `json:"status"`
+	// ResolutionMessage - Message shown to the consumer about the decision.
 	ResolutionMessage *string `json:"resolution_message,omitempty"`
-	ConsumerGroupId   *string `json:"consumer_group_id,omitempty"`
+	// ConsumerGroupId - Consumer group the approval grants access through.
+	ConsumerGroupId *string `json:"consumer_group_id,omitempty"`
 }
 
 // List returns a paginated list of access requests for a portal.
@@ -51,7 +62,7 @@ func (e *PortalsAccessRequestsEndpoint) List(instanceId string, portalId string,
 	return &result, nil
 }
 
-// Get retrieves a access request by ID.
+// Get retrieves a portal access request.
 func (e *PortalsAccessRequestsEndpoint) Get(instanceId string, portalId string, accessRequestId string) (*accessrequests.PortalsAccessRequestsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "access-requests", accessRequestId},
@@ -63,7 +74,7 @@ func (e *PortalsAccessRequestsEndpoint) Get(instanceId string, portalId string, 
 	return &result, nil
 }
 
-// Update approves or rejects a access request.
+// Update approves or rejects a portal access request. Approving with a consumer group grants access through that group.
 func (e *PortalsAccessRequestsEndpoint) Update(instanceId string, portalId string, accessRequestId string, body *PortalsAccessRequestsEndpointUpdateBody) (*accessrequests.PortalsAccessRequestsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "access-requests", accessRequestId},

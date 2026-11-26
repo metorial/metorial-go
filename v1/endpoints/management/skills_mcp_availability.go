@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/mcpavailability"
 )
 
-// SkillsMcpAvailabilityEndpoint provides access to read and edit the files of a skill by path.
+// SkillsMcpAvailabilityEndpoint provides access to skill files are the versioned files that make up a skill, addressed by path.
 type SkillsMcpAvailabilityEndpoint struct {
 	client *endpoint.Client
 }

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/participants"
 )
 
-// SessionsParticipantsEndpoint provides access to session participants represent the clients and other entities that are connected to a session. This read-only resource tracks who is participating in a session.
+// SessionsParticipantsEndpoint provides access to a session participant is a client, provider, or system actor in a session. Participants appear automatically as connections open.
 type SessionsParticipantsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsParticipantsEndpoint(client *endpoint.Client) *SessionsParticipa
 
 // SessionsParticipantsEndpointListParams contains optional query parameters for List.
 type SessionsParticipantsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by participant type(s)
 	Type *any `json:"type,omitempty"`
 	// Id - Filter by participant ID(s)
@@ -42,13 +47,13 @@ type SessionsParticipantsEndpointListParams struct {
 	SessionConnectionId *any `json:"session_connection_id,omitempty"`
 	// SessionMessageId - Filter by session message ID(s)
 	SessionMessageId *any `json:"session_message_id,omitempty"`
-	// CreatedAt - Filter session participant creation time by date range
+	// CreatedAt - Only return results whose session participant creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session participant last update time by date range
+	// UpdatedAt - Only return results whose session participant last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// List returns a paginated list of participants in a session.
+// List returns a paginated list of session participants.
 func (e *SessionsParticipantsEndpoint) List(instanceId string, params *SessionsParticipantsEndpointListParams) (*participants.SessionsParticipantsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -65,7 +70,7 @@ func (e *SessionsParticipantsEndpoint) List(instanceId string, params *SessionsP
 	return &result, nil
 }
 
-// Get retrieves a specific participant in a session.
+// Get retrieves a session participant.
 func (e *SessionsParticipantsEndpoint) Get(instanceId string, sessionParticipantId string) (*participants.SessionsParticipantsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-participants", sessionParticipantId},

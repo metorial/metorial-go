@@ -7,15 +7,15 @@ import (
 
 // IdentitiesCredentialsUpdateOutput represents the identities credentials update output type.
 type IdentitiesCredentialsUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity credential identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current lifecycle status of the credential.
+	// Status - Current lifecycle status of the credential. `archived` once you archive the credential.
 	Status string `json:"status"`
 	// IdentityId - Identity that owns this credential.
 	IdentityId string `json:"identity_id"`
-	// ProviderId - Provider associated with the credential.
+	// ProviderId - Provider this credential holds access for.
 	ProviderId string `json:"provider_id"`
 	// DeploymentId - Provider deployment used by this credential.
 	DeploymentId *string `json:"deployment_id,omitempty"`
@@ -25,9 +25,9 @@ type IdentitiesCredentialsUpdateOutput struct {
 	AuthConfigId *string `json:"auth_config_id,omitempty"`
 	// DelegationConfigId - Delegation config applied to this credential.
 	DelegationConfigId *string `json:"delegation_config_id,omitempty"`
-	// CreatedAt - Timestamp when the credential was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the credential was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

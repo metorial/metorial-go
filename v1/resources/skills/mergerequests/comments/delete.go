@@ -33,7 +33,7 @@ type SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActor represents the skills merge requests comments delete output actor organization actor type.
+// SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,41 +57,57 @@ type SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsCommentsDeleteOutputActorConsumer represents the skills merge requests comments delete output actor consumer type.
+// SkillsMergeRequestsCommentsDeleteOutputActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsMergeRequestsCommentsDeleteOutputActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsMergeRequestsCommentsDeleteOutputActor represents the skills merge requests comments delete output actor type.
+// SkillsMergeRequestsCommentsDeleteOutputActor - Actor behind a participant.
 type SkillsMergeRequestsCommentsDeleteOutputActor struct {
-	Type              string                                                         `json:"type"`
-	Name              string                                                         `json:"name"`
-	ImageUrl          *string                                                        `json:"image_url,omitempty"`
-	Email             *string                                                        `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsMergeRequestsCommentsDeleteOutputActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsMergeRequestsCommentsDeleteOutputActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsMergeRequestsCommentsDeleteOutputActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsMergeRequestsCommentsDeleteOutput represents the skills merge requests comments delete output type.
 type SkillsMergeRequestsCommentsDeleteOutput struct {
-	Object                  string                                       `json:"object"`
-	Id                      string                                       `json:"id"`
-	SkillMergeRequestItemId *string                                      `json:"skill_merge_request_item_id,omitempty"`
-	Actor                   SkillsMergeRequestsCommentsDeleteOutputActor `json:"actor"`
-	Body                    string                                       `json:"body"`
-	Path                    *string                                      `json:"path,omitempty"`
-	InReplyToCommentId      *string                                      `json:"in_reply_to_comment_id,omitempty"`
-	DeletedAt               *time.Time                                   `json:"deleted_at,omitempty"`
-	CreatedAt               time.Time                                    `json:"created_at"`
-	UpdatedAt               time.Time                                    `json:"updated_at"`
+	Object                  string  `json:"object"`
+	Id                      string  `json:"id"`
+	SkillMergeRequestItemId *string `json:"skill_merge_request_item_id,omitempty"`
+	// Actor - Actor behind a participant.
+	Actor              SkillsMergeRequestsCommentsDeleteOutputActor `json:"actor"`
+	Body               string                                       `json:"body"`
+	Path               *string                                      `json:"path,omitempty"`
+	InReplyToCommentId *string                                      `json:"in_reply_to_comment_id,omitempty"`
+	DeletedAt          *time.Time                                   `json:"deleted_at,omitempty"`
+	CreatedAt          time.Time                                    `json:"created_at"`
+	UpdatedAt          time.Time                                    `json:"updated_at"`
 }
 
 // MapSkillsMergeRequestsCommentsDeleteOutputFromJSON deserializes JSON data into a SkillsMergeRequestsCommentsDeleteOutput.

@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// ChatsThreadsGetOutputContextAuthor represents the chats threads get output context author type.
+// ChatsThreadsGetOutputContextAuthor - Author of the external resource, as reported by the provider.
 type ChatsThreadsGetOutputContextAuthor struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -13,7 +13,7 @@ type ChatsThreadsGetOutputContextAuthor struct {
 	Name string `json:"name"`
 }
 
-// ChatsThreadsGetOutputContextAssignee represents the chats threads get output context assignee type.
+// ChatsThreadsGetOutputContextAssignee - Assignee of the external resource, as reported by the provider.
 type ChatsThreadsGetOutputContextAssignee struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -27,13 +27,15 @@ type ChatsThreadsGetOutputContext struct {
 	Type string `json:"type"`
 	// Id - The resource's identifier on the provider
 	Id string `json:"id"`
-	// Description - Description of the resource
+	// Description - Description of the external resource, as reported by the provider.
 	Description *string `json:"description,omitempty"`
 	// Status - Status of the resource, as reported by the provider
 	Status *string `json:"status,omitempty"`
 	// Url - Link to the resource
-	Url      *string                               `json:"url,omitempty"`
-	Author   *ChatsThreadsGetOutputContextAuthor   `json:"author,omitempty"`
+	Url *string `json:"url,omitempty"`
+	// Author - Author of the external resource, as reported by the provider.
+	Author *ChatsThreadsGetOutputContextAuthor `json:"author,omitempty"`
+	// Assignee - Assignee of the external resource, as reported by the provider.
 	Assignee *ChatsThreadsGetOutputContextAssignee `json:"assignee,omitempty"`
 	// Labels - Labels attached to the resource
 	Labels *[]string `json:"labels,omitempty"`
@@ -41,9 +43,9 @@ type ChatsThreadsGetOutputContext struct {
 
 // ChatsThreadsGetOutput represents the chats threads get output type.
 type ChatsThreadsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat thread identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this thread belongs to
 	ChatId string `json:"chat_id"`
@@ -53,11 +55,11 @@ type ChatsThreadsGetOutput struct {
 	Type string `json:"type"`
 	// ProviderType - The provider's own name for this kind of thread
 	ProviderType string `json:"provider_type"`
-	// ProviderThreadId - The thread's identifier on the chat provider
+	// ProviderThreadId - Identifier the chat provider uses for this thread.
 	ProviderThreadId string `json:"provider_thread_id"`
 	// ProviderRootMessageId - Provider identifier of the message the thread was started from, if the provider reports one
 	ProviderRootMessageId *string `json:"provider_root_message_id,omitempty"`
-	// Subject - Subject of the thread
+	// Subject - Subject of the thread, if the provider sets one.
 	Subject *string `json:"subject,omitempty"`
 	// Permalink - Link to the thread on the chat provider
 	Permalink *string `json:"permalink,omitempty"`

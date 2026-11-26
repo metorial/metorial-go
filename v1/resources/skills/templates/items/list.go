@@ -5,44 +5,59 @@ import (
 	"time"
 )
 
-// SkillsTemplatesItemsListOutputItemsIntegrationConfiguration represents the skills templates items list output items integration configuration type.
+// SkillsTemplatesItemsListOutputItemsIntegrationConfiguration - Which settings integration instances may customize.
 type SkillsTemplatesItemsListOutputItemsIntegrationConfiguration struct {
-	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
-	EnableCallbackTools           bool  `json:"enable_callback_tools"`
+	// CanAttachCustomToolFilters - Lets integration instances attach their own tool filters.
+	CanAttachCustomToolFilters bool `json:"can_attach_custom_tool_filters"`
+	// CanAttachCustomProviderConfig - Lets integration instances use their own provider configs.
+	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
+	// CanOverrideToolFilters - Lets integration instances ignore the integration tool filters.
+	CanOverrideToolFilters bool `json:"can_override_tool_filters"`
+	// EnableCallbackTools - Makes callback event tools available for this integration.
+	EnableCallbackTools bool `json:"enable_callback_tools"`
+	// UseIntegrationNameInToolNames - Names session providers after the integration instead of the provider. `null` uses the default.
 	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // SkillsTemplatesItemsListOutputItemsIntegration represents the skills templates items list output items integration type.
 type SkillsTemplatesItemsListOutputItemsIntegration struct {
-	Object        string                                                      `json:"object"`
-	Id            string                                                      `json:"id"`
-	Slug          string                                                      `json:"slug"`
-	Name          string                                                      `json:"name"`
-	Description   *string                                                     `json:"description,omitempty"`
-	Metadata      *map[string]any                                             `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Slug - URL-safe name, unique across Metorial.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Which settings integration instances may customize.
 	Configuration SkillsTemplatesItemsListOutputItemsIntegrationConfiguration `json:"configuration"`
-	CreatedAt     time.Time                                                   `json:"created_at"`
-	UpdatedAt     time.Time                                                   `json:"updated_at"`
-	ArchivedAt    *time.Time                                                  `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // SkillsTemplatesItemsListOutputItemsProvider represents the skills templates items list output items provider type.
 type SkillsTemplatesItemsListOutputItemsProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -59,12 +74,20 @@ type SkillsTemplatesItemsListOutputItems struct {
 
 // SkillsTemplatesItemsListOutputPagination represents the skills templates items list output pagination type.
 type SkillsTemplatesItemsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsTemplatesItemsListOutput represents the skills templates items list output type.
 type SkillsTemplatesItemsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                   `json:"object"`
 	Items      []SkillsTemplatesItemsListOutputItems    `json:"items"`
 	Pagination SkillsTemplatesItemsListOutputPagination `json:"pagination"`
 }
@@ -85,11 +108,16 @@ func MapSkillsTemplatesItemsListOutputToJSON(v *SkillsTemplatesItemsListOutput) 
 
 // SkillsTemplatesItemsListQuery represents the skills templates items list query type.
 type SkillsTemplatesItemsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
 // MapSkillsTemplatesItemsListQueryFromJSON deserializes JSON data into a SkillsTemplatesItemsListQuery.

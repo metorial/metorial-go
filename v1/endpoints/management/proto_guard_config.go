@@ -6,7 +6,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/protoguardconfig"
 )
 
-// ProtoGuardConfigEndpoint provides access to protoGuard config controls prompt-injection filters and alert thresholds.
+// ProtoGuardConfigEndpoint provides access to protoGuard config is the prompt-injection filter set for an instance. It controls which filters run and when they raise alerts.
 type ProtoGuardConfigEndpoint struct {
 	client *endpoint.Client
 }
@@ -18,7 +18,7 @@ func NewProtoGuardConfigEndpoint(client *endpoint.Client) *ProtoGuardConfigEndpo
 
 // ProtoGuardConfigEndpointUpdateBody contains the request body for Update.
 type ProtoGuardConfigEndpointUpdateBody struct {
-	// Enabled - Whether ProtoGuard analyzes session messages for this instance.
+	// Enabled - Analyzes session messages for prompt injection when `true`. Set to `false` to stop analysis.
 	Enabled *bool `json:"enabled,omitempty"`
 	// AlertProbabilityThreshold - The combined injection probability, above 0 and at most 1, at which a message raises an alert. Pass null to restore the default.
 	AlertProbabilityThreshold *nullable.Nullable[float64] `json:"alert_probability_threshold,omitempty"`
@@ -28,16 +28,19 @@ type ProtoGuardConfigEndpointUpdateBody struct {
 
 // ProtoGuardConfigEndpointUpdateFilterBody contains the request body for UpdateFilter.
 type ProtoGuardConfigEndpointUpdateFilterBody struct {
-	Enabled                  *bool    `json:"enabled,omitempty"`
-	AlertConfidenceThreshold *float64 `json:"alert_confidence_threshold,omitempty"`
+	// Enabled - Whether the filter runs for the instance.
+	Enabled *bool `json:"enabled,omitempty"`
+	// AlertConfidenceThreshold - Confidence a match needs for the filter to count as triggered. Pass `null` to restore the default.
+	AlertConfidenceThreshold *nullable.Nullable[float64] `json:"alert_confidence_threshold,omitempty"`
 }
 
 // ProtoGuardConfigEndpointSetAlertFilterCountThresholdBody contains the request body for SetAlertFilterCountThreshold.
 type ProtoGuardConfigEndpointSetAlertFilterCountThresholdBody struct {
+	// Threshold - Number of matching ProtoGuard filters required to create an alert. Pass `null` to clear it.
 	Threshold *float64 `json:"threshold,omitempty"`
 }
 
-// Get retrieves ProtoGuard filter configuration for this instance.
+// Get retrieves the ProtoGuard config for the instance.
 func (e *ProtoGuardConfigEndpoint) Get(instanceId string) (*protoguardconfig.ProtoGuardConfigGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "protoguard-config"},

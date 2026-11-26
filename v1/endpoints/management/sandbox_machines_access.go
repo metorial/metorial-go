@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sandbox/machines/access"
 )
 
-// SandboxMachinesAccessEndpoint provides access to create and operate sandbox machines. A machine boots from an image, can mount disks, and moves between running, paused, and hibernated states.
+// SandboxMachinesAccessEndpoint provides access to a sandbox machine is a virtual machine that boots from an image and can mount disks. Machines move between running, paused, and hibernated states.
 type SandboxMachinesAccessEndpoint struct {
 	client *endpoint.Client
 }

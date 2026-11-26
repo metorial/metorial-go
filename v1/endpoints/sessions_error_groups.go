@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/errorgroups"
 )
 
-// SessionsErrorGroupsEndpoint provides access to session error groups aggregate similar errors that occurred during a session. This read-only resource helps identify patterns in errors.
+// SessionsErrorGroupsEndpoint provides access to a session error group is a set of similar session errors. Groups show how often each failure repeats.
 type SessionsErrorGroupsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsErrorGroupsEndpoint(client *endpoint.Client) *SessionsErrorGroup
 
 // SessionsErrorGroupsEndpointListParams contains optional query parameters for List.
 type SessionsErrorGroupsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by error type(s)
 	Type *any `json:"type,omitempty"`
 	// Id - Filter by error group ID(s)
@@ -51,7 +56,7 @@ func (e *SessionsErrorGroupsEndpoint) List(params *SessionsErrorGroupsEndpointLi
 	return &result, nil
 }
 
-// Get retrieves a specific error group by ID across all sessions.
+// Get retrieves a session error group.
 func (e *SessionsErrorGroupsEndpoint) Get(sessionErrorGroupId string) (*errorgroups.SessionsErrorGroupsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-error-groups", sessionErrorGroupId},

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/participants"
 )
 
-// SkillsParticipantsEndpoint provides access to inspect participants associated with an instance skill.
+// SkillsParticipantsEndpoint provides access to a skill participant is a member or consumer participating in a skill.
 type SkillsParticipantsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,14 +17,19 @@ func NewSkillsParticipantsEndpoint(client *endpoint.Client) *SkillsParticipantsE
 
 // SkillsParticipantsEndpointListParams contains optional query parameters for List.
 type SkillsParticipantsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
-// List returns a paginated list of participants for a specific skill.
+// List returns a paginated list of skill participants.
 func (e *SkillsParticipantsEndpoint) List(instanceId string, skillId string, params *SkillsParticipantsEndpointListParams) (*participants.SkillsParticipantsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -41,7 +46,7 @@ func (e *SkillsParticipantsEndpoint) List(instanceId string, skillId string, par
 	return &result, nil
 }
 
-// Get retrieves a specific participant within a skill.
+// Get retrieves a skill participant.
 func (e *SkillsParticipantsEndpoint) Get(instanceId string, skillId string, skillParticipantId string) (*participants.SkillsParticipantsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skills", skillId, "participants", skillParticipantId},

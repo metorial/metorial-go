@@ -7,19 +7,19 @@ import (
 
 // IdentitiesCreateOutputOwnerActor represents the identities create output owner actor type.
 type IdentitiesCreateOutputOwnerActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity actor identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - Type of actor that owns or participates in identities.
 	Type string `json:"type"`
-	// Status - Current lifecycle status of the identity actor.
+	// Status - Current lifecycle status of the identity actor. `archived` once you archive the actor.
 	Status string `json:"status"`
-	// Name - Human-readable name of the identity actor.
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Optional description of the actor.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata associated with the actor.
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// AgentId - Linked agent identifier when this actor represents an agent.
 	AgentId *string `json:"agent_id,omitempty"`
@@ -27,13 +27,13 @@ type IdentitiesCreateOutputOwnerActor struct {
 	ConsumerId *string `json:"consumer_id,omitempty"`
 	// DefaultIdentityId - Identifier of the actor's default identity, which is its oldest active identity.
 	DefaultIdentityId *string `json:"default_identity_id,omitempty"`
-	// CreatedAt - Timestamp when the actor was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the actor was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// IdentitiesCreateOutputOwner represents the identities create output owner type.
+// IdentitiesCreateOutputOwner - Actor that owns the identity.
 type IdentitiesCreateOutputOwner struct {
 	// Type - Owner type for the identity.
 	Type  string                           `json:"type"`
@@ -42,15 +42,15 @@ type IdentitiesCreateOutputOwner struct {
 
 // IdentitiesCreateOutputCredentials represents the identities create output credentials type.
 type IdentitiesCreateOutputCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity credential identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current lifecycle status of the credential.
+	// Status - Current lifecycle status of the credential. `archived` once you archive the credential.
 	Status string `json:"status"`
 	// IdentityId - Identity that owns this credential.
 	IdentityId string `json:"identity_id"`
-	// ProviderId - Provider associated with the credential.
+	// ProviderId - Provider this credential holds access for.
 	ProviderId string `json:"provider_id"`
 	// DeploymentId - Provider deployment used by this credential.
 	DeploymentId *string `json:"deployment_id,omitempty"`
@@ -60,34 +60,35 @@ type IdentitiesCreateOutputCredentials struct {
 	AuthConfigId *string `json:"auth_config_id,omitempty"`
 	// DelegationConfigId - Delegation config applied to this credential.
 	DelegationConfigId *string `json:"delegation_config_id,omitempty"`
-	// CreatedAt - Timestamp when the credential was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the credential was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IdentitiesCreateOutput represents the identities create output type.
 type IdentitiesCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current lifecycle status of the identity.
+	// Status - Current lifecycle status of the identity. `archived` once you archive the identity.
 	Status string `json:"status"`
-	// Name - Human-readable name of the identity.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Optional description of what the identity is used for.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata associated with the identity.
-	Metadata *map[string]any             `json:"metadata,omitempty"`
-	Owner    IdentitiesCreateOutputOwner `json:"owner"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Owner - Actor that owns the identity.
+	Owner IdentitiesCreateOutputOwner `json:"owner"`
 	// Credentials - Credentials currently attached to the identity.
 	Credentials []IdentitiesCreateOutputCredentials `json:"credentials"`
-	// DelegationConfigId - Default delegation config applied to the identity.
+	// DelegationConfigId - Default delegation config applied to the identity. `null` when none is set.
 	DelegationConfigId *string `json:"delegation_config_id,omitempty"`
-	// CreatedAt - Timestamp when the identity was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the identity was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -121,11 +122,11 @@ type IdentitiesCreateBodyCredentials struct {
 type IdentitiesCreateBody struct {
 	// ActorId - Identity actor that will own the new identity.
 	ActorId string `json:"actor_id"`
-	// Name - Optional display name for the identity.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Optional description of the identity.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata to store on the identity.
+	// Metadata - Custom data to identify or organize the identity.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Credentials - Credentials to create and attach as part of identity creation.
 	Credentials *[]IdentitiesCreateBodyCredentials `json:"credentials,omitempty"`

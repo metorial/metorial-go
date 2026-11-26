@@ -26,12 +26,20 @@ type SkillsAgentsListOutputItems struct {
 
 // SkillsAgentsListOutputPagination represents the skills agents list output pagination type.
 type SkillsAgentsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsAgentsListOutput represents the skills agents list output type.
 type SkillsAgentsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                           `json:"object"`
 	Items      []SkillsAgentsListOutputItems    `json:"items"`
 	Pagination SkillsAgentsListOutputPagination `json:"pagination"`
 }
@@ -52,12 +60,18 @@ func MapSkillsAgentsListOutputToJSON(v *SkillsAgentsListOutput) ([]byte, error) 
 
 // SkillsAgentsListQuery represents the skills agents list query type.
 type SkillsAgentsListQuery struct {
-	Limit           *float64 `json:"limit,omitempty"`
-	After           *string  `json:"after,omitempty"`
-	Before          *string  `json:"before,omitempty"`
-	Cursor          *string  `json:"cursor,omitempty"`
-	Order           *string  `json:"order,omitempty"`
-	IncludeArchived *bool    `json:"include_archived,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// IncludeArchived - Include archived agents in the results.
+	IncludeArchived *bool `json:"include_archived,omitempty"`
 }
 
 // MapSkillsAgentsListQueryFromJSON deserializes JSON data into a SkillsAgentsListQuery.

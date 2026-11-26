@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/portals"
 )
 
-// PortalsEndpoint provides access to use Portals to create custom branded MCP server marketplaces for your organization.
+// PortalsEndpoint provides access to a portal is a branded catalog of integrations and skills for your consumers. Each portal has its own consumers, groups, and access rules.
 type PortalsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,34 +17,52 @@ func NewPortalsEndpoint(client *endpoint.Client) *PortalsEndpoint {
 
 // PortalsEndpointListParams contains optional query parameters for List.
 type PortalsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
 }
 
 // PortalsEndpointCreateBody contains the request body for Create.
 type PortalsEndpointCreateBody struct {
-	Name                         string            `json:"name"`
-	Description                  *string           `json:"description,omitempty"`
-	AllowedRedirectUrlFilters    *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
-	SessionExpiryTimeInSeconds   *float64          `json:"session_expiry_time_in_seconds,omitempty"`
-	AllowConsumerSkillAuthoring  *bool             `json:"allow_consumer_skill_authoring,omitempty"`
-	AllowConsumerSkillPublishing *bool             `json:"allow_consumer_skill_publishing,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// AllowedRedirectUrlFilters - Redirect URL patterns consumers may return to after signing in.
+	AllowedRedirectUrlFilters *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
+	// SessionExpiryTimeInSeconds - How long consumer sessions stay valid, in seconds.
+	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	// AllowConsumerSkillAuthoring - Whether consumers can create skills on the portal.
+	AllowConsumerSkillAuthoring *bool `json:"allow_consumer_skill_authoring,omitempty"`
+	// AllowConsumerSkillPublishing - Whether consumers can publish skills on the portal.
+	AllowConsumerSkillPublishing *bool `json:"allow_consumer_skill_publishing,omitempty"`
 }
 
 // PortalsEndpointUpdateBody contains the request body for Update.
 type PortalsEndpointUpdateBody struct {
-	Name                         *string           `json:"name,omitempty"`
-	Description                  *string           `json:"description,omitempty"`
-	AllowedRedirectUrlFilters    *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
-	SessionExpiryTimeInSeconds   *float64          `json:"session_expiry_time_in_seconds,omitempty"`
-	AllowConsumerSkillAuthoring  *bool             `json:"allow_consumer_skill_authoring,omitempty"`
-	AllowConsumerSkillPublishing *bool             `json:"allow_consumer_skill_publishing,omitempty"`
-	SkillConfiguration           *map[string]any   `json:"skill_configuration,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// AllowedRedirectUrlFilters - Redirect URL patterns consumers may return to after signing in.
+	AllowedRedirectUrlFilters *[]map[string]any `json:"allowed_redirect_url_filters,omitempty"`
+	// SessionExpiryTimeInSeconds - How long consumer sessions stay valid, in seconds.
+	SessionExpiryTimeInSeconds *float64 `json:"session_expiry_time_in_seconds,omitempty"`
+	// AllowConsumerSkillAuthoring - Whether consumers can create skills on the portal.
+	AllowConsumerSkillAuthoring *bool `json:"allow_consumer_skill_authoring,omitempty"`
+	// AllowConsumerSkillPublishing - Whether consumers can publish skills on the portal.
+	AllowConsumerSkillPublishing *bool `json:"allow_consumer_skill_publishing,omitempty"`
+	// SkillConfiguration - Skill settings for the portal.
+	SkillConfiguration *map[string]any `json:"skill_configuration,omitempty"`
 }
 
 // List returns a paginated list of portals.
@@ -64,7 +82,7 @@ func (e *PortalsEndpoint) List(instanceId string, params *PortalsEndpointListPar
 	return &result, nil
 }
 
-// Get retrieves details for a specific portal.
+// Get retrieves a portal.
 func (e *PortalsEndpoint) Get(instanceId string, portalId string) (*portals.PortalsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId},
@@ -76,7 +94,7 @@ func (e *PortalsEndpoint) Get(instanceId string, portalId string) (*portals.Port
 	return &result, nil
 }
 
-// Create creates a new portal for the instance.
+// Create creates a portal.
 func (e *PortalsEndpoint) Create(instanceId string, body *PortalsEndpointCreateBody) (*portals.PortalsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals"},
@@ -89,7 +107,7 @@ func (e *PortalsEndpoint) Create(instanceId string, body *PortalsEndpointCreateB
 	return &result, nil
 }
 
-// Update updates an existing portal for the instance.
+// Update updates a portal. Omitted fields keep their current value.
 func (e *PortalsEndpoint) Update(instanceId string, portalId string, body *PortalsEndpointUpdateBody) (*portals.PortalsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId},
