@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/toolcalls"
 )
 
-// ToolCallsEndpoint provides access to tool calls represent individual tool invocations within a session. They track the input, output, and status of each tool execution.
+// ToolCallsEndpoint provides access to a tool call is one invocation of a provider tool in a session, with its input, output, and status.
 type ToolCallsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewToolCallsEndpoint(client *endpoint.Client) *ToolCallsEndpoint {
 
 // ToolCallsEndpointListParams contains optional query parameters for List.
 type ToolCallsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// SessionId - Filter by session ID(s)
 	SessionId *any `json:"session_id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
@@ -52,9 +57,9 @@ type ToolCallsEndpointListParams struct {
 	ToolId *any `json:"tool_id,omitempty"`
 	// Status - Filter by tool call status(es)
 	Status *any `json:"status,omitempty"`
-	// CreatedAt - Filter tool call creation time by date range
+	// CreatedAt - Only return results whose tool call creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter tool call last update time by date range
+	// UpdatedAt - Only return results whose tool call last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 	// Search - Search by tool call ID or tool key, or by the name of a related tool, provider, deployment, config, auth config, agent, actor, identity, or consumer
 	Search *string `json:"search,omitempty"`
@@ -62,13 +67,13 @@ type ToolCallsEndpointListParams struct {
 
 // ToolCallsEndpointCreateBody contains the request body for Create.
 type ToolCallsEndpointCreateBody struct {
-	// ToolId - The ID of the tool to call
+	// ToolId - Tool to call, by ID or key.
 	ToolId string `json:"tool_id"`
-	// Input - Input data to pass to the tool
+	// Input - Input to pass to the tool.
 	Input map[string]any `json:"input"`
-	// Metadata - Optional metadata for the tool call
+	// Metadata - Custom data to identify or organize the tool call.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SessionId - The ID of the session to which this tool call belongs
+	// SessionId - Session to run the tool call in.
 	SessionId string `json:"session_id"`
 }
 
@@ -89,7 +94,7 @@ func (e *ToolCallsEndpoint) List(params *ToolCallsEndpointListParams) (*toolcall
 	return &result, nil
 }
 
-// Get retrieves a specific tool call by ID.
+// Get retrieves a tool call.
 func (e *ToolCallsEndpoint) Get(toolCallId string) (*toolcalls.ToolCallsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"tool-calls", toolCallId},
@@ -101,7 +106,7 @@ func (e *ToolCallsEndpoint) Get(toolCallId string) (*toolcalls.ToolCallsGetOutpu
 	return &result, nil
 }
 
-// Create creates a new tool call in a session by invoking a specific tool.
+// Create calls a tool in a session and returns the resulting tool call.
 func (e *ToolCallsEndpoint) Create(body *ToolCallsEndpointCreateBody) (*toolcalls.ToolCallsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"tool-calls"},

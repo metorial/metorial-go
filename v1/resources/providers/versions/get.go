@@ -7,27 +7,27 @@ import (
 
 // ProvidersVersionsGetOutput represents the providers versions get output type.
 type ProvidersVersionsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

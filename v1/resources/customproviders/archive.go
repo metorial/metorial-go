@@ -5,123 +5,131 @@ import (
 	"time"
 )
 
-// CustomProvidersArchiveOutputDraftContainerImage represents the custom providers archive output draft container image type.
+// CustomProvidersArchiveOutputDraftContainerImage - Container image this provider deploys. Only set for `container` providers.
 type CustomProvidersArchiveOutputDraftContainerImage struct {
-	// Object - String representing the container image draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// ContainerRegistry - URL of the container registry
+	// ContainerRegistry - Registry the image is pulled from.
 	ContainerRegistry string `json:"container_registry"`
-	// ContainerImageTag - Tag of the container image
+	// ContainerImageTag - Tag selecting the image version.
 	ContainerImageTag string `json:"container_image_tag"`
-	// ContainerImage - Name of the container image
+	// ContainerImage - Name of the image in the registry.
 	ContainerImage string `json:"container_image"`
 }
 
-// CustomProvidersArchiveOutputDraftRemoteMcpServer represents the custom providers archive output draft remote mcp server type.
+// CustomProvidersArchiveOutputDraftRemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 type CustomProvidersArchiveOutputDraftRemoteMcpServer struct {
-	// Object - String representing the remote MCP server draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Url - URL of the remote MCP server
+	// Url - URL where the remote MCP server is reachable.
 	Url string `json:"url"`
-	// Transport - Transport protocol for connecting to the remote MCP server
+	// Transport - MCP transport the remote server speaks.
 	Transport string `json:"transport"`
 }
 
-// CustomProvidersArchiveOutputDraftConfigSchema represents the custom providers archive output draft config schema type.
+// CustomProvidersArchiveOutputDraftConfigSchema - Configuration fields for the custom provider.
 type CustomProvidersArchiveOutputDraftConfigSchema struct {
+	// Type - Format of the configuration schema.
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the configuration fields for the custom provider
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
 }
 
-// CustomProvidersArchiveOutputDraftConfig represents the custom providers archive output draft config type.
+// CustomProvidersArchiveOutputDraftConfig - Configuration for the custom provider.
 type CustomProvidersArchiveOutputDraftConfig struct {
-	// Object - String representing the custom provider config draft type
-	Object string                                        `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Schema - Configuration fields for the custom provider.
 	Schema CustomProvidersArchiveOutputDraftConfigSchema `json:"schema"`
-	// Transformer - Optional jsonata transformer function for the configuration.
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
-// CustomProvidersArchiveOutputDraft represents the custom providers archive output draft type.
+// CustomProvidersArchiveOutputDraft - Draft source and configuration of the custom provider.
 type CustomProvidersArchiveOutputDraft struct {
-	// Object - String representing the draft's type
-	Object          string                                            `json:"object"`
-	ContainerImage  *CustomProvidersArchiveOutputDraftContainerImage  `json:"container_image,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// ContainerImage - Container image this provider deploys. Only set for `container` providers.
+	ContainerImage *CustomProvidersArchiveOutputDraftContainerImage `json:"container_image,omitempty"`
+	// RemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 	RemoteMcpServer *CustomProvidersArchiveOutputDraftRemoteMcpServer `json:"remote_mcp_server,omitempty"`
-	Config          CustomProvidersArchiveOutputDraftConfig           `json:"config"`
+	// Config - Configuration for the custom provider.
+	Config CustomProvidersArchiveOutputDraftConfig `json:"config"`
 }
 
-// CustomProvidersArchiveOutputScmRepoProvider represents the custom providers archive output scm repo provider type.
+// CustomProvidersArchiveOutputScmRepoProvider - Provider the repository lives on.
 type CustomProvidersArchiveOutputScmRepoProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
-// CustomProvidersArchiveOutputScmRepo represents the custom providers archive output scm repo type.
+// CustomProvidersArchiveOutputScmRepo - Repository the provider code is deployed from. `null` when not linked.
 type CustomProvidersArchiveOutputScmRepo struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                      `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersArchiveOutputScmRepoProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersArchiveOutputProviderPublisher represents the custom providers archive output provider publisher type.
 type CustomProvidersArchiveOutputProviderPublisher struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique publisher identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the publisher
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the publisher
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of the publisher logo
 	ImageUrl string `json:"image_url"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersArchiveOutputProviderCurrentVersion represents the custom providers archive output provider current version type.
 type CustomProvidersArchiveOutputProviderCurrentVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -135,62 +143,65 @@ type CustomProvidersArchiveOutputProviderOauthAutoRegistration struct {
 type CustomProvidersArchiveOutputProviderOauth struct {
 	// Status - OAuth status
 	Status string `json:"status"`
-	// CallbackUrl - OAuth callback URL
+	// CallbackUrl - Callback URL to register on your OAuth app.
 	CallbackUrl      *string                                                   `json:"callback_url,omitempty"`
 	AutoRegistration CustomProvidersArchiveOutputProviderOauthAutoRegistration `json:"auto_registration"`
 }
 
-// CustomProvidersArchiveOutputProvider represents the custom providers archive output provider type.
+// CustomProvidersArchiveOutputProvider - Session provider backed by this custom provider. `null` when none is linked.
 type CustomProvidersArchiveOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Access - Access level of the provider
+	// Access - `public` providers are available to every instance. `tenant` providers are your own.
 	Access string `json:"access"`
-	// Status - Current status of the provider
+	// Status - Archived once the provider is archived.
 	Status         string                                              `json:"status"`
 	Publisher      CustomProvidersArchiveOutputProviderPublisher       `json:"publisher"`
 	CurrentVersion *CustomProvidersArchiveOutputProviderCurrentVersion `json:"current_version,omitempty"`
 	Oauth          *CustomProvidersArchiveOutputProviderOauth          `json:"oauth,omitempty"`
 	// Identifier - Provider identifier
 	Identifier string `json:"identifier"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersArchiveOutput represents the custom providers archive output type.
 type CustomProvidersArchiveOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current status of the custom provider
+	// Status - `archived` once archived. Archived providers reject new connections.
 	Status string `json:"status"`
-	// Type - Type of the custom provider
+	// Type - How the provider runs: `function`, `container`, or `remote`.
 	Type string `json:"type"`
-	// Name - Display name of the custom provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the custom provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any                       `json:"metadata,omitempty"`
-	Draft    CustomProvidersArchiveOutputDraft     `json:"draft"`
-	ScmRepo  *CustomProvidersArchiveOutputScmRepo  `json:"scm_repo,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Draft - Draft source and configuration of the custom provider.
+	Draft CustomProvidersArchiveOutputDraft `json:"draft"`
+	// ScmRepo - Repository the provider code is deployed from. `null` when not linked.
+	ScmRepo *CustomProvidersArchiveOutputScmRepo `json:"scm_repo,omitempty"`
+	// Provider - Session provider backed by this custom provider. `null` when none is linked.
 	Provider *CustomProvidersArchiveOutputProvider `json:"provider,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

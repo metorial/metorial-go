@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/magicmcptokens"
 )
 
-// MagicMcpTokensEndpoint provides access to magic MCP tokens authorize access to Magic MCP servers via the /magic connection API.
+// MagicMcpTokensEndpoint provides access to a magic MCP token is a credential that authorizes access to magic MCP servers and endpoints.
 type MagicMcpTokensEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,41 +17,61 @@ func NewMagicMcpTokensEndpoint(client *endpoint.Client) *MagicMcpTokensEndpoint 
 
 // MagicMcpTokensEndpointListParams contains optional query parameters for List.
 type MagicMcpTokensEndpointListParams struct {
-	Limit              *float64 `json:"limit,omitempty"`
-	After              *string  `json:"after,omitempty"`
-	Before             *string  `json:"before,omitempty"`
-	Cursor             *string  `json:"cursor,omitempty"`
-	Order              *string  `json:"order,omitempty"`
-	Status             *any     `json:"status,omitempty"`
-	MagicMcpGroupId    *any     `json:"magic_mcp_group_id,omitempty"`
-	MagicMcpServerId   *any     `json:"magic_mcp_server_id,omitempty"`
-	MagicMcpEndpointId *any     `json:"magic_mcp_endpoint_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return tokens with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// MagicMcpGroupId - Only return tokens scoped to one of these groups.
+	MagicMcpGroupId *any `json:"magic_mcp_group_id,omitempty"`
+	// MagicMcpServerId - Only return tokens bound to one of these servers.
+	MagicMcpServerId *any `json:"magic_mcp_server_id,omitempty"`
+	// MagicMcpEndpointId - Only return tokens bound to one of these endpoints.
+	MagicMcpEndpointId *any `json:"magic_mcp_endpoint_id,omitempty"`
 }
 
 // MagicMcpTokensEndpointCreateBody contains the request body for Create.
 type MagicMcpTokensEndpointCreateBody struct {
-	Name               string          `json:"name"`
-	Description        *string         `json:"description,omitempty"`
-	Metadata           *map[string]any `json:"metadata,omitempty"`
-	MagicMcpGroupIds   *[]string       `json:"magic_mcp_group_ids,omitempty"`
-	MagicMcpServerId   *string         `json:"magic_mcp_server_id,omitempty"`
-	MagicMcpEndpointId *string         `json:"magic_mcp_endpoint_id,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the token. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// MagicMcpGroupIds - Groups to scope the token to.
+	MagicMcpGroupIds *[]string `json:"magic_mcp_group_ids,omitempty"`
+	// MagicMcpServerId - Server to bind the token to.
+	MagicMcpServerId *string `json:"magic_mcp_server_id,omitempty"`
+	// MagicMcpEndpointId - Endpoint to bind the token to.
+	MagicMcpEndpointId *string `json:"magic_mcp_endpoint_id,omitempty"`
 }
 
 // MagicMcpTokensEndpointUpdateBody contains the request body for Update.
 type MagicMcpTokensEndpointUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the token. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // MagicMcpTokensEndpointAddGroupsBody contains the request body for AddGroups.
 type MagicMcpTokensEndpointAddGroupsBody struct {
+	// MagicMcpGroupIds - Groups to scope the token to.
 	MagicMcpGroupIds []string `json:"magic_mcp_group_ids"`
 }
 
 // MagicMcpTokensEndpointRemoveGroupsBody contains the request body for RemoveGroups.
 type MagicMcpTokensEndpointRemoveGroupsBody struct {
+	// MagicMcpGroupIds - Groups to remove from the token.
 	MagicMcpGroupIds []string `json:"magic_mcp_group_ids"`
 }
 
@@ -84,7 +104,7 @@ func (e *MagicMcpTokensEndpoint) Get(instanceId string, magicMcpTokenId string) 
 	return &result, nil
 }
 
-// Create creates a new magic MCP token.
+// Create creates a magic MCP token.
 func (e *MagicMcpTokensEndpoint) Create(instanceId string, body *MagicMcpTokensEndpointCreateBody) (*magicmcptokens.MagicMcpTokensCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-tokens"},
@@ -109,7 +129,7 @@ func (e *MagicMcpTokensEndpoint) Delete(instanceId string, magicMcpTokenId strin
 	return &result, nil
 }
 
-// Update updates a magic MCP token.
+// Update updates a magic MCP token. Omitted fields keep their current value.
 func (e *MagicMcpTokensEndpoint) Update(instanceId string, magicMcpTokenId string, body *MagicMcpTokensEndpointUpdateBody) (*magicmcptokens.MagicMcpTokensUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-tokens", magicMcpTokenId},

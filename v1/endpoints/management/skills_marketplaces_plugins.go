@@ -2,10 +2,11 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/marketplaces/plugins"
 )
 
-// SkillsMarketplacesPluginsEndpoint provides access to manage plugin links for skill marketplaces.
+// SkillsMarketplacesPluginsEndpoint provides access to a skill marketplace plugin is one plugin in a skill marketplace.
 type SkillsMarketplacesPluginsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,26 +18,38 @@ func NewSkillsMarketplacesPluginsEndpoint(client *endpoint.Client) *SkillsMarket
 
 // SkillsMarketplacesPluginsEndpointListParams contains optional query parameters for List.
 type SkillsMarketplacesPluginsEndpointListParams struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	SkillPluginId        *any     `json:"skill_plugin_id,omitempty"`
-	Status               *any     `json:"status,omitempty"`
-	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
-	// CreatedAt - Filter skill marketplace plugin creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return marketplace plugins with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SkillPluginId - Only return links for one of these skill plugins.
+	SkillPluginId *any `json:"skill_plugin_id,omitempty"`
+	// Status - Only return marketplace plugins with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// SkillConfigurationId - Only return marketplace plugins using one of these skill configurations.
+	SkillConfigurationId *any `json:"skill_configuration_id,omitempty"`
+	// CreatedAt - Only return results whose skill marketplace plugin creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter skill marketplace plugin last update time by date range
+	// UpdatedAt - Only return results whose skill marketplace plugin last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SkillsMarketplacesPluginsEndpointAddBody contains the request body for Add.
 type SkillsMarketplacesPluginsEndpointAddBody struct {
-	SkillPluginId        string  `json:"skill_plugin_id"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
-	Identifier           *string `json:"identifier,omitempty"`
+	// SkillPluginId - Skill plugin to add to the marketplace, by ID.
+	SkillPluginId string `json:"skill_plugin_id"`
+	// SkillConfigurationId - Skill configuration for the plugin link, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
+	// Identifier - Slug identifying the plugin in the marketplace. Defaults to the plugin name.
+	Identifier *string `json:"identifier,omitempty"`
 }
 
 // List returns plugins linked to a skill marketplace.
@@ -56,7 +69,7 @@ func (e *SkillsMarketplacesPluginsEndpoint) List(instanceId string, skillMarketp
 	return &result, nil
 }
 
-// Add adds a skill plugin to a skill marketplace.
+// Add adds a skill plugin to a skill marketplace. Adding a plugin that was removed reactivates its link.
 func (e *SkillsMarketplacesPluginsEndpoint) Add(instanceId string, skillMarketplaceId string, body *SkillsMarketplacesPluginsEndpointAddBody) (*plugins.SkillsMarketplacesPluginsAddOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skill-marketplaces", skillMarketplaceId, "plugins"},

@@ -6,11 +6,11 @@ import (
 
 // ChatInstancesProviderAuthenticatedUserOutputWorkspace - The workspace the authenticated account belongs to, once one could be resolved
 type ChatInstancesProviderAuthenticatedUserOutputWorkspace struct {
-	// Id - Unique chat workspace identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ProviderWorkspaceId - The workspace's identifier on the chat provider
+	// ProviderWorkspaceId - Identifier the chat provider uses for this workspace.
 	ProviderWorkspaceId string `json:"provider_workspace_id"`
-	// Name - Display name of the workspace
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Domain - Domain the workspace is reachable under
 	Domain *string `json:"domain,omitempty"`
@@ -20,7 +20,7 @@ type ChatInstancesProviderAuthenticatedUserOutputWorkspace struct {
 
 // ChatInstancesProviderAuthenticatedUserOutput represents the chat instances provider authenticated user output type.
 type ChatInstancesProviderAuthenticatedUserOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Id - Unique chat author identifier. Null when Metorial has not yet persisted this author, which happens when the provider does not return a workspace for the authenticated account.
 	Id *string `json:"id,omitempty"`
@@ -32,7 +32,7 @@ type ChatInstancesProviderAuthenticatedUserOutput struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType *string `json:"provider_type,omitempty"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`

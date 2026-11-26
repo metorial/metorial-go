@@ -5,21 +5,29 @@ import (
 	"time"
 )
 
-// IntegrationsListOutputItemsConfiguration represents the integrations list output items configuration type.
+// IntegrationsListOutputItemsConfiguration - Which settings integration instances may customize.
 type IntegrationsListOutputItemsConfiguration struct {
-	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
-	EnableCallbackTools           bool  `json:"enable_callback_tools"`
+	// CanAttachCustomToolFilters - Lets integration instances attach their own tool filters.
+	CanAttachCustomToolFilters bool `json:"can_attach_custom_tool_filters"`
+	// CanAttachCustomProviderConfig - Lets integration instances use their own provider configs.
+	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
+	// CanOverrideToolFilters - Lets integration instances ignore the integration tool filters.
+	CanOverrideToolFilters bool `json:"can_override_tool_filters"`
+	// EnableCallbackTools - Makes callback event tools available for this integration.
+	EnableCallbackTools bool `json:"enable_callback_tools"`
+	// UseIntegrationNameInToolNames - Names session providers after the integration instead of the provider. `null` uses the default.
 	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // IntegrationsListOutputItemsImplementation represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type IntegrationsListOutputItemsImplementation struct {
-	Type               *string `json:"type,omitempty"`
+	// Type - Which kind of backing this is.
+	Type *string `json:"type,omitempty"`
+	// ProviderTemplateId - Provider template this integration is built on.
 	ProviderTemplateId *string `json:"provider_template_id,omitempty"`
-	MagicMcpServerId   *string `json:"magic_mcp_server_id,omitempty"`
+	// MagicMcpServerId - Magic MCP server this integration is built on.
+	MagicMcpServerId *string `json:"magic_mcp_server_id,omitempty"`
 }
 
 // IntegrationsListOutputItemsProvidersToolFilter represents one of several possible types.
@@ -32,31 +40,31 @@ type IntegrationsListOutputItemsProvidersToolFilter struct {
 
 // IntegrationsListOutputItemsProvidersConfig represents the integrations list output items providers config type.
 type IntegrationsListOutputItemsProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsListOutputItemsProvidersCallbacks - Provider callback state for this integration provider
 type IntegrationsListOutputItemsProvidersCallbacks struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Status - Whether this integration provider should receive provider callbacks. Enabling it creates a callback and registers it against every matching integration instance.
+	// Status - Enabling registers a callback against every matching integration instance. Disabling tears it down again. Only providers whose type reports `triggers.status` as `enabled` can enable callbacks.
 	Status string `json:"status"`
 	// CallbackId - The active callback, once it has been created. Null while callbacks are disabled.
 	CallbackId *string `json:"callback_id,omitempty"`
@@ -64,52 +72,87 @@ type IntegrationsListOutputItemsProvidersCallbacks struct {
 
 // IntegrationsListOutputItemsProviders represents the integrations list output items providers type.
 type IntegrationsListOutputItemsProviders struct {
-	Object        string          `json:"object"`
-	Id            string          `json:"id"`
-	Status        string          `json:"status"`
-	IntegrationId string          `json:"integration_id"`
-	Name          string          `json:"name"`
-	Description   *string         `json:"description,omitempty"`
-	Metadata      *map[string]any `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the integration provider.
+	Status string `json:"status"`
+	// IntegrationId - Integration this provider belongs to.
+	IntegrationId string `json:"integration_id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter        *IntegrationsListOutputItemsProvidersToolFilter `json:"tool_filter,omitempty"`
-	ProviderId        string                                          `json:"provider_id"`
-	DeploymentId      string                                          `json:"deployment_id"`
-	AuthMethodId      *string                                         `json:"auth_method_id,omitempty"`
-	AuthCredentialsId *string                                         `json:"auth_credentials_id,omitempty"`
-	Config            *IntegrationsListOutputItemsProvidersConfig     `json:"config,omitempty"`
+	ToolFilter *IntegrationsListOutputItemsProvidersToolFilter `json:"tool_filter,omitempty"`
+	// ProviderId - Provider added to the integration.
+	ProviderId string `json:"provider_id"`
+	// DeploymentId - Deployment the provider runs with.
+	DeploymentId string `json:"deployment_id"`
+	// AuthMethodId - Auth method the provider runs with. `null` when none is set.
+	AuthMethodId *string `json:"auth_method_id,omitempty"`
+	// AuthCredentialsId - Credentials the provider runs with. `null` when none are set.
+	AuthCredentialsId *string                                     `json:"auth_credentials_id,omitempty"`
+	Config            *IntegrationsListOutputItemsProvidersConfig `json:"config,omitempty"`
 	// Callbacks - Provider callback state for this integration provider
-	Callbacks  IntegrationsListOutputItemsProvidersCallbacks `json:"callbacks"`
-	CreatedAt  time.Time                                     `json:"created_at"`
-	UpdatedAt  time.Time                                     `json:"updated_at"`
-	ArchivedAt *time.Time                                    `json:"archived_at,omitempty"`
+	Callbacks IntegrationsListOutputItemsProvidersCallbacks `json:"callbacks"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsListOutputItems represents the integrations list output items type.
 type IntegrationsListOutputItems struct {
-	Object         string                                     `json:"object"`
-	Id             string                                     `json:"id"`
-	Status         string                                     `json:"status"`
-	Slug           string                                     `json:"slug"`
-	Name           string                                     `json:"name"`
-	Description    *string                                    `json:"description,omitempty"`
-	Metadata       *map[string]any                            `json:"metadata,omitempty"`
-	Configuration  IntegrationsListOutputItemsConfiguration   `json:"configuration"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the integration.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique across Metorial.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Which settings integration instances may customize.
+	Configuration IntegrationsListOutputItemsConfiguration `json:"configuration"`
+	// Implementation - What this integration is built on. `null` for a standalone integration.
 	Implementation *IntegrationsListOutputItemsImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsListOutputItemsProviders     `json:"providers"`
-	CreatedAt      time.Time                                  `json:"created_at"`
-	UpdatedAt      time.Time                                  `json:"updated_at"`
-	ArchivedAt     *time.Time                                 `json:"archived_at,omitempty"`
+	// Providers - Providers in this integration, with the deployment, credentials, and tool filters each runs with.
+	Providers []IntegrationsListOutputItemsProviders `json:"providers"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsListOutputPagination represents the integrations list output pagination type.
 type IntegrationsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // IntegrationsListOutput represents the integrations list output type.
 type IntegrationsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                           `json:"object"`
 	Items      []IntegrationsListOutputItems    `json:"items"`
 	Pagination IntegrationsListOutputPagination `json:"pagination"`
 }
@@ -128,37 +171,47 @@ func MapIntegrationsListOutputToJSON(v *IntegrationsListOutput) ([]byte, error) 
 	return json.Marshal(v)
 }
 
-// IntegrationsListQueryCreatedAt - Filter integration creation time by date range
+// IntegrationsListQueryCreatedAt - Only return results whose integration creation time is in this range. Set `gt`, `lt`, or both.
 type IntegrationsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for integration creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for integration creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// IntegrationsListQueryUpdatedAt - Filter integration last update time by date range
+// IntegrationsListQueryUpdatedAt - Only return results whose integration last update time is in this range. Set `gt`, `lt`, or both.
 type IntegrationsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for integration last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for integration last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // IntegrationsListQuery represents the integrations list query type.
 type IntegrationsListQuery struct {
-	Limit                 *float64 `json:"limit,omitempty"`
-	After                 *string  `json:"after,omitempty"`
-	Before                *string  `json:"before,omitempty"`
-	Cursor                *string  `json:"cursor,omitempty"`
-	Order                 *string  `json:"order,omitempty"`
-	Search                *string  `json:"search,omitempty"`
-	Status                *any     `json:"status,omitempty"`
-	Id                    *any     `json:"id,omitempty"`
-	ProviderId            *any     `json:"provider_id,omitempty"`
-	IntegrationProviderId *any     `json:"integration_provider_id,omitempty"`
-	// CreatedAt - Filter integration creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Search - Search integrations by name, description, ID, or slug.
+	Search *string `json:"search,omitempty"`
+	// Status - Only return integrations with one of these statuses. `deleted` integrations are never listed.
+	Status *any `json:"status,omitempty"`
+	// Id - Only return integrations with one of these IDs.
+	Id *any `json:"id,omitempty"`
+	// ProviderId - Only return integrations using one of these providers.
+	ProviderId *any `json:"provider_id,omitempty"`
+	// IntegrationProviderId - Only return integrations using one of these integration providers.
+	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
+	// CreatedAt - Only return results whose integration creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *IntegrationsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter integration last update time by date range
+	// UpdatedAt - Only return results whose integration last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *IntegrationsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/imports"
 )
 
-// SkillsImportsEndpoint provides access to import skills from public repositories or uploaded files.
+// SkillsImportsEndpoint provides access to a skill import is a queued import of skills from a repository or uploaded file.
 type SkillsImportsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,17 +17,25 @@ func NewSkillsImportsEndpoint(client *endpoint.Client) *SkillsImportsEndpoint {
 
 // SkillsImportsEndpointListParams contains optional query parameters for List.
 type SkillsImportsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Id     *any     `json:"id,omitempty"`
-	Status *any     `json:"status,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return skill imports with these IDs.
+	Id *any `json:"id,omitempty"`
+	// Status - Only return skill imports with one of these statuses.
+	Status *any `json:"status,omitempty"`
 }
 
 // SkillsImportsEndpointCreateBody contains the request body for Create.
 type SkillsImportsEndpointCreateBody struct {
+	// Source - Where to import skills from.
 	Source any `json:"source"`
 	// SkillGroupId - The ID of a skill group that every imported skill is added to.
 	SkillGroupId *string `json:"skill_group_id,omitempty"`
@@ -50,7 +58,7 @@ func (e *SkillsImportsEndpoint) List(instanceId string, params *SkillsImportsEnd
 	return &result, nil
 }
 
-// Get retrieves an individual skill import and its results.
+// Get retrieves a skill import and its results.
 func (e *SkillsImportsEndpoint) Get(instanceId string, skillImportId string) (*imports.SkillsImportsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skill-imports", skillImportId},

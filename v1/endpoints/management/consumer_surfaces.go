@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/consumersurfaces"
 )
 
-// ConsumerSurfacesEndpoint provides access to list and retrieve consumer surfaces for an instance.
+// ConsumerSurfacesEndpoint provides access to a consumer surface is a portal, member directory, or CLI entry point consumers sign in through.
 type ConsumerSurfacesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,14 +17,19 @@ func NewConsumerSurfacesEndpoint(client *endpoint.Client) *ConsumerSurfacesEndpo
 
 // ConsumerSurfacesEndpointListParams contains optional query parameters for List.
 type ConsumerSurfacesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
-// List returns a paginated list of consumer surfaces for an instance.
+// List returns a paginated list of consumer surfaces.
 func (e *ConsumerSurfacesEndpoint) List(instanceId string, params *ConsumerSurfacesEndpointListParams) (*consumersurfaces.ConsumerSurfacesListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -41,7 +46,7 @@ func (e *ConsumerSurfacesEndpoint) List(instanceId string, params *ConsumerSurfa
 	return &result, nil
 }
 
-// Get retrieves a consumer surface by ID.
+// Get retrieves a consumer surface.
 func (e *ConsumerSurfacesEndpoint) Get(instanceId string, consumerSurfaceId string) (*consumersurfaces.ConsumerSurfacesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "consumer-surfaces", consumerSurfaceId},

@@ -7,9 +7,9 @@ import (
 
 // ChatsChannelsMembersGetOutput represents the chats channels members get output type.
 type ChatsChannelsMembersGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsChannelsMembersGetOutput struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`

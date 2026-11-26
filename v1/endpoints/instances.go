@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/instances"
 )
 
-// InstancesEndpoint provides access to endpoints for listing and retrieving instances. An instance is an isolated environment within a Metorial project. Instances are created via the dashboard (since API keys are scoped to instances). Common setups include production, staging, and development instances.
+// InstancesEndpoint provides access to an instance is an isolated environment within a Metorial project. Only the instances you can access are listed.
 type InstancesEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewInstancesEndpoint(client *endpoint.Client) *InstancesEndpoint {
 	return &InstancesEndpoint{client: client}
 }
 
-// Get retrieves metadata and configuration details for a specific instance.
+// Get retrieves an instance.
 func (e *InstancesEndpoint) Get(instanceId string) (*instances.InstancesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId},
@@ -27,7 +27,7 @@ func (e *InstancesEndpoint) Get(instanceId string) (*instances.InstancesGetOutpu
 	return &result, nil
 }
 
-// List lists all instances within the organization that the authenticated actor has access to.
+// List returns the instances in the organization that the caller can access.
 func (e *InstancesEndpoint) List() (*instances.InstancesListOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances"},

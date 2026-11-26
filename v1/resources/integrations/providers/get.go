@@ -15,31 +15,31 @@ type IntegrationsProvidersGetOutputToolFilter struct {
 
 // IntegrationsProvidersGetOutputConfig represents the integrations providers get output config type.
 type IntegrationsProvidersGetOutputConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsProvidersGetOutputCallbacks - Provider callback state for this integration provider
 type IntegrationsProvidersGetOutputCallbacks struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Status - Whether this integration provider should receive provider callbacks. Enabling it creates a callback and registers it against every matching integration instance.
+	// Status - Enabling registers a callback against every matching integration instance. Disabling tears it down again. Only providers whose type reports `triggers.status` as `enabled` can enable callbacks.
 	Status string `json:"status"`
 	// CallbackId - The active callback, once it has been created. Null while callbacks are disabled.
 	CallbackId *string `json:"callback_id,omitempty"`
@@ -47,25 +47,39 @@ type IntegrationsProvidersGetOutputCallbacks struct {
 
 // IntegrationsProvidersGetOutput represents the integrations providers get output type.
 type IntegrationsProvidersGetOutput struct {
-	Object        string          `json:"object"`
-	Id            string          `json:"id"`
-	Status        string          `json:"status"`
-	IntegrationId string          `json:"integration_id"`
-	Name          string          `json:"name"`
-	Description   *string         `json:"description,omitempty"`
-	Metadata      *map[string]any `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the integration provider.
+	Status string `json:"status"`
+	// IntegrationId - Integration this provider belongs to.
+	IntegrationId string `json:"integration_id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter        *IntegrationsProvidersGetOutputToolFilter `json:"tool_filter,omitempty"`
-	ProviderId        string                                    `json:"provider_id"`
-	DeploymentId      string                                    `json:"deployment_id"`
-	AuthMethodId      *string                                   `json:"auth_method_id,omitempty"`
-	AuthCredentialsId *string                                   `json:"auth_credentials_id,omitempty"`
-	Config            *IntegrationsProvidersGetOutputConfig     `json:"config,omitempty"`
+	ToolFilter *IntegrationsProvidersGetOutputToolFilter `json:"tool_filter,omitempty"`
+	// ProviderId - Provider added to the integration.
+	ProviderId string `json:"provider_id"`
+	// DeploymentId - Deployment the provider runs with.
+	DeploymentId string `json:"deployment_id"`
+	// AuthMethodId - Auth method the provider runs with. `null` when none is set.
+	AuthMethodId *string `json:"auth_method_id,omitempty"`
+	// AuthCredentialsId - Credentials the provider runs with. `null` when none are set.
+	AuthCredentialsId *string                               `json:"auth_credentials_id,omitempty"`
+	Config            *IntegrationsProvidersGetOutputConfig `json:"config,omitempty"`
 	// Callbacks - Provider callback state for this integration provider
-	Callbacks  IntegrationsProvidersGetOutputCallbacks `json:"callbacks"`
-	CreatedAt  time.Time                               `json:"created_at"`
-	UpdatedAt  time.Time                               `json:"updated_at"`
-	ArchivedAt *time.Time                              `json:"archived_at,omitempty"`
+	Callbacks IntegrationsProvidersGetOutputCallbacks `json:"callbacks"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsProvidersGetOutputFromJSON deserializes JSON data into a IntegrationsProvidersGetOutput.

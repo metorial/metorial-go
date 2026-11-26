@@ -15,74 +15,77 @@ type SessionTemplatesProvidersCreateOutputToolFilter struct {
 
 // SessionTemplatesProvidersCreateOutputDeployment represents the session templates providers create output deployment type.
 type SessionTemplatesProvidersCreateOutputDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionTemplatesProvidersCreateOutputConfig represents the session templates providers create output config type.
 type SessionTemplatesProvidersCreateOutputConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SessionTemplatesProvidersCreateOutputAuthConfig represents the session templates providers create output auth config type.
+// SessionTemplatesProvidersCreateOutputAuthConfig - Auth config the provider runs with. `null` when there is none.
 type SessionTemplatesProvidersCreateOutputAuthConfig struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
 }
 
 // SessionTemplatesProvidersCreateOutput represents the session templates providers create output type.
 type SessionTemplatesProvidersCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session template provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Provider status
+	// Status - `archived` once the template provider is removed. Removed template providers stay listable.
 	Status string `json:"status"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter SessionTemplatesProvidersCreateOutputToolFilter `json:"tool_filter"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this template provider connects to.
 	ProviderId string `json:"provider_id"`
-	// SessionTemplateId - Parent session template ID
-	SessionTemplateId string                                           `json:"session_template_id"`
-	Deployment        SessionTemplatesProvidersCreateOutputDeployment  `json:"deployment"`
-	Config            SessionTemplatesProvidersCreateOutputConfig      `json:"config"`
-	AuthConfig        *SessionTemplatesProvidersCreateOutputAuthConfig `json:"auth_config,omitempty"`
-	// CreatedAt - Timestamp when created
+	// SessionTemplateId - Template this provider belongs to.
+	SessionTemplateId string                                          `json:"session_template_id"`
+	Deployment        SessionTemplatesProvidersCreateOutputDeployment `json:"deployment"`
+	Config            SessionTemplatesProvidersCreateOutputConfig     `json:"config"`
+	// AuthConfig - Auth config the provider runs with. `null` when there is none.
+	AuthConfig *SessionTemplatesProvidersCreateOutputAuthConfig `json:"auth_config,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -102,12 +105,17 @@ func MapSessionTemplatesProvidersCreateOutputToJSON(v *SessionTemplatesProviders
 
 // SessionTemplatesProvidersCreateBody represents the session templates providers create body type.
 type SessionTemplatesProvidersCreateBody struct {
-	SessionTemplateId     string  `json:"session_template_id"`
-	ProviderDeploymentId  *string `json:"provider_deployment_id,omitempty"`
+	// SessionTemplateId - Session template to add the provider to.
+	SessionTemplateId string `json:"session_template_id"`
+	// ProviderDeploymentId - Deployment the template provider runs with.
+	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
+	// ProviderConfigId - Config the template provider runs with.
 	ProviderConfigId      *string `json:"provider_config_id,omitempty"`
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
-	ProviderAuthConfigId  *string `json:"provider_auth_config_id,omitempty"`
-	ToolFilters           *any    `json:"tool_filters,omitempty"`
+	// ProviderAuthConfigId - Auth config the template provider runs with.
+	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // MapSessionTemplatesProvidersCreateBodyFromJSON deserializes JSON data into a SessionTemplatesProvidersCreateBody.

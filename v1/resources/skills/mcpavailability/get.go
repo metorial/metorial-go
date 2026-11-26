@@ -6,9 +6,9 @@ import (
 
 // SkillsMcpAvailabilityGetOutput represents the skills mcp availability get output type.
 type SkillsMcpAvailabilityGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// SkillId - The ID of the skill.
+	// SkillId - Skill this availability report is for.
 	SkillId string `json:"skill_id"`
 	// Available - Whether apps connected over MCP can see the skill. Skills over a limit are left out of MCP connections but keep working everywhere else.
 	Available bool `json:"available"`

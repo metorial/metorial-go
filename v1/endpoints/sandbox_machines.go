@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sandbox/machines"
 )
 
-// SandboxMachinesEndpoint provides access to create and operate sandbox machines. A machine boots from an image, can mount disks, and moves between running, paused, and hibernated states.
+// SandboxMachinesEndpoint provides access to a sandbox machine is a virtual machine that boots from an image and can mount disks. Machines move between running, paused, and hibernated states.
 type SandboxMachinesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSandboxMachinesEndpoint(client *endpoint.Client) *SandboxMachinesEndpoin
 
 // SandboxMachinesEndpointListParams contains optional query parameters for List.
 type SandboxMachinesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by resource IDs
 	Id *any `json:"id,omitempty"`
 	// Status - Filter by whether the machine still exists (active) or was terminated (deleted). Defaults to active.
@@ -100,12 +105,17 @@ type SandboxMachinesEndpointUpdateBody struct {
 
 // SandboxMachinesEndpointUsageParams contains optional query parameters for Usage.
 type SandboxMachinesEndpointUsageParams struct {
-	Limit             *float64 `json:"limit,omitempty"`
-	After             *string  `json:"after,omitempty"`
-	Before            *string  `json:"before,omitempty"`
-	Cursor            *string  `json:"cursor,omitempty"`
-	Order             *string  `json:"order,omitempty"`
-	MachineInstanceId *any     `json:"machine_instance_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order             *string `json:"order,omitempty"`
+	MachineInstanceId *any    `json:"machine_instance_id,omitempty"`
 }
 
 // SandboxMachinesEndpointExecBody contains the request body for Exec.

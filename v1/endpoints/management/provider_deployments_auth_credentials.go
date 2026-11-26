@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments/authcredentials"
 )
 
-// ProviderDeploymentsAuthCredentialsEndpoint provides access to auth credentials store your OAuth app registration (client ID, client secret, and scopes). These are the app-level credentials you get from a service like GitHub or Slack.
+// ProviderDeploymentsAuthCredentialsEndpoint provides access to provider auth credentials are an OAuth app registration used with a provider: a client ID, a client secret, and scopes.
 type ProviderDeploymentsAuthCredentialsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProviderDeploymentsAuthCredentialsEndpoint(client *endpoint.Client) *Pro
 
 // ProviderDeploymentsAuthCredentialsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsAuthCredentialsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by credential ID(s)
@@ -34,32 +39,40 @@ type ProviderDeploymentsAuthCredentialsEndpointListParams struct {
 	Origin *any `json:"origin,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider auth credentials creation time by date range
+	// CreatedAt - Only return results whose provider auth credentials creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider auth credentials last update time by date range
+	// UpdatedAt - Only return results whose provider auth credentials last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthCredentialsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsAuthCredentialsEndpointCreateBody struct {
-	// ProviderId - Provider ID
-	ProviderId  string  `json:"provider_id"`
-	Name        *string `json:"name,omitempty"`
+	// ProviderId - Provider to create credentials for.
+	ProviderId string `json:"provider_id"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the provider auth credentials. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	Config   map[string]any  `json:"config"`
+	// Config - OAuth app credentials to store.
+	Config map[string]any `json:"config"`
 }
 
 // ProviderDeploymentsAuthCredentialsEndpointUpdateBody contains the request body for Update.
 type ProviderDeploymentsAuthCredentialsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata     *map[string]any `json:"metadata,omitempty"`
-	ClientId     *string         `json:"client_id,omitempty"`
-	ClientSecret *string         `json:"client_secret,omitempty"`
-	Scopes       *[]string       `json:"scopes,omitempty"`
+	// Metadata - Custom data to identify or organize the provider auth credentials. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ClientId - Client ID of your OAuth app.
+	ClientId *string `json:"client_id,omitempty"`
+	// ClientSecret - Client secret of your OAuth app.
+	ClientSecret *string `json:"client_secret,omitempty"`
+	// Scopes - OAuth scopes to request.
+	Scopes *[]string `json:"scopes,omitempty"`
 }
 
 // List returns a paginated list of provider auth credentials.
@@ -79,7 +92,7 @@ func (e *ProviderDeploymentsAuthCredentialsEndpoint) List(instanceId string, par
 	return &result, nil
 }
 
-// Get retrieves specific provider auth credentials by ID.
+// Get retrieves provider auth credentials.
 func (e *ProviderDeploymentsAuthCredentialsEndpoint) Get(instanceId string, providerAuthCredentialsId string) (*authcredentials.ProviderDeploymentsAuthCredentialsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-auth-credentials", providerAuthCredentialsId},
@@ -91,7 +104,7 @@ func (e *ProviderDeploymentsAuthCredentialsEndpoint) Get(instanceId string, prov
 	return &result, nil
 }
 
-// Create creates new provider auth credentials.
+// Create creates provider auth credentials.
 func (e *ProviderDeploymentsAuthCredentialsEndpoint) Create(instanceId string, body *ProviderDeploymentsAuthCredentialsEndpointCreateBody) (*authcredentials.ProviderDeploymentsAuthCredentialsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-auth-credentials"},
@@ -104,7 +117,7 @@ func (e *ProviderDeploymentsAuthCredentialsEndpoint) Create(instanceId string, b
 	return &result, nil
 }
 
-// Update updates specific provider auth credentials.
+// Update updates provider auth credentials.
 func (e *ProviderDeploymentsAuthCredentialsEndpoint) Update(instanceId string, providerAuthCredentialsId string, body *ProviderDeploymentsAuthCredentialsEndpointUpdateBody) (*authcredentials.ProviderDeploymentsAuthCredentialsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-auth-credentials", providerAuthCredentialsId},
@@ -117,7 +130,7 @@ func (e *ProviderDeploymentsAuthCredentialsEndpoint) Update(instanceId string, p
 	return &result, nil
 }
 
-// Delete permanently deletes provider auth credentials.
+// Delete archives provider auth credentials. They stay listable with `status=archived`.
 func (e *ProviderDeploymentsAuthCredentialsEndpoint) Delete(instanceId string, providerAuthCredentialsId string) (*authcredentials.ProviderDeploymentsAuthCredentialsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-auth-credentials", providerAuthCredentialsId},

@@ -14,18 +14,18 @@ type ProviderDeploymentsAuthConfigsImportsGetSchemaOutputSchema struct {
 
 // ProviderDeploymentsAuthConfigsImportsGetSchemaOutput represents the provider deployments auth configs imports get schema output type.
 type ProviderDeploymentsAuthConfigsImportsGetSchemaOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string                                                      `json:"object"`
 	Schema *ProviderDeploymentsAuthConfigsImportsGetSchemaOutputSchema `json:"schema,omitempty"`
-	// Visibility - Visibility of the auth config data
+	// Visibility - Always `encrypted`. Auth values are stored encrypted.
 	Visibility string `json:"visibility"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this schema belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this schema belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -45,9 +45,13 @@ func MapProviderDeploymentsAuthConfigsImportsGetSchemaOutputToJSON(v *ProviderDe
 
 // ProviderDeploymentsAuthConfigsImportsGetSchemaQuery represents the provider deployments auth configs imports get schema query type.
 type ProviderDeploymentsAuthConfigsImportsGetSchemaQuery struct {
-	ProviderId           *string `json:"provider_id,omitempty"`
+	// ProviderId - Provider to resolve the schema for.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ProviderDeploymentId - Deployment to resolve the schema for.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
+	// ProviderAuthConfigId - Auth config to resolve the schema for.
 	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
+	// ProviderAuthMethodId - Auth method to resolve the schema for.
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
 }
 

@@ -5,123 +5,131 @@ import (
 	"time"
 )
 
-// CustomProvidersUpdateOutputDraftContainerImage represents the custom providers update output draft container image type.
+// CustomProvidersUpdateOutputDraftContainerImage - Container image this provider deploys. Only set for `container` providers.
 type CustomProvidersUpdateOutputDraftContainerImage struct {
-	// Object - String representing the container image draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// ContainerRegistry - URL of the container registry
+	// ContainerRegistry - Registry the image is pulled from.
 	ContainerRegistry string `json:"container_registry"`
-	// ContainerImageTag - Tag of the container image
+	// ContainerImageTag - Tag selecting the image version.
 	ContainerImageTag string `json:"container_image_tag"`
-	// ContainerImage - Name of the container image
+	// ContainerImage - Name of the image in the registry.
 	ContainerImage string `json:"container_image"`
 }
 
-// CustomProvidersUpdateOutputDraftRemoteMcpServer represents the custom providers update output draft remote mcp server type.
+// CustomProvidersUpdateOutputDraftRemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 type CustomProvidersUpdateOutputDraftRemoteMcpServer struct {
-	// Object - String representing the remote MCP server draft type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Url - URL of the remote MCP server
+	// Url - URL where the remote MCP server is reachable.
 	Url string `json:"url"`
-	// Transport - Transport protocol for connecting to the remote MCP server
+	// Transport - MCP transport the remote server speaks.
 	Transport string `json:"transport"`
 }
 
-// CustomProvidersUpdateOutputDraftConfigSchema represents the custom providers update output draft config schema type.
+// CustomProvidersUpdateOutputDraftConfigSchema - Configuration fields for the custom provider.
 type CustomProvidersUpdateOutputDraftConfigSchema struct {
+	// Type - Format of the configuration schema.
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the configuration fields for the custom provider
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
 }
 
-// CustomProvidersUpdateOutputDraftConfig represents the custom providers update output draft config type.
+// CustomProvidersUpdateOutputDraftConfig - Configuration for the custom provider.
 type CustomProvidersUpdateOutputDraftConfig struct {
-	// Object - String representing the custom provider config draft type
-	Object string                                       `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Schema - Configuration fields for the custom provider.
 	Schema CustomProvidersUpdateOutputDraftConfigSchema `json:"schema"`
-	// Transformer - Optional jsonata transformer function for the configuration.
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
-// CustomProvidersUpdateOutputDraft represents the custom providers update output draft type.
+// CustomProvidersUpdateOutputDraft - Draft source and configuration of the custom provider.
 type CustomProvidersUpdateOutputDraft struct {
-	// Object - String representing the draft's type
-	Object          string                                           `json:"object"`
-	ContainerImage  *CustomProvidersUpdateOutputDraftContainerImage  `json:"container_image,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// ContainerImage - Container image this provider deploys. Only set for `container` providers.
+	ContainerImage *CustomProvidersUpdateOutputDraftContainerImage `json:"container_image,omitempty"`
+	// RemoteMcpServer - Remote MCP server this provider connects to. Only set for `remote` providers.
 	RemoteMcpServer *CustomProvidersUpdateOutputDraftRemoteMcpServer `json:"remote_mcp_server,omitempty"`
-	Config          CustomProvidersUpdateOutputDraftConfig           `json:"config"`
+	// Config - Configuration for the custom provider.
+	Config CustomProvidersUpdateOutputDraftConfig `json:"config"`
 }
 
-// CustomProvidersUpdateOutputScmRepoProvider represents the custom providers update output scm repo provider type.
+// CustomProvidersUpdateOutputScmRepoProvider - Provider the repository lives on.
 type CustomProvidersUpdateOutputScmRepoProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
-// CustomProvidersUpdateOutputScmRepo represents the custom providers update output scm repo type.
+// CustomProvidersUpdateOutputScmRepo - Repository the provider code is deployed from. `null` when not linked.
 type CustomProvidersUpdateOutputScmRepo struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                     `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersUpdateOutputScmRepoProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersUpdateOutputProviderPublisher represents the custom providers update output provider publisher type.
 type CustomProvidersUpdateOutputProviderPublisher struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique publisher identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the publisher
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the publisher
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of the publisher logo
 	ImageUrl string `json:"image_url"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersUpdateOutputProviderCurrentVersion represents the custom providers update output provider current version type.
 type CustomProvidersUpdateOutputProviderCurrentVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -135,62 +143,65 @@ type CustomProvidersUpdateOutputProviderOauthAutoRegistration struct {
 type CustomProvidersUpdateOutputProviderOauth struct {
 	// Status - OAuth status
 	Status string `json:"status"`
-	// CallbackUrl - OAuth callback URL
+	// CallbackUrl - Callback URL to register on your OAuth app.
 	CallbackUrl      *string                                                  `json:"callback_url,omitempty"`
 	AutoRegistration CustomProvidersUpdateOutputProviderOauthAutoRegistration `json:"auto_registration"`
 }
 
-// CustomProvidersUpdateOutputProvider represents the custom providers update output provider type.
+// CustomProvidersUpdateOutputProvider - Session provider backed by this custom provider. `null` when none is linked.
 type CustomProvidersUpdateOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Access - Access level of the provider
+	// Access - `public` providers are available to every instance. `tenant` providers are your own.
 	Access string `json:"access"`
-	// Status - Current status of the provider
+	// Status - Archived once the provider is archived.
 	Status         string                                             `json:"status"`
 	Publisher      CustomProvidersUpdateOutputProviderPublisher       `json:"publisher"`
 	CurrentVersion *CustomProvidersUpdateOutputProviderCurrentVersion `json:"current_version,omitempty"`
 	Oauth          *CustomProvidersUpdateOutputProviderOauth          `json:"oauth,omitempty"`
 	// Identifier - Provider identifier
 	Identifier string `json:"identifier"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersUpdateOutput represents the custom providers update output type.
 type CustomProvidersUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current status of the custom provider
+	// Status - `archived` once archived. Archived providers reject new connections.
 	Status string `json:"status"`
-	// Type - Type of the custom provider
+	// Type - How the provider runs: `function`, `container`, or `remote`.
 	Type string `json:"type"`
-	// Name - Display name of the custom provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the custom provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata *map[string]any                      `json:"metadata,omitempty"`
-	Draft    CustomProvidersUpdateOutputDraft     `json:"draft"`
-	ScmRepo  *CustomProvidersUpdateOutputScmRepo  `json:"scm_repo,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Draft - Draft source and configuration of the custom provider.
+	Draft CustomProvidersUpdateOutputDraft `json:"draft"`
+	// ScmRepo - Repository the provider code is deployed from. `null` when not linked.
+	ScmRepo *CustomProvidersUpdateOutputScmRepo `json:"scm_repo,omitempty"`
+	// Provider - Session provider backed by this custom provider. `null` when none is linked.
 	Provider *CustomProvidersUpdateOutputProvider `json:"provider,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -210,9 +221,11 @@ func MapCustomProvidersUpdateOutputToJSON(v *CustomProvidersUpdateOutput) ([]byt
 
 // CustomProvidersUpdateBody represents the custom providers update body type.
 type CustomProvidersUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name for the custom provider.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the custom provider.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Readme - README content in markdown format
 	Readme *string `json:"readme,omitempty"`

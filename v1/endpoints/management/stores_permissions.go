@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/stores/permissions"
 )
 
-// StoresPermissionsEndpoint provides access to create and manage instance stores backed by Cargo.
+// StoresPermissionsEndpoint provides access to a store is a shared collection of files and documents. Participants get read or write access to its contents.
 type StoresPermissionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewStoresPermissionsEndpoint(client *endpoint.Client) *StoresPermissionsEnd
 	return &StoresPermissionsEndpoint{client: client}
 }
 
-// Get returns the effective Cargo permissions for the current actor on a specific store.
+// Get returns what the caller can do with a store.
 func (e *StoresPermissionsEndpoint) Get(instanceId string, storeId string) (*permissions.StoresPermissionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "stores", storeId, "permissions"},

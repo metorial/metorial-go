@@ -5,113 +5,133 @@ import (
 	"time"
 )
 
-// SessionsMessagesGetOutputHierarchy - Message hierarchy information
+// SessionsMessagesGetOutputHierarchy - Where this message sits in the reply chain.
 type SessionsMessagesGetOutputHierarchy struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - Hierarchy type
+	// Type - `child` when the message replies to another message, `parent` otherwise.
 	Type string `json:"type"`
-	// ParentMessageId - Parent message ID
+	// ParentMessageId - Message this replies to. `null` for parent messages.
 	ParentMessageId *string `json:"parent_message_id,omitempty"`
-	// ChildMessageIds - List of child message IDs
+	// ChildMessageIds - Messages replying to this one.
 	ChildMessageIds []string `json:"child_message_ids"`
 }
 
 // SessionsMessagesGetOutputTransportMcp represents the sessions messages get output transport mcp type.
 type SessionsMessagesGetOutputTransportMcp struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - MCP message ID
+	// Id - Unique ID.
 	Id any `json:"id"`
-	// ProtocolVersion - MCP protocol version
+	// ProtocolVersion - Negotiated MCP version, or `unknown`.
 	ProtocolVersion string `json:"protocol_version"`
-	// Transport - MCP transport type
+	// Transport - How the MCP connection is carried.
 	Transport string `json:"transport"`
 }
 
 // SessionsMessagesGetOutputTransportToolCall represents the sessions messages get output transport tool call type.
 type SessionsMessagesGetOutputTransportToolCall struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Tool call ID
+	// Id - Unique ID.
 	Id string `json:"id"`
 }
 
-// SessionsMessagesGetOutputTransport - Transport information
+// SessionsMessagesGetOutputTransport - How this message was delivered.
 type SessionsMessagesGetOutputTransport struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - Transport type
+	// Type - Which channel carried the message.
 	Type     string                                      `json:"type"`
 	Mcp      *SessionsMessagesGetOutputTransportMcp      `json:"mcp,omitempty"`
 	ToolCall *SessionsMessagesGetOutputTransportToolCall `json:"tool_call,omitempty"`
 }
 
-// SessionsMessagesGetOutputToolCallSenderParticipantData - Participant payload data
+// SessionsMessagesGetOutputToolCallSenderParticipantData - Extra details the participant connected with.
 type SessionsMessagesGetOutputToolCallSenderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsMessagesGetOutputToolCallSenderParticipant represents the sessions messages get output tool call sender participant type.
 type SessionsMessagesGetOutputToolCallSenderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsMessagesGetOutputToolCallSenderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// SessionsMessagesGetOutputToolCallResponderParticipantData - Participant payload data
+// SessionsMessagesGetOutputToolCallResponderParticipantData - Extra details the participant connected with.
 type SessionsMessagesGetOutputToolCallResponderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsMessagesGetOutputToolCallResponderParticipant represents the sessions messages get output tool call responder participant type.
 type SessionsMessagesGetOutputToolCallResponderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsMessagesGetOutputToolCallResponderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
@@ -131,100 +151,100 @@ type SessionsMessagesGetOutputToolCallToolOutputSchema struct {
 
 // SessionsMessagesGetOutputToolCallToolTags represents the sessions messages get output tool call tool tags type.
 type SessionsMessagesGetOutputToolCallToolTags struct {
-	// Destructive - Whether the tool is destructive
+	// Destructive - Whether the tool changes or deletes data.
 	Destructive *bool `json:"destructive,omitempty"`
-	// ReadOnly - Whether the tool is read-only
+	// ReadOnly - Whether the tool only reads data.
 	ReadOnly *bool `json:"read_only,omitempty"`
 }
 
 // SessionsMessagesGetOutputToolCallTool represents the sessions messages get output tool call tool type.
 type SessionsMessagesGetOutputToolCallTool struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Key - Tool key
+	// Key - Key used to call the tool over MCP.
 	Key string `json:"key"`
-	// Name - Display name of the tool
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Tool description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Tool capabilities
+	// Capabilities - What the tool can do.
 	Capabilities map[string]any `json:"capabilities"`
-	// Constraints - Tool constraints
+	// Constraints - Rules for using the tool.
 	Constraints []string `json:"constraints"`
-	// Instructions - Tool usage instructions
+	// Instructions - Guidance for calling the tool correctly.
 	Instructions []string                                           `json:"instructions"`
 	InputSchema  *SessionsMessagesGetOutputToolCallToolInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *SessionsMessagesGetOutputToolCallToolOutputSchema `json:"output_schema,omitempty"`
 	Tags         *SessionsMessagesGetOutputToolCallToolTags         `json:"tags,omitempty"`
 	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
 	ToolCategoryKeys []string `json:"tool_category_keys"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this tool belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this tool belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SessionsMessagesGetOutputToolCallError represents the sessions messages get output tool call error type.
 type SessionsMessagesGetOutputToolCallError struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session error identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable summary of the failure.
 	Message string `json:"message"`
-	// Data - Error payload data
+	// Data - Additional error details.
 	Data map[string]any `json:"data"`
 	// Status - Indicates whether the error is still being processed or has been fully processed and grouped.
 	Status string `json:"status"`
-	// SessionId - Parent session ID
+	// SessionId - Session the error occurred in.
 	SessionId string `json:"session_id"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run the error belongs to. `null` when there is none.
 	ProviderRunId *string `json:"provider_run_id,omitempty"`
-	// ConnectionId - Connection ID
+	// ConnectionId - Connection the error belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// GroupId - Error group ID
+	// GroupId - Group this error belongs to. `null` while the error is still processing.
 	GroupId *string `json:"group_id,omitempty"`
-	// SimilarErrorCount - Count of similar errors in the group
+	// SimilarErrorCount - How many errors are in this group.
 	SimilarErrorCount float64 `json:"similar_error_count"`
-	// IssueId - The provider issue this occurrence is aggregated into
+	// IssueId - Provider issue this error is aggregated into. `null` when there is none.
 	IssueId *string `json:"issue_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsMessagesGetOutputToolCall represents the sessions messages get output tool call type.
 type SessionsMessagesGetOutputToolCall struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool call identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ToolKey - The key identifying the tool that was called
+	// ToolKey - The key identifying the tool that was called.
 	ToolKey string `json:"tool_key"`
-	// Type - The type of the tool call
+	// Type - Always `tool_call`.
 	Type string `json:"type"`
-	// Status - Current status of the tool call
+	// Status - `waiting_for_response` until the tool replies.
 	Status string `json:"status"`
-	// Source - Source of the tool call
+	// Source - Whether the client or the provider made the call.
 	Source string `json:"source"`
 	// Transport - Transport protocol used
 	Transport string `json:"transport"`
-	// SessionId - Parent session ID
+	// SessionId - Session the tool was called in.
 	SessionId string `json:"session_id"`
-	// MessageId - Associated session message ID
+	// MessageId - Message that records this call.
 	MessageId string `json:"message_id"`
-	// SessionProviderId - Session provider ID
+	// SessionProviderId - Session provider that handled the call. `null` when there is none.
 	SessionProviderId *string `json:"session_provider_id,omitempty"`
-	// ConnectionId - Session connection ID
+	// ConnectionId - Connection the call belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run that produced the call. `null` when there is none.
 	ProviderRunId        *string                                                `json:"provider_run_id,omitempty"`
 	SenderParticipant    *SessionsMessagesGetOutputToolCallSenderParticipant    `json:"sender_participant,omitempty"`
 	ResponderParticipant *SessionsMessagesGetOutputToolCallResponderParticipant `json:"responder_participant,omitempty"`
@@ -234,135 +254,151 @@ type SessionsMessagesGetOutputToolCall struct {
 	Input *map[string]any `json:"input,omitempty"`
 	// Output - Output data returned from the tool call. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Output *map[string]any `json:"output,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// SessionsMessagesGetOutputSenderParticipantData - Participant payload data
+// SessionsMessagesGetOutputSenderParticipantData - Extra details the participant connected with.
 type SessionsMessagesGetOutputSenderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsMessagesGetOutputSenderParticipant represents the sessions messages get output sender participant type.
 type SessionsMessagesGetOutputSenderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsMessagesGetOutputSenderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// SessionsMessagesGetOutputResponderParticipantData - Participant payload data
+// SessionsMessagesGetOutputResponderParticipantData - Extra details the participant connected with.
 type SessionsMessagesGetOutputResponderParticipantData struct {
-	// Identifier - Participant-specific identifier within the payload
+	// Identifier - Participant identifier from the connection payload.
 	Identifier string `json:"identifier"`
-	// Name - Participant-specific display name within the payload
+	// Name - Display name from the connection payload.
 	Name string `json:"name"`
 }
 
 // SessionsMessagesGetOutputResponderParticipant represents the sessions messages get output responder participant type.
 type SessionsMessagesGetOutputResponderParticipant struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session participant identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Participant type
+	// Type - What kind of actor the participant is. Older client types report as `agent`.
 	Type string `json:"type"`
-	// Identifier - Participant identifier
+	// Identifier - How the participant identifies itself.
 	Identifier string `json:"identifier"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Data - Participant payload data
+	// Data - Extra details the participant connected with.
 	Data SessionsMessagesGetOutputResponderParticipantData `json:"data"`
-	// ProviderId - Provider ID if associated
-	ProviderId      *string `json:"provider_id,omitempty"`
-	ConnectionType  *string `json:"connection_type,omitempty"`
-	AgentId         *string `json:"agent_id,omitempty"`
+	// ProviderId - Provider the participant belongs to. `null` when there is none.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ConnectionType - How the participant connected.
+	ConnectionType *string `json:"connection_type,omitempty"`
+	// AgentId - Agent the participant belongs to. `null` when there is none.
+	AgentId *string `json:"agent_id,omitempty"`
+	// AgentInstanceId - Agent instance the participant runs as. `null` when there is none.
 	AgentInstanceId *string `json:"agent_instance_id,omitempty"`
+	// IdentityActorId - Identity actor the participant acts as. `null` when there is none.
 	IdentityActorId *string `json:"identity_actor_id,omitempty"`
-	IdentityId      *string `json:"identity_id,omitempty"`
-	AgentActorId    *string `json:"agent_actor_id,omitempty"`
-	AgentClientId   *string `json:"agent_client_id,omitempty"`
-	ConsumerId      *string `json:"consumer_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// IdentityId - Identity the participant acts as. `null` when there is none.
+	IdentityId *string `json:"identity_id,omitempty"`
+	// AgentActorId - Actor record for the agent. `null` when there is none.
+	AgentActorId *string `json:"agent_actor_id,omitempty"`
+	// AgentClientId - Client record for the agent. `null` when there is none.
+	AgentClientId *string `json:"agent_client_id,omitempty"`
+	// ConsumerId - Consumer the participant acts for. `null` when there is none.
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsMessagesGetOutputError represents the sessions messages get output error type.
 type SessionsMessagesGetOutputError struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session error identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable summary of the failure.
 	Message string `json:"message"`
-	// Data - Error payload data
+	// Data - Additional error details.
 	Data map[string]any `json:"data"`
 	// Status - Indicates whether the error is still being processed or has been fully processed and grouped.
 	Status string `json:"status"`
-	// SessionId - Parent session ID
+	// SessionId - Session the error occurred in.
 	SessionId string `json:"session_id"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run the error belongs to. `null` when there is none.
 	ProviderRunId *string `json:"provider_run_id,omitempty"`
-	// ConnectionId - Connection ID
+	// ConnectionId - Connection the error belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// GroupId - Error group ID
+	// GroupId - Group this error belongs to. `null` while the error is still processing.
 	GroupId *string `json:"group_id,omitempty"`
-	// SimilarErrorCount - Count of similar errors in the group
+	// SimilarErrorCount - How many errors are in this group.
 	SimilarErrorCount float64 `json:"similar_error_count"`
-	// IssueId - The provider issue this occurrence is aggregated into
+	// IssueId - Provider issue this error is aggregated into. `null` when there is none.
 	IssueId *string `json:"issue_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // SessionsMessagesGetOutput represents the sessions messages get output type.
 type SessionsMessagesGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique session message identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Message type
+	// Type - What the message carries: a tool call, connection control, or MCP protocol data.
 	Type string `json:"type"`
-	// Status - Message status
+	// Status - `waiting_for_response` until a reply arrives.
 	Status string `json:"status"`
-	// Source - Message source
+	// Source - Whether the client or the provider sent the message.
 	Source string `json:"source"`
-	// SessionId - Parent session ID
+	// SessionId - Session the message was sent in.
 	SessionId string `json:"session_id"`
-	// SessionProviderId - Session provider ID
+	// SessionProviderId - Session provider that handled the message. `null` when there is none.
 	SessionProviderId *string `json:"session_provider_id,omitempty"`
-	// ConnectionId - Connection ID
+	// ConnectionId - Connection the message belongs to. `null` when there is none.
 	ConnectionId *string `json:"connection_id,omitempty"`
-	// ProviderRunId - Provider run ID
+	// ProviderRunId - Provider run that produced the message. `null` when there is none.
 	ProviderRunId *string `json:"provider_run_id,omitempty"`
-	// Hierarchy - Message hierarchy information
+	// Hierarchy - Where this message sits in the reply chain.
 	Hierarchy SessionsMessagesGetOutputHierarchy `json:"hierarchy"`
-	// Transport - Transport information
+	// Transport - How this message was delivered.
 	Transport SessionsMessagesGetOutputTransport `json:"transport"`
 	// Input - Input message data. Bodies larger than 16 KB in list responses, or larger than 1 MB when retrieving by ID, are replaced with a session.message.omitted_body object.
 	Input *map[string]any `json:"input,omitempty"`
@@ -372,7 +408,7 @@ type SessionsMessagesGetOutput struct {
 	SenderParticipant    SessionsMessagesGetOutputSenderParticipant     `json:"sender_participant"`
 	ResponderParticipant *SessionsMessagesGetOutputResponderParticipant `json:"responder_participant,omitempty"`
 	Error                *SessionsMessagesGetOutputError                `json:"error,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

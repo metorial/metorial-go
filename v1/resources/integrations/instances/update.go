@@ -2,6 +2,7 @@ package instances
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -49,9 +50,11 @@ type IntegrationsInstancesUpdateOutputAccess struct {
 	Owner *IntegrationsInstancesUpdateOutputAccessOwner `json:"owner,omitempty"`
 }
 
-// IntegrationsInstancesUpdateOutputImplementation represents the integrations instances update output implementation type.
+// IntegrationsInstancesUpdateOutputImplementation - What backs this instance. `null` for a standalone instance.
 type IntegrationsInstancesUpdateOutputImplementation struct {
-	Type             string `json:"type"`
+	// Type - Which kind of backing this is.
+	Type string `json:"type"`
+	// MagicMcpServerId - Magic MCP server backing this instance.
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
 }
 
@@ -65,27 +68,30 @@ type IntegrationsInstancesUpdateOutputProvidersToolFilter struct {
 
 // IntegrationsInstancesUpdateOutputProvidersProvider represents the integrations instances update output providers provider type.
 type IntegrationsInstancesUpdateOutputProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// IntegrationsInstancesUpdateOutputProvidersIntegrationProviderProviderVersion represents the integrations instances update output providers integration provider provider version type.
+// IntegrationsInstancesUpdateOutputProvidersIntegrationProviderProviderVersion - Version this snapshot was taken from.
 type IntegrationsInstancesUpdateOutputProvidersIntegrationProviderProviderVersion struct {
-	Object string  `json:"object"`
-	Id     string  `json:"id"`
-	Index  float64 `json:"index"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Index - Position of this version, starting at 0.
+	Index float64 `json:"index"`
 }
 
 // IntegrationsInstancesUpdateOutputProvidersIntegrationProviderToolFilter represents one of several possible types.
@@ -98,133 +104,172 @@ type IntegrationsInstancesUpdateOutputProvidersIntegrationProviderToolFilter str
 
 // IntegrationsInstancesUpdateOutputProvidersIntegrationProviderConfig represents the integrations instances update output providers integration provider config type.
 type IntegrationsInstancesUpdateOutputProvidersIntegrationProviderConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesUpdateOutputProvidersIntegrationProvider represents the integrations instances update output providers integration provider type.
 type IntegrationsInstancesUpdateOutputProvidersIntegrationProvider struct {
-	Object          string                                                                       `json:"object"`
-	Id              string                                                                       `json:"id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// ProviderVersion - Version this snapshot was taken from.
 	ProviderVersion IntegrationsInstancesUpdateOutputProvidersIntegrationProviderProviderVersion `json:"provider_version"`
-	Status          string                                                                       `json:"status"`
-	Name            string                                                                       `json:"name"`
-	Description     *string                                                                      `json:"description,omitempty"`
-	Metadata        *map[string]any                                                              `json:"metadata,omitempty"`
+	// Status - `archived` once you archive the integration provider.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter        *IntegrationsInstancesUpdateOutputProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
-	ProviderId        string                                                                   `json:"provider_id"`
-	DeploymentId      string                                                                   `json:"deployment_id"`
-	AuthMethodId      *string                                                                  `json:"auth_method_id,omitempty"`
-	AuthCredentialsId *string                                                                  `json:"auth_credentials_id,omitempty"`
-	Config            *IntegrationsInstancesUpdateOutputProvidersIntegrationProviderConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                                                `json:"created_at"`
-	UpdatedAt         time.Time                                                                `json:"updated_at"`
-	ArchivedAt        *time.Time                                                               `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsInstancesUpdateOutputProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
+	// ProviderId - Provider this snapshot was taken from.
+	ProviderId string `json:"provider_id"`
+	// DeploymentId - Deployment this snapshot was taken from.
+	DeploymentId string `json:"deployment_id"`
+	// AuthMethodId - Auth method at snapshot time. `null` when none was set.
+	AuthMethodId *string `json:"auth_method_id,omitempty"`
+	// AuthCredentialsId - Credentials at snapshot time. `null` when none were set.
+	AuthCredentialsId *string                                                              `json:"auth_credentials_id,omitempty"`
+	Config            *IntegrationsInstancesUpdateOutputProvidersIntegrationProviderConfig `json:"config,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesUpdateOutputProvidersConfig represents the integrations instances update output providers config type.
 type IntegrationsInstancesUpdateOutputProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesUpdateOutputProvidersAuthConfig represents the integrations instances update output providers auth config type.
 type IntegrationsInstancesUpdateOutputProvidersAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesUpdateOutputProviders represents the integrations instances update output providers type.
 type IntegrationsInstancesUpdateOutputProviders struct {
-	Object                string          `json:"object"`
-	Id                    string          `json:"id"`
-	Status                string          `json:"status"`
-	Name                  string          `json:"name"`
-	Description           *string         `json:"description,omitempty"`
-	Metadata              *map[string]any `json:"metadata,omitempty"`
-	IntegrationId         string          `json:"integration_id"`
-	IntegrationInstanceId string          `json:"integration_instance_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the entry is archived.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration the instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceId - Integration instance this entry belongs to.
+	IntegrationInstanceId string `json:"integration_instance_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsInstancesUpdateOutputProvidersToolFilter         `json:"tool_filter,omitempty"`
+	ToolFilter *IntegrationsInstancesUpdateOutputProvidersToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
 	IsOverrideToolFilter bool                                                          `json:"is_override_tool_filter"`
 	Provider             IntegrationsInstancesUpdateOutputProvidersProvider            `json:"provider"`
 	IntegrationProvider  IntegrationsInstancesUpdateOutputProvidersIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsInstancesUpdateOutputProvidersConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsInstancesUpdateOutputProvidersAuthConfig         `json:"auth_config,omitempty"`
 	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
-	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
-	CreatedAt          time.Time  `json:"created_at"`
-	UpdatedAt          time.Time  `json:"updated_at"`
-	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
+	CallbackInstanceId *string `json:"callback_instance_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesUpdateOutput represents the integrations instances update output type.
 type IntegrationsInstancesUpdateOutput struct {
-	Object          string          `json:"object"`
-	Id              string          `json:"id"`
-	Status          string          `json:"status"`
-	Name            string          `json:"name"`
-	Description     *string         `json:"description,omitempty"`
-	Metadata        *map[string]any `json:"metadata,omitempty"`
-	IntegrationId   string          `json:"integration_id"`
-	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
-	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `draft` when created. `archived` once you archive the instance.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IdentityActorId - Identity actor the instance connects as. `null` when none is set.
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	// IdentityId - Identity the instance connects as. `null` when none is set.
+	IdentityId *string `json:"identity_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access         IntegrationsInstancesUpdateOutputAccess          `json:"access"`
+	Access IntegrationsInstancesUpdateOutputAccess `json:"access"`
+	// Implementation - What backs this instance. `null` for a standalone instance.
 	Implementation *IntegrationsInstancesUpdateOutputImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsInstancesUpdateOutputProviders     `json:"providers"`
-	CreatedAt      time.Time                                        `json:"created_at"`
-	UpdatedAt      time.Time                                        `json:"updated_at"`
-	ArchivedAt     *time.Time                                       `json:"archived_at,omitempty"`
+	// Providers - Providers set up on this instance.
+	Providers []IntegrationsInstancesUpdateOutputProviders `json:"providers"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstancesUpdateOutputFromJSON deserializes JSON data into a IntegrationsInstancesUpdateOutput.
@@ -243,21 +288,32 @@ func MapIntegrationsInstancesUpdateOutputToJSON(v *IntegrationsInstancesUpdateOu
 
 // IntegrationsInstancesUpdateBodyProviders represents the integrations instances update body providers type.
 type IntegrationsInstancesUpdateBodyProviders struct {
-	ProviderId           string  `json:"provider_id"`
-	ProviderConfigId     *string `json:"provider_config_id,omitempty"`
+	// ProviderId - Provider to bind, by provider ID or integration provider ID.
+	ProviderId string `json:"provider_id"`
+	// ProviderConfigId - Provider config the entry runs with. Omitted uses the shared config.
+	ProviderConfigId *string `json:"provider_config_id,omitempty"`
+	// ProviderAuthConfigId - Credentials the entry runs with. Omitted leaves them unset.
 	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
-	ToolFilters          *any    `json:"tool_filters,omitempty"`
-	IsOverrideToolFilter *bool   `json:"is_override_tool_filter,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
+	IsOverrideToolFilter *bool `json:"is_override_tool_filter,omitempty"`
 }
 
 // IntegrationsInstancesUpdateBody represents the integrations instances update body type.
 type IntegrationsInstancesUpdateBody struct {
-	Name            *string                                     `json:"name,omitempty"`
-	Description     *string                                     `json:"description,omitempty"`
-	Metadata        *map[string]any                             `json:"metadata,omitempty"`
-	IdentityActorId *string                                     `json:"identity_actor_id,omitempty"`
-	IdentityId      *string                                     `json:"identity_id,omitempty"`
-	Providers       *[]IntegrationsInstancesUpdateBodyProviders `json:"providers,omitempty"`
+	// Name - Display name for the integration instance.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the integration instance. Replaces existing metadata. `null` clears it.
+	Metadata *nullable.Nullable[map[string]any] `json:"metadata,omitempty"`
+	// IdentityActorId - Identity actor the instance connects as. `null` clears it. Omitted keeps the current one.
+	IdentityActorId *nullable.Nullable[string] `json:"identity_actor_id,omitempty"`
+	// IdentityId - Identity the instance connects as. `null` clears it. Omitted keeps the current one.
+	IdentityId *nullable.Nullable[string] `json:"identity_id,omitempty"`
+	// Providers - Providers to create or update. Existing providers not listed are left alone.
+	Providers *[]IntegrationsInstancesUpdateBodyProviders `json:"providers,omitempty"`
 }
 
 // MapIntegrationsInstancesUpdateBodyFromJSON deserializes JSON data into a IntegrationsInstancesUpdateBody.

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/portals/access"
 )
 
-// PortalsAccessEndpoint provides access to manage which consumer groups can access portal provider templates and MCP servers.
+// PortalsAccessEndpoint provides access to a portal access rule grants one consumer group access to one listing target, such as an integration, skill, or skill set.
 type PortalsAccessEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,39 +17,64 @@ func NewPortalsAccessEndpoint(client *endpoint.Client) *PortalsAccessEndpoint {
 
 // PortalsAccessEndpointListParams contains optional query parameters for List.
 type PortalsAccessEndpointListParams struct {
-	Limit                   *float64 `json:"limit,omitempty"`
-	After                   *string  `json:"after,omitempty"`
-	Before                  *string  `json:"before,omitempty"`
-	Cursor                  *string  `json:"cursor,omitempty"`
-	Order                   *string  `json:"order,omitempty"`
-	Search                  *string  `json:"search,omitempty"`
-	ConsumerGroupId         *any     `json:"consumer_group_id,omitempty"`
-	ProviderTemplateId      *any     `json:"provider_template_id,omitempty"`
-	MagicMcpServerId        *any     `json:"magic_mcp_server_id,omitempty"`
-	SkillId                 *any     `json:"skill_id,omitempty"`
-	SkillTemplateId         *any     `json:"skill_template_id,omitempty"`
-	SkillGroupId            *any     `json:"skill_group_id,omitempty"`
-	SkillMarketplaceId      *any     `json:"skill_marketplace_id,omitempty"`
-	SkillPluginId           *any     `json:"skill_plugin_id,omitempty"`
-	ConsumerAccessListingId *any     `json:"consumer_access_listing_id,omitempty"`
-	Type                    *any     `json:"type,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Search - Search by name or description.
+	Search *string `json:"search,omitempty"`
+	// ConsumerGroupId - Only return rules for these consumer groups.
+	ConsumerGroupId *any `json:"consumer_group_id,omitempty"`
+	// ProviderTemplateId - Only return rules for these provider templates.
+	ProviderTemplateId *any `json:"provider_template_id,omitempty"`
+	// MagicMcpServerId - Only return rules for these magic MCP servers.
+	MagicMcpServerId *any `json:"magic_mcp_server_id,omitempty"`
+	// SkillId - Only return rules for these skills.
+	SkillId *any `json:"skill_id,omitempty"`
+	// SkillTemplateId - Only return rules for these skill templates.
+	SkillTemplateId *any `json:"skill_template_id,omitempty"`
+	// SkillGroupId - Only return rules for these skill groups.
+	SkillGroupId *any `json:"skill_group_id,omitempty"`
+	// SkillMarketplaceId - Only return rules for these skill marketplaces.
+	SkillMarketplaceId *any `json:"skill_marketplace_id,omitempty"`
+	// SkillPluginId - Only return rules for these skill plugins.
+	SkillPluginId *any `json:"skill_plugin_id,omitempty"`
+	// ConsumerAccessListingId - Only return rules attached to these listings.
+	ConsumerAccessListingId *any `json:"consumer_access_listing_id,omitempty"`
+	// Type - Only return rules of these types.
+	Type *any `json:"type,omitempty"`
 }
 
 // PortalsAccessEndpointCreateBody contains the request body for Create.
 type PortalsAccessEndpointCreateBody struct {
-	ConsumerGroupId string  `json:"consumer_group_id"`
-	Name            *string `json:"name,omitempty"`
-	Description     *string `json:"description,omitempty"`
-	Readme          *string `json:"readme,omitempty"`
-	Access          any     `json:"access"`
+	// ConsumerGroupId - Consumer group the rule grants access to.
+	ConsumerGroupId string `json:"consumer_group_id"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
+	// Access - The integration, skill, or skill set the rule grants access to.
+	Access any `json:"access"`
 }
 
 // PortalsAccessEndpointUpdateBody contains the request body for Update.
 type PortalsAccessEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Readme      *string `json:"readme,omitempty"`
-	Permission  *string `json:"permission,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
+	// Permission - What the group can do with the skill or skill group.
+	Permission *string `json:"permission,omitempty"`
 }
 
 // List returns a paginated list of consumer access rules for a portal.
@@ -69,7 +94,7 @@ func (e *PortalsAccessEndpoint) List(portalId string, params *PortalsAccessEndpo
 	return &result, nil
 }
 
-// Get retrieves a portal access rule by ID.
+// Get retrieves a portal access rule.
 func (e *PortalsAccessEndpoint) Get(portalId string, accessId string) (*access.PortalsAccessGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"portals", portalId, "access", accessId},
@@ -81,7 +106,7 @@ func (e *PortalsAccessEndpoint) Get(portalId string, accessId string) (*access.P
 	return &result, nil
 }
 
-// Create creates a new consumer access rule for the portal.
+// Create creates a consumer access rule for a portal.
 func (e *PortalsAccessEndpoint) Create(portalId string, body *PortalsAccessEndpointCreateBody) (*access.PortalsAccessCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"portals", portalId, "access"},
@@ -94,7 +119,7 @@ func (e *PortalsAccessEndpoint) Create(portalId string, body *PortalsAccessEndpo
 	return &result, nil
 }
 
-// Update updates the shared listing fields of a portal access rule, and the access level of skill and skill group rules.
+// Update updates a portal access rule. Only skill and skill group rules use `permission`. Omitted fields keep their current value.
 func (e *PortalsAccessEndpoint) Update(portalId string, accessId string, body *PortalsAccessEndpointUpdateBody) (*access.PortalsAccessUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"portals", portalId, "access", accessId},
@@ -107,7 +132,7 @@ func (e *PortalsAccessEndpoint) Update(portalId string, accessId string, body *P
 	return &result, nil
 }
 
-// Delete deletes a consumer access rule from the portal.
+// Delete deletes a portal access rule.
 func (e *PortalsAccessEndpoint) Delete(portalId string, accessId string) (*access.PortalsAccessDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"portals", portalId, "access", accessId},

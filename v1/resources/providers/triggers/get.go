@@ -21,13 +21,13 @@ type ProvidersTriggersGetOutputOutputSchema struct {
 
 // ProvidersTriggersGetOutputInvocationAutoRegistration represents the providers triggers get output invocation auto registration type.
 type ProvidersTriggersGetOutputInvocationAutoRegistration struct {
-	// Status - Whether automatic webhook registration is supported
+	// Status - Whether Metorial registers the webhook for you.
 	Status string `json:"status"`
 }
 
 // ProvidersTriggersGetOutputInvocationAutoUnregistration represents the providers triggers get output invocation auto unregistration type.
 type ProvidersTriggersGetOutputInvocationAutoUnregistration struct {
-	// Status - Whether automatic webhook removal is supported
+	// Status - Whether Metorial removes the webhook for you.
 	Status string `json:"status"`
 }
 
@@ -43,26 +43,26 @@ type ProvidersTriggersGetOutputInvocation struct {
 
 // ProvidersTriggersGetOutput represents the providers triggers get output type.
 type ProvidersTriggersGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider trigger identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Key - Trigger key used when subscribing callbacks
 	Key string `json:"key"`
-	// Name - Display name of the trigger
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Trigger description
+	// Description - Free-text description.
 	Description  *string                                 `json:"description,omitempty"`
 	InputSchema  *ProvidersTriggersGetOutputInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersTriggersGetOutputOutputSchema `json:"output_schema,omitempty"`
 	Invocation   ProvidersTriggersGetOutputInvocation    `json:"invocation"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this trigger belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Provider specification ID
+	// ProviderSpecificationId - Specification this trigger belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

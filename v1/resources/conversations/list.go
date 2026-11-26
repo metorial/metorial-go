@@ -33,7 +33,7 @@ type ConversationsListOutputItemsCreatedByActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsListOutputItemsCreatedByActorOrganizationActor represents the conversations list output items created by actor organization actor type.
+// ConversationsListOutputItemsCreatedByActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type ConversationsListOutputItemsCreatedByActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,27 +57,42 @@ type ConversationsListOutputItemsCreatedByActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsListOutputItemsCreatedByActorConsumer represents the conversations list output items created by actor consumer type.
+// ConversationsListOutputItemsCreatedByActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type ConversationsListOutputItemsCreatedByActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsListOutputItemsCreatedByActor represents the conversations list output items created by actor type.
+// ConversationsListOutputItemsCreatedByActor - Actor behind a participant.
 type ConversationsListOutputItemsCreatedByActor struct {
-	Type              string                                                       `json:"type"`
-	Name              string                                                       `json:"name"`
-	ImageUrl          *string                                                      `json:"image_url,omitempty"`
-	Email             *string                                                      `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *ConversationsListOutputItemsCreatedByActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *ConversationsListOutputItemsCreatedByActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                              `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *ConversationsListOutputItemsCreatedByActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsListOutputItemsAssistantDefaultModelProvider represents the conversations list output items assistant default model provider type.
@@ -134,12 +149,13 @@ type ConversationsListOutputItemsAssistant struct {
 
 // ConversationsListOutputItems represents the conversations list output items type.
 type ConversationsListOutputItems struct {
-	Object         string                                     `json:"object"`
-	Id             string                                     `json:"id"`
-	Title          *string                                    `json:"title,omitempty"`
-	AssistantId    string                                     `json:"assistant_id"`
-	InstanceId     string                                     `json:"instance_id"`
-	OrganizationId string                                     `json:"organization_id"`
+	Object         string  `json:"object"`
+	Id             string  `json:"id"`
+	Title          *string `json:"title,omitempty"`
+	AssistantId    string  `json:"assistant_id"`
+	InstanceId     string  `json:"instance_id"`
+	OrganizationId string  `json:"organization_id"`
+	// CreatedByActor - Actor behind a participant.
 	CreatedByActor ConversationsListOutputItemsCreatedByActor `json:"created_by_actor"`
 	RootMessageId  string                                     `json:"root_message_id"`
 	Assistant      ConversationsListOutputItemsAssistant      `json:"assistant"`
@@ -149,12 +165,20 @@ type ConversationsListOutputItems struct {
 
 // ConversationsListOutputPagination represents the conversations list output pagination type.
 type ConversationsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ConversationsListOutput represents the conversations list output type.
 type ConversationsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                            `json:"object"`
 	Items      []ConversationsListOutputItems    `json:"items"`
 	Pagination ConversationsListOutputPagination `json:"pagination"`
 }
@@ -175,12 +199,17 @@ func MapConversationsListOutputToJSON(v *ConversationsListOutput) ([]byte, error
 
 // ConversationsListQuery represents the conversations list query type.
 type ConversationsListQuery struct {
-	Limit       *float64 `json:"limit,omitempty"`
-	After       *string  `json:"after,omitempty"`
-	Before      *string  `json:"before,omitempty"`
-	Cursor      *string  `json:"cursor,omitempty"`
-	Order       *string  `json:"order,omitempty"`
-	AssistantId *any     `json:"assistant_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order       *string `json:"order,omitempty"`
+	AssistantId *any    `json:"assistant_id,omitempty"`
 }
 
 // MapConversationsListQueryFromJSON deserializes JSON data into a ConversationsListQuery.

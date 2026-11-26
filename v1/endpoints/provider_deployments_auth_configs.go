@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments/authconfigs"
 )
 
-// ProviderDeploymentsAuthConfigsEndpoint provides access to an auth config is a user's authenticated connection to a provider. Created when a user completes OAuth or manually enters an API token.
+// ProviderDeploymentsAuthConfigsEndpoint provides access to a provider auth config is a user's authenticated connection to a provider. It is created when a user completes OAuth or enters an API token.
 type ProviderDeploymentsAuthConfigsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProviderDeploymentsAuthConfigsEndpoint(client *endpoint.Client) *Provide
 
 // ProviderDeploymentsAuthConfigsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsAuthConfigsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Ownership - Which resources to return under the resource ownership rules: shared (resources without an owner), usable (shared resources plus owned resources the caller may use), or all (everything the caller can see). Defaults to shared when ownership is enforced for the project, and all otherwise.
 	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
@@ -52,19 +57,22 @@ type ProviderDeploymentsAuthConfigsEndpointListParams struct {
 	Adapter *string `json:"adapter,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider auth config creation time by date range
+	// CreatedAt - Only return results whose provider auth config creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider auth config last update time by date range
+	// UpdatedAt - Only return results whose provider auth config last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsAuthConfigsEndpointCreateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider auth config. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// ProviderAuthMethodId - The authentication method this config uses (e.g., OAuth, API key)
 	ProviderAuthMethodId string `json:"provider_auth_method_id"`
 	// ProviderDeploymentId - The provider deployment this auth config is associated with (if applicable)
@@ -75,11 +83,14 @@ type ProviderDeploymentsAuthConfigsEndpointCreateBody struct {
 
 // ProviderDeploymentsAuthConfigsEndpointUpdateBody contains the request body for Update.
 type ProviderDeploymentsAuthConfigsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider auth config. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // List returns a paginated list of provider auth configs.
@@ -111,7 +122,7 @@ func (e *ProviderDeploymentsAuthConfigsEndpoint) Get(providerAuthConfigId string
 	return &result, nil
 }
 
-// Create creates a new provider auth config.
+// Create creates a provider auth config.
 func (e *ProviderDeploymentsAuthConfigsEndpoint) Create(body *ProviderDeploymentsAuthConfigsEndpointCreateBody) (*authconfigs.ProviderDeploymentsAuthConfigsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-auth-configs"},
@@ -137,7 +148,7 @@ func (e *ProviderDeploymentsAuthConfigsEndpoint) Update(providerAuthConfigId str
 	return &result, nil
 }
 
-// Delete permanently deletes a provider auth config.
+// Delete archives a provider auth config. It stays listable with `status=archived`.
 func (e *ProviderDeploymentsAuthConfigsEndpoint) Delete(providerAuthConfigId string) (*authconfigs.ProviderDeploymentsAuthConfigsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-auth-configs", providerAuthConfigId},

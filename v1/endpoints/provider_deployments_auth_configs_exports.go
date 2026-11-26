@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments/authconfigs/exports"
 )
 
-// ProviderDeploymentsAuthConfigsExportsEndpoint provides access to an auth export lets you extract OAuth tokens or credentials from Metorial to use in other systems, avoiding duplicate authentication flows.
+// ProviderDeploymentsAuthConfigsExportsEndpoint provides access to a provider auth export is a copy of authentication credentials taken out of Metorial for use in another system.
 type ProviderDeploymentsAuthConfigsExportsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProviderDeploymentsAuthConfigsExportsEndpoint(client *endpoint.Client) *
 
 // ProviderDeploymentsAuthConfigsExportsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsAuthConfigsExportsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by export ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
@@ -30,18 +35,19 @@ type ProviderDeploymentsAuthConfigsExportsEndpointListParams struct {
 	ProviderAuthCredentialsId *any `json:"provider_auth_credentials_id,omitempty"`
 	// ProviderAuthConfigId - Filter by auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter provider auth export creation time by date range
+	// CreatedAt - Only return results whose provider auth export creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider auth export last update time by date range
+	// UpdatedAt - Only return results whose provider auth export last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsAuthConfigsExportsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsAuthConfigsExportsEndpointCreateBody struct {
-	// ProviderAuthConfigId - Provider auth config ID
+	// ProviderAuthConfigId - Auth config to export credentials from.
 	ProviderAuthConfigId string `json:"provider_auth_config_id"`
-	Note                 string `json:"note"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Note - Why the credentials are exported.
+	Note string `json:"note"`
+	// Metadata - Custom data to identify or organize the provider auth export. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -74,7 +80,7 @@ func (e *ProviderDeploymentsAuthConfigsExportsEndpoint) Get(providerAuthExportId
 	return &result, nil
 }
 
-// Create exports authentication credentials from a provider.
+// Create exports the credentials of a provider auth config for use outside Metorial.
 func (e *ProviderDeploymentsAuthConfigsExportsEndpoint) Create(body *ProviderDeploymentsAuthConfigsExportsEndpointCreateBody) (*exports.ProviderDeploymentsAuthConfigsExportsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-auth-config-exports"},

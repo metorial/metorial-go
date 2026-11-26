@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments/setupsessions"
 )
 
-// ProviderDeploymentsSetupSessionsEndpoint provides access to a setup session tracks an in-progress OAuth flow, storing state during the redirect. On success, it creates an auth config with the user's access token.
+// ProviderDeploymentsSetupSessionsEndpoint provides access to a provider setup session is a guided flow that collects authentication, configuration, or both for a provider. `admin` sessions create a consent link for someone else to complete instead.
 type ProviderDeploymentsSetupSessionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProviderDeploymentsSetupSessionsEndpoint(client *endpoint.Client) *Provi
 
 // ProviderDeploymentsSetupSessionsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsSetupSessionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by setup session ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
@@ -38,21 +43,23 @@ type ProviderDeploymentsSetupSessionsEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 	// Type - Filter by session type (auth_only, config_only, auth_and_config, admin), matching either the requested or the resolved type
 	Type *any `json:"type,omitempty"`
-	// CreatedAt - Filter provider setup session creation time by date range
+	// CreatedAt - Only return results whose provider setup session creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider setup session last update time by date range
+	// UpdatedAt - Only return results whose provider setup session last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
-	// ProviderId - The provider ID
+	// ProviderId - Provider to set up.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// ProviderDeploymentId - Optional provider deployment ID
+	// ProviderDeploymentId - Deployment to set up.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider setup session. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ProviderAuthMethodId - The authentication method to use (e.g., OAuth flow)
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
@@ -61,18 +68,22 @@ type ProviderDeploymentsSetupSessionsEndpointCreateBody struct {
 	// IdentityId - Optional identity to link this setup session to
 	IdentityId *string `json:"identity_id,omitempty"`
 	// ConsumerId - Optional consumer to link this setup session to
-	ConsumerId  *string `json:"consumer_id,omitempty"`
+	ConsumerId *string `json:"consumer_id,omitempty"`
+	// RedirectUrl - URL to redirect to after setup.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 	// Type - The type of setup session, determining the flow and outcome of the session. `admin` creates an admin consent link for auth methods that support it, never creates credentials or configs, and cannot be bound to an identity, consumer, or config.
-	Type          *string         `json:"type,omitempty"`
+	Type *string `json:"type,omitempty"`
+	// Configuration - Options shaping the session flow.
 	Configuration *map[string]any `json:"configuration,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEndpointUpdateBody contains the request body for Update.
 type ProviderDeploymentsSetupSessionsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the provider setup session. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// IdentityId - Optional identity to link this setup session to
 	IdentityId *string `json:"identity_id,omitempty"`
@@ -107,7 +118,7 @@ func (e *ProviderDeploymentsSetupSessionsEndpoint) Get(instanceId string, provid
 	return &result, nil
 }
 
-// Create creates a new provider setup session for OAuth authentication.
+// Create creates a provider setup session.
 func (e *ProviderDeploymentsSetupSessionsEndpoint) Create(instanceId string, body *ProviderDeploymentsSetupSessionsEndpointCreateBody) (*setupsessions.ProviderDeploymentsSetupSessionsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-setup-sessions"},
@@ -133,7 +144,7 @@ func (e *ProviderDeploymentsSetupSessionsEndpoint) Update(instanceId string, pro
 	return &result, nil
 }
 
-// Delete deletes a provider setup session.
+// Delete archives a provider setup session. It stays listable with `status=archived`.
 func (e *ProviderDeploymentsSetupSessionsEndpoint) Delete(instanceId string, providerSetupSessionId string) (*setupsessions.ProviderDeploymentsSetupSessionsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-setup-sessions", providerSetupSessionId},

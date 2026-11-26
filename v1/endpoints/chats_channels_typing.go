@@ -17,7 +17,7 @@ func NewChatsChannelsTypingEndpoint(client *endpoint.Client) *ChatsChannelsTypin
 
 // ChatsChannelsTypingEndpointStartBody contains the request body for Start.
 type ChatsChannelsTypingEndpointStartBody struct {
-	// ThreadId - Show the typing indicator within this thread
+	// ThreadId - Thread to show the typing indicator in.
 	ThreadId *string `json:"thread_id,omitempty"`
 	// Status - Provider-specific typing status text
 	Status *string `json:"status,omitempty"`

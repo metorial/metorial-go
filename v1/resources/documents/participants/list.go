@@ -33,7 +33,7 @@ type DocumentsParticipantsListOutputItemsActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsListOutputItemsActorOrganizationActor represents the documents participants list output items actor organization actor type.
+// DocumentsParticipantsListOutputItemsActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsParticipantsListOutputItemsActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,51 +57,82 @@ type DocumentsParticipantsListOutputItemsActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsListOutputItemsActorConsumer represents the documents participants list output items actor consumer type.
+// DocumentsParticipantsListOutputItemsActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsParticipantsListOutputItemsActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsParticipantsListOutputItemsActor represents the documents participants list output items actor type.
+// DocumentsParticipantsListOutputItemsActor - Actor behind a participant.
 type DocumentsParticipantsListOutputItemsActor struct {
-	Type              string                                                      `json:"type"`
-	Name              string                                                      `json:"name"`
-	ImageUrl          *string                                                     `json:"image_url,omitempty"`
-	Email             *string                                                     `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsParticipantsListOutputItemsActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsParticipantsListOutputItemsActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                             `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsParticipantsListOutputItemsActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsParticipantsListOutputItems represents the documents participants list output items type.
 type DocumentsParticipantsListOutputItems struct {
-	// Object - String representing the object's type
-	Object             string                                    `json:"object"`
-	Id                 string                                    `json:"id"`
-	Role               string                                    `json:"role"`
-	EditCount          float64                                   `json:"edit_count"`
-	LastEditedAt       *time.Time                                `json:"last_edited_at,omitempty"`
-	LastViewedAt       *time.Time                                `json:"last_viewed_at,omitempty"`
-	Actor              DocumentsParticipantsListOutputItemsActor `json:"actor"`
-	StoreParticipantId *string                                   `json:"store_participant_id,omitempty"`
-	CreatedAt          time.Time                                 `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Role - What the participant can do in the document.
+	Role string `json:"role"`
+	// EditCount - Number of edits the participant has made.
+	EditCount float64 `json:"edit_count"`
+	// LastEditedAt - When the participant last changed the document.
+	LastEditedAt *time.Time `json:"last_edited_at,omitempty"`
+	// LastViewedAt - When the participant last opened the document.
+	LastViewedAt *time.Time `json:"last_viewed_at,omitempty"`
+	// Actor - Actor behind a participant.
+	Actor DocumentsParticipantsListOutputItemsActor `json:"actor"`
+	// StoreParticipantId - Linked store participant, by ID.
+	StoreParticipantId *string `json:"store_participant_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // DocumentsParticipantsListOutputPagination represents the documents participants list output pagination type.
 type DocumentsParticipantsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // DocumentsParticipantsListOutput represents the documents participants list output type.
 type DocumentsParticipantsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                    `json:"object"`
 	Items      []DocumentsParticipantsListOutputItems    `json:"items"`
 	Pagination DocumentsParticipantsListOutputPagination `json:"pagination"`
 }
@@ -120,34 +151,39 @@ func MapDocumentsParticipantsListOutputToJSON(v *DocumentsParticipantsListOutput
 	return json.Marshal(v)
 }
 
-// DocumentsParticipantsListQueryCreatedAt - Filter Filter by creation time by date range
+// DocumentsParticipantsListQueryCreatedAt - Only return results whose participant creation time is in this range. Set `gt`, `lt`, or both.
 type DocumentsParticipantsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// DocumentsParticipantsListQueryUpdatedAt - Filter Filter by update time by date range
+// DocumentsParticipantsListQueryUpdatedAt - Only return results whose participant last update time is in this range. Set `gt`, `lt`, or both.
 type DocumentsParticipantsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // DocumentsParticipantsListQuery represents the documents participants list query type.
 type DocumentsParticipantsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by document participant ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return participants with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose participant creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *DocumentsParticipantsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose participant last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *DocumentsParticipantsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

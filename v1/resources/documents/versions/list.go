@@ -33,7 +33,7 @@ type DocumentsVersionsListOutputItemsEditorsOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsListOutputItemsEditorsOrganizationActor represents the documents versions list output items editors organization actor type.
+// DocumentsVersionsListOutputItemsEditorsOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsVersionsListOutputItemsEditorsOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,51 +57,82 @@ type DocumentsVersionsListOutputItemsEditorsOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsListOutputItemsEditorsConsumer represents the documents versions list output items editors consumer type.
+// DocumentsVersionsListOutputItemsEditorsConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsVersionsListOutputItemsEditorsConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsListOutputItemsEditors represents the documents versions list output items editors type.
+// DocumentsVersionsListOutputItemsEditors - Actor behind a participant.
 type DocumentsVersionsListOutputItemsEditors struct {
-	Type              string                                                    `json:"type"`
-	Name              string                                                    `json:"name"`
-	ImageUrl          *string                                                   `json:"image_url,omitempty"`
-	Email             *string                                                   `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsVersionsListOutputItemsEditorsOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsVersionsListOutputItemsEditorsConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                           `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsVersionsListOutputItemsEditorsConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsVersionsListOutputItems represents the documents versions list output items type.
 type DocumentsVersionsListOutputItems struct {
-	// Object - String representing the object's type
-	Object            string                                    `json:"object"`
-	Id                string                                    `json:"id"`
-	DocumentId        string                                    `json:"document_id"`
-	VersionNumber     float64                                   `json:"version_number"`
-	PreviousVersionId *string                                   `json:"previous_version_id,omitempty"`
-	ListEditedAt      *time.Time                                `json:"list_edited_at,omitempty"`
-	Content           string                                    `json:"content"`
-	Editors           []DocumentsVersionsListOutputItemsEditors `json:"editors"`
-	CreatedAt         time.Time                                 `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// DocumentId - Document this version belongs to.
+	DocumentId string `json:"document_id"`
+	// VersionNumber - Sequential number of this version.
+	VersionNumber float64 `json:"version_number"`
+	// PreviousVersionId - Previous version, by ID. `null` for the first version.
+	PreviousVersionId *string `json:"previous_version_id,omitempty"`
+	// ListEditedAt - When the version content was last changed.
+	ListEditedAt *time.Time `json:"list_edited_at,omitempty"`
+	// Content - Text body of the document at this version.
+	Content string `json:"content"`
+	// Editors - Actors who edited this version.
+	Editors []DocumentsVersionsListOutputItemsEditors `json:"editors"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // DocumentsVersionsListOutputPagination represents the documents versions list output pagination type.
 type DocumentsVersionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // DocumentsVersionsListOutput represents the documents versions list output type.
 type DocumentsVersionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                `json:"object"`
 	Items      []DocumentsVersionsListOutputItems    `json:"items"`
 	Pagination DocumentsVersionsListOutputPagination `json:"pagination"`
 }
@@ -120,34 +151,39 @@ func MapDocumentsVersionsListOutputToJSON(v *DocumentsVersionsListOutput) ([]byt
 	return json.Marshal(v)
 }
 
-// DocumentsVersionsListQueryCreatedAt - Filter Filter by creation time by date range
+// DocumentsVersionsListQueryCreatedAt - Only return results whose version creation time is in this range. Set `gt`, `lt`, or both.
 type DocumentsVersionsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// DocumentsVersionsListQueryLastEditedAt - Filter Filter by last edit time by date range
+// DocumentsVersionsListQueryLastEditedAt - Only return results whose version last edit time is in this range. Set `gt`, `lt`, or both.
 type DocumentsVersionsListQueryLastEditedAt struct {
-	// Gt - Only include records after this timestamp for Filter by last edit time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by last edit time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // DocumentsVersionsListQuery represents the documents versions list query type.
 type DocumentsVersionsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by document version ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return versions with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose version creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *DocumentsVersionsListQueryCreatedAt `json:"created_at,omitempty"`
-	// LastEditedAt - Filter Filter by last edit time by date range
+	// LastEditedAt - Only return results whose version last edit time is in this range. Set `gt`, `lt`, or both.
 	LastEditedAt *DocumentsVersionsListQueryLastEditedAt `json:"last_edited_at,omitempty"`
 }
 

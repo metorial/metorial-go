@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions"
 )
 
-// SessionsEndpoint provides access to sessions are connections to providers that allow clients to interact with MCP servers. Each session can include one or more provider deployments.
+// SessionsEndpoint provides access to a session is a connection between clients and providers over MCP. Each session connects to one or more providers.
 type SessionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsEndpoint(client *endpoint.Client) *SessionsEndpoint {
 
 // SessionsEndpointListParams contains optional query parameters for List.
 type SessionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Filter by status (active, archived)
 	Status *any `json:"status,omitempty"`
 	// Id - Filter by session ID(s)
@@ -46,9 +51,9 @@ type SessionsEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter session creation time by date range
+	// CreatedAt - Only return results whose session creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session last update time by date range
+	// UpdatedAt - Only return results whose session last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 	// Search - Search by session ID, or by the name of a related provider, auth method, deployment, config, auth config, agent, actor, identity, or consumer
 	Search *string `json:"search,omitempty"`
@@ -56,17 +61,22 @@ type SessionsEndpointListParams struct {
 
 // SessionsEndpointCreateBody contains the request body for Create.
 type SessionsEndpointCreateBody struct {
-	Name        *string          `json:"name,omitempty"`
-	Description *string          `json:"description,omitempty"`
-	Metadata    *map[string]any  `json:"metadata,omitempty"`
-	Providers   []map[string]any `json:"providers"`
+	// Name - Display name. Generated when omitted.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the session.
+	Metadata  *map[string]any  `json:"metadata,omitempty"`
+	Providers []map[string]any `json:"providers"`
 }
 
 // SessionsEndpointUpdateBody contains the request body for Update.
 type SessionsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the session. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -87,7 +97,7 @@ func (e *SessionsEndpoint) List(params *SessionsEndpointListParams) (*sessions.S
 	return &result, nil
 }
 
-// Get retrieves a specific session by ID.
+// Get retrieves a session.
 func (e *SessionsEndpoint) Get(sessionId string) (*sessions.SessionsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"sessions", sessionId},
@@ -99,7 +109,7 @@ func (e *SessionsEndpoint) Get(sessionId string) (*sessions.SessionsGetOutput, e
 	return &result, nil
 }
 
-// Create creates a new session with provider deployments.
+// Create creates a session with one or more providers, from a template or inline definitions.
 func (e *SessionsEndpoint) Create(body *SessionsEndpointCreateBody) (*sessions.SessionsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"sessions"},
@@ -112,7 +122,7 @@ func (e *SessionsEndpoint) Create(body *SessionsEndpointCreateBody) (*sessions.S
 	return &result, nil
 }
 
-// Update updates a session.
+// Update updates a session. Omitted fields keep their current value.
 func (e *SessionsEndpoint) Update(sessionId string, body *SessionsEndpointUpdateBody) (*sessions.SessionsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"sessions", sessionId},
@@ -125,7 +135,7 @@ func (e *SessionsEndpoint) Update(sessionId string, body *SessionsEndpointUpdate
 	return &result, nil
 }
 
-// Delete deletes a session.
+// Delete archives a session. Its connections disconnect and its providers are archived. It stays listable with `status=archived`.
 func (e *SessionsEndpoint) Delete(sessionId string) (*sessions.SessionsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"sessions", sessionId},

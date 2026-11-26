@@ -7,9 +7,9 @@ import (
 
 // CallbackInstancesGetOutput represents the callback instances get output type.
 type CallbackInstancesGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique callback instance identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Callback instance lifecycle status. Archived once the callback or the integration instance provider goes away.
 	Status string `json:"status"`
@@ -19,9 +19,9 @@ type CallbackInstancesGetOutput struct {
 	IntegrationInstanceId string `json:"integration_instance_id"`
 	// IntegrationInstanceProviderId - Integration instance provider this callback instance is registered on
 	IntegrationInstanceProviderId string `json:"integration_instance_provider_id"`
-	// CreatedAt - Timestamp when the callback instance was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the callback instance was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/firewalls/networkpolicies"
 )
 
-// FirewallsNetworkPoliciesEndpoint provides access to manage firewalls and their attached network policies. Firewalls apply to integration enclaves, providers, and sandbox machines.
+// FirewallsNetworkPoliciesEndpoint provides access to a firewall is a set of network policies applied to targets. Firewalls apply to integration enclaves, providers, and sandbox machines.
 type FirewallsNetworkPoliciesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,8 +17,10 @@ func NewFirewallsNetworkPoliciesEndpoint(client *endpoint.Client) *FirewallsNetw
 
 // FirewallsNetworkPoliciesEndpointAttachBody contains the request body for Attach.
 type FirewallsNetworkPoliciesEndpointAttachBody struct {
-	NetworkPolicyId string   `json:"network_policy_id"`
-	Position        *float64 `json:"position,omitempty"`
+	// NetworkPolicyId - Network policy to attach to the firewall.
+	NetworkPolicyId string `json:"network_policy_id"`
+	// Position - Position to insert the policy at. Omitted appends it last.
+	Position *float64 `json:"position,omitempty"`
 }
 
 // Attach attaches a network policy to a firewall.

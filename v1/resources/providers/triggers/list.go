@@ -21,13 +21,13 @@ type ProvidersTriggersListOutputItemsOutputSchema struct {
 
 // ProvidersTriggersListOutputItemsInvocationAutoRegistration represents the providers triggers list output items invocation auto registration type.
 type ProvidersTriggersListOutputItemsInvocationAutoRegistration struct {
-	// Status - Whether automatic webhook registration is supported
+	// Status - Whether Metorial registers the webhook for you.
 	Status string `json:"status"`
 }
 
 // ProvidersTriggersListOutputItemsInvocationAutoUnregistration represents the providers triggers list output items invocation auto unregistration type.
 type ProvidersTriggersListOutputItemsInvocationAutoUnregistration struct {
-	// Status - Whether automatic webhook removal is supported
+	// Status - Whether Metorial removes the webhook for you.
 	Status string `json:"status"`
 }
 
@@ -43,37 +43,45 @@ type ProvidersTriggersListOutputItemsInvocation struct {
 
 // ProvidersTriggersListOutputItems represents the providers triggers list output items type.
 type ProvidersTriggersListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider trigger identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Key - Trigger key used when subscribing callbacks
 	Key string `json:"key"`
-	// Name - Display name of the trigger
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Trigger description
+	// Description - Free-text description.
 	Description  *string                                       `json:"description,omitempty"`
 	InputSchema  *ProvidersTriggersListOutputItemsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersTriggersListOutputItemsOutputSchema `json:"output_schema,omitempty"`
 	Invocation   ProvidersTriggersListOutputItemsInvocation    `json:"invocation"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this trigger belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Provider specification ID
+	// ProviderSpecificationId - Specification this trigger belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProvidersTriggersListOutputPagination represents the providers triggers list output pagination type.
 type ProvidersTriggersListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProvidersTriggersListOutput represents the providers triggers list output type.
 type ProvidersTriggersListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                `json:"object"`
 	Items      []ProvidersTriggersListOutputItems    `json:"items"`
 	Pagination ProvidersTriggersListOutputPagination `json:"pagination"`
 }
@@ -94,11 +102,16 @@ func MapProvidersTriggersListOutputToJSON(v *ProvidersTriggersListOutput) ([]byt
 
 // ProvidersTriggersListQuery represents the providers triggers list query type.
 type ProvidersTriggersListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ProviderVersionId - Provider version to list triggers for
 	ProviderVersionId string `json:"provider_version_id"`
 }

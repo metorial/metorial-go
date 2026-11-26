@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments/configs"
 )
 
-// ProviderDeploymentsConfigsEndpoint provides access to a config holds settings for a deployment, like API endpoints or feature flags. Create configs with values directly, or from a saved config vault with pre-saved values.
+// ProviderDeploymentsConfigsEndpoint provides access to a provider config is a set of configuration values for a provider. It holds values directly or references a config vault.
 type ProviderDeploymentsConfigsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProviderDeploymentsConfigsEndpoint(client *endpoint.Client) *ProviderDep
 
 // ProviderDeploymentsConfigsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsConfigsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Ownership - Which resources to return under the resource ownership rules. 'shared' returns only resources that aren't owned, 'usable' returns shared resources plus owned resources the caller can use, 'all' returns every resource the caller can see. Defaults to 'usable' for consumers, and otherwise to 'shared' when ownership is enforced for the project and 'all' when it isn't.
 	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
@@ -50,23 +55,26 @@ type ProviderDeploymentsConfigsEndpointListParams struct {
 	IdentityCredentialId *any `json:"identity_credential_id,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider config creation time by date range
+	// CreatedAt - Only return results whose provider config creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider config last update time by date range
+	// UpdatedAt - Only return results whose provider config last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsConfigsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsConfigsEndpointCreateBody struct {
-	// ProviderId - Provider ID
+	// ProviderId - Provider to create the config for.
 	ProviderId string `json:"provider_id"`
-	// ProviderDeploymentId - Optional provider deployment ID
+	// ProviderDeploymentId - Deployment the config is locked to.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	Name                 *string `json:"name,omitempty"`
-	Description          *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider config. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// Value - Provider-specific configuration values
 	Value *map[string]any `json:"value,omitempty"`
 	// ProviderConfigVaultId - Config vault ID to use as template
@@ -75,18 +83,25 @@ type ProviderDeploymentsConfigsEndpointCreateBody struct {
 
 // ProviderDeploymentsConfigsEndpointUpdateBody contains the request body for Update.
 type ProviderDeploymentsConfigsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider config. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // ProviderDeploymentsConfigsEndpointGetConfigSchemaParams contains optional query parameters for GetConfigSchema.
 type ProviderDeploymentsConfigsEndpointGetConfigSchemaParams struct {
-	ProviderId           *string `json:"provider_id,omitempty"`
-	ProviderConfigId     *string `json:"provider_config_id,omitempty"`
-	ProviderVersionId    *string `json:"provider_version_id,omitempty"`
+	// ProviderId - Provider to resolve the schema for.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// ProviderConfigId - Config to resolve the schema for.
+	ProviderConfigId *string `json:"provider_config_id,omitempty"`
+	// ProviderVersionId - Version to resolve the schema for.
+	ProviderVersionId *string `json:"provider_version_id,omitempty"`
+	// ProviderDeploymentId - Deployment to resolve the schema for.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
 }
 
@@ -119,7 +134,7 @@ func (e *ProviderDeploymentsConfigsEndpoint) Get(providerConfigId string) (*conf
 	return &result, nil
 }
 
-// Create creates a new provider config.
+// Create creates a provider config.
 func (e *ProviderDeploymentsConfigsEndpoint) Create(body *ProviderDeploymentsConfigsEndpointCreateBody) (*configs.ProviderDeploymentsConfigsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-configs"},
@@ -145,7 +160,7 @@ func (e *ProviderDeploymentsConfigsEndpoint) Update(providerConfigId string, bod
 	return &result, nil
 }
 
-// Delete permanently deletes a provider config.
+// Delete archives a provider config. It stays listable with `status=archived`.
 func (e *ProviderDeploymentsConfigsEndpoint) Delete(providerConfigId string) (*configs.ProviderDeploymentsConfigsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-configs", providerConfigId},
@@ -157,7 +172,7 @@ func (e *ProviderDeploymentsConfigsEndpoint) Delete(providerConfigId string) (*c
 	return &result, nil
 }
 
-// GetConfigSchema retrieves the JSON Schema for configuration of this provider deployment.
+// GetConfigSchema returns the JSON Schema for provider configuration, resolved from the given provider, version, deployment, or config.
 func (e *ProviderDeploymentsConfigsEndpoint) GetConfigSchema(params *ProviderDeploymentsConfigsEndpointGetConfigSchemaParams) (*configs.ProviderDeploymentsConfigsGetConfigSchemaOutput, error) {
 	var query map[string]any
 	if params != nil {

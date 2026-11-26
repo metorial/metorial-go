@@ -7,15 +7,15 @@ import (
 
 // IdentitiesCredentialsListOutputItems represents the identities credentials list output items type.
 type IdentitiesCredentialsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity credential identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current lifecycle status of the credential.
+	// Status - Current lifecycle status of the credential. `archived` once you archive the credential.
 	Status string `json:"status"`
 	// IdentityId - Identity that owns this credential.
 	IdentityId string `json:"identity_id"`
-	// ProviderId - Provider associated with the credential.
+	// ProviderId - Provider this credential holds access for.
 	ProviderId string `json:"provider_id"`
 	// DeploymentId - Provider deployment used by this credential.
 	DeploymentId *string `json:"deployment_id,omitempty"`
@@ -25,20 +25,28 @@ type IdentitiesCredentialsListOutputItems struct {
 	AuthConfigId *string `json:"auth_config_id,omitempty"`
 	// DelegationConfigId - Delegation config applied to this credential.
 	DelegationConfigId *string `json:"delegation_config_id,omitempty"`
-	// CreatedAt - Timestamp when the credential was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the credential was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IdentitiesCredentialsListOutputPagination represents the identities credentials list output pagination type.
 type IdentitiesCredentialsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // IdentitiesCredentialsListOutput represents the identities credentials list output type.
 type IdentitiesCredentialsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                    `json:"object"`
 	Items      []IdentitiesCredentialsListOutputItems    `json:"items"`
 	Pagination IdentitiesCredentialsListOutputPagination `json:"pagination"`
 }
@@ -57,52 +65,57 @@ func MapIdentitiesCredentialsListOutputToJSON(v *IdentitiesCredentialsListOutput
 	return json.Marshal(v)
 }
 
-// IdentitiesCredentialsListQueryCreatedAt - Filter identity credential creation time by date range
+// IdentitiesCredentialsListQueryCreatedAt - Only return results whose identity credential creation time is in this range. Set `gt`, `lt`, or both.
 type IdentitiesCredentialsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for identity credential creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for identity credential creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// IdentitiesCredentialsListQueryUpdatedAt - Filter identity credential last update time by date range
+// IdentitiesCredentialsListQueryUpdatedAt - Only return results whose identity credential last update time is in this range. Set `gt`, `lt`, or both.
 type IdentitiesCredentialsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for identity credential last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for identity credential last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // IdentitiesCredentialsListQuery represents the identities credentials list query type.
 type IdentitiesCredentialsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by one or more credential statuses.
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return identity credentials with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by identity credential ID or IDs.
+	// Id - Only return identity credentials with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// AgentId - Filter by owner agent ID or IDs.
+	// AgentId - Only return identity credentials owned by one of these agents.
 	AgentId *any `json:"agent_id,omitempty"`
-	// ActorId - Filter by owner actor ID or IDs.
+	// ActorId - Only return identity credentials owned by one of these identity actors.
 	ActorId *any `json:"actor_id,omitempty"`
-	// ConsumerProfileId - Filter by the consumer profile that owns the credentials.
+	// ConsumerProfileId - Only return identity credentials owned by one of these consumer profiles.
 	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
-	// IdentityId - Filter by identity ID or IDs.
+	// IdentityId - Only return identity credentials attached to one of these identities.
 	IdentityId *any `json:"identity_id,omitempty"`
-	// ProviderId - Filter by provider ID or IDs.
+	// ProviderId - Only return identity credentials for one of these providers.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// ProviderDeploymentId - Filter by provider deployment ID or IDs.
+	// ProviderDeploymentId - Only return identity credentials attached to one of these provider deployments.
 	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
-	// ProviderConfigId - Filter by provider config ID or IDs.
+	// ProviderConfigId - Only return identity credentials attached to one of these provider configs.
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
-	// ProviderAuthConfigId - Filter by provider auth config ID or IDs.
+	// ProviderAuthConfigId - Only return identity credentials attached to one of these provider auth configs.
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter identity credential creation time by date range
+	// CreatedAt - Only return results whose identity credential creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *IdentitiesCredentialsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter identity credential last update time by date range
+	// UpdatedAt - Only return results whose identity credential last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *IdentitiesCredentialsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

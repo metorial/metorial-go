@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/monitoralerts"
 )
 
-// MonitorAlertsEndpoint provides access to monitor alerts represent detected prompt-injection or schema-change events.
+// MonitorAlertsEndpoint provides access to a monitor alert is one firing of a monitor. It records a detected prompt-injection or schema-change event.
 type MonitorAlertsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,32 +17,51 @@ func NewMonitorAlertsEndpoint(client *endpoint.Client) *MonitorAlertsEndpoint {
 
 // MonitorAlertsEndpointListParams contains optional query parameters for List.
 type MonitorAlertsEndpointListParams struct {
-	Limit                             *float64 `json:"limit,omitempty"`
-	After                             *string  `json:"after,omitempty"`
-	Before                            *string  `json:"before,omitempty"`
-	Cursor                            *string  `json:"cursor,omitempty"`
-	Order                             *string  `json:"order,omitempty"`
-	Id                                *any     `json:"id,omitempty"`
-	MonitorId                         *any     `json:"monitor_id,omitempty"`
-	Status                            *any     `json:"status,omitempty"`
-	Target                            *any     `json:"target,omitempty"`
-	Source                            *any     `json:"source,omitempty"`
-	ProviderId                        *any     `json:"provider_id,omitempty"`
-	ProtoGuardAlertId                 *any     `json:"proto_guard_alert_id,omitempty"`
-	ProtoGuardRunId                   *any     `json:"proto_guard_run_id,omitempty"`
-	ProtoGuardFilterId                *any     `json:"proto_guard_filter_id,omitempty"`
-	SpecificationChangeNotificationId *any     `json:"specification_change_notification_id,omitempty"`
-	SessionId                         *any     `json:"session_id,omitempty"`
-	SessionMessageId                  *any     `json:"session_message_id,omitempty"`
-	SessionConnectionId               *any     `json:"session_connection_id,omitempty"`
-	ProviderRunId                     *any     `json:"provider_run_id,omitempty"`
-	// CreatedAt - Filter monitor alert creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return monitor alerts with one of these IDs.
+	Id *any `json:"id,omitempty"`
+	// MonitorId - Only return alerts from one of these monitors.
+	MonitorId *any `json:"monitor_id,omitempty"`
+	// Status - Only return monitor alerts with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Target - Only return monitor alerts watching one of these targets.
+	Target *any `json:"target,omitempty"`
+	// Source - Only return monitor alerts from one of these sources.
+	Source *any `json:"source,omitempty"`
+	// ProviderId - Only return monitor alerts for one of these providers.
+	ProviderId *any `json:"provider_id,omitempty"`
+	// ProtoGuardAlertId - Only return monitor alerts linked to one of these ProtoGuard alerts.
+	ProtoGuardAlertId *any `json:"proto_guard_alert_id,omitempty"`
+	// ProtoGuardRunId - Only return monitor alerts linked to one of these ProtoGuard runs.
+	ProtoGuardRunId *any `json:"proto_guard_run_id,omitempty"`
+	// ProtoGuardFilterId - Only return monitor alerts linked to one of these ProtoGuard filters.
+	ProtoGuardFilterId *any `json:"proto_guard_filter_id,omitempty"`
+	// SpecificationChangeNotificationId - Only return monitor alerts linked to one of these specification change notifications.
+	SpecificationChangeNotificationId *any `json:"specification_change_notification_id,omitempty"`
+	// SessionId - Only return monitor alerts linked to one of these sessions.
+	SessionId *any `json:"session_id,omitempty"`
+	// SessionMessageId - Only return monitor alerts linked to one of these session messages.
+	SessionMessageId *any `json:"session_message_id,omitempty"`
+	// SessionConnectionId - Only return monitor alerts linked to one of these session connections.
+	SessionConnectionId *any `json:"session_connection_id,omitempty"`
+	// ProviderRunId - Only return monitor alerts linked to one of these provider runs.
+	ProviderRunId *any `json:"provider_run_id,omitempty"`
+	// CreatedAt - Only return results whose monitor alert creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// ResolvedAt - Filter monitor alert resolution time by date range
+	// ResolvedAt - Only return results whose monitor alert resolution time is in this range. Set `gt`, `lt`, or both.
 	ResolvedAt *map[string]any `json:"resolved_at,omitempty"`
 }
 
-// List returns a paginated list of monitor alerts for this instance.
+// List returns a paginated list of monitor alerts in the instance.
 func (e *MonitorAlertsEndpoint) List(params *MonitorAlertsEndpointListParams) (*monitoralerts.MonitorAlertsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -59,7 +78,7 @@ func (e *MonitorAlertsEndpoint) List(params *MonitorAlertsEndpointListParams) (*
 	return &result, nil
 }
 
-// Get retrieves a monitor alert by ID.
+// Get retrieves a monitor alert.
 func (e *MonitorAlertsEndpoint) Get(monitorAlertId string) (*monitoralerts.MonitorAlertsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"monitor-alerts", monitorAlertId},

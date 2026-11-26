@@ -7,9 +7,9 @@ import (
 
 // ChatEventsListOutputItems represents the chat events list output items type.
 type ChatEventsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat event identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - What happened in the chat
 	Type string `json:"type"`
@@ -39,18 +39,26 @@ type ChatEventsListOutputItems struct {
 	ProviderAuthorId *string `json:"provider_author_id,omitempty"`
 	// OccurredAt - Timestamp when the event happened on the chat provider
 	OccurredAt time.Time `json:"occurred_at"`
-	// CreatedAt - Timestamp when the event was recorded by Metorial
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ChatEventsListOutputPagination represents the chat events list output pagination type.
 type ChatEventsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatEventsListOutput represents the chat events list output type.
 type ChatEventsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                         `json:"object"`
 	Items      []ChatEventsListOutputItems    `json:"items"`
 	Pagination ChatEventsListOutputPagination `json:"pagination"`
 }
@@ -69,40 +77,45 @@ func MapChatEventsListOutputToJSON(v *ChatEventsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// ChatEventsListQueryCreatedAt - Filter chat event creation time by date range
+// ChatEventsListQueryCreatedAt - Only return results whose chat event creation time is in this range. Set `gt`, `lt`, or both.
 type ChatEventsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for chat event creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat event creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ChatEventsListQueryOccurredAt - Filter chat event occurrence time by date range
+// ChatEventsListQueryOccurredAt - Only return results whose chat event occurrence time is in this range. Set `gt`, `lt`, or both.
 type ChatEventsListQueryOccurredAt struct {
-	// Gt - Only include records after this timestamp for chat event occurrence time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat event occurrence time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ChatEventsListQuery represents the chat events list query type.
 type ChatEventsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// ChatId - Filter by chat ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// ChatId - Only return events for one of these chats.
 	ChatId *any `json:"chat_id,omitempty"`
-	// ChatConnectionId - Filter by chat connection ID(s)
+	// ChatConnectionId - Only return events for one of these chat connections.
 	ChatConnectionId *any `json:"chat_connection_id,omitempty"`
-	// ChatInstanceId - Filter by chat instance ID(s)
+	// ChatInstanceId - Only return events for one of these chat instances.
 	ChatInstanceId *any `json:"chat_instance_id,omitempty"`
-	// Type - Filter by event type(s)
+	// Type - Only return events with one of these types.
 	Type *any `json:"type,omitempty"`
-	// CreatedAt - Filter chat event creation time by date range
+	// CreatedAt - Only return results whose chat event creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ChatEventsListQueryCreatedAt `json:"created_at,omitempty"`
-	// OccurredAt - Filter chat event occurrence time by date range
+	// OccurredAt - Only return results whose chat event occurrence time is in this range. Set `gt`, `lt`, or both.
 	OccurredAt *ChatEventsListQueryOccurredAt `json:"occurred_at,omitempty"`
 }
 

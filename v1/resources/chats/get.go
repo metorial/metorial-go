@@ -7,13 +7,13 @@ import (
 
 // ChatsGetOutput represents the chats get output type.
 type ChatsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat status
+	// Status - `archived` once the chat or its connection is archived. Archived chats stay listable.
 	Status string `json:"status"`
-	// Name - Display name of the chat
+	// Name - Display name.
 	Name string `json:"name"`
 	// ChatConnectionId - The chat connection this chat was created through
 	ChatConnectionId string `json:"chat_connection_id"`
@@ -25,9 +25,9 @@ type ChatsGetOutput struct {
 	ProviderId string `json:"provider_id"`
 	// WorkspaceId - The workspace this chat is connected to, once one has been resolved
 	WorkspaceId *string `json:"workspace_id,omitempty"`
-	// CreatedAt - Timestamp when the chat was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

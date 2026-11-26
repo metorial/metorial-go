@@ -7,19 +7,19 @@ import (
 
 // ProviderGroupsUpdateOutput represents the provider groups update output type.
 type ProviderGroupsUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique group identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the group
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the group
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the group.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -39,7 +39,9 @@ func MapProviderGroupsUpdateOutputToJSON(v *ProviderGroupsUpdateOutput) ([]byte,
 
 // ProviderGroupsUpdateBody represents the provider groups update body type.
 type ProviderGroupsUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/files"
 )
 
-// FilesEndpoint provides access to represents files that you have uploaded to Metorial. Files can be linked to various resources based on their purpose. Metorial can also automatically extract files for you, for example for data exports.
+// FilesEndpoint provides access to a file is content uploaded to an instance, such as an image or an attachment. Its purpose controls what it can be linked to.
 type FilesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,28 +17,33 @@ func NewFilesEndpoint(client *endpoint.Client) *FilesEndpoint {
 
 // FilesEndpointListParams contains optional query parameters for List.
 type FilesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by file ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return files with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// Purpose - Filter by file purpose
+	// Purpose - Only return files with one of these purposes.
 	Purpose *any `json:"purpose,omitempty"`
-	// StoreId - Filter by store ID
+	// StoreId - Only return files in one of these stores.
 	StoreId *any `json:"store_id,omitempty"`
-	// DocumentId - Filter by document ID
+	// DocumentId - Only return files attached to one of these documents.
 	DocumentId *any `json:"document_id,omitempty"`
-	// FileLinkId - Filter by file link ID
+	// FileLinkId - Only return files shared through one of these file links.
 	FileLinkId *any `json:"file_link_id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose file creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose file last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// List returns a paginated list of files owned by the instance.
+// List returns a paginated list of files.
 func (e *FilesEndpoint) List(instanceId string, params *FilesEndpointListParams) (*files.FilesListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -55,7 +60,7 @@ func (e *FilesEndpoint) List(instanceId string, params *FilesEndpointListParams)
 	return &result, nil
 }
 
-// Get retrieves details for a specific file by its ID.
+// Get retrieves a file.
 func (e *FilesEndpoint) Get(instanceId string, fileId string) (*files.FilesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "files", fileId},
@@ -67,7 +72,7 @@ func (e *FilesEndpoint) Get(instanceId string, fileId string) (*files.FilesGetOu
 	return &result, nil
 }
 
-// Delete deletes a specific file by its ID.
+// Delete deletes a file.
 func (e *FilesEndpoint) Delete(instanceId string, fileId string) (*files.FilesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "files", fileId},

@@ -6,7 +6,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/files"
 )
 
-// SkillsFilesEndpoint provides access to read and edit the files of a skill by path.
+// SkillsFilesEndpoint provides access to skill files are the versioned files that make up a skill, addressed by path.
 type SkillsFilesEndpoint struct {
 	client *endpoint.Client
 }

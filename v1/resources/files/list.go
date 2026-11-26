@@ -33,7 +33,7 @@ type FilesListOutputItemsCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesListOutputItemsCreatedByOrganizationActor represents the files list output items created by organization actor type.
+// FilesListOutputItemsCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type FilesListOutputItemsCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,62 +57,86 @@ type FilesListOutputItemsCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesListOutputItemsCreatedByConsumer represents the files list output items created by consumer type.
+// FilesListOutputItemsCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type FilesListOutputItemsCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// FilesListOutputItemsCreatedBy represents the files list output items created by type.
+// FilesListOutputItemsCreatedBy - Actor that uploaded the file.
 type FilesListOutputItemsCreatedBy struct {
-	Type              string                                          `json:"type"`
-	Name              string                                          `json:"name"`
-	ImageUrl          *string                                         `json:"image_url,omitempty"`
-	Email             *string                                         `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *FilesListOutputItemsCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *FilesListOutputItemsCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                 `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *FilesListOutputItemsCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // FilesListOutputItems represents the files list output items type.
 type FilesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The files's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The files's status
+	// Status - `deleted` after the file is deleted.
 	Status string `json:"status"`
-	// FileName - The file's name
+	// FileName - Name of the uploaded file.
 	FileName string `json:"file_name"`
-	// FileSize - The file's size in bytes
+	// FileSize - Size of the file in bytes.
 	FileSize float64 `json:"file_size"`
-	// FileType - The file's MIME type
+	// FileType - MIME type of the file.
 	FileType string `json:"file_type"`
-	// Title - The file's title
+	// Title - Label shown for the file.
 	Title string `json:"title"`
-	// Purpose - The file's purpose identifier
-	Purpose   string                         `json:"purpose"`
+	// Purpose - Why the file was uploaded. Controls what it can be used for.
+	Purpose string `json:"purpose"`
+	// CreatedBy - Actor that uploaded the file.
 	CreatedBy *FilesListOutputItemsCreatedBy `json:"created_by,omitempty"`
-	// CreatedAt - The files's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - The files's last update date
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // FilesListOutputPagination represents the files list output pagination type.
 type FilesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // FilesListOutput represents the files list output type.
 type FilesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                    `json:"object"`
 	Items      []FilesListOutputItems    `json:"items"`
 	Pagination FilesListOutputPagination `json:"pagination"`
 }
@@ -131,42 +155,47 @@ func MapFilesListOutputToJSON(v *FilesListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// FilesListQueryCreatedAt - Filter Filter by creation time by date range
+// FilesListQueryCreatedAt - Only return results whose file creation time is in this range. Set `gt`, `lt`, or both.
 type FilesListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// FilesListQueryUpdatedAt - Filter Filter by update time by date range
+// FilesListQueryUpdatedAt - Only return results whose file last update time is in this range. Set `gt`, `lt`, or both.
 type FilesListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // FilesListQuery represents the files list query type.
 type FilesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by file ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return files with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// Purpose - Filter by file purpose
+	// Purpose - Only return files with one of these purposes.
 	Purpose *any `json:"purpose,omitempty"`
-	// StoreId - Filter by store ID
+	// StoreId - Only return files in one of these stores.
 	StoreId *any `json:"store_id,omitempty"`
-	// DocumentId - Filter by document ID
+	// DocumentId - Only return files attached to one of these documents.
 	DocumentId *any `json:"document_id,omitempty"`
-	// FileLinkId - Filter by file link ID
+	// FileLinkId - Only return files shared through one of these file links.
 	FileLinkId *any `json:"file_link_id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose file creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *FilesListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose file last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *FilesListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

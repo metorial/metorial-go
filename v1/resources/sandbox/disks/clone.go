@@ -47,9 +47,12 @@ type SandboxDisksCloneOutput struct {
 	Machine *SandboxDisksCloneOutputMachine `json:"machine,omitempty"`
 	// ActiveResize - The resize currently in progress, if any
 	ActiveResize *SandboxDisksCloneOutputActiveResize `json:"active_resize,omitempty"`
-	CreatedAt    time.Time                            `json:"created_at"`
-	UpdatedAt    time.Time                            `json:"updated_at"`
-	DeletedAt    *time.Time                           `json:"deleted_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// DeletedAt - When this was deleted. `null` while active.
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
 
 // MapSandboxDisksCloneOutputFromJSON deserializes JSON data into a SandboxDisksCloneOutput.

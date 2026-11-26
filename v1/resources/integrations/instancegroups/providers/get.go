@@ -15,23 +15,38 @@ type IntegrationsInstanceGroupsProvidersGetOutputToolFilter struct {
 
 // IntegrationsInstanceGroupsProvidersGetOutput represents the integrations instance groups providers get output type.
 type IntegrationsInstanceGroupsProvidersGetOutput struct {
-	Object                        string          `json:"object"`
-	Id                            string          `json:"id"`
-	Status                        string          `json:"status"`
-	Name                          string          `json:"name"`
-	Description                   *string         `json:"description,omitempty"`
-	Metadata                      *map[string]any `json:"metadata,omitempty"`
-	IntegrationId                 string          `json:"integration_id"`
-	IntegrationInstanceGroupId    string          `json:"integration_instance_group_id"`
-	IntegrationInstanceId         string          `json:"integration_instance_id"`
-	IntegrationProviderId         *string         `json:"integration_provider_id,omitempty"`
-	IntegrationInstanceProviderId string          `json:"integration_instance_provider_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the entry.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this entry belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceGroupId - Group this entry belongs to.
+	IntegrationInstanceGroupId string `json:"integration_instance_group_id"`
+	// IntegrationInstanceId - Instance this entry’s provider comes from.
+	IntegrationInstanceId string `json:"integration_instance_id"`
+	// IntegrationProviderId - Integration provider this entry was taken from. `null` when the entry has no integration provider.
+	IntegrationProviderId *string `json:"integration_provider_id,omitempty"`
+	// IntegrationInstanceProviderId - Integration instance provider this entry links.
+	IntegrationInstanceProviderId string `json:"integration_instance_provider_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsInstanceGroupsProvidersGetOutputToolFilter `json:"tool_filter,omitempty"`
-	IsOverrideToolFilter bool                                                    `json:"is_override_tool_filter"`
-	CreatedAt            time.Time                                               `json:"created_at"`
-	UpdatedAt            time.Time                                               `json:"updated_at"`
-	ArchivedAt           *time.Time                                              `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsInstanceGroupsProvidersGetOutputToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
+	IsOverrideToolFilter bool `json:"is_override_tool_filter"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstanceGroupsProvidersGetOutputFromJSON deserializes JSON data into a IntegrationsInstanceGroupsProvidersGetOutput.

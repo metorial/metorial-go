@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessiontemplates"
 )
 
-// SessionTemplatesEndpoint provides access to session templates define reusable configurations for sessions, including which providers to include. Templates can be used to quickly create new sessions with consistent settings.
+// SessionTemplatesEndpoint provides access to a session template is a reusable configuration for creating sessions with the same providers.
 type SessionTemplatesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionTemplatesEndpoint(client *endpoint.Client) *SessionTemplatesEndpo
 
 // SessionTemplatesEndpointListParams contains optional query parameters for List.
 type SessionTemplatesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Ownership - Which resources to return under the resource ownership rules: shared (resources without an owner), usable (shared resources plus resources the caller can use), or all. Defaults to shared when ownership is enforced for the project and to all otherwise.
 	Ownership *string `json:"ownership,omitempty"`
 	// Status - Filter by status (active, archived)
@@ -40,17 +45,19 @@ type SessionTemplatesEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter templates that include provider auth configs with these IDs
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter session template creation time by date range
+	// CreatedAt - Only return results whose session template creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session template last update time by date range
+	// UpdatedAt - Only return results whose session template last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SessionTemplatesEndpointCreateBody contains the request body for Create.
 type SessionTemplatesEndpointCreateBody struct {
-	Name        string  `json:"name"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the session template.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Providers - Optional list of providers to include in the template
 	Providers *[]map[string]any `json:"providers,omitempty"`
@@ -58,9 +65,11 @@ type SessionTemplatesEndpointCreateBody struct {
 
 // SessionTemplatesEndpointUpdateBody contains the request body for Update.
 type SessionTemplatesEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data to identify or organize the session template. Replaces existing metadata.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -81,7 +90,7 @@ func (e *SessionTemplatesEndpoint) List(params *SessionTemplatesEndpointListPara
 	return &result, nil
 }
 
-// Get retrieves a specific session template by ID.
+// Get retrieves a session template.
 func (e *SessionTemplatesEndpoint) Get(sessionTemplateId string) (*sessiontemplates.SessionTemplatesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-templates", sessionTemplateId},
@@ -93,7 +102,7 @@ func (e *SessionTemplatesEndpoint) Get(sessionTemplateId string) (*sessiontempla
 	return &result, nil
 }
 
-// Create creates a new session template.
+// Create creates a session template.
 func (e *SessionTemplatesEndpoint) Create(body *SessionTemplatesEndpointCreateBody) (*sessiontemplates.SessionTemplatesCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-templates"},
@@ -106,7 +115,7 @@ func (e *SessionTemplatesEndpoint) Create(body *SessionTemplatesEndpointCreateBo
 	return &result, nil
 }
 
-// Update updates a specific session template.
+// Update updates a session template. Omitted fields keep their current value.
 func (e *SessionTemplatesEndpoint) Update(sessionTemplateId string, body *SessionTemplatesEndpointUpdateBody) (*sessiontemplates.SessionTemplatesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-templates", sessionTemplateId},
@@ -119,7 +128,7 @@ func (e *SessionTemplatesEndpoint) Update(sessionTemplateId string, body *Sessio
 	return &result, nil
 }
 
-// Delete deletes a specific session template.
+// Delete archives a session template. It stays listable with `status=archived`.
 func (e *SessionTemplatesEndpoint) Delete(sessionTemplateId string) (*sessiontemplates.SessionTemplatesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-templates", sessionTemplateId},

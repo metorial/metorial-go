@@ -7,13 +7,19 @@ import (
 
 // StoresCreateOutput represents the stores create output type.
 type StoresCreateOutput struct {
-	// Object - String representing the object's type
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Access    string    `json:"access"`
-	ItemCount float64   `json:"item_count"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
+	Access string `json:"access"`
+	// ItemCount - Number of items in the store.
+	ItemCount float64 `json:"item_count"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -33,10 +39,14 @@ func MapStoresCreateOutputToJSON(v *StoresCreateOutput) ([]byte, error) {
 
 // StoresCreateBody represents the stores create body type.
 type StoresCreateBody struct {
-	Name       string  `json:"name"`
-	Access     *string `json:"access,omitempty"`
+	// Name - Display name for the store.
+	Name string `json:"name"`
+	// Access - Who else can access the store: `private`, `public_read`, or `public_write`.
+	Access *string `json:"access,omitempty"`
+	// TemplateId - Template to create the store from, by ID. Cannot be combined with `parent_id`.
 	TemplateId *string `json:"template_id,omitempty"`
-	ParentId   *string `json:"parent_id,omitempty"`
+	// ParentId - Store to copy, by ID. Cannot be combined with `template_id`.
+	ParentId *string `json:"parent_id,omitempty"`
 }
 
 // MapStoresCreateBodyFromJSON deserializes JSON data into a StoresCreateBody.

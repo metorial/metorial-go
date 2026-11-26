@@ -33,7 +33,7 @@ type DocumentsCreateOutputCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCreateOutputCreatedByOrganizationActor represents the documents create output created by organization actor type.
+// DocumentsCreateOutputCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsCreateOutputCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,43 +57,68 @@ type DocumentsCreateOutputCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCreateOutputCreatedByConsumer represents the documents create output created by consumer type.
+// DocumentsCreateOutputCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsCreateOutputCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCreateOutputCreatedBy represents the documents create output created by type.
+// DocumentsCreateOutputCreatedBy - Actor that created the document.
 type DocumentsCreateOutputCreatedBy struct {
-	Type              string                                           `json:"type"`
-	Name              string                                           `json:"name"`
-	ImageUrl          *string                                          `json:"image_url,omitempty"`
-	Email             *string                                          `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsCreateOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsCreateOutputCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                  `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsCreateOutputCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsCreateOutput represents the documents create output type.
 type DocumentsCreateOutput struct {
-	// Object - String representing the object's type
-	Object           string                          `json:"object"`
-	Id               string                          `json:"id"`
-	Status           string                          `json:"status"`
-	Title            string                          `json:"title"`
-	Content          string                          `json:"content"`
-	FileId           string                          `json:"file_id"`
-	ParentDocumentId *string                         `json:"parent_document_id,omitempty"`
-	CurrentVersionId *string                         `json:"current_version_id,omitempty"`
-	CreatedBy        *DocumentsCreateOutputCreatedBy `json:"created_by,omitempty"`
-	CreatedAt        time.Time                       `json:"created_at"`
-	UpdatedAt        time.Time                       `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` after the document is deleted.
+	Status string `json:"status"`
+	// Title - Label shown for the document.
+	Title string `json:"title"`
+	// Content - Text body of the document.
+	Content string `json:"content"`
+	// FileId - File holding the document content.
+	FileId string `json:"file_id"`
+	// ParentDocumentId - Document this was cloned from. `null` for top-level documents.
+	ParentDocumentId *string `json:"parent_document_id,omitempty"`
+	// CurrentVersionId - Latest version of the document, by ID.
+	CurrentVersionId *string `json:"current_version_id,omitempty"`
+	// CreatedBy - Actor that created the document.
+	CreatedBy *DocumentsCreateOutputCreatedBy `json:"created_by,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapDocumentsCreateOutputFromJSON deserializes JSON data into a DocumentsCreateOutput.
@@ -112,7 +137,9 @@ func MapDocumentsCreateOutputToJSON(v *DocumentsCreateOutput) ([]byte, error) {
 
 // DocumentsCreateBody represents the documents create body type.
 type DocumentsCreateBody struct {
-	Title   string `json:"title"`
+	// Title - Title of the document.
+	Title string `json:"title"`
+	// Content - Content of the document.
 	Content string `json:"content"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/mergerequests/events"
 )
 
-// SkillsMergeRequestsEventsEndpoint provides access to inspect the activity history of skill merge requests.
+// SkillsMergeRequestsEventsEndpoint provides access to a skill merge request event is one entry in a merge request activity history.
 type SkillsMergeRequestsEventsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,13 +17,19 @@ func NewSkillsMergeRequestsEventsEndpoint(client *endpoint.Client) *SkillsMergeR
 
 // SkillsMergeRequestsEventsEndpointListParams contains optional query parameters for List.
 type SkillsMergeRequestsEventsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Type   *any     `json:"type,omitempty"`
-	// CreatedAt - Filter skill merge request event creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Type - Only return events of one of these types.
+	Type *any `json:"type,omitempty"`
+	// CreatedAt - Only return results whose skill merge request event creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
 }
 

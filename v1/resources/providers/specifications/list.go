@@ -21,54 +21,54 @@ type ProvidersSpecificationsListOutputItemsToolsOutputSchema struct {
 
 // ProvidersSpecificationsListOutputItemsToolsTags represents the providers specifications list output items tools tags type.
 type ProvidersSpecificationsListOutputItemsToolsTags struct {
-	// Destructive - Whether the tool is destructive
+	// Destructive - Whether the tool changes or deletes data.
 	Destructive *bool `json:"destructive,omitempty"`
-	// ReadOnly - Whether the tool is read-only
+	// ReadOnly - Whether the tool only reads data.
 	ReadOnly *bool `json:"read_only,omitempty"`
 }
 
 // ProvidersSpecificationsListOutputItemsTools represents the providers specifications list output items tools type.
 type ProvidersSpecificationsListOutputItemsTools struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Key - Tool key
+	// Key - Key used to call the tool over MCP.
 	Key string `json:"key"`
-	// Name - Display name of the tool
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Tool description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Tool capabilities
+	// Capabilities - What the tool can do.
 	Capabilities map[string]any `json:"capabilities"`
-	// Constraints - Tool constraints
+	// Constraints - Rules for using the tool.
 	Constraints []string `json:"constraints"`
-	// Instructions - Tool usage instructions
+	// Instructions - Guidance for calling the tool correctly.
 	Instructions []string                                                 `json:"instructions"`
 	InputSchema  *ProvidersSpecificationsListOutputItemsToolsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersSpecificationsListOutputItemsToolsOutputSchema `json:"output_schema,omitempty"`
 	Tags         *ProvidersSpecificationsListOutputItemsToolsTags         `json:"tags,omitempty"`
 	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
 	ToolCategoryKeys []string `json:"tool_category_keys"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this tool belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this tool belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProvidersSpecificationsListOutputItemsToolCategories represents the providers specifications list output items tool categories type.
 type ProvidersSpecificationsListOutputItemsToolCategories struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Key - Tool category key
+	// Key - Stable key for the tool category.
 	Key string `json:"key"`
-	// Name - Display name of the tool category
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Tool category description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of an icon or logo for the tool category
 	ImageUrl *string `json:"image_url,omitempty"`
@@ -92,33 +92,33 @@ type ProvidersSpecificationsListOutputItemsAuthMethodsOutputSchema struct {
 
 // ProvidersSpecificationsListOutputItemsAuthMethodsScopes represents the providers specifications list output items auth methods scopes type.
 type ProvidersSpecificationsListOutputItemsAuthMethodsScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // ProvidersSpecificationsListOutputItemsAuthMethods represents the providers specifications list output items auth methods type.
 type ProvidersSpecificationsListOutputItemsAuthMethods struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Auth method capabilities
+	// Capabilities - What this auth method supports.
 	Capabilities map[string]any                                                 `json:"capabilities"`
 	InputSchema  *ProvidersSpecificationsListOutputItemsAuthMethodsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *ProvidersSpecificationsListOutputItemsAuthMethodsOutputSchema `json:"output_schema,omitempty"`
@@ -126,54 +126,62 @@ type ProvidersSpecificationsListOutputItemsAuthMethods struct {
 	Scopes *[]ProvidersSpecificationsListOutputItemsAuthMethodsScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProvidersSpecificationsListOutputItems represents the providers specifications list output items type.
 type ProvidersSpecificationsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique specification identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Key - Unique specification key
+	// Key - Stable key identifying the specification.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ConfigSchema - JSON Schema defining the configuration structure
 	ConfigSchema map[string]any `json:"config_schema"`
-	// ConfigVisibility - Visibility level of the configuration
+	// ConfigVisibility - Whether config values are stored encrypted or in plain text.
 	ConfigVisibility string `json:"config_visibility"`
-	// Tools - Available tools
+	// Tools - Tools this specification offers.
 	Tools []ProvidersSpecificationsListOutputItemsTools `json:"tools"`
 	// ToolCategories - Tool categories that group the tools of this specification
 	ToolCategories []ProvidersSpecificationsListOutputItemsToolCategories `json:"tool_categories"`
-	// AuthMethods - Authentication methods
+	// AuthMethods - Auth methods this specification offers.
 	AuthMethods []ProvidersSpecificationsListOutputItemsAuthMethods `json:"auth_methods"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this specification belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProvidersSpecificationsListOutputPagination represents the providers specifications list output pagination type.
 type ProvidersSpecificationsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProvidersSpecificationsListOutput represents the providers specifications list output type.
 type ProvidersSpecificationsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                      `json:"object"`
 	Items      []ProvidersSpecificationsListOutputItems    `json:"items"`
 	Pagination ProvidersSpecificationsListOutputPagination `json:"pagination"`
 }
@@ -192,29 +200,34 @@ func MapProvidersSpecificationsListOutputToJSON(v *ProvidersSpecificationsListOu
 	return json.Marshal(v)
 }
 
-// ProvidersSpecificationsListQueryCreatedAt - Filter provider specification creation time by date range
+// ProvidersSpecificationsListQueryCreatedAt - Only return results whose provider specification creation time is in this range. Set `gt`, `lt`, or both.
 type ProvidersSpecificationsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for provider specification creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider specification creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ProvidersSpecificationsListQueryUpdatedAt - Filter provider specification last update time by date range
+// ProvidersSpecificationsListQueryUpdatedAt - Only return results whose provider specification last update time is in this range. Set `gt`, `lt`, or both.
 type ProvidersSpecificationsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for provider specification last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider specification last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ProvidersSpecificationsListQuery represents the providers specifications list query type.
 type ProvidersSpecificationsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by specification ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
@@ -227,9 +240,9 @@ type ProvidersSpecificationsListQuery struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// Search - Match a provider specification by its exact ID
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider specification creation time by date range
+	// CreatedAt - Only return results whose provider specification creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ProvidersSpecificationsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider specification last update time by date range
+	// UpdatedAt - Only return results whose provider specification last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ProvidersSpecificationsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

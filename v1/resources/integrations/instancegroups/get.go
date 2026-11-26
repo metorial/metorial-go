@@ -5,9 +5,11 @@ import (
 	"time"
 )
 
-// IntegrationsInstanceGroupsGetOutputImplementation represents the integrations instance groups get output implementation type.
+// IntegrationsInstanceGroupsGetOutputImplementation - What backs this group. `null` for a standalone group.
 type IntegrationsInstanceGroupsGetOutputImplementation struct {
-	Type               string `json:"type"`
+	// Type - Which kind of backing this is.
+	Type string `json:"type"`
+	// MagicMcpEndpointId - Magic MCP endpoint backing this group.
 	MagicMcpEndpointId string `json:"magic_mcp_endpoint_id"`
 }
 
@@ -21,23 +23,38 @@ type IntegrationsInstanceGroupsGetOutputProvidersToolFilter struct {
 
 // IntegrationsInstanceGroupsGetOutputProviders represents the integrations instance groups get output providers type.
 type IntegrationsInstanceGroupsGetOutputProviders struct {
-	Object                        string          `json:"object"`
-	Id                            string          `json:"id"`
-	Status                        string          `json:"status"`
-	Name                          string          `json:"name"`
-	Description                   *string         `json:"description,omitempty"`
-	Metadata                      *map[string]any `json:"metadata,omitempty"`
-	IntegrationId                 string          `json:"integration_id"`
-	IntegrationInstanceGroupId    string          `json:"integration_instance_group_id"`
-	IntegrationInstanceId         string          `json:"integration_instance_id"`
-	IntegrationProviderId         *string         `json:"integration_provider_id,omitempty"`
-	IntegrationInstanceProviderId string          `json:"integration_instance_provider_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the entry.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this entry belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceGroupId - Group this entry belongs to.
+	IntegrationInstanceGroupId string `json:"integration_instance_group_id"`
+	// IntegrationInstanceId - Instance this entry’s provider comes from.
+	IntegrationInstanceId string `json:"integration_instance_id"`
+	// IntegrationProviderId - Integration provider this entry was taken from. `null` when the entry has no integration provider.
+	IntegrationProviderId *string `json:"integration_provider_id,omitempty"`
+	// IntegrationInstanceProviderId - Integration instance provider this entry links.
+	IntegrationInstanceProviderId string `json:"integration_instance_provider_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsInstanceGroupsGetOutputProvidersToolFilter `json:"tool_filter,omitempty"`
-	IsOverrideToolFilter bool                                                    `json:"is_override_tool_filter"`
-	CreatedAt            time.Time                                               `json:"created_at"`
-	UpdatedAt            time.Time                                               `json:"updated_at"`
-	ArchivedAt           *time.Time                                              `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsInstanceGroupsGetOutputProvidersToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
+	IsOverrideToolFilter bool `json:"is_override_tool_filter"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstanceGroupsGetOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
@@ -86,19 +103,30 @@ type IntegrationsInstanceGroupsGetOutputAccess struct {
 
 // IntegrationsInstanceGroupsGetOutput represents the integrations instance groups get output type.
 type IntegrationsInstanceGroupsGetOutput struct {
-	Object         string                                             `json:"object"`
-	Id             string                                             `json:"id"`
-	Status         string                                             `json:"status"`
-	Name           string                                             `json:"name"`
-	Description    *string                                            `json:"description,omitempty"`
-	Metadata       *map[string]any                                    `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `draft` when created. `archived` once you archive the group.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Implementation - What backs this group. `null` for a standalone group.
 	Implementation *IntegrationsInstanceGroupsGetOutputImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsInstanceGroupsGetOutputProviders     `json:"providers"`
+	// Providers - Providers linked into this group.
+	Providers []IntegrationsInstanceGroupsGetOutputProviders `json:"providers"`
 	// Access - Resource ownership and access settings.
-	Access     IntegrationsInstanceGroupsGetOutputAccess `json:"access"`
-	CreatedAt  time.Time                                 `json:"created_at"`
-	UpdatedAt  time.Time                                 `json:"updated_at"`
-	ArchivedAt *time.Time                                `json:"archived_at,omitempty"`
+	Access IntegrationsInstanceGroupsGetOutputAccess `json:"access"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstanceGroupsGetOutputFromJSON deserializes JSON data into a IntegrationsInstanceGroupsGetOutput.

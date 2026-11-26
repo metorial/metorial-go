@@ -6,7 +6,9 @@ import (
 
 // ConsumersCreateMemberSessionOutput represents the consumers create member session output type.
 type ConsumersCreateMemberSessionOutput struct {
-	AccessToken   string  `json:"access_token"`
+	// AccessToken - Short-lived credential for the member's own consumer profile.
+	AccessToken string `json:"access_token"`
+	// CatalogItemId - Provider template created for the given integration. Omitted without one.
 	CatalogItemId *string `json:"catalog_item_id,omitempty"`
 }
 
@@ -26,6 +28,7 @@ func MapConsumersCreateMemberSessionOutputToJSON(v *ConsumersCreateMemberSession
 
 // ConsumersCreateMemberSessionBody represents the consumers create member session body type.
 type ConsumersCreateMemberSessionBody struct {
+	// IntegrationId - Integration to grant the member's consumer profile access to.
 	IntegrationId *string `json:"integration_id,omitempty"`
 }
 

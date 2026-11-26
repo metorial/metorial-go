@@ -17,9 +17,9 @@ type ProviderIssuesGetOutputDailyOccurrences struct {
 
 // ProviderIssuesGetOutput represents the provider issues get output type.
 type ProviderIssuesGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider issue identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - Where the issue comes from: a failed provider or tool call, a provider authentication failure, or a ProtoGuard detection on session traffic
 	Type string `json:"type"`
@@ -43,7 +43,7 @@ type ProviderIssuesGetOutput struct {
 	FirstSeenAt time.Time `json:"first_seen_at"`
 	// LastSeenAt - When the issue most recently occurred
 	LastSeenAt time.Time `json:"last_seen_at"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

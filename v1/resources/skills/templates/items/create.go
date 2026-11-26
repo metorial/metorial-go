@@ -5,44 +5,59 @@ import (
 	"time"
 )
 
-// SkillsTemplatesItemsCreateOutputIntegrationConfiguration represents the skills templates items create output integration configuration type.
+// SkillsTemplatesItemsCreateOutputIntegrationConfiguration - Which settings integration instances may customize.
 type SkillsTemplatesItemsCreateOutputIntegrationConfiguration struct {
-	CanAttachCustomToolFilters    bool  `json:"can_attach_custom_tool_filters"`
-	CanAttachCustomProviderConfig bool  `json:"can_attach_custom_provider_config"`
-	CanOverrideToolFilters        bool  `json:"can_override_tool_filters"`
-	EnableCallbackTools           bool  `json:"enable_callback_tools"`
+	// CanAttachCustomToolFilters - Lets integration instances attach their own tool filters.
+	CanAttachCustomToolFilters bool `json:"can_attach_custom_tool_filters"`
+	// CanAttachCustomProviderConfig - Lets integration instances use their own provider configs.
+	CanAttachCustomProviderConfig bool `json:"can_attach_custom_provider_config"`
+	// CanOverrideToolFilters - Lets integration instances ignore the integration tool filters.
+	CanOverrideToolFilters bool `json:"can_override_tool_filters"`
+	// EnableCallbackTools - Makes callback event tools available for this integration.
+	EnableCallbackTools bool `json:"enable_callback_tools"`
+	// UseIntegrationNameInToolNames - Names session providers after the integration instead of the provider. `null` uses the default.
 	UseIntegrationNameInToolNames *bool `json:"use_integration_name_in_tool_names,omitempty"`
 }
 
 // SkillsTemplatesItemsCreateOutputIntegration represents the skills templates items create output integration type.
 type SkillsTemplatesItemsCreateOutputIntegration struct {
-	Object        string                                                   `json:"object"`
-	Id            string                                                   `json:"id"`
-	Slug          string                                                   `json:"slug"`
-	Name          string                                                   `json:"name"`
-	Description   *string                                                  `json:"description,omitempty"`
-	Metadata      *map[string]any                                          `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Slug - URL-safe name, unique across Metorial.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Configuration - Which settings integration instances may customize.
 	Configuration SkillsTemplatesItemsCreateOutputIntegrationConfiguration `json:"configuration"`
-	CreatedAt     time.Time                                                `json:"created_at"`
-	UpdatedAt     time.Time                                                `json:"updated_at"`
-	ArchivedAt    *time.Time                                               `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // SkillsTemplatesItemsCreateOutputProvider represents the skills templates items create output provider type.
 type SkillsTemplatesItemsCreateOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -74,8 +89,11 @@ func MapSkillsTemplatesItemsCreateOutputToJSON(v *SkillsTemplatesItemsCreateOutp
 // SkillsTemplatesItemsCreateBody represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type SkillsTemplatesItemsCreateBody struct {
-	Type          *string `json:"type,omitempty"`
-	ProviderId    *string `json:"provider_id,omitempty"`
+	// Type - Attach an integration to the skill template.
+	Type *string `json:"type,omitempty"`
+	// ProviderId - Provider to attach to the skill template, by ID.
+	ProviderId *string `json:"provider_id,omitempty"`
+	// IntegrationId - Integration to attach to the skill template, by ID.
 	IntegrationId *string `json:"integration_id,omitempty"`
 }
 

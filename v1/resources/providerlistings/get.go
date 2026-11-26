@@ -13,7 +13,7 @@ type ProviderListingsGetOutputAttributes struct {
 	IsCustomized bool `json:"is_customized"`
 	// IsMetorial - Whether Metorial-maintained
 	IsMetorial bool `json:"is_metorial"`
-	// IsVerified - Whether verified
+	// IsVerified - Reviewed and trusted by Metorial.
 	IsVerified bool `json:"is_verified"`
 	// IsOfficial - Whether official integration
 	IsOfficial bool `json:"is_official"`
@@ -21,45 +21,45 @@ type ProviderListingsGetOutputAttributes struct {
 
 // ProviderListingsGetOutputProviderPublisher represents the provider listings get output provider publisher type.
 type ProviderListingsGetOutputProviderPublisher struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique publisher identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the publisher
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the publisher
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// ImageUrl - URL of the publisher logo
 	ImageUrl string `json:"image_url"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderListingsGetOutputProviderCurrentVersion represents the provider listings get output provider current version type.
 type ProviderListingsGetOutputProviderCurrentVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Version - Version identifier string
+	// Version - Release label for the version.
 	Version string `json:"version"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this version belongs to.
 	ProviderId string `json:"provider_id"`
-	// IsCurrent - Whether this is the current version
+	// IsCurrent - The version deployments follow unless locked to another.
 	IsCurrent bool `json:"is_current"`
-	// Name - Version name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Version description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this version belongs to.
 	SpecificationId *string `json:"specification_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -73,107 +73,107 @@ type ProviderListingsGetOutputProviderOauthAutoRegistration struct {
 type ProviderListingsGetOutputProviderOauth struct {
 	// Status - OAuth status
 	Status string `json:"status"`
-	// CallbackUrl - OAuth callback URL
+	// CallbackUrl - Callback URL to register on your OAuth app.
 	CallbackUrl      *string                                                `json:"callback_url,omitempty"`
 	AutoRegistration ProviderListingsGetOutputProviderOauthAutoRegistration `json:"auto_registration"`
 }
 
 // ProviderListingsGetOutputProvider represents the provider listings get output provider type.
 type ProviderListingsGetOutputProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Access - Access level of the provider
+	// Access - `public` providers are available to every instance. `tenant` providers are your own.
 	Access string `json:"access"`
-	// Status - Current status of the provider
+	// Status - Archived once the provider is archived.
 	Status         string                                           `json:"status"`
 	Publisher      ProviderListingsGetOutputProviderPublisher       `json:"publisher"`
 	CurrentVersion *ProviderListingsGetOutputProviderCurrentVersion `json:"current_version,omitempty"`
 	Oauth          *ProviderListingsGetOutputProviderOauth          `json:"oauth,omitempty"`
 	// Identifier - Provider identifier
 	Identifier string `json:"identifier"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderListingsGetOutputCategories represents the provider listings get output categories type.
 type ProviderListingsGetOutputCategories struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique category identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the category
+	// Name - Display name.
 	Name string `json:"name"`
 	// Description - Description of providers in this category
 	Description string `json:"description"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the category.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderListingsGetOutputCollections represents the provider listings get output collections type.
 type ProviderListingsGetOutputCollections struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique collection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the collection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the collection
+	// Description - Free-text description.
 	Description string `json:"description"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the collection.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderListingsGetOutputGroups represents the provider listings get output groups type.
 type ProviderListingsGetOutputGroups struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique group identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the group
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the group
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the group.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ProviderListingsGetOutput represents the provider listings get output type.
 type ProviderListingsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique listing identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Attributes - Listing attribute flags
 	Attributes ProviderListingsGetOutputAttributes `json:"attributes"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Full description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
 	// ImageUrl - URL of the listing logo/icon
 	ImageUrl string `json:"image_url"`
@@ -186,11 +186,11 @@ type ProviderListingsGetOutput struct {
 	Categories []ProviderListingsGetOutputCategories `json:"categories"`
 	// Collections - Provider collections this provider belongs to
 	Collections []ProviderListingsGetOutputCollections `json:"collections"`
-	// Groups - User groups with access to this provider
+	// Groups - Provider groups this listing is organized into.
 	Groups []ProviderListingsGetOutputGroups `json:"groups"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 

@@ -2,10 +2,11 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/magicmcpservers/providers"
 )
 
-// MagicMcpServersProvidersEndpoint provides access to magic MCP servers are stable MCP entrypoints backed by one Subspace session template.
+// MagicMcpServersProvidersEndpoint provides access to a magic MCP server is a stable MCP entrypoint with its own providers and tool filters. Servers can be grouped and bound to tokens, or combined behind an endpoint.
 type MagicMcpServersProvidersEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,40 +18,62 @@ func NewMagicMcpServersProvidersEndpoint(client *endpoint.Client) *MagicMcpServe
 
 // MagicMcpServersProvidersEndpointListParams contains optional query parameters for List.
 type MagicMcpServersProvidersEndpointListParams struct {
-	Limit                         *float64 `json:"limit,omitempty"`
-	After                         *string  `json:"after,omitempty"`
-	Before                        *string  `json:"before,omitempty"`
-	Cursor                        *string  `json:"cursor,omitempty"`
-	Order                         *string  `json:"order,omitempty"`
-	Status                        *any     `json:"status,omitempty"`
-	Id                            *any     `json:"id,omitempty"`
-	ProviderId                    *any     `json:"provider_id,omitempty"`
-	IntegrationProviderId         *any     `json:"integration_provider_id,omitempty"`
-	IntegrationInstanceProviderId *any     `json:"integration_instance_provider_id,omitempty"`
-	ProviderDeploymentId          *any     `json:"provider_deployment_id,omitempty"`
-	ProviderConfigId              *any     `json:"provider_config_id,omitempty"`
-	ProviderAuthConfigId          *any     `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter magic MCP server provider creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return providers with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Id - Only return providers with these IDs.
+	Id *any `json:"id,omitempty"`
+	// ProviderId - Only return providers using one of these providers.
+	ProviderId *any `json:"provider_id,omitempty"`
+	// IntegrationProviderId - Only return providers using one of these integration providers.
+	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
+	// IntegrationInstanceProviderId - Only return providers using one of these integration instance providers.
+	IntegrationInstanceProviderId *any `json:"integration_instance_provider_id,omitempty"`
+	// ProviderDeploymentId - Only return providers using one of these deployments.
+	ProviderDeploymentId *any `json:"provider_deployment_id,omitempty"`
+	// ProviderConfigId - Only return providers using one of these configurations.
+	ProviderConfigId *any `json:"provider_config_id,omitempty"`
+	// ProviderAuthConfigId - Only return providers using one of these auth configurations.
+	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
+	// CreatedAt - Only return results whose magic MCP server provider creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter magic MCP server provider last update time by date range
+	// UpdatedAt - Only return results whose magic MCP server provider last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // MagicMcpServersProvidersEndpointCreateBody contains the request body for Create.
 type MagicMcpServersProvidersEndpointCreateBody struct {
-	ProviderId           string  `json:"provider_id"`
+	// ProviderId - Provider to add to the server.
+	ProviderId string `json:"provider_id"`
+	// ProviderDeploymentId - Deployment of the provider to use.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	ProviderConfigId     *string `json:"provider_config_id,omitempty"`
-	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
-	ToolFilters          *any    `json:"tool_filters,omitempty"`
+	// ProviderConfigId - Configuration of the provider to use. `null` clears it.
+	ProviderConfigId *nullable.Nullable[string] `json:"provider_config_id,omitempty"`
+	// ProviderAuthConfigId - Auth configuration of the provider to use. `null` clears it.
+	ProviderAuthConfigId *nullable.Nullable[string] `json:"provider_auth_config_id,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // MagicMcpServersProvidersEndpointUpdateBody contains the request body for Update.
 type MagicMcpServersProvidersEndpointUpdateBody struct {
+	// ProviderDeploymentId - Deployment of the provider to use.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	ProviderConfigId     *string `json:"provider_config_id,omitempty"`
-	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
-	ToolFilters          *any    `json:"tool_filters,omitempty"`
+	// ProviderConfigId - Configuration of the provider to use. `null` clears it.
+	ProviderConfigId *nullable.Nullable[string] `json:"provider_config_id,omitempty"`
+	// ProviderAuthConfigId - Auth configuration of the provider to use. `null` clears it.
+	ProviderAuthConfigId *nullable.Nullable[string] `json:"provider_auth_config_id,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // List returns the backing integration instance providers configured for a magic MCP server.
@@ -70,7 +93,7 @@ func (e *MagicMcpServersProvidersEndpoint) List(instanceId string, magicMcpServe
 	return &result, nil
 }
 
-// Create creates a configurable provider row for a magic MCP server.
+// Create adds a provider to a magic MCP server.
 func (e *MagicMcpServersProvidersEndpoint) Create(instanceId string, magicMcpServerId string, body *MagicMcpServersProvidersEndpointCreateBody) (*providers.MagicMcpServersProvidersCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-servers", magicMcpServerId, "providers"},
@@ -83,7 +106,7 @@ func (e *MagicMcpServersProvidersEndpoint) Create(instanceId string, magicMcpSer
 	return &result, nil
 }
 
-// Get retrieves a specific backing integration instance provider for a magic MCP server.
+// Get retrieves a provider of a magic MCP server.
 func (e *MagicMcpServersProvidersEndpoint) Get(instanceId string, magicMcpServerId string, magicMcpServerProviderId string) (*providers.MagicMcpServersProvidersGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-servers", magicMcpServerId, "providers", magicMcpServerProviderId},
@@ -95,7 +118,7 @@ func (e *MagicMcpServersProvidersEndpoint) Get(instanceId string, magicMcpServer
 	return &result, nil
 }
 
-// Update updates a backing integration provider and then sets the corresponding integration instance provider for a magic MCP server.
+// Update updates a provider of a magic MCP server. Omitted fields keep their current value.
 func (e *MagicMcpServersProvidersEndpoint) Update(instanceId string, magicMcpServerId string, magicMcpServerProviderId string, body *MagicMcpServersProvidersEndpointUpdateBody) (*providers.MagicMcpServersProvidersUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "magic-mcp-servers", magicMcpServerId, "providers", magicMcpServerProviderId},

@@ -36,32 +36,52 @@ type SkillsMarketplacesPluginsListOutputItemsSkillPluginSource struct {
 	LastSyncedAt *time.Time `json:"last_synced_at,omitempty"`
 }
 
-// SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkillImage represents the skills marketplaces plugins list output items skill plugin skills skill image type.
+// SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkillImage - Image shown for the skill.
 type SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkillImage struct {
-	Object string  `json:"object"`
-	Type   string  `json:"type"`
-	Icon   *string `json:"icon,omitempty"`
-	Color  *string `json:"color,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - Where the skill image comes from.
+	Type string `json:"type"`
+	// Icon - Library icon ID. `null` unless `type` is `icon`.
+	Icon *string `json:"icon,omitempty"`
+	// Color - Tile color. `null` unless `type` is `icon`.
+	Color *string `json:"color,omitempty"`
 }
 
 // SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkill represents the skills marketplaces plugins list output items skill plugin skills skill type.
 type SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkill struct {
-	Object            string                                                              `json:"object"`
-	Id                string                                                              `json:"id"`
-	Status            string                                                              `json:"status"`
-	Slug              string                                                              `json:"slug"`
-	Name              string                                                              `json:"name"`
-	Description       *string                                                             `json:"description,omitempty"`
-	ImageUrl          string                                                              `json:"image_url"`
-	Image             SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkillImage `json:"image"`
-	ClientName        string                                                              `json:"client_name"`
-	ClientDescription *string                                                             `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any                                                     `json:"client_metadata,omitempty"`
-	License           *string                                                             `json:"license,omitempty"`
-	Compatibility     *string                                                             `json:"compatibility,omitempty"`
-	Metadata          *map[string]any                                                     `json:"metadata,omitempty"`
-	CreatedAt         time.Time                                                           `json:"created_at"`
-	UpdatedAt         time.Time                                                           `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Whether the skill is available, archived, or deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - Public URL of the skill image.
+	ImageUrl string `json:"image_url"`
+	// Image - Image shown for the skill.
+	Image SkillsMarketplacesPluginsListOutputItemsSkillPluginSkillsSkillImage `json:"image"`
+	// ClientName - Client-facing skill name.
+	ClientName string `json:"client_name"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsMarketplacesPluginsListOutputItemsSkillPluginSkills represents the skills marketplaces plugins list output items skill plugin skills type.
@@ -117,12 +137,20 @@ type SkillsMarketplacesPluginsListOutputItems struct {
 
 // SkillsMarketplacesPluginsListOutputPagination represents the skills marketplaces plugins list output pagination type.
 type SkillsMarketplacesPluginsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsMarketplacesPluginsListOutput represents the skills marketplaces plugins list output type.
 type SkillsMarketplacesPluginsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                        `json:"object"`
 	Items      []SkillsMarketplacesPluginsListOutputItems    `json:"items"`
 	Pagination SkillsMarketplacesPluginsListOutputPagination `json:"pagination"`
 }
@@ -141,36 +169,45 @@ func MapSkillsMarketplacesPluginsListOutputToJSON(v *SkillsMarketplacesPluginsLi
 	return json.Marshal(v)
 }
 
-// SkillsMarketplacesPluginsListQueryCreatedAt - Filter skill marketplace plugin creation time by date range
+// SkillsMarketplacesPluginsListQueryCreatedAt - Only return results whose skill marketplace plugin creation time is in this range. Set `gt`, `lt`, or both.
 type SkillsMarketplacesPluginsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for skill marketplace plugin creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for skill marketplace plugin creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// SkillsMarketplacesPluginsListQueryUpdatedAt - Filter skill marketplace plugin last update time by date range
+// SkillsMarketplacesPluginsListQueryUpdatedAt - Only return results whose skill marketplace plugin last update time is in this range. Set `gt`, `lt`, or both.
 type SkillsMarketplacesPluginsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for skill marketplace plugin last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for skill marketplace plugin last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // SkillsMarketplacesPluginsListQuery represents the skills marketplaces plugins list query type.
 type SkillsMarketplacesPluginsListQuery struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	SkillPluginId        *any     `json:"skill_plugin_id,omitempty"`
-	Status               *any     `json:"status,omitempty"`
-	SkillConfigurationId *any     `json:"skill_configuration_id,omitempty"`
-	// CreatedAt - Filter skill marketplace plugin creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return marketplace plugins with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SkillPluginId - Only return links for one of these skill plugins.
+	SkillPluginId *any `json:"skill_plugin_id,omitempty"`
+	// Status - Only return marketplace plugins with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// SkillConfigurationId - Only return marketplace plugins using one of these skill configurations.
+	SkillConfigurationId *any `json:"skill_configuration_id,omitempty"`
+	// CreatedAt - Only return results whose skill marketplace plugin creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *SkillsMarketplacesPluginsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter skill marketplace plugin last update time by date range
+	// UpdatedAt - Only return results whose skill marketplace plugin last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *SkillsMarketplacesPluginsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

@@ -15,7 +15,7 @@ func NewInstanceEndpoint(client *endpoint.Client) *InstanceEndpoint {
 	return &InstanceEndpoint{client: client}
 }
 
-// Get retrieves metadata and configuration details for a specific instance.
+// Get retrieves an instance.
 func (e *InstanceEndpoint) Get() (*instance.InstanceGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instance"},

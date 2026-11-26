@@ -141,7 +141,7 @@ type SandboxMachinesCreateOutput struct {
 	Metadata map[string]any `json:"metadata"`
 	// Id - The machine's unique identifier
 	Id string `json:"id"`
-	// Status - The machine's current status
+	// Status - The machine’s runtime state, for example `running` or `paused`. `terminated` once the machine is deleted.
 	Status string `json:"status"`
 	// Name - The machine's name
 	Name *string `json:"name,omitempty"`
@@ -189,11 +189,11 @@ type SandboxMachinesCreateOutput struct {
 	CreatedAt time.Time `json:"created_at"`
 	// RunningAt - When the machine last started running
 	RunningAt *time.Time `json:"running_at,omitempty"`
-	// PausedAt - When the machine was last paused
+	// PausedAt - When the machine last paused. `null` if it never paused.
 	PausedAt *time.Time `json:"paused_at,omitempty"`
-	// HibernatedAt - When the machine was last hibernated
+	// HibernatedAt - When the machine last hibernated. `null` if it never hibernated.
 	HibernatedAt *time.Time `json:"hibernated_at,omitempty"`
-	// TerminatedAt - When the machine was terminated
+	// TerminatedAt - When the machine terminated. `null` while it exists.
 	TerminatedAt *time.Time `json:"terminated_at,omitempty"`
 }
 

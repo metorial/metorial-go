@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/portals/consumergroups"
 )
 
-// PortalsConsumerGroupsEndpoint provides access to manage the consumer groups that drive portal visibility and access rules.
+// PortalsConsumerGroupsEndpoint provides access to a portal consumer group is a set of consumers on a portal. Groups decide which listings each consumer sees.
 type PortalsConsumerGroupsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,27 +17,40 @@ func NewPortalsConsumerGroupsEndpoint(client *endpoint.Client) *PortalsConsumerG
 
 // PortalsConsumerGroupsEndpointListParams contains optional query parameters for List.
 type PortalsConsumerGroupsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Status *any     `json:"status,omitempty"`
-	Search *string  `json:"search,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return groups with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Search - Search by name or description.
+	Search *string `json:"search,omitempty"`
 }
 
 // PortalsConsumerGroupsEndpointCreateBody contains the request body for Create.
 type PortalsConsumerGroupsEndpointCreateBody struct {
-	Name        string  `json:"name"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	IsDefault   *bool   `json:"is_default,omitempty"`
+	// IsDefault - Whether this is a default group on the portal.
+	IsDefault *bool `json:"is_default,omitempty"`
 }
 
 // PortalsConsumerGroupsEndpointUpdateBody contains the request body for Update.
 type PortalsConsumerGroupsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	IsDefault   *bool   `json:"is_default,omitempty"`
+	// IsDefault - Whether this is a default group on the portal.
+	IsDefault *bool `json:"is_default,omitempty"`
 }
 
 // List returns a paginated list of consumer groups for a portal.
@@ -57,7 +70,7 @@ func (e *PortalsConsumerGroupsEndpoint) List(instanceId string, portalId string,
 	return &result, nil
 }
 
-// Get retrieves a portal consumer group by ID.
+// Get retrieves a portal consumer group.
 func (e *PortalsConsumerGroupsEndpoint) Get(instanceId string, portalId string, consumerGroupId string) (*consumergroups.PortalsConsumerGroupsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "consumer-groups", consumerGroupId},
@@ -69,7 +82,7 @@ func (e *PortalsConsumerGroupsEndpoint) Get(instanceId string, portalId string, 
 	return &result, nil
 }
 
-// Create creates a new consumer group for the portal.
+// Create creates a consumer group for a portal.
 func (e *PortalsConsumerGroupsEndpoint) Create(instanceId string, portalId string, body *PortalsConsumerGroupsEndpointCreateBody) (*consumergroups.PortalsConsumerGroupsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "consumer-groups"},
@@ -82,7 +95,7 @@ func (e *PortalsConsumerGroupsEndpoint) Create(instanceId string, portalId strin
 	return &result, nil
 }
 
-// Update updates a consumer group for the portal.
+// Update updates a portal consumer group. Omitted fields keep their current value.
 func (e *PortalsConsumerGroupsEndpoint) Update(instanceId string, portalId string, consumerGroupId string, body *PortalsConsumerGroupsEndpointUpdateBody) (*consumergroups.PortalsConsumerGroupsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "consumer-groups", consumerGroupId},
@@ -95,7 +108,7 @@ func (e *PortalsConsumerGroupsEndpoint) Update(instanceId string, portalId strin
 	return &result, nil
 }
 
-// Delete archives a consumer group for the portal.
+// Delete archives a portal consumer group.
 func (e *PortalsConsumerGroupsEndpoint) Delete(instanceId string, portalId string, consumerGroupId string) (*consumergroups.PortalsConsumerGroupsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "portals", portalId, "consumer-groups", consumerGroupId},

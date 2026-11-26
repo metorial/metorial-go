@@ -2,10 +2,11 @@ package management
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/mergerequests/comments"
 )
 
-// SkillsMergeRequestsCommentsEndpoint provides access to discuss skill merge requests and individual proposed changes.
+// SkillsMergeRequestsCommentsEndpoint provides access to a skill merge request comment is a comment on a merge request or one of its proposed changes.
 type SkillsMergeRequestsCommentsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,28 +18,39 @@ func NewSkillsMergeRequestsCommentsEndpoint(client *endpoint.Client) *SkillsMerg
 
 // SkillsMergeRequestsCommentsEndpointListParams contains optional query parameters for List.
 type SkillsMergeRequestsCommentsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	ItemId *string  `json:"item_id,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// ItemId - Only return comments on this proposed change.
+	ItemId *string `json:"item_id,omitempty"`
 }
 
 // SkillsMergeRequestsCommentsEndpointCreateBody contains the request body for Create.
 type SkillsMergeRequestsCommentsEndpointCreateBody struct {
-	ItemId             *string `json:"item_id,omitempty"`
+	// ItemId - Proposed change to comment on. Omit to comment on the merge request.
+	ItemId *string `json:"item_id,omitempty"`
+	// InReplyToCommentId - Comment this replies to, by ID.
 	InReplyToCommentId *string `json:"in_reply_to_comment_id,omitempty"`
-	Body               string  `json:"body"`
-	Path               *string `json:"path,omitempty"`
+	// Body - Comment text.
+	Body string `json:"body"`
+	// Path - File path the comment refers to. `null` for general comments.
+	Path *nullable.Nullable[string] `json:"path,omitempty"`
 }
 
 // SkillsMergeRequestsCommentsEndpointUpdateBody contains the request body for Update.
 type SkillsMergeRequestsCommentsEndpointUpdateBody struct {
+	// Body - Comment text.
 	Body string `json:"body"`
 }
 
-// List lists comments on a skill merge request or one of its items.
+// List returns a paginated list of skill merge request comments.
 func (e *SkillsMergeRequestsCommentsEndpoint) List(instanceId string, skillMergeRequestId string, params *SkillsMergeRequestsCommentsEndpointListParams) (*comments.SkillsMergeRequestsCommentsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -55,7 +67,7 @@ func (e *SkillsMergeRequestsCommentsEndpoint) List(instanceId string, skillMerge
 	return &result, nil
 }
 
-// Create adds a comment to a skill merge request or one of its items.
+// Create creates a comment on a skill merge request or one of its items.
 func (e *SkillsMergeRequestsCommentsEndpoint) Create(instanceId string, skillMergeRequestId string, body *SkillsMergeRequestsCommentsEndpointCreateBody) (*comments.SkillsMergeRequestsCommentsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "skill-merge-requests", skillMergeRequestId, "comments"},

@@ -7,13 +7,13 @@ import (
 
 // ChatsListOutputItems represents the chats list output items type.
 type ChatsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat status
+	// Status - `archived` once the chat or its connection is archived. Archived chats stay listable.
 	Status string `json:"status"`
-	// Name - Display name of the chat
+	// Name - Display name.
 	Name string `json:"name"`
 	// ChatConnectionId - The chat connection this chat was created through
 	ChatConnectionId string `json:"chat_connection_id"`
@@ -25,20 +25,28 @@ type ChatsListOutputItems struct {
 	ProviderId string `json:"provider_id"`
 	// WorkspaceId - The workspace this chat is connected to, once one has been resolved
 	WorkspaceId *string `json:"workspace_id,omitempty"`
-	// CreatedAt - Timestamp when the chat was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatsListOutputPagination represents the chats list output pagination type.
 type ChatsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatsListOutput represents the chats list output type.
 type ChatsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                    `json:"object"`
 	Items      []ChatsListOutputItems    `json:"items"`
 	Pagination ChatsListOutputPagination `json:"pagination"`
 }
@@ -57,44 +65,49 @@ func MapChatsListOutputToJSON(v *ChatsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// ChatsListQueryCreatedAt - Filter chat creation time by date range
+// ChatsListQueryCreatedAt - Only return results whose chat creation time is in this range. Set `gt`, `lt`, or both.
 type ChatsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for chat creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ChatsListQueryUpdatedAt - Filter chat last update time by date range
+// ChatsListQueryUpdatedAt - Only return results whose chat last update time is in this range. Set `gt`, `lt`, or both.
 type ChatsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for chat last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ChatsListQuery represents the chats list query type.
 type ChatsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by status
+	// Status - Only return chats with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by chat ID(s)
+	// Id - Only return chats with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// ChatConnectionId - Filter by chat connection ID(s)
+	// ChatConnectionId - Only return chats for one of these chat connections.
 	ChatConnectionId *any `json:"chat_connection_id,omitempty"`
-	// ChatInstanceId - Filter by chat instance ID(s)
+	// ChatInstanceId - Only return chats for one of these chat instances.
 	ChatInstanceId *any `json:"chat_instance_id,omitempty"`
-	// ChatInstanceProviderId - Filter by chat instance provider ID(s)
+	// ChatInstanceProviderId - Only return chats for one of these chat instance providers.
 	ChatInstanceProviderId *any `json:"chat_instance_provider_id,omitempty"`
-	// CreatedAt - Filter chat creation time by date range
+	// CreatedAt - Only return results whose chat creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ChatsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter chat last update time by date range
+	// UpdatedAt - Only return results whose chat last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ChatsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

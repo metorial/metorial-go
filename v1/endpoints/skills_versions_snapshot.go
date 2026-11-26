@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/versions/snapshot"
 )
 
-// SkillsVersionsSnapshotEndpoint provides access to inspect version history and snapshots for a skill.
+// SkillsVersionsSnapshotEndpoint provides access to a skill version is a snapshot of a skill at a point in time.
 type SkillsVersionsSnapshotEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewSkillsVersionsSnapshotEndpoint(client *endpoint.Client) *SkillsVersionsS
 	return &SkillsVersionsSnapshotEndpoint{client: client}
 }
 
-// Get retrieves the store-backed snapshot for a specific skill version.
+// Get retrieves the content snapshot for a skill version.
 func (e *SkillsVersionsSnapshotEndpoint) Get(skillId string, skillVersionId string) (*snapshot.SkillsVersionsSnapshotGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "versions", skillVersionId, "snapshot"},

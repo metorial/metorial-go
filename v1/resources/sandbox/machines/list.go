@@ -141,7 +141,7 @@ type SandboxMachinesListOutputItems struct {
 	Metadata map[string]any `json:"metadata"`
 	// Id - The machine's unique identifier
 	Id string `json:"id"`
-	// Status - The machine's current status
+	// Status - The machine’s runtime state, for example `running` or `paused`. `terminated` once the machine is deleted.
 	Status string `json:"status"`
 	// Name - The machine's name
 	Name *string `json:"name,omitempty"`
@@ -189,22 +189,30 @@ type SandboxMachinesListOutputItems struct {
 	CreatedAt time.Time `json:"created_at"`
 	// RunningAt - When the machine last started running
 	RunningAt *time.Time `json:"running_at,omitempty"`
-	// PausedAt - When the machine was last paused
+	// PausedAt - When the machine last paused. `null` if it never paused.
 	PausedAt *time.Time `json:"paused_at,omitempty"`
-	// HibernatedAt - When the machine was last hibernated
+	// HibernatedAt - When the machine last hibernated. `null` if it never hibernated.
 	HibernatedAt *time.Time `json:"hibernated_at,omitempty"`
-	// TerminatedAt - When the machine was terminated
+	// TerminatedAt - When the machine terminated. `null` while it exists.
 	TerminatedAt *time.Time `json:"terminated_at,omitempty"`
 }
 
 // SandboxMachinesListOutputPagination represents the sandbox machines list output pagination type.
 type SandboxMachinesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SandboxMachinesListOutput represents the sandbox machines list output type.
 type SandboxMachinesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                              `json:"object"`
 	Items      []SandboxMachinesListOutputItems    `json:"items"`
 	Pagination SandboxMachinesListOutputPagination `json:"pagination"`
 }
@@ -225,11 +233,16 @@ func MapSandboxMachinesListOutputToJSON(v *SandboxMachinesListOutput) ([]byte, e
 
 // SandboxMachinesListQuery represents the sandbox machines list query type.
 type SandboxMachinesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by resource IDs
 	Id *any `json:"id,omitempty"`
 	// Status - Filter by whether the machine still exists (active) or was terminated (deleted). Defaults to active.

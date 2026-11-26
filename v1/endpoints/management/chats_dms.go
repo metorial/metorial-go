@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/chats/dms"
 )
 
-// ChatsDmsEndpoint provides access to open direct message channels with one or more users on a chat.
+// ChatsDmsEndpoint provides access to a chat DM is a direct message channel with one or more users on a chat.
 type ChatsDmsEndpoint struct {
 	client *endpoint.Client
 }

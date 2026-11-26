@@ -33,7 +33,7 @@ type DocumentsListOutputItemsCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsListOutputItemsCreatedByOrganizationActor represents the documents list output items created by organization actor type.
+// DocumentsListOutputItemsCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsListOutputItemsCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,53 +57,86 @@ type DocumentsListOutputItemsCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsListOutputItemsCreatedByConsumer represents the documents list output items created by consumer type.
+// DocumentsListOutputItemsCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsListOutputItemsCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsListOutputItemsCreatedBy represents the documents list output items created by type.
+// DocumentsListOutputItemsCreatedBy - Actor that created the document.
 type DocumentsListOutputItemsCreatedBy struct {
-	Type              string                                              `json:"type"`
-	Name              string                                              `json:"name"`
-	ImageUrl          *string                                             `json:"image_url,omitempty"`
-	Email             *string                                             `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsListOutputItemsCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsListOutputItemsCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                     `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsListOutputItemsCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsListOutputItems represents the documents list output items type.
 type DocumentsListOutputItems struct {
-	// Object - String representing the object's type
-	Object           string                             `json:"object"`
-	Id               string                             `json:"id"`
-	Status           string                             `json:"status"`
-	Title            string                             `json:"title"`
-	Content          string                             `json:"content"`
-	FileId           string                             `json:"file_id"`
-	ParentDocumentId *string                            `json:"parent_document_id,omitempty"`
-	CurrentVersionId *string                            `json:"current_version_id,omitempty"`
-	CreatedBy        *DocumentsListOutputItemsCreatedBy `json:"created_by,omitempty"`
-	CreatedAt        time.Time                          `json:"created_at"`
-	UpdatedAt        time.Time                          `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` after the document is deleted.
+	Status string `json:"status"`
+	// Title - Label shown for the document.
+	Title string `json:"title"`
+	// Content - Text body of the document.
+	Content string `json:"content"`
+	// FileId - File holding the document content.
+	FileId string `json:"file_id"`
+	// ParentDocumentId - Document this was cloned from. `null` for top-level documents.
+	ParentDocumentId *string `json:"parent_document_id,omitempty"`
+	// CurrentVersionId - Latest version of the document, by ID.
+	CurrentVersionId *string `json:"current_version_id,omitempty"`
+	// CreatedBy - Actor that created the document.
+	CreatedBy *DocumentsListOutputItemsCreatedBy `json:"created_by,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // DocumentsListOutputPagination represents the documents list output pagination type.
 type DocumentsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // DocumentsListOutput represents the documents list output type.
 type DocumentsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                        `json:"object"`
 	Items      []DocumentsListOutputItems    `json:"items"`
 	Pagination DocumentsListOutputPagination `json:"pagination"`
 }
@@ -122,40 +155,45 @@ func MapDocumentsListOutputToJSON(v *DocumentsListOutput) ([]byte, error) {
 	return json.Marshal(v)
 }
 
-// DocumentsListQueryCreatedAt - Filter Filter by creation time by date range
+// DocumentsListQueryCreatedAt - Only return results whose document creation time is in this range. Set `gt`, `lt`, or both.
 type DocumentsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// DocumentsListQueryUpdatedAt - Filter Filter by update time by date range
+// DocumentsListQueryUpdatedAt - Only return results whose document last update time is in this range. Set `gt`, `lt`, or both.
 type DocumentsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for Filter by update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for Filter by update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // DocumentsListQuery represents the documents list query type.
 type DocumentsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by document ID
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return documents with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// FileId - Filter by file ID
+	// FileId - Only return documents stored in one of these files.
 	FileId *any `json:"file_id,omitempty"`
-	// StoreId - Filter by store ID
+	// StoreId - Only return documents in one of these stores.
 	StoreId *any `json:"store_id,omitempty"`
-	// ParentDocumentId - Filter by parent document ID
+	// ParentDocumentId - Only return documents cloned from one of these documents.
 	ParentDocumentId *any `json:"parent_document_id,omitempty"`
-	// CreatedAt - Filter Filter by creation time by date range
+	// CreatedAt - Only return results whose document creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *DocumentsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter Filter by update time by date range
+	// UpdatedAt - Only return results whose document last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *DocumentsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

@@ -7,6 +7,7 @@ import (
 // ChatsMessagesReactionsDeleteOutputReactionsEmoji represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsMessagesReactionsDeleteOutputReactionsEmoji struct {
+	// Type - Provider-specific custom emoji.
 	Type *string `json:"type,omitempty"`
 	// Value - The unicode emoji shortcode
 	Value *string `json:"value,omitempty"`
@@ -38,11 +39,13 @@ type ChatsMessagesReactionsDeleteOutputReactionsAuthors struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - URL of the author's avatar
 	ImageUrl *string `json:"imageUrl,omitempty"`
-	Raw      *any    `json:"raw,omitempty"`
+	// Raw - Raw reaction payload from the provider.
+	Raw *any `json:"raw,omitempty"`
 }
 
 // ChatsMessagesReactionsDeleteOutputReactions represents the chats messages reactions delete output reactions type.
 type ChatsMessagesReactionsDeleteOutputReactions struct {
+	// Emoji - Emoji used for the reaction.
 	Emoji ChatsMessagesReactionsDeleteOutputReactionsEmoji `json:"emoji"`
 	// Count - Number of times this emoji was used to react
 	Count float64 `json:"count"`
@@ -52,7 +55,7 @@ type ChatsMessagesReactionsDeleteOutputReactions struct {
 
 // ChatsMessagesReactionsDeleteOutput represents the chats messages reactions delete output type.
 type ChatsMessagesReactionsDeleteOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Reactions - Reactions left on the message, as reported by the provider
 	Reactions []ChatsMessagesReactionsDeleteOutputReactions `json:"reactions"`

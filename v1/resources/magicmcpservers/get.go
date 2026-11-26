@@ -7,9 +7,12 @@ import (
 
 // MagicMcpServersGetOutputEndpoints represents the magic mcp servers get output endpoints type.
 type MagicMcpServersGetOutputEndpoints struct {
-	Id    string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Alias - Connection slug for the server.
 	Alias string `json:"alias"`
-	Url   string `json:"url"`
+	// Url - Connection URL for the server.
+	Url string `json:"url"`
 }
 
 // MagicMcpServersGetOutputProvidersToolFilter represents one of several possible types.
@@ -22,41 +25,41 @@ type MagicMcpServersGetOutputProvidersToolFilter struct {
 
 // MagicMcpServersGetOutputProvidersProvider represents the magic mcp servers get output providers provider type.
 type MagicMcpServersGetOutputProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersGetOutputProvidersDeployment represents the magic mcp servers get output providers deployment type.
 type MagicMcpServersGetOutputProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -76,31 +79,31 @@ type MagicMcpServersGetOutputProvidersAuthMethodOutputSchema struct {
 
 // MagicMcpServersGetOutputProvidersAuthMethodScopes represents the magic mcp servers get output providers auth method scopes type.
 type MagicMcpServersGetOutputProvidersAuthMethodScopes struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique scope identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Scope - OAuth scope string
+	// Scope - The scope value sent to the provider.
 	Scope string `json:"scope"`
-	// Name - Display name of the scope
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Scope description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
 // MagicMcpServersGetOutputProvidersAuthMethod represents the magic mcp servers get output providers auth method type.
 type MagicMcpServersGetOutputProvidersAuthMethod struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique auth method identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Authentication type
+	// Type - How the user authenticates with the provider.
 	Type string `json:"type"`
-	// Key - Auth method key
+	// Key - Stable key for the auth method.
 	Key string `json:"key"`
-	// Name - Display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Auth method description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// Capabilities - Capabilities of this auth method in the provider version the deployment currently uses: its locked version, otherwise the provider's current version. The other fields describe the pinned auth method and may come from an older specification.
 	Capabilities map[string]any                                           `json:"capabilities"`
@@ -110,99 +113,110 @@ type MagicMcpServersGetOutputProvidersAuthMethod struct {
 	Scopes *[]MagicMcpServersGetOutputProvidersAuthMethodScopes `json:"scopes,omitempty"`
 	// Adapters - Adapter IDs this auth method can be used with
 	Adapters *[]string `json:"adapters,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth method belongs to.
 	ProviderId string `json:"provider_id"`
-	// ProviderSpecificationId - Specification ID
+	// ProviderSpecificationId - Specification this auth method belongs to.
 	ProviderSpecificationId string `json:"provider_specification_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersGetOutputProvidersAuthCredentials represents the magic mcp servers get output providers auth credentials type.
 type MagicMcpServersGetOutputProvidersAuthCredentials struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique credentials identifier
-	Id   string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Type - Must be `oauth`.
 	Type string `json:"type"`
-	// Status - Credentials status
+	// Status - Archived once the credentials are archived. Archived credentials stay listable.
 	Status string `json:"status"`
-	// IsDefault - Whether this is the default credentials for the provider
+	// IsDefault - Used when a request doesn't name credentials.
 	IsDefault bool `json:"is_default"`
-	// IsManaged - Whether these credentials are managed by Metorial
+	// IsManaged - Whether Metorial or the installation administrator manages these OAuth credentials.
 	IsManaged bool `json:"is_managed"`
-	// Name - Display name
+	// ManagedBy - Who manages these credentials: Metorial, or the administrator of this self-hosted installation. Null for credentials created in the project.
+	ManagedBy *string `json:"managed_by,omitempty"`
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// Scopes - OAuth scopes requested by this credential
 	Scopes *[]string `json:"scopes,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider these credentials belong to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersGetOutputProvidersConfig represents the magic mcp servers get output providers config type.
 type MagicMcpServersGetOutputProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersGetOutputProvidersAuthConfig represents the magic mcp servers get output providers auth config type.
 type MagicMcpServersGetOutputProvidersAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersGetOutputProviders represents the magic mcp servers get output providers type.
 type MagicMcpServersGetOutputProviders struct {
-	Object                 string          `json:"object"`
-	Id                     string          `json:"id"`
-	Status                 string          `json:"status"`
-	MagicMcpServerId       string          `json:"magic_mcp_server_id"`
-	ProviderManagementMode string          `json:"provider_management_mode"`
-	Name                   string          `json:"name"`
-	Description            *string         `json:"description,omitempty"`
-	Metadata               *map[string]any `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you remove the provider from the server.
+	Status string `json:"status"`
+	// MagicMcpServerId - Server the provider belongs to.
+	MagicMcpServerId string `json:"magic_mcp_server_id"`
+	// ProviderManagementMode - Whether the provider is managed here or inherited.
+	ProviderManagementMode string `json:"provider_management_mode"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
 	ToolFilter      *MagicMcpServersGetOutputProvidersToolFilter      `json:"tool_filter,omitempty"`
 	Provider        MagicMcpServersGetOutputProvidersProvider         `json:"provider"`
@@ -211,9 +225,12 @@ type MagicMcpServersGetOutputProviders struct {
 	AuthCredentials *MagicMcpServersGetOutputProvidersAuthCredentials `json:"auth_credentials,omitempty"`
 	Config          *MagicMcpServersGetOutputProvidersConfig          `json:"config,omitempty"`
 	AuthConfig      *MagicMcpServersGetOutputProvidersAuthConfig      `json:"auth_config,omitempty"`
-	CreatedAt       time.Time                                         `json:"created_at"`
-	UpdatedAt       time.Time                                         `json:"updated_at"`
-	ArchivedAt      *time.Time                                        `json:"archived_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MagicMcpServersGetOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
@@ -262,22 +279,34 @@ type MagicMcpServersGetOutputAccess struct {
 
 // MagicMcpServersGetOutput represents the magic mcp servers get output type.
 type MagicMcpServersGetOutput struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	Id     string `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you delete the server. Archived servers stay listable.
 	Status string `json:"status"`
 	// Source - How this Magic MCP server was created or configured
-	Source                 string                              `json:"source"`
-	ProviderManagementMode string                              `json:"provider_management_mode"`
-	Endpoints              []MagicMcpServersGetOutputEndpoints `json:"endpoints"`
-	ProviderTemplateId     *string                             `json:"provider_template_id,omitempty"`
-	Providers              []MagicMcpServersGetOutputProviders `json:"providers"`
-	Name                   *string                             `json:"name,omitempty"`
-	Description            *string                             `json:"description,omitempty"`
-	Metadata               map[string]any                      `json:"metadata"`
+	Source string `json:"source"`
+	// ProviderManagementMode - Whether providers are managed on the server or inherited.
+	ProviderManagementMode string `json:"provider_management_mode"`
+	// Endpoints - Connection targets for the server.
+	Endpoints []MagicMcpServersGetOutputEndpoints `json:"endpoints"`
+	// ProviderTemplateId - Provider template the server is built from, if any.
+	ProviderTemplateId *string `json:"provider_template_id,omitempty"`
+	// Providers - Providers the server connects through.
+	Providers []MagicMcpServersGetOutputProviders `json:"providers"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
 	// Access - Resource ownership and access settings.
-	Access    MagicMcpServersGetOutputAccess `json:"access"`
-	CreatedAt time.Time                      `json:"created_at"`
-	UpdatedAt time.Time                      `json:"updated_at"`
+	Access MagicMcpServersGetOutputAccess `json:"access"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpServersGetOutputFromJSON deserializes JSON data into a MagicMcpServersGetOutput.

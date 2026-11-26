@@ -52,7 +52,7 @@ type ConversationsMessagesCancelOutputRequestActorOrganizationActorTeams struct 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesCancelOutputRequestActorOrganizationActor represents the conversations messages cancel output request actor organization actor type.
+// ConversationsMessagesCancelOutputRequestActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type ConversationsMessagesCancelOutputRequestActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -76,27 +76,42 @@ type ConversationsMessagesCancelOutputRequestActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesCancelOutputRequestActorConsumer represents the conversations messages cancel output request actor consumer type.
+// ConversationsMessagesCancelOutputRequestActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type ConversationsMessagesCancelOutputRequestActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsMessagesCancelOutputRequestActor represents the conversations messages cancel output request actor type.
+// ConversationsMessagesCancelOutputRequestActor - Actor behind a participant.
 type ConversationsMessagesCancelOutputRequestActor struct {
-	Type              string                                                          `json:"type"`
-	Name              string                                                          `json:"name"`
-	ImageUrl          *string                                                         `json:"image_url,omitempty"`
-	Email             *string                                                         `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *ConversationsMessagesCancelOutputRequestActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *ConversationsMessagesCancelOutputRequestActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                 `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *ConversationsMessagesCancelOutputRequestActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsMessagesCancelOutputRequestContext represents the conversations messages cancel output request context type.
@@ -111,9 +126,10 @@ type ConversationsMessagesCancelOutputRequestContext struct {
 
 // ConversationsMessagesCancelOutputRequest represents the conversations messages cancel output request type.
 type ConversationsMessagesCancelOutputRequest struct {
-	Object    string                                           `json:"object"`
-	Id        string                                           `json:"id"`
-	Status    string                                           `json:"status"`
+	Object string `json:"object"`
+	Id     string `json:"id"`
+	Status string `json:"status"`
+	// Actor - Actor behind a participant.
 	Actor     *ConversationsMessagesCancelOutputRequestActor   `json:"actor,omitempty"`
 	Context   *ConversationsMessagesCancelOutputRequestContext `json:"context,omitempty"`
 	CreatedAt time.Time                                        `json:"created_at"`

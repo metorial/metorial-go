@@ -17,14 +17,19 @@ func NewChatsMessagesEndpoint(client *endpoint.Client) *ChatsMessagesEndpoint {
 
 // ChatsMessagesEndpointListParams contains optional query parameters for List.
 type ChatsMessagesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ChannelId - The channel to list messages for
 	ChannelId string `json:"channel_id"`
-	// ThreadId - Filter to messages in this thread
+	// ThreadId - Only return messages in this thread.
 	ThreadId *string `json:"thread_id,omitempty"`
 	// Search - Search message content
 	Search *string `json:"search,omitempty"`
@@ -40,16 +45,17 @@ type ChatsMessagesEndpointGetParams struct {
 type ChatsMessagesEndpointCreateBody struct {
 	// ChannelId - The channel to send the message to
 	ChannelId string `json:"channel_id"`
-	// ThreadId - Send the message within this thread
+	// ThreadId - Thread to send the message in.
 	ThreadId *string `json:"thread_id,omitempty"`
 	// Parts - Structured content parts making up the message body
 	Parts []any `json:"parts"`
 	// AltText - Plain-text fallback for the message
-	AltText     *string           `json:"alt_text,omitempty"`
+	AltText *string `json:"alt_text,omitempty"`
+	// Attachments - Files to attach to the message.
 	Attachments *[]map[string]any `json:"attachments,omitempty"`
-	// ReplyMessageId - Reply to this message
+	// ReplyMessageId - Message this one replies to.
 	ReplyMessageId *string `json:"reply_message_id,omitempty"`
-	// EphemeralTargetUserId - Send this message so only this user can see it
+	// EphemeralTargetUserId - Only this user can see the message. Omit to send it to the channel.
 	EphemeralTargetUserId *string `json:"ephemeral_target_user_id,omitempty"`
 }
 
@@ -94,7 +100,7 @@ func (e *ChatsMessagesEndpoint) List(chatId string, params *ChatsMessagesEndpoin
 	return &result, nil
 }
 
-// Get retrieves a specific chat message.
+// Get retrieves a chat message.
 func (e *ChatsMessagesEndpoint) Get(chatId string, messageId string, params *ChatsMessagesEndpointGetParams) (*messages.ChatsMessagesGetOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -124,7 +130,7 @@ func (e *ChatsMessagesEndpoint) Create(chatId string, body *ChatsMessagesEndpoin
 	return &result, nil
 }
 
-// Update edits a specific chat message.
+// Update edits a chat message.
 func (e *ChatsMessagesEndpoint) Update(chatId string, messageId string, body *ChatsMessagesEndpointUpdateBody) (*messages.ChatsMessagesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chats", chatId, "messages", messageId},
@@ -137,7 +143,7 @@ func (e *ChatsMessagesEndpoint) Update(chatId string, messageId string, body *Ch
 	return &result, nil
 }
 
-// Delete deletes a specific chat message.
+// Delete deletes a chat message.
 func (e *ChatsMessagesEndpoint) Delete(chatId string, messageId string, params *ChatsMessagesEndpointDeleteParams) (*messages.ChatsMessagesDeleteOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -154,7 +160,7 @@ func (e *ChatsMessagesEndpoint) Delete(chatId string, messageId string, params *
 	return &result, nil
 }
 
-// Read marks a specific chat message as read.
+// Read marks a chat message as read.
 func (e *ChatsMessagesEndpoint) Read(chatId string, messageId string, body *ChatsMessagesEndpointReadBody) (*messages.ChatsMessagesReadOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"chats", chatId, "messages", messageId, "read"},

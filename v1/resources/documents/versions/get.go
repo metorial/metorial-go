@@ -33,7 +33,7 @@ type DocumentsVersionsGetOutputEditorsOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsGetOutputEditorsOrganizationActor represents the documents versions get output editors organization actor type.
+// DocumentsVersionsGetOutputEditorsOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsVersionsGetOutputEditorsOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,41 +57,64 @@ type DocumentsVersionsGetOutputEditorsOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsGetOutputEditorsConsumer represents the documents versions get output editors consumer type.
+// DocumentsVersionsGetOutputEditorsConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsVersionsGetOutputEditorsConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsVersionsGetOutputEditors represents the documents versions get output editors type.
+// DocumentsVersionsGetOutputEditors - Actor behind a participant.
 type DocumentsVersionsGetOutputEditors struct {
-	Type              string                                              `json:"type"`
-	Name              string                                              `json:"name"`
-	ImageUrl          *string                                             `json:"image_url,omitempty"`
-	Email             *string                                             `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsVersionsGetOutputEditorsOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsVersionsGetOutputEditorsConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                     `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsVersionsGetOutputEditorsConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsVersionsGetOutput represents the documents versions get output type.
 type DocumentsVersionsGetOutput struct {
-	// Object - String representing the object's type
-	Object            string                              `json:"object"`
-	Id                string                              `json:"id"`
-	DocumentId        string                              `json:"document_id"`
-	VersionNumber     float64                             `json:"version_number"`
-	PreviousVersionId *string                             `json:"previous_version_id,omitempty"`
-	ListEditedAt      *time.Time                          `json:"list_edited_at,omitempty"`
-	Content           string                              `json:"content"`
-	Editors           []DocumentsVersionsGetOutputEditors `json:"editors"`
-	CreatedAt         time.Time                           `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// DocumentId - Document this version belongs to.
+	DocumentId string `json:"document_id"`
+	// VersionNumber - Sequential number of this version.
+	VersionNumber float64 `json:"version_number"`
+	// PreviousVersionId - Previous version, by ID. `null` for the first version.
+	PreviousVersionId *string `json:"previous_version_id,omitempty"`
+	// ListEditedAt - When the version content was last changed.
+	ListEditedAt *time.Time `json:"list_edited_at,omitempty"`
+	// Content - Text body of the document at this version.
+	Content string `json:"content"`
+	// Editors - Actors who edited this version.
+	Editors []DocumentsVersionsGetOutputEditors `json:"editors"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // MapDocumentsVersionsGetOutputFromJSON deserializes JSON data into a DocumentsVersionsGetOutput.

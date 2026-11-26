@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/access"
 )
 
-// SkillsAccessEndpoint provides access to inspect who has been granted access to an instance skill.
+// SkillsAccessEndpoint provides access to skill access is the record of who can view or edit a skill.
 type SkillsAccessEndpoint struct {
 	client *endpoint.Client
 }
@@ -15,7 +15,7 @@ func NewSkillsAccessEndpoint(client *endpoint.Client) *SkillsAccessEndpoint {
 	return &SkillsAccessEndpoint{client: client}
 }
 
-// Get returns the access grants of a specific skill.
+// Get returns the access grants for a skill.
 func (e *SkillsAccessEndpoint) Get(skillId string) (*access.SkillsAccessGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "access"},

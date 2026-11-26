@@ -7,73 +7,73 @@ import (
 
 // ChatConnectionsListOutputItemsProvidersProvider represents the chat connections list output items providers provider type.
 type ChatConnectionsListOutputItemsProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsListOutputItemsProvidersDeployment represents the chat connections list output items providers deployment type.
 type ChatConnectionsListOutputItemsProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsListOutputItemsProvidersConfig represents the chat connections list output items providers config type.
 type ChatConnectionsListOutputItemsProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsListOutputItemsProviders represents the chat connections list output items providers type.
 type ChatConnectionsListOutputItemsProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat connection provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat connection provider status
+	// Status - `archived` once the connection is archived.
 	Status     string                                             `json:"status"`
 	Provider   ChatConnectionsListOutputItemsProvidersProvider    `json:"provider"`
 	Deployment *ChatConnectionsListOutputItemsProvidersDeployment `json:"deployment,omitempty"`
@@ -82,9 +82,9 @@ type ChatConnectionsListOutputItemsProviders struct {
 	AuthMethodId *string `json:"auth_method_id,omitempty"`
 	// AuthCredentialsId - The auth credentials this connection authenticates with, if any
 	AuthCredentialsId *string `json:"auth_credentials_id,omitempty"`
-	// Name - Display name of the provider link
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the provider link
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// CreatedAt - Timestamp when the provider was linked
 	CreatedAt time.Time `json:"created_at"`
@@ -94,36 +94,44 @@ type ChatConnectionsListOutputItemsProviders struct {
 
 // ChatConnectionsListOutputItems represents the chat connections list output items type.
 type ChatConnectionsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat connection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat connection status
+	// Status - `archived` once you archive the connection. Archived connections stay listable.
 	Status string `json:"status"`
-	// Slug - URL-safe identifier for the chat connection
+	// Slug - URL-safe name, unique across Metorial.
 	Slug string `json:"slug"`
-	// Name - Display name of the chat connection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the chat connection
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata set on the chat connection
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata map[string]any `json:"metadata"`
 	// Providers - The provider linked to this chat connection. Currently always zero or one items.
 	Providers []ChatConnectionsListOutputItemsProviders `json:"providers"`
-	// CreatedAt - Timestamp when the chat connection was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat connection was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsListOutputPagination represents the chat connections list output pagination type.
 type ChatConnectionsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatConnectionsListOutput represents the chat connections list output type.
 type ChatConnectionsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                              `json:"object"`
 	Items      []ChatConnectionsListOutputItems    `json:"items"`
 	Pagination ChatConnectionsListOutputPagination `json:"pagination"`
 }
@@ -142,38 +150,43 @@ func MapChatConnectionsListOutputToJSON(v *ChatConnectionsListOutput) ([]byte, e
 	return json.Marshal(v)
 }
 
-// ChatConnectionsListQueryCreatedAt - Filter chat connection creation time by date range
+// ChatConnectionsListQueryCreatedAt - Only return results whose chat connection creation time is in this range. Set `gt`, `lt`, or both.
 type ChatConnectionsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for chat connection creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat connection creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ChatConnectionsListQueryUpdatedAt - Filter chat connection last update time by date range
+// ChatConnectionsListQueryUpdatedAt - Only return results whose chat connection last update time is in this range. Set `gt`, `lt`, or both.
 type ChatConnectionsListQueryUpdatedAt struct {
-	// Gt - Only include records after this timestamp for chat connection last update time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for chat connection last update time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ChatConnectionsListQuery represents the chat connections list query type.
 type ChatConnectionsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Search - Search by name
 	Search *string `json:"search,omitempty"`
-	// Status - Filter by status
+	// Status - Only return chat connections with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Id - Filter by chat connection ID(s)
+	// Id - Only return chat connections with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CreatedAt - Filter chat connection creation time by date range
+	// CreatedAt - Only return results whose chat connection creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ChatConnectionsListQueryCreatedAt `json:"created_at,omitempty"`
-	// UpdatedAt - Filter chat connection last update time by date range
+	// UpdatedAt - Only return results whose chat connection last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *ChatConnectionsListQueryUpdatedAt `json:"updated_at,omitempty"`
 }
 

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providertemplates"
 )
 
-// ProviderTemplatesEndpoint provides access to provider templates are reusable, consumer-facing wrappers around integrations.
+// ProviderTemplatesEndpoint provides access to a provider template is a consumer-facing view of an integration. It is created from an existing integration.
 type ProviderTemplatesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,30 +17,46 @@ func NewProviderTemplatesEndpoint(client *endpoint.Client) *ProviderTemplatesEnd
 
 // ProviderTemplatesEndpointListParams contains optional query parameters for List.
 type ProviderTemplatesEndpointListParams struct {
-	Limit         *float64 `json:"limit,omitempty"`
-	After         *string  `json:"after,omitempty"`
-	Before        *string  `json:"before,omitempty"`
-	Cursor        *string  `json:"cursor,omitempty"`
-	Order         *string  `json:"order,omitempty"`
-	Id            *any     `json:"id,omitempty"`
-	IntegrationId *any     `json:"integration_id,omitempty"`
-	Search        *string  `json:"search,omitempty"`
-	Status        *any     `json:"status,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return provider templates with one of these IDs.
+	Id *any `json:"id,omitempty"`
+	// IntegrationId - Only return provider templates for one of these integrations.
+	IntegrationId *any `json:"integration_id,omitempty"`
+	// Search - Search provider templates by name or description.
+	Search *string `json:"search,omitempty"`
+	// Status - Only return provider templates with one of these statuses. `deleted` templates are never listed.
+	Status *any `json:"status,omitempty"`
 }
 
 // ProviderTemplatesEndpointCreateBody contains the request body for Create.
 type ProviderTemplatesEndpointCreateBody struct {
-	Name          string          `json:"name"`
-	Description   *string         `json:"description,omitempty"`
-	Metadata      *map[string]any `json:"metadata,omitempty"`
-	IntegrationId string          `json:"integration_id"`
+	// Name - Display name for the provider template.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider template.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration the template is created from.
+	IntegrationId string `json:"integration_id"`
 }
 
 // ProviderTemplatesEndpointUpdateBody contains the request body for Update.
 type ProviderTemplatesEndpointUpdateBody struct {
-	Name        *string         `json:"name,omitempty"`
-	Description *string         `json:"description,omitempty"`
-	Metadata    *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name for the provider template.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the provider template. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // List returns a paginated list of provider templates.
@@ -60,7 +76,7 @@ func (e *ProviderTemplatesEndpoint) List(params *ProviderTemplatesEndpointListPa
 	return &result, nil
 }
 
-// Get retrieves a specific provider template.
+// Get retrieves a provider template.
 func (e *ProviderTemplatesEndpoint) Get(providerTemplateId string) (*providertemplates.ProviderTemplatesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-templates", providerTemplateId},
@@ -72,7 +88,7 @@ func (e *ProviderTemplatesEndpoint) Get(providerTemplateId string) (*providertem
 	return &result, nil
 }
 
-// Create creates a new provider template from an existing integration.
+// Create creates a provider template from an existing integration.
 func (e *ProviderTemplatesEndpoint) Create(body *ProviderTemplatesEndpointCreateBody) (*providertemplates.ProviderTemplatesCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-templates"},
@@ -85,7 +101,7 @@ func (e *ProviderTemplatesEndpoint) Create(body *ProviderTemplatesEndpointCreate
 	return &result, nil
 }
 
-// Update updates an existing provider template.
+// Update updates a provider template. Omitted fields keep their current value.
 func (e *ProviderTemplatesEndpoint) Update(providerTemplateId string, body *ProviderTemplatesEndpointUpdateBody) (*providertemplates.ProviderTemplatesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-templates", providerTemplateId},
@@ -98,7 +114,7 @@ func (e *ProviderTemplatesEndpoint) Update(providerTemplateId string, body *Prov
 	return &result, nil
 }
 
-// Delete archives an existing provider template.
+// Delete archives a provider template.
 func (e *ProviderTemplatesEndpoint) Delete(providerTemplateId string) (*providertemplates.ProviderTemplatesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"provider-templates", providerTemplateId},

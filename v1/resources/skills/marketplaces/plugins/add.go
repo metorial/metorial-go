@@ -2,6 +2,7 @@ package plugins
 
 import (
 	"encoding/json"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"time"
 )
 
@@ -36,32 +37,52 @@ type SkillsMarketplacesPluginsAddOutputSkillPluginSource struct {
 	LastSyncedAt *time.Time `json:"last_synced_at,omitempty"`
 }
 
-// SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkillImage represents the skills marketplaces plugins add output skill plugin skills skill image type.
+// SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkillImage - Image shown for the skill.
 type SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkillImage struct {
-	Object string  `json:"object"`
-	Type   string  `json:"type"`
-	Icon   *string `json:"icon,omitempty"`
-	Color  *string `json:"color,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Type - Where the skill image comes from.
+	Type string `json:"type"`
+	// Icon - Library icon ID. `null` unless `type` is `icon`.
+	Icon *string `json:"icon,omitempty"`
+	// Color - Tile color. `null` unless `type` is `icon`.
+	Color *string `json:"color,omitempty"`
 }
 
 // SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkill represents the skills marketplaces plugins add output skill plugin skills skill type.
 type SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkill struct {
-	Object            string                                                        `json:"object"`
-	Id                string                                                        `json:"id"`
-	Status            string                                                        `json:"status"`
-	Slug              string                                                        `json:"slug"`
-	Name              string                                                        `json:"name"`
-	Description       *string                                                       `json:"description,omitempty"`
-	ImageUrl          string                                                        `json:"image_url"`
-	Image             SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkillImage `json:"image"`
-	ClientName        string                                                        `json:"client_name"`
-	ClientDescription *string                                                       `json:"client_description,omitempty"`
-	ClientMetadata    *map[string]any                                               `json:"client_metadata,omitempty"`
-	License           *string                                                       `json:"license,omitempty"`
-	Compatibility     *string                                                       `json:"compatibility,omitempty"`
-	Metadata          *map[string]any                                               `json:"metadata,omitempty"`
-	CreatedAt         time.Time                                                     `json:"created_at"`
-	UpdatedAt         time.Time                                                     `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - Whether the skill is available, archived, or deleted.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ImageUrl - Public URL of the skill image.
+	ImageUrl string `json:"image_url"`
+	// Image - Image shown for the skill.
+	Image SkillsMarketplacesPluginsAddOutputSkillPluginSkillsSkillImage `json:"image"`
+	// ClientName - Client-facing skill name.
+	ClientName string `json:"client_name"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsMarketplacesPluginsAddOutputSkillPluginSkills represents the skills marketplaces plugins add output skill plugin skills type.
@@ -131,9 +152,12 @@ func MapSkillsMarketplacesPluginsAddOutputToJSON(v *SkillsMarketplacesPluginsAdd
 
 // SkillsMarketplacesPluginsAddBody represents the skills marketplaces plugins add body type.
 type SkillsMarketplacesPluginsAddBody struct {
-	SkillPluginId        string  `json:"skill_plugin_id"`
-	SkillConfigurationId *string `json:"skill_configuration_id,omitempty"`
-	Identifier           *string `json:"identifier,omitempty"`
+	// SkillPluginId - Skill plugin to add to the marketplace, by ID.
+	SkillPluginId string `json:"skill_plugin_id"`
+	// SkillConfigurationId - Skill configuration for the plugin link, by ID. `null` uses the default configuration.
+	SkillConfigurationId *nullable.Nullable[string] `json:"skill_configuration_id,omitempty"`
+	// Identifier - Slug identifying the plugin in the marketplace. Defaults to the plugin name.
+	Identifier *string `json:"identifier,omitempty"`
 }
 
 // MapSkillsMarketplacesPluginsAddBodyFromJSON deserializes JSON data into a SkillsMarketplacesPluginsAddBody.

@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/networkpolicies"
 )
 
-// NetworkPoliciesEndpoint provides access to manage reusable network policy definitions and their rules.
+// NetworkPoliciesEndpoint provides access to a network policy is a reusable set of allow and deny rules. Firewalls attach policies to enforce them.
 type NetworkPoliciesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,36 +17,51 @@ func NewNetworkPoliciesEndpoint(client *endpoint.Client) *NetworkPoliciesEndpoin
 
 // NetworkPoliciesEndpointListParams contains optional query parameters for List.
 type NetworkPoliciesEndpointListParams struct {
-	Limit      *float64 `json:"limit,omitempty"`
-	After      *string  `json:"after,omitempty"`
-	Before     *string  `json:"before,omitempty"`
-	Cursor     *string  `json:"cursor,omitempty"`
-	Order      *string  `json:"order,omitempty"`
-	Id         *any     `json:"id,omitempty"`
-	Status     *any     `json:"status,omitempty"`
-	FirewallId *any     `json:"firewall_id,omitempty"`
-	Search     *string  `json:"search,omitempty"`
-	// CreatedAt - Filter network policy creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return network policies with one of these IDs.
+	Id *any `json:"id,omitempty"`
+	// Status - Only return network policies with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// FirewallId - Only return network policies attached to one of these firewalls.
+	FirewallId *any `json:"firewall_id,omitempty"`
+	// Search - Filter network policies by name or description.
+	Search *string `json:"search,omitempty"`
+	// CreatedAt - Only return results whose network policy creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter network policy last update time by date range
+	// UpdatedAt - Only return results whose network policy last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // NetworkPoliciesEndpointCreateBody contains the request body for Create.
 type NetworkPoliciesEndpointCreateBody struct {
-	Name        string            `json:"name"`
-	Description *string           `json:"description,omitempty"`
-	Rules       *[]map[string]any `json:"rules,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Rules - Rules to create with the network policy.
+	Rules *[]map[string]any `json:"rules,omitempty"`
 }
 
 // NetworkPoliciesEndpointUpdateBody contains the request body for Update.
 type NetworkPoliciesEndpointUpdateBody struct {
-	Name        *string           `json:"name,omitempty"`
-	Description *string           `json:"description,omitempty"`
-	Rules       *[]map[string]any `json:"rules,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Rules - Rules in the network policy. Replaces existing rules.
+	Rules *[]map[string]any `json:"rules,omitempty"`
 }
 
-// List returns a paginated list of network policies.
+// List returns a paginated list of network policies in the instance.
 func (e *NetworkPoliciesEndpoint) List(instanceId string, params *NetworkPoliciesEndpointListParams) (*networkpolicies.NetworkPoliciesListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -63,7 +78,7 @@ func (e *NetworkPoliciesEndpoint) List(instanceId string, params *NetworkPolicie
 	return &result, nil
 }
 
-// Get retrieves a specific network policy by ID.
+// Get retrieves a network policy.
 func (e *NetworkPoliciesEndpoint) Get(instanceId string, networkPolicyId string) (*networkpolicies.NetworkPoliciesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "network-policies", networkPolicyId},
@@ -75,7 +90,7 @@ func (e *NetworkPoliciesEndpoint) Get(instanceId string, networkPolicyId string)
 	return &result, nil
 }
 
-// Create creates a new network policy.
+// Create creates a network policy.
 func (e *NetworkPoliciesEndpoint) Create(instanceId string, body *NetworkPoliciesEndpointCreateBody) (*networkpolicies.NetworkPoliciesCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "network-policies"},
@@ -88,7 +103,7 @@ func (e *NetworkPoliciesEndpoint) Create(instanceId string, body *NetworkPolicie
 	return &result, nil
 }
 
-// Update updates a network policy definition.
+// Update updates a network policy. Omitted fields keep their current value.
 func (e *NetworkPoliciesEndpoint) Update(instanceId string, networkPolicyId string, body *NetworkPoliciesEndpointUpdateBody) (*networkpolicies.NetworkPoliciesUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "network-policies", networkPolicyId},
@@ -101,7 +116,7 @@ func (e *NetworkPoliciesEndpoint) Update(instanceId string, networkPolicyId stri
 	return &result, nil
 }
 
-// Delete archives a network policy.
+// Delete archives a network policy. It stays listable with `status=archived`.
 func (e *NetworkPoliciesEndpoint) Delete(instanceId string, networkPolicyId string) (*networkpolicies.NetworkPoliciesDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "network-policies", networkPolicyId},

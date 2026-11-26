@@ -18,10 +18,10 @@ type SandboxRegionsGetOutput struct {
 	Object string `json:"object"`
 	// Id - The region's identifier, used wherever a region is requested
 	Id string `json:"id"`
-	// Name - The region's display name
+	// Name - Display name.
 	Name string                      `json:"name"`
 	Area SandboxRegionsGetOutputArea `json:"area"`
-	// IsDefault - Whether this is the default sandbox region for this Metorial region
+	// IsDefault - The default region for new machines in this Metorial region.
 	IsDefault bool `json:"is_default"`
 	// Availability - Whether the region is currently available for new machines
 	Availability string `json:"availability"`

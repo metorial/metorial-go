@@ -7,7 +7,7 @@ import (
 
 // CallbackEventsGetOutputDetailsError - The processing failure, if this event failed
 type CallbackEventsGetOutputDetailsError struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Code - Machine-readable reason this event failed to process
 	Code string `json:"code"`
@@ -23,9 +23,9 @@ type CallbackEventsGetOutputDetailsWebhookRequestBody struct {
 	Content string `json:"content"`
 }
 
-// CallbackEventsGetOutputDetailsWebhookRequest - The inbound HTTP request as it was received. Null once the backend has aged the raw request out of hot storage.
+// CallbackEventsGetOutputDetailsWebhookRequest - Inbound HTTP request as received. `null` once it is past its retention period.
 type CallbackEventsGetOutputDetailsWebhookRequest struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Method - HTTP method of the inbound request
 	Method string `json:"method"`
@@ -39,13 +39,13 @@ type CallbackEventsGetOutputDetailsWebhookRequest struct {
 
 // CallbackEventsGetOutputDetailsWebhook - The inbound webhook delivery behind this event, if there was one
 type CallbackEventsGetOutputDetailsWebhook struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Incoming webhook identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Status - Processing status of the inbound webhook, as reported by the provider backend
 	Status string `json:"status"`
-	// Request - The inbound HTTP request as it was received. Null once the backend has aged the raw request out of hot storage.
+	// Request - Inbound HTTP request as received. `null` once it is past its retention period.
 	Request *CallbackEventsGetOutputDetailsWebhookRequest `json:"request,omitempty"`
 	// ReceivedAt - Timestamp when the webhook was received
 	ReceivedAt time.Time `json:"received_at"`
@@ -53,7 +53,7 @@ type CallbackEventsGetOutputDetailsWebhook struct {
 
 // CallbackEventsGetOutputDetails - Enrichment fetched from the provider backend. Only present when fetching a single callback event.
 type CallbackEventsGetOutputDetails struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Status - Processing status of the trigger invocation, as reported by the provider backend
 	Status string `json:"status"`
@@ -67,13 +67,13 @@ type CallbackEventsGetOutputDetails struct {
 
 // CallbackEventsGetOutput represents the callback events get output type.
 type CallbackEventsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique callback event identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Processing status of this callback event within Metorial
+	// Status - Processing status of this callback event within Metorial. `failed` when processing failed; the reason is in `details.error`.
 	Status string `json:"status"`
-	// Source - How the provider trigger that produced this event was invoked
+	// Source - How this event reached Metorial. `webhook` when the provider pushed it, `polling` when Metorial fetched it.
 	Source string `json:"source"`
 	// ProviderTriggerKey - Key of the provider trigger this event was produced by
 	ProviderTriggerKey string `json:"provider_trigger_key"`
@@ -91,7 +91,7 @@ type CallbackEventsGetOutput struct {
 	Details *CallbackEventsGetOutputDetails `json:"details,omitempty"`
 	// OccurredAt - Timestamp when the underlying provider event occurred
 	OccurredAt time.Time `json:"occurred_at"`
-	// CreatedAt - Timestamp when the callback event was recorded
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 

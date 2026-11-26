@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/identities/delegations"
 )
 
-// IdentitiesDelegationsEndpoint provides access to identity delegations grant provider permissions from one identity owner to another actor, with optional per-credential overrides.
+// IdentitiesDelegationsEndpoint provides access to an identity delegation is a grant of provider permissions from an identity owner to another actor. It can narrow permissions per credential.
 type IdentitiesDelegationsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,28 +17,33 @@ func NewIdentitiesDelegationsEndpoint(client *endpoint.Client) *IdentitiesDelega
 
 // IdentitiesDelegationsEndpointListParams contains optional query parameters for List.
 type IdentitiesDelegationsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Status - Filter by one or more delegation statuses.
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return identity delegations with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Permissions - Filter by one or more granted permissions.
+	// Permissions - Only return identity delegations granting one of these permissions.
 	Permissions *any `json:"permissions,omitempty"`
-	// Id - Filter by delegation ID or IDs.
+	// Id - Only return identity delegations with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// OwnerActorId - Filter by owner actor ID or IDs.
+	// OwnerActorId - Only return identity delegations owned by one of these actors.
 	OwnerActorId *any `json:"owner_actor_id,omitempty"`
-	// DelegatorActorId - Filter by delegator actor ID or IDs.
+	// DelegatorActorId - Only return identity delegations started by one of these actors.
 	DelegatorActorId *any `json:"delegator_actor_id,omitempty"`
-	// DelegateeActorId - Filter by delegatee actor ID or IDs.
+	// DelegateeActorId - Only return identity delegations received by one of these actors.
 	DelegateeActorId *any `json:"delegatee_actor_id,omitempty"`
-	// IdentityId - Filter by identity ID or IDs.
+	// IdentityId - Only return identity delegations for one of these identities.
 	IdentityId *any `json:"identity_id,omitempty"`
-	// CreatedAt - Filter identity delegation creation time by date range
+	// CreatedAt - Only return results whose identity delegation creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter identity delegation last update time by date range
+	// UpdatedAt - Only return results whose identity delegation last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -60,7 +65,7 @@ type IdentitiesDelegationsEndpointCreateBody struct {
 	CredentialOverrides *[]map[string]any `json:"credential_overrides,omitempty"`
 	// Note - Optional human-readable note for the delegation.
 	Note *string `json:"note,omitempty"`
-	// Metadata - Additional metadata to store on the delegation.
+	// Metadata - Custom data to identify or organize the identity delegation.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
@@ -81,7 +86,7 @@ func (e *IdentitiesDelegationsEndpoint) List(instanceId string, params *Identiti
 	return &result, nil
 }
 
-// Get retrieves a specific identity delegation by ID.
+// Get retrieves an identity delegation.
 func (e *IdentitiesDelegationsEndpoint) Get(instanceId string, identityDelegationId string) (*delegations.IdentitiesDelegationsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-delegations", identityDelegationId},
@@ -93,7 +98,7 @@ func (e *IdentitiesDelegationsEndpoint) Get(instanceId string, identityDelegatio
 	return &result, nil
 }
 
-// Create creates a new identity delegation.
+// Create creates an identity delegation.
 func (e *IdentitiesDelegationsEndpoint) Create(instanceId string, body *IdentitiesDelegationsEndpointCreateBody) (*delegations.IdentitiesDelegationsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-delegations"},
@@ -106,7 +111,7 @@ func (e *IdentitiesDelegationsEndpoint) Create(instanceId string, body *Identiti
 	return &result, nil
 }
 
-// Revoke revokes an existing identity delegation.
+// Revoke revokes an identity delegation.
 func (e *IdentitiesDelegationsEndpoint) Revoke(instanceId string, identityDelegationId string) (*delegations.IdentitiesDelegationsRevokeOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "identity-delegations", identityDelegationId, "revoke"},

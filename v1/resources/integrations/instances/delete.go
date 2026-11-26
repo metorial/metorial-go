@@ -49,9 +49,11 @@ type IntegrationsInstancesDeleteOutputAccess struct {
 	Owner *IntegrationsInstancesDeleteOutputAccessOwner `json:"owner,omitempty"`
 }
 
-// IntegrationsInstancesDeleteOutputImplementation represents the integrations instances delete output implementation type.
+// IntegrationsInstancesDeleteOutputImplementation - What backs this instance. `null` for a standalone instance.
 type IntegrationsInstancesDeleteOutputImplementation struct {
-	Type             string `json:"type"`
+	// Type - Which kind of backing this is.
+	Type string `json:"type"`
+	// MagicMcpServerId - Magic MCP server backing this instance.
 	MagicMcpServerId string `json:"magic_mcp_server_id"`
 }
 
@@ -65,27 +67,30 @@ type IntegrationsInstancesDeleteOutputProvidersToolFilter struct {
 
 // IntegrationsInstancesDeleteOutputProvidersProvider represents the integrations instances delete output providers provider type.
 type IntegrationsInstancesDeleteOutputProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// IntegrationsInstancesDeleteOutputProvidersIntegrationProviderProviderVersion represents the integrations instances delete output providers integration provider provider version type.
+// IntegrationsInstancesDeleteOutputProvidersIntegrationProviderProviderVersion - Version this snapshot was taken from.
 type IntegrationsInstancesDeleteOutputProvidersIntegrationProviderProviderVersion struct {
-	Object string  `json:"object"`
-	Id     string  `json:"id"`
-	Index  float64 `json:"index"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Index - Position of this version, starting at 0.
+	Index float64 `json:"index"`
 }
 
 // IntegrationsInstancesDeleteOutputProvidersIntegrationProviderToolFilter represents one of several possible types.
@@ -98,133 +103,172 @@ type IntegrationsInstancesDeleteOutputProvidersIntegrationProviderToolFilter str
 
 // IntegrationsInstancesDeleteOutputProvidersIntegrationProviderConfig represents the integrations instances delete output providers integration provider config type.
 type IntegrationsInstancesDeleteOutputProvidersIntegrationProviderConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesDeleteOutputProvidersIntegrationProvider represents the integrations instances delete output providers integration provider type.
 type IntegrationsInstancesDeleteOutputProvidersIntegrationProvider struct {
-	Object          string                                                                       `json:"object"`
-	Id              string                                                                       `json:"id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// ProviderVersion - Version this snapshot was taken from.
 	ProviderVersion IntegrationsInstancesDeleteOutputProvidersIntegrationProviderProviderVersion `json:"provider_version"`
-	Status          string                                                                       `json:"status"`
-	Name            string                                                                       `json:"name"`
-	Description     *string                                                                      `json:"description,omitempty"`
-	Metadata        *map[string]any                                                              `json:"metadata,omitempty"`
+	// Status - `archived` once you archive the integration provider.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter        *IntegrationsInstancesDeleteOutputProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
-	ProviderId        string                                                                   `json:"provider_id"`
-	DeploymentId      string                                                                   `json:"deployment_id"`
-	AuthMethodId      *string                                                                  `json:"auth_method_id,omitempty"`
-	AuthCredentialsId *string                                                                  `json:"auth_credentials_id,omitempty"`
-	Config            *IntegrationsInstancesDeleteOutputProvidersIntegrationProviderConfig     `json:"config,omitempty"`
-	CreatedAt         time.Time                                                                `json:"created_at"`
-	UpdatedAt         time.Time                                                                `json:"updated_at"`
-	ArchivedAt        *time.Time                                                               `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsInstancesDeleteOutputProvidersIntegrationProviderToolFilter `json:"tool_filter,omitempty"`
+	// ProviderId - Provider this snapshot was taken from.
+	ProviderId string `json:"provider_id"`
+	// DeploymentId - Deployment this snapshot was taken from.
+	DeploymentId string `json:"deployment_id"`
+	// AuthMethodId - Auth method at snapshot time. `null` when none was set.
+	AuthMethodId *string `json:"auth_method_id,omitempty"`
+	// AuthCredentialsId - Credentials at snapshot time. `null` when none were set.
+	AuthCredentialsId *string                                                              `json:"auth_credentials_id,omitempty"`
+	Config            *IntegrationsInstancesDeleteOutputProvidersIntegrationProviderConfig `json:"config,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesDeleteOutputProvidersConfig represents the integrations instances delete output providers config type.
 type IntegrationsInstancesDeleteOutputProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesDeleteOutputProvidersAuthConfig represents the integrations instances delete output providers auth config type.
 type IntegrationsInstancesDeleteOutputProvidersAuthConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - Used when a request doesn't name an auth config.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this auth config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // IntegrationsInstancesDeleteOutputProviders represents the integrations instances delete output providers type.
 type IntegrationsInstancesDeleteOutputProviders struct {
-	Object                string          `json:"object"`
-	Id                    string          `json:"id"`
-	Status                string          `json:"status"`
-	Name                  string          `json:"name"`
-	Description           *string         `json:"description,omitempty"`
-	Metadata              *map[string]any `json:"metadata,omitempty"`
-	IntegrationId         string          `json:"integration_id"`
-	IntegrationInstanceId string          `json:"integration_instance_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the entry is archived.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration the instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceId - Integration instance this entry belongs to.
+	IntegrationInstanceId string `json:"integration_instance_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsInstancesDeleteOutputProvidersToolFilter         `json:"tool_filter,omitempty"`
+	ToolFilter *IntegrationsInstancesDeleteOutputProvidersToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
 	IsOverrideToolFilter bool                                                          `json:"is_override_tool_filter"`
 	Provider             IntegrationsInstancesDeleteOutputProvidersProvider            `json:"provider"`
 	IntegrationProvider  IntegrationsInstancesDeleteOutputProvidersIntegrationProvider `json:"integration_provider"`
 	Config               *IntegrationsInstancesDeleteOutputProvidersConfig             `json:"config,omitempty"`
 	AuthConfig           *IntegrationsInstancesDeleteOutputProvidersAuthConfig         `json:"auth_config,omitempty"`
 	// CallbackInstanceId - The active callback instance registered for this integration instance provider, if its integration provider has callbacks enabled.
-	CallbackInstanceId *string    `json:"callback_instance_id,omitempty"`
-	CreatedAt          time.Time  `json:"created_at"`
-	UpdatedAt          time.Time  `json:"updated_at"`
-	ArchivedAt         *time.Time `json:"archived_at,omitempty"`
+	CallbackInstanceId *string `json:"callback_instance_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstancesDeleteOutput represents the integrations instances delete output type.
 type IntegrationsInstancesDeleteOutput struct {
-	Object          string          `json:"object"`
-	Id              string          `json:"id"`
-	Status          string          `json:"status"`
-	Name            string          `json:"name"`
-	Description     *string         `json:"description,omitempty"`
-	Metadata        *map[string]any `json:"metadata,omitempty"`
-	IntegrationId   string          `json:"integration_id"`
-	IdentityActorId *string         `json:"identity_actor_id,omitempty"`
-	IdentityId      *string         `json:"identity_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `draft` when created. `archived` once you archive the instance.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this instance belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IdentityActorId - Identity actor the instance connects as. `null` when none is set.
+	IdentityActorId *string `json:"identity_actor_id,omitempty"`
+	// IdentityId - Identity the instance connects as. `null` when none is set.
+	IdentityId *string `json:"identity_id,omitempty"`
 	// Access - Resource ownership and access settings.
-	Access         IntegrationsInstancesDeleteOutputAccess          `json:"access"`
+	Access IntegrationsInstancesDeleteOutputAccess `json:"access"`
+	// Implementation - What backs this instance. `null` for a standalone instance.
 	Implementation *IntegrationsInstancesDeleteOutputImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsInstancesDeleteOutputProviders     `json:"providers"`
-	CreatedAt      time.Time                                        `json:"created_at"`
-	UpdatedAt      time.Time                                        `json:"updated_at"`
-	ArchivedAt     *time.Time                                       `json:"archived_at,omitempty"`
+	// Providers - Providers set up on this instance.
+	Providers []IntegrationsInstancesDeleteOutputProviders `json:"providers"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstancesDeleteOutputFromJSON deserializes JSON data into a IntegrationsInstancesDeleteOutput.

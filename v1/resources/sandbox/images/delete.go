@@ -26,10 +26,13 @@ type SandboxImagesDeleteOutput struct {
 	// LatestVersionId - The most recent version of the image
 	LatestVersionId *string `json:"latest_version_id,omitempty"`
 	// LatestVersionNumber - The version number of the most recent active image version
-	LatestVersionNumber *float64   `json:"latest_version_number,omitempty"`
-	CreatedAt           time.Time  `json:"created_at"`
-	UpdatedAt           time.Time  `json:"updated_at"`
-	DeletedAt           *time.Time `json:"deleted_at,omitempty"`
+	LatestVersionNumber *float64 `json:"latest_version_number,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// DeletedAt - When this was deleted. `null` while active.
+	DeletedAt *time.Time `json:"deleted_at,omitempty"`
 }
 
 // MapSandboxImagesDeleteOutputFromJSON deserializes JSON data into a SandboxImagesDeleteOutput.

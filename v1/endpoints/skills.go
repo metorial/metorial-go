@@ -6,7 +6,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills"
 )
 
-// SkillsEndpoint provides access to skills group provider and integration capabilities into reusable, owned compositions.
+// SkillsEndpoint provides access to a skill is a reusable composition of provider and integration capabilities.
 type SkillsEndpoint struct {
 	client *endpoint.Client
 }
@@ -18,86 +18,136 @@ func NewSkillsEndpoint(client *endpoint.Client) *SkillsEndpoint {
 
 // SkillsEndpointListParams contains optional query parameters for List.
 type SkillsEndpointListParams struct {
-	Limit         *float64 `json:"limit,omitempty"`
-	After         *string  `json:"after,omitempty"`
-	Before        *string  `json:"before,omitempty"`
-	Cursor        *string  `json:"cursor,omitempty"`
-	Order         *string  `json:"order,omitempty"`
-	Search        *string  `json:"search,omitempty"`
-	Status        *any     `json:"status,omitempty"`
-	Id            *any     `json:"id,omitempty"`
-	SkillGroupId  *any     `json:"skill_group_id,omitempty"`
-	IntegrationId *any     `json:"integration_id,omitempty"`
-	ProviderId    *any     `json:"provider_id,omitempty"`
-	// OwnedByMe - Only return skills the caller created or owns, including ones created through their other member or consumer identities
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Search - Only return skills matching this search text.
+	Search *string `json:"search,omitempty"`
+	// Status - Only return skills with one of these statuses.
+	Status *any `json:"status,omitempty"`
+	// Id - Only return skills with these IDs.
+	Id *any `json:"id,omitempty"`
+	// SkillGroupId - Only return skills in one of these skill groups.
+	SkillGroupId *any `json:"skill_group_id,omitempty"`
+	// IntegrationId - Only return skills using one of these integrations.
+	IntegrationId *any `json:"integration_id,omitempty"`
+	// ProviderId - Only return skills using one of these providers.
+	ProviderId *any `json:"provider_id,omitempty"`
+	// OwnedByMe - Only return skills the caller created or owns, including ones created through their other member or consumer identities.
 	OwnedByMe *bool `json:"owned_by_me,omitempty"`
-	// CreatedAt - Filter skill creation time by date range
+	// CreatedAt - Only return results whose skill creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter skill last update time by date range
+	// UpdatedAt - Only return results whose skill last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SkillsEndpointCreateBody contains the request body for Create.
 type SkillsEndpointCreateBody struct {
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	ClientName        *string         `json:"client_name,omitempty"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	ImageFileId       *string         `json:"image_file_id,omitempty"`
-	TemplateId        *string         `json:"template_id,omitempty"`
-	SkillGroupId      *string         `json:"skill_group_id,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data to identify or organize the skill.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ClientName - Client-facing skill name. Defaults to `name`. Lowercase letters, numbers, and hyphens.
+	ClientName *string `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// ImageFileId - Image file for the skill, by ID.
+	ImageFileId *string `json:"image_file_id,omitempty"`
+	// TemplateId - Skill template to create the skill from. Defaults to the default template.
+	TemplateId *string `json:"template_id,omitempty"`
+	// SkillGroupId - Skill group to add the skill to.
+	SkillGroupId *string `json:"skill_group_id,omitempty"`
 }
 
 // SkillsEndpointUpdateBody contains the request body for Update.
 type SkillsEndpointUpdateBody struct {
-	Name              *string         `json:"name,omitempty"`
-	Description       *string         `json:"description,omitempty"`
-	ClientName        *string         `json:"client_name,omitempty"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	ImageFileId       *string         `json:"image_file_id,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// ClientName - Client-facing skill name. Lowercase letters, numbers, and hyphens.
+	ClientName *string `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// License - License terms for the skill. `null` clears it.
+	License *nullable.Nullable[string] `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill. `null` clears it.
+	Compatibility *nullable.Nullable[string] `json:"compatibility,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill. `null` clears it.
+	ClientMetadata *nullable.Nullable[map[string]any] `json:"client_metadata,omitempty"`
+	// Metadata - Custom data to identify or organize the skill. Replaces existing metadata. `null` clears it.
+	Metadata *nullable.Nullable[map[string]any] `json:"metadata,omitempty"`
+	// ImageFileId - Image file for the skill, by ID. `null` resets to the default image. Cannot be combined with `image_icon`.
+	ImageFileId *nullable.Nullable[string] `json:"image_file_id,omitempty"`
 	// ImageIcon - Use a library icon with a tile color as the skill image. Pass null to reset to the default image. Cannot be combined with image_file_id.
 	ImageIcon *nullable.Nullable[map[string]any] `json:"image_icon,omitempty"`
 }
 
 // SkillsEndpointForkBody contains the request body for Fork.
 type SkillsEndpointForkBody struct {
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ClientName        *string         `json:"client_name,omitempty"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
-	ImageFileId       *string         `json:"image_file_id,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ClientName - Client-facing skill name. Defaults to `name`. Lowercase letters, numbers, and hyphens.
+	ClientName *string `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// Metadata - Custom data to identify or organize the skill.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ImageFileId - Image file for the skill, by ID.
+	ImageFileId *string `json:"image_file_id,omitempty"`
 }
 
 // SkillsEndpointShareBody contains the request body for Share.
 type SkillsEndpointShareBody struct {
-	ConsumerProfileIds    *[]string `json:"consumer_profile_ids,omitempty"`
+	// ConsumerProfileIds - Consumers to share the skill with, by ID.
+	ConsumerProfileIds *[]string `json:"consumer_profile_ids,omitempty"`
+	// OrganizationMemberIds - Must be omitted. Organization member access cannot be changed.
 	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
-	// Permission - Access to grant. Owners can always edit the skill and can add other owners; only admins can remove or downgrade an owner. Owners must be consumers.
+	// Permission - For consumers with inherited edit and share access, `write` and `owner` add portal visibility. Consumers must own the skill to grant ownership. Only admins can remove or downgrade an owner.
 	Permission string `json:"permission"`
 }
 
 // SkillsEndpointDuplicateBody contains the request body for Duplicate.
 type SkillsEndpointDuplicateBody struct {
-	Name              string          `json:"name"`
-	Description       *string         `json:"description,omitempty"`
-	ClientName        *string         `json:"client_name,omitempty"`
-	ClientDescription *string         `json:"client_description,omitempty"`
-	License           *string         `json:"license,omitempty"`
-	Compatibility     *string         `json:"compatibility,omitempty"`
-	ClientMetadata    *map[string]any `json:"client_metadata,omitempty"`
-	Metadata          *map[string]any `json:"metadata,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// ClientName - Client-facing skill name. Defaults to `name`. Lowercase letters, numbers, and hyphens.
+	ClientName *string `json:"client_name,omitempty"`
+	// ClientDescription - Client-facing description.
+	ClientDescription *string `json:"client_description,omitempty"`
+	// License - License terms for the skill.
+	License *string `json:"license,omitempty"`
+	// Compatibility - Compatibility notes for the skill.
+	Compatibility *string `json:"compatibility,omitempty"`
+	// ClientMetadata - Custom data for the client-facing skill.
+	ClientMetadata *map[string]any `json:"client_metadata,omitempty"`
+	// Metadata - Custom data to identify or organize the skill.
+	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // List returns a paginated list of skills.
@@ -117,7 +167,7 @@ func (e *SkillsEndpoint) List(params *SkillsEndpointListParams) (*skills.SkillsL
 	return &result, nil
 }
 
-// Get retrieves a specific skill.
+// Get retrieves a skill.
 func (e *SkillsEndpoint) Get(skillId string) (*skills.SkillsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId},
@@ -142,7 +192,7 @@ func (e *SkillsEndpoint) Create(body *SkillsEndpointCreateBody) (*skills.SkillsC
 	return &result, nil
 }
 
-// Update updates a specific skill.
+// Update updates a skill. Omitted fields keep their current value.
 func (e *SkillsEndpoint) Update(skillId string, body *SkillsEndpointUpdateBody) (*skills.SkillsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId},
@@ -155,7 +205,7 @@ func (e *SkillsEndpoint) Update(skillId string, body *SkillsEndpointUpdateBody) 
 	return &result, nil
 }
 
-// Delete archives a specific skill.
+// Delete archives a skill.
 func (e *SkillsEndpoint) Delete(skillId string) (*skills.SkillsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId},
@@ -192,7 +242,7 @@ func (e *SkillsEndpoint) PublishConsumerSkill(skillId string) (*skills.SkillsPub
 	return &result, nil
 }
 
-// Share shares a skill with consumers or organization members.
+// Share shares a skill with consumers.
 func (e *SkillsEndpoint) Share(skillId string, body *SkillsEndpointShareBody) (*skills.SkillsShareOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "shares"},

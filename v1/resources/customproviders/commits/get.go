@@ -5,752 +5,807 @@ import (
 	"time"
 )
 
-// CustomProvidersCommitsGetOutputError represents the custom providers commits get output error type.
+// CustomProvidersCommitsGetOutputError - Failure details. `null` when the commit did not fail.
 type CustomProvidersCommitsGetOutputError struct {
-	// Code - Error code
+	// Code - Machine-readable error code.
 	Code string `json:"code"`
-	// Message - Error message
+	// Message - Human-readable error message.
 	Message string `json:"message"`
 }
 
 // CustomProvidersCommitsGetOutputToEnvironment represents the custom providers commits get output to environment type.
 type CustomProvidersCommitsGetOutputToEnvironment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider environment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this environment belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CurrentProviderVersionId - ID of the current provider version in this environment
+	// CurrentProviderVersionId - Version currently live in this environment. `null` when no version is live.
 	CurrentProviderVersionId *string `json:"current_provider_version_id,omitempty"`
-	// InstanceId - ID of the instance this environment is associated with
+	// InstanceId - ID of the instance this environment deploys into.
 	InstanceId string `json:"instance_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CustomProvidersCommitsGetOutputFromEnvironment represents the custom providers commits get output from environment type.
+// CustomProvidersCommitsGetOutputFromEnvironment - Environment the version is promoted from. `null` for rollbacks.
 type CustomProvidersCommitsGetOutputFromEnvironment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider environment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this environment belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CurrentProviderVersionId - ID of the current provider version in this environment
+	// CurrentProviderVersionId - Version currently live in this environment. `null` when no version is live.
 	CurrentProviderVersionId *string `json:"current_provider_version_id,omitempty"`
-	// InstanceId - ID of the instance this environment is associated with
+	// InstanceId - ID of the instance this environment deploys into.
 	InstanceId string `json:"instance_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfigSchema represents the custom providers commits get output target custom provider version config schema type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfigSchema - Configuration fields for the custom provider.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfigSchema struct {
+	// Type - Format of the configuration schema.
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the configuration fields for the custom provider
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfig represents the custom providers commits get output target custom provider version config type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfig - Configuration for this version.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfig struct {
-	// Object - String representing the object's type
-	Object string                                                                 `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Schema - Configuration fields for the custom provider.
 	Schema CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfigSchema `json:"schema"`
-	// Transformer - Optional jsonata transformer function for the configuration.
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentCommit represents the custom providers commits get output target custom provider version deployment commit type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentCommit - Commit that triggered this deployment. `null` for deployments without a commit.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentCommit struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Commit type
+	// Type - What the commit did: created a version, merged one into an environment, or rolled one back.
 	Type string `json:"type"`
-	// Message - Commit message
+	// Message - Message of the commit. `null` when the commit has no message.
 	Message *string `json:"message,omitempty"`
-	// CreatedAt - Timestamp when commit was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider represents the custom providers commits get output target custom provider version deployment immutable bucket scm repo link repository provider type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider - Provider the repository lives on.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository represents the custom providers commits get output target custom provider version deployment immutable bucket scm repo link repository type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                                                                                           `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLink represents the custom providers commits get output target custom provider version deployment immutable bucket scm repo link type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLink - Repository this bucket syncs with. `null` when not linked.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLink struct {
-	Object   string `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// IsLinked - `true` when the bucket is linked to a repository.
 	IsLinked string `json:"is_linked"`
-	// Path - Path within the SCM repository
+	// Path - Path within the repository the bucket syncs.
 	Path       *string                                                                                                  `json:"path,omitempty"`
 	Repository CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository `json:"repository"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucket represents the custom providers commits get output target custom provider version deployment immutable bucket type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucket - Immutable copy of the deployed code.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucket struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique bucket identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsImmutable - Whether the bucket is immutable
+	// IsImmutable - `true` when the bucket contents can no longer change.
 	IsImmutable bool `json:"is_immutable"`
-	// IsReadOnly - Whether the bucket is read-only
-	IsReadOnly  bool                                                                                            `json:"is_read_only"`
+	// IsReadOnly - `true` when the bucket cannot be written to.
+	IsReadOnly bool `json:"is_read_only"`
+	// ScmRepoLink - Repository this bucket syncs with. `null` when not linked.
 	ScmRepoLink *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucketScmRepoLink `json:"scm_repo_link,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentActor represents the custom providers commits get output target custom provider version deployment actor type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Actor type
+	// Type - `external` for user actors, `system` for automated ones.
 	Type string `json:"type"`
-	// Identifier - Actor unique identifier
+	// Identifier - Stable identifier for this actor.
 	Identifier string `json:"identifier"`
-	// Name - Actor display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationActorId - Organization actor ID if linked
+	// OrganizationActorId - Linked organization actor, by ID. `null` when not linked.
 	OrganizationActorId *string `json:"organization_actor_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushActor represents the custom providers commits get output target custom provider version deployment scm push actor type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushActor - Actor that pushed.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushActor struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Stable ID for the actor.
 	Id string `json:"id"`
-	// ExternalId - External actor identifier
+	// ExternalId - ID of the actor on the provider.
 	ExternalId *string `json:"external_id,omitempty"`
-	// Name - Actor name
+	// Name - Name of the actor.
 	Name *string `json:"name,omitempty"`
-	// Email - Actor email
+	// Email - Email of the actor.
 	Email *string `json:"email,omitempty"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushCommit represents the custom providers commits get output target custom provider version deployment scm push commit type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushCommit - Commit that was pushed.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushCommit struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Sha - Commit SHA
+	// Sha - SHA hash of the commit.
 	Sha string `json:"sha"`
-	// Branch - Branch name
+	// Branch - Branch the commit was pushed to.
 	Branch string `json:"branch"`
-	// Message - Commit message
+	// Message - Full message of the commit.
 	Message *string `json:"message,omitempty"`
-	// CreatedAt - Timestamp when commit was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepositoryProvider represents the custom providers commits get output target custom provider version deployment scm push repository provider type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepositoryProvider - Provider the repository lives on.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepositoryProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepository represents the custom providers commits get output target custom provider version deployment scm push repository type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepository struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                                                                        `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepositoryProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPush represents the custom providers commits get output target custom provider version deployment scm push type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPush - SCM push that triggered the deployment. `null` unless `trigger` is `scm`.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPush struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique SCM push identifier
-	Id         string                                                                                `json:"id"`
-	Actor      CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushActor      `json:"actor"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Actor - Actor that pushed.
+	Actor CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushActor `json:"actor"`
+	// Commit - Commit that was pushed.
 	Commit     CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushCommit     `json:"commit"`
 	Repository CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPushRepository `json:"repository"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeployment represents the custom providers commits get output target custom provider version deployment type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider deployment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current deployment status
+	// Status - Build and rollout status.
 	Status string `json:"status"`
-	// Trigger - What triggered this deployment
+	// Trigger - How the deployment was triggered: manually, by the system, or by an SCM push.
 	Trigger string `json:"trigger"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider being deployed.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CustomProviderVersionId - ID of the custom provider version being deployed
-	CustomProviderVersionId *string                                                                              `json:"custom_provider_version_id,omitempty"`
-	Commit                  *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentCommit          `json:"commit,omitempty"`
-	ImmutableBucket         *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucket `json:"immutable_bucket,omitempty"`
-	Actor                   CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentActor            `json:"actor"`
-	ScmPush                 *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPush         `json:"scm_push,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CustomProviderVersionId - Version being deployed, by ID.
+	CustomProviderVersionId *string `json:"custom_provider_version_id,omitempty"`
+	// Commit - Commit that triggered this deployment. `null` for deployments without a commit.
+	Commit *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentCommit `json:"commit,omitempty"`
+	// ImmutableBucket - Immutable copy of the deployed code.
+	ImmutableBucket *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentImmutableBucket `json:"immutable_bucket,omitempty"`
+	Actor           CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentActor            `json:"actor"`
+	// ScmPush - SCM push that triggered the deployment. `null` unless `trigger` is `scm`.
+	ScmPush *CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeploymentScmPush `json:"scm_push,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironmentsEnvironment represents the custom providers commits get output target custom provider version environments environment type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironmentsEnvironment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider environment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this environment belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CurrentProviderVersionId - ID of the current provider version in this environment
+	// CurrentProviderVersionId - Version currently live in this environment. `null` when no version is live.
 	CurrentProviderVersionId *string `json:"current_provider_version_id,omitempty"`
-	// InstanceId - ID of the instance this environment is associated with
+	// InstanceId - ID of the instance this environment deploys into.
 	InstanceId string `json:"instance_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironments represents the custom providers commits get output target custom provider version environments type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironments - Environment this version is deployed to.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironments struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Environment version reference identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsCurrentVersionForEnvironment - Whether this version is the current one for the environment
+	// IsCurrentVersionForEnvironment - Whether this version is the current one for the environment.
 	IsCurrentVersionForEnvironment bool                                                                              `json:"is_current_version_for_environment"`
 	Environment                    CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironmentsEnvironment `json:"environment"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersionActor represents the custom providers commits get output target custom provider version actor type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Actor type
+	// Type - `external` for user actors, `system` for automated ones.
 	Type string `json:"type"`
-	// Identifier - Actor unique identifier
+	// Identifier - Stable identifier for this actor.
 	Identifier string `json:"identifier"`
-	// Name - Actor display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationActorId - Organization actor ID if linked
+	// OrganizationActorId - Linked organization actor, by ID. `null` when not linked.
 	OrganizationActorId *string `json:"organization_actor_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionContainerImage represents the custom providers commits get output target custom provider version container image type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionContainerImage - Container image this version deploys. Only set for `container` providers.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionContainerImage struct {
-	// ContainerRegistry - URL of the container registry
+	// ContainerRegistry - Registry the image is pulled from.
 	ContainerRegistry string `json:"container_registry"`
-	// ContainerImageTag - Tag of the container image
+	// ContainerImageTag - Tag selecting the image version.
 	ContainerImageTag string `json:"container_image_tag"`
-	// ContainerImage - Name of the container image
+	// ContainerImage - Name of the image in the registry.
 	ContainerImage string `json:"container_image"`
 }
 
-// CustomProvidersCommitsGetOutputTargetCustomProviderVersionRemoteMcpServer represents the custom providers commits get output target custom provider version remote mcp server type.
+// CustomProvidersCommitsGetOutputTargetCustomProviderVersionRemoteMcpServer - Remote MCP server this version connects to. Only set for `remote` providers.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersionRemoteMcpServer struct {
-	// Url - URL of the remote MCP server
+	// Url - URL where the remote MCP server is reachable.
 	Url string `json:"url"`
-	// Transport - Transport protocol for the remote MCP server
+	// Transport - MCP transport the remote server speaks.
 	Transport string `json:"transport"`
 }
 
 // CustomProvidersCommitsGetOutputTargetCustomProviderVersion represents the custom providers commits get output target custom provider version type.
 type CustomProvidersCommitsGetOutputTargetCustomProviderVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current version status
-	Status string                                                            `json:"status"`
+	// Status - Build status of this version.
+	Status string `json:"status"`
+	// Config - Configuration for this version.
 	Config *CustomProvidersCommitsGetOutputTargetCustomProviderVersionConfig `json:"config,omitempty"`
-	// Index - Version index number
+	// Index - Sequential number of this version.
 	Index float64 `json:"index"`
-	// Identifier - Version identifier
+	// Identifier - Human-readable label for this version.
 	Identifier string                                                               `json:"identifier"`
 	Deployment CustomProvidersCommitsGetOutputTargetCustomProviderVersionDeployment `json:"deployment"`
-	// Environments - Environments this version is deployed to
+	// Environments - Environments this version is deployed to.
 	Environments []CustomProvidersCommitsGetOutputTargetCustomProviderVersionEnvironments `json:"environments"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this version belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
-	ProviderId      *string                                                                    `json:"provider_id,omitempty"`
-	Actor           CustomProvidersCommitsGetOutputTargetCustomProviderVersionActor            `json:"actor"`
-	ContainerImage  *CustomProvidersCommitsGetOutputTargetCustomProviderVersionContainerImage  `json:"container_image,omitempty"`
+	// ProviderId - Associated provider, by ID. `null` when there is none.
+	ProviderId *string                                                         `json:"provider_id,omitempty"`
+	Actor      CustomProvidersCommitsGetOutputTargetCustomProviderVersionActor `json:"actor"`
+	// ContainerImage - Container image this version deploys. Only set for `container` providers.
+	ContainerImage *CustomProvidersCommitsGetOutputTargetCustomProviderVersionContainerImage `json:"container_image,omitempty"`
+	// RemoteMcpServer - Remote MCP server this version connects to. Only set for `remote` providers.
 	RemoteMcpServer *CustomProvidersCommitsGetOutputTargetCustomProviderVersionRemoteMcpServer `json:"remote_mcp_server,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfigSchema represents the custom providers commits get output previous custom provider version config schema type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfigSchema - Configuration fields for the custom provider.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfigSchema struct {
+	// Type - Format of the configuration schema.
 	Type string `json:"type"`
-	// Schema - JSON Schema defining the configuration fields for the custom provider
+	// Schema - JSON Schema for the provider's configuration.
 	Schema map[string]any `json:"schema"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfig represents the custom providers commits get output previous custom provider version config type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfig - Configuration for this version.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfig struct {
-	// Object - String representing the object's type
-	Object string                                                                   `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Schema - Configuration fields for the custom provider.
 	Schema CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfigSchema `json:"schema"`
-	// Transformer - Optional jsonata transformer function for the configuration.
+	// Transformer - Code that transforms the provider's configuration.
 	Transformer string `json:"transformer"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentCommit represents the custom providers commits get output previous custom provider version deployment commit type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentCommit - Commit that triggered this deployment. `null` for deployments without a commit.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentCommit struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Commit type
+	// Type - What the commit did: created a version, merged one into an environment, or rolled one back.
 	Type string `json:"type"`
-	// Message - Commit message
+	// Message - Message of the commit. `null` when the commit has no message.
 	Message *string `json:"message,omitempty"`
-	// CreatedAt - Timestamp when commit was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider represents the custom providers commits get output previous custom provider version deployment immutable bucket scm repo link repository provider type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider - Provider the repository lives on.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository represents the custom providers commits get output previous custom provider version deployment immutable bucket scm repo link repository type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                                                                                             `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepositoryProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLink represents the custom providers commits get output previous custom provider version deployment immutable bucket scm repo link type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLink - Repository this bucket syncs with. `null` when not linked.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLink struct {
-	Object   string `json:"object"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// IsLinked - `true` when the bucket is linked to a repository.
 	IsLinked string `json:"is_linked"`
-	// Path - Path within the SCM repository
+	// Path - Path within the repository the bucket syncs.
 	Path       *string                                                                                                    `json:"path,omitempty"`
 	Repository CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLinkRepository `json:"repository"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucket represents the custom providers commits get output previous custom provider version deployment immutable bucket type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucket - Immutable copy of the deployed code.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucket struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique bucket identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsImmutable - Whether the bucket is immutable
+	// IsImmutable - `true` when the bucket contents can no longer change.
 	IsImmutable bool `json:"is_immutable"`
-	// IsReadOnly - Whether the bucket is read-only
-	IsReadOnly  bool                                                                                              `json:"is_read_only"`
+	// IsReadOnly - `true` when the bucket cannot be written to.
+	IsReadOnly bool `json:"is_read_only"`
+	// ScmRepoLink - Repository this bucket syncs with. `null` when not linked.
 	ScmRepoLink *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucketScmRepoLink `json:"scm_repo_link,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentActor represents the custom providers commits get output previous custom provider version deployment actor type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Actor type
+	// Type - `external` for user actors, `system` for automated ones.
 	Type string `json:"type"`
-	// Identifier - Actor unique identifier
+	// Identifier - Stable identifier for this actor.
 	Identifier string `json:"identifier"`
-	// Name - Actor display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationActorId - Organization actor ID if linked
+	// OrganizationActorId - Linked organization actor, by ID. `null` when not linked.
 	OrganizationActorId *string `json:"organization_actor_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushActor represents the custom providers commits get output previous custom provider version deployment scm push actor type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushActor - Actor that pushed.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushActor struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Stable ID for the actor.
 	Id string `json:"id"`
-	// ExternalId - External actor identifier
+	// ExternalId - ID of the actor on the provider.
 	ExternalId *string `json:"external_id,omitempty"`
-	// Name - Actor name
+	// Name - Name of the actor.
 	Name *string `json:"name,omitempty"`
-	// Email - Actor email
+	// Email - Email of the actor.
 	Email *string `json:"email,omitempty"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushCommit represents the custom providers commits get output previous custom provider version deployment scm push commit type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushCommit - Commit that was pushed.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushCommit struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Sha - Commit SHA
+	// Sha - SHA hash of the commit.
 	Sha string `json:"sha"`
-	// Branch - Branch name
+	// Branch - Branch the commit was pushed to.
 	Branch string `json:"branch"`
-	// Message - Commit message
+	// Message - Full message of the commit.
 	Message *string `json:"message,omitempty"`
-	// CreatedAt - Timestamp when commit was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepositoryProvider represents the custom providers commits get output previous custom provider version deployment scm push repository provider type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepositoryProvider - Provider the repository lives on.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepositoryProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepository represents the custom providers commits get output previous custom provider version deployment scm push repository type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepository struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                                                                          `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepositoryProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPush represents the custom providers commits get output previous custom provider version deployment scm push type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPush - SCM push that triggered the deployment. `null` unless `trigger` is `scm`.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPush struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique SCM push identifier
-	Id         string                                                                                  `json:"id"`
-	Actor      CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushActor      `json:"actor"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Actor - Actor that pushed.
+	Actor CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushActor `json:"actor"`
+	// Commit - Commit that was pushed.
 	Commit     CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushCommit     `json:"commit"`
 	Repository CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPushRepository `json:"repository"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeployment represents the custom providers commits get output previous custom provider version deployment type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider deployment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current deployment status
+	// Status - Build and rollout status.
 	Status string `json:"status"`
-	// Trigger - What triggered this deployment
+	// Trigger - How the deployment was triggered: manually, by the system, or by an SCM push.
 	Trigger string `json:"trigger"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider being deployed.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CustomProviderVersionId - ID of the custom provider version being deployed
-	CustomProviderVersionId *string                                                                                `json:"custom_provider_version_id,omitempty"`
-	Commit                  *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentCommit          `json:"commit,omitempty"`
-	ImmutableBucket         *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucket `json:"immutable_bucket,omitempty"`
-	Actor                   CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentActor            `json:"actor"`
-	ScmPush                 *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPush         `json:"scm_push,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CustomProviderVersionId - Version being deployed, by ID.
+	CustomProviderVersionId *string `json:"custom_provider_version_id,omitempty"`
+	// Commit - Commit that triggered this deployment. `null` for deployments without a commit.
+	Commit *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentCommit `json:"commit,omitempty"`
+	// ImmutableBucket - Immutable copy of the deployed code.
+	ImmutableBucket *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentImmutableBucket `json:"immutable_bucket,omitempty"`
+	Actor           CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentActor            `json:"actor"`
+	// ScmPush - SCM push that triggered the deployment. `null` unless `trigger` is `scm`.
+	ScmPush *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeploymentScmPush `json:"scm_push,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironmentsEnvironment represents the custom providers commits get output previous custom provider version environments environment type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironmentsEnvironment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider environment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this environment belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CurrentProviderVersionId - ID of the current provider version in this environment
+	// CurrentProviderVersionId - Version currently live in this environment. `null` when no version is live.
 	CurrentProviderVersionId *string `json:"current_provider_version_id,omitempty"`
-	// InstanceId - ID of the instance this environment is associated with
+	// InstanceId - ID of the instance this environment deploys into.
 	InstanceId string `json:"instance_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironments represents the custom providers commits get output previous custom provider version environments type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironments - Environment this version is deployed to.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironments struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Environment version reference identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsCurrentVersionForEnvironment - Whether this version is the current one for the environment
+	// IsCurrentVersionForEnvironment - Whether this version is the current one for the environment.
 	IsCurrentVersionForEnvironment bool                                                                                `json:"is_current_version_for_environment"`
 	Environment                    CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironmentsEnvironment `json:"environment"`
 }
 
 // CustomProvidersCommitsGetOutputPreviousCustomProviderVersionActor represents the custom providers commits get output previous custom provider version actor type.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Actor type
+	// Type - `external` for user actors, `system` for automated ones.
 	Type string `json:"type"`
-	// Identifier - Actor unique identifier
+	// Identifier - Stable identifier for this actor.
 	Identifier string `json:"identifier"`
-	// Name - Actor display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationActorId - Organization actor ID if linked
+	// OrganizationActorId - Linked organization actor, by ID. `null` when not linked.
 	OrganizationActorId *string `json:"organization_actor_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionContainerImage represents the custom providers commits get output previous custom provider version container image type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionContainerImage - Container image this version deploys. Only set for `container` providers.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionContainerImage struct {
-	// ContainerRegistry - URL of the container registry
+	// ContainerRegistry - Registry the image is pulled from.
 	ContainerRegistry string `json:"container_registry"`
-	// ContainerImageTag - Tag of the container image
+	// ContainerImageTag - Tag selecting the image version.
 	ContainerImageTag string `json:"container_image_tag"`
-	// ContainerImage - Name of the container image
+	// ContainerImage - Name of the image in the registry.
 	ContainerImage string `json:"container_image"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionRemoteMcpServer represents the custom providers commits get output previous custom provider version remote mcp server type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersionRemoteMcpServer - Remote MCP server this version connects to. Only set for `remote` providers.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersionRemoteMcpServer struct {
-	// Url - URL of the remote MCP server
+	// Url - URL where the remote MCP server is reachable.
 	Url string `json:"url"`
-	// Transport - Transport protocol for the remote MCP server
+	// Transport - MCP transport the remote server speaks.
 	Transport string `json:"transport"`
 }
 
-// CustomProvidersCommitsGetOutputPreviousCustomProviderVersion represents the custom providers commits get output previous custom provider version type.
+// CustomProvidersCommitsGetOutputPreviousCustomProviderVersion - Version previously in the environment. `null` when there was none.
 type CustomProvidersCommitsGetOutputPreviousCustomProviderVersion struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider version identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current version status
-	Status string                                                              `json:"status"`
+	// Status - Build status of this version.
+	Status string `json:"status"`
+	// Config - Configuration for this version.
 	Config *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionConfig `json:"config,omitempty"`
-	// Index - Version index number
+	// Index - Sequential number of this version.
 	Index float64 `json:"index"`
-	// Identifier - Version identifier
+	// Identifier - Human-readable label for this version.
 	Identifier string                                                                 `json:"identifier"`
 	Deployment CustomProvidersCommitsGetOutputPreviousCustomProviderVersionDeployment `json:"deployment"`
-	// Environments - Environments this version is deployed to
+	// Environments - Environments this version is deployed to.
 	Environments []CustomProvidersCommitsGetOutputPreviousCustomProviderVersionEnvironments `json:"environments"`
-	// CustomProviderId - ID of the parent custom provider
+	// CustomProviderId - Custom provider this version belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
-	ProviderId      *string                                                                      `json:"provider_id,omitempty"`
-	Actor           CustomProvidersCommitsGetOutputPreviousCustomProviderVersionActor            `json:"actor"`
-	ContainerImage  *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionContainerImage  `json:"container_image,omitempty"`
+	// ProviderId - Associated provider, by ID. `null` when there is none.
+	ProviderId *string                                                           `json:"provider_id,omitempty"`
+	Actor      CustomProvidersCommitsGetOutputPreviousCustomProviderVersionActor `json:"actor"`
+	// ContainerImage - Container image this version deploys. Only set for `container` providers.
+	ContainerImage *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionContainerImage `json:"container_image,omitempty"`
+	// RemoteMcpServer - Remote MCP server this version connects to. Only set for `remote` providers.
 	RemoteMcpServer *CustomProvidersCommitsGetOutputPreviousCustomProviderVersionRemoteMcpServer `json:"remote_mcp_server,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // CustomProvidersCommitsGetOutputActor represents the custom providers commits get output actor type.
 type CustomProvidersCommitsGetOutputActor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Type - Actor type
+	// Type - `external` for user actors, `system` for automated ones.
 	Type string `json:"type"`
-	// Identifier - Actor unique identifier
+	// Identifier - Stable identifier for this actor.
 	Identifier string `json:"identifier"`
-	// Name - Actor display name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationActorId - Organization actor ID if linked
+	// OrganizationActorId - Linked organization actor, by ID. `null` when not linked.
 	OrganizationActorId *string `json:"organization_actor_id,omitempty"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputScmPushActor represents the custom providers commits get output scm push actor type.
+// CustomProvidersCommitsGetOutputScmPushActor - Actor that pushed.
 type CustomProvidersCommitsGetOutputScmPushActor struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Actor identifier
+	// Id - Stable ID for the actor.
 	Id string `json:"id"`
-	// ExternalId - External actor identifier
+	// ExternalId - ID of the actor on the provider.
 	ExternalId *string `json:"external_id,omitempty"`
-	// Name - Actor name
+	// Name - Name of the actor.
 	Name *string `json:"name,omitempty"`
-	// Email - Actor email
+	// Email - Email of the actor.
 	Email *string `json:"email,omitempty"`
 }
 
-// CustomProvidersCommitsGetOutputScmPushCommit represents the custom providers commits get output scm push commit type.
+// CustomProvidersCommitsGetOutputScmPushCommit - Commit that was pushed.
 type CustomProvidersCommitsGetOutputScmPushCommit struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Sha - Commit SHA
+	// Sha - SHA hash of the commit.
 	Sha string `json:"sha"`
-	// Branch - Branch name
+	// Branch - Branch the commit was pushed to.
 	Branch string `json:"branch"`
-	// Message - Commit message
+	// Message - Full message of the commit.
 	Message *string `json:"message,omitempty"`
-	// CreatedAt - Timestamp when commit was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputScmPushRepositoryProvider represents the custom providers commits get output scm push repository provider type.
+// CustomProvidersCommitsGetOutputScmPushRepositoryProvider - Provider the repository lives on.
 type CustomProvidersCommitsGetOutputScmPushRepositoryProvider struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Type - SCM provider type
+	// Type - Provider the repository lives on.
 	Type string `json:"type"`
-	// Id - External provider identifier
+	// Id - ID of the repository on the provider.
 	Id string `json:"id"`
-	// Name - Repository name on the provider
+	// Name - Name of the repository on the provider.
 	Name string `json:"name"`
-	// Owner - Repository owner on the provider
+	// Owner - Owner of the repository on the provider.
 	Owner string `json:"owner"`
 }
 
 // CustomProvidersCommitsGetOutputScmPushRepository represents the custom providers commits get output scm push repository type.
 type CustomProvidersCommitsGetOutputScmPushRepository struct {
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique repository identifier
-	Id       string                                                   `json:"id"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Provider - Provider the repository lives on.
 	Provider CustomProvidersCommitsGetOutputScmPushRepositoryProvider `json:"provider"`
-	// Url - Repository URL
+	// Url - Web URL of the repository.
 	Url string `json:"url"`
-	// IsPrivate - Whether the repository is private
+	// IsPrivate - Whether the repository is private.
 	IsPrivate bool `json:"is_private"`
-	// DefaultBranch - Default branch name
+	// DefaultBranch - Branch used when none is specified.
 	DefaultBranch string `json:"default_branch"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
-// CustomProvidersCommitsGetOutputScmPush represents the custom providers commits get output scm push type.
+// CustomProvidersCommitsGetOutputScmPush - SCM push that triggered the commit. `null` unless `trigger` is `scm`.
 type CustomProvidersCommitsGetOutputScmPush struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique SCM push identifier
-	Id         string                                           `json:"id"`
-	Actor      CustomProvidersCommitsGetOutputScmPushActor      `json:"actor"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Actor - Actor that pushed.
+	Actor CustomProvidersCommitsGetOutputScmPushActor `json:"actor"`
+	// Commit - Commit that was pushed.
 	Commit     CustomProvidersCommitsGetOutputScmPushCommit     `json:"commit"`
 	Repository CustomProvidersCommitsGetOutputScmPushRepository `json:"repository"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CustomProvidersCommitsGetOutput represents the custom providers commits get output type.
 type CustomProvidersCommitsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique custom provider commit identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current commit status
+	// Status - `applied` once the version promotion takes effect.
 	Status string `json:"status"`
-	// Trigger - What triggered this commit
-	Trigger string                                `json:"trigger"`
-	Error   *CustomProvidersCommitsGetOutputError `json:"error,omitempty"`
-	// CustomProviderId - ID of the parent custom provider
+	// Trigger - How the commit was created: manually, by the system, or by an SCM push.
+	Trigger string `json:"trigger"`
+	// Error - Failure details. `null` when the commit did not fail.
+	Error *CustomProvidersCommitsGetOutputError `json:"error,omitempty"`
+	// CustomProviderId - Custom provider this commit belongs to.
 	CustomProviderId string `json:"custom_provider_id"`
-	// ProviderId - ID of the associated provider
+	// ProviderId - Associated provider, by ID. `null` when there is none.
 	ProviderId *string `json:"provider_id,omitempty"`
-	// CustomProviderDeploymentId - ID of the associated deployment
-	CustomProviderDeploymentId    *string                                                       `json:"custom_provider_deployment_id,omitempty"`
-	ToEnvironment                 CustomProvidersCommitsGetOutputToEnvironment                  `json:"to_environment"`
-	FromEnvironment               *CustomProvidersCommitsGetOutputFromEnvironment               `json:"from_environment,omitempty"`
-	TargetCustomProviderVersion   CustomProvidersCommitsGetOutputTargetCustomProviderVersion    `json:"target_custom_provider_version"`
+	// CustomProviderDeploymentId - Deployment this commit built. `null` when there is none.
+	CustomProviderDeploymentId *string                                      `json:"custom_provider_deployment_id,omitempty"`
+	ToEnvironment              CustomProvidersCommitsGetOutputToEnvironment `json:"to_environment"`
+	// FromEnvironment - Environment the version is promoted from. `null` for rollbacks.
+	FromEnvironment             *CustomProvidersCommitsGetOutputFromEnvironment            `json:"from_environment,omitempty"`
+	TargetCustomProviderVersion CustomProvidersCommitsGetOutputTargetCustomProviderVersion `json:"target_custom_provider_version"`
+	// PreviousCustomProviderVersion - Version previously in the environment. `null` when there was none.
 	PreviousCustomProviderVersion *CustomProvidersCommitsGetOutputPreviousCustomProviderVersion `json:"previous_custom_provider_version,omitempty"`
 	Actor                         CustomProvidersCommitsGetOutputActor                          `json:"actor"`
-	ScmPush                       *CustomProvidersCommitsGetOutputScmPush                       `json:"scm_push,omitempty"`
-	// CreatedAt - Timestamp when created
+	// ScmPush - SCM push that triggered the commit. `null` unless `trigger` is `scm`.
+	ScmPush *CustomProvidersCommitsGetOutputScmPush `json:"scm_push,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// AppliedAt - Timestamp when the commit was applied
+	// AppliedAt - When the commit took effect. `null` while `status` is `pending`.
 	AppliedAt *time.Time `json:"applied_at,omitempty"`
 }
 

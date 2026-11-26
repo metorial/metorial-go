@@ -21,47 +21,48 @@ type MagicMcpServersToolsOutputItemsOutputSchema struct {
 
 // MagicMcpServersToolsOutputItemsTags represents the magic mcp servers tools output items tags type.
 type MagicMcpServersToolsOutputItemsTags struct {
-	// Destructive - Whether the tool is destructive
+	// Destructive - Whether the tool changes or deletes data.
 	Destructive *bool `json:"destructive,omitempty"`
-	// ReadOnly - Whether the tool is read-only
+	// ReadOnly - Whether the tool only reads data.
 	ReadOnly *bool `json:"read_only,omitempty"`
 }
 
 // MagicMcpServersToolsOutputItems represents the magic mcp servers tools output items type.
 type MagicMcpServersToolsOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique tool identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Key - Tool key
+	// Key - Key used to call the tool over MCP.
 	Key string `json:"key"`
-	// Name - Display name of the tool
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Tool description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Capabilities - Tool capabilities
+	// Capabilities - What the tool can do.
 	Capabilities map[string]any `json:"capabilities"`
-	// Constraints - Tool constraints
+	// Constraints - Rules for using the tool.
 	Constraints []string `json:"constraints"`
-	// Instructions - Tool usage instructions
+	// Instructions - Guidance for calling the tool correctly.
 	Instructions []string                                     `json:"instructions"`
 	InputSchema  *MagicMcpServersToolsOutputItemsInputSchema  `json:"input_schema,omitempty"`
 	OutputSchema *MagicMcpServersToolsOutputItemsOutputSchema `json:"output_schema,omitempty"`
 	Tags         *MagicMcpServersToolsOutputItemsTags         `json:"tags,omitempty"`
 	// ToolCategoryKeys - Keys of the tool categories this tool belongs to
 	ToolCategoryKeys []string `json:"tool_category_keys"`
-	// SpecificationId - Specification ID
+	// SpecificationId - Specification this tool belongs to.
 	SpecificationId string `json:"specification_id"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this tool belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MagicMcpServersToolsOutput represents the magic mcp servers tools output type.
 type MagicMcpServersToolsOutput struct {
+	// Object - String representing the object’s type.
 	Object string                            `json:"object"`
 	Items  []MagicMcpServersToolsOutputItems `json:"items"`
 }

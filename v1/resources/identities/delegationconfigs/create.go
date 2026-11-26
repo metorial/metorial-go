@@ -7,27 +7,27 @@ import (
 
 // IdentitiesDelegationConfigsCreateOutput represents the identities delegation configs create output type.
 type IdentitiesDelegationConfigsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique delegation config identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Current lifecycle status of the delegation config.
+	// Status - Current lifecycle status of the delegation config. `archived` once you archive the config.
 	Status string `json:"status"`
-	// IsDefault - Whether this config is the default config for the environment.
+	// IsDefault - Delegations use this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Human-readable name of the delegation config.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Optional description of the delegation policy.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata associated with the delegation config.
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SubDelegationBehavior - How this config handles sub-delegation requests.
+	// SubDelegationBehavior - Whether delegates can delegate further. `require_consent` asks the owner for approval first.
 	SubDelegationBehavior string `json:"sub_delegation_behavior"`
-	// SubDelegationDepth - Maximum allowed sub-delegation depth for this policy.
+	// SubDelegationDepth - Maximum sub-delegation depth. `0` blocks sub-delegation.
 	SubDelegationDepth float64 `json:"sub_delegation_depth"`
-	// CreatedAt - Timestamp when the delegation config was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the delegation config was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -47,15 +47,15 @@ func MapIdentitiesDelegationConfigsCreateOutputToJSON(v *IdentitiesDelegationCon
 
 // IdentitiesDelegationConfigsCreateBody represents the identities delegation configs create body type.
 type IdentitiesDelegationConfigsCreateBody struct {
-	// Name - Optional display name for the delegation config.
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Optional description of the delegation policy.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata to store on the delegation config.
+	// Metadata - Custom data to identify or organize the identity delegation config.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// SubDelegationBehavior - How sub-delegations should be handled.
+	// SubDelegationBehavior - Whether delegates can delegate further. `require_consent` asks the owner for approval first.
 	SubDelegationBehavior string `json:"sub_delegation_behavior"`
-	// SubDelegationDepth - Maximum allowed sub-delegation depth.
+	// SubDelegationDepth - Maximum sub-delegation depth. `0` blocks sub-delegation.
 	SubDelegationDepth *float64 `json:"sub_delegation_depth,omitempty"`
 }
 

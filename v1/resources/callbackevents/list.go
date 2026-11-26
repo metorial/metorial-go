@@ -7,13 +7,13 @@ import (
 
 // CallbackEventsListOutputItems represents the callback events list output items type.
 type CallbackEventsListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique callback event identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - Processing status of this callback event within Metorial
+	// Status - Processing status of this callback event within Metorial. `failed` when processing failed; the reason is in `details.error`.
 	Status string `json:"status"`
-	// Source - How the provider trigger that produced this event was invoked
+	// Source - How this event reached Metorial. `webhook` when the provider pushed it, `polling` when Metorial fetched it.
 	Source string `json:"source"`
 	// ProviderTriggerKey - Key of the provider trigger this event was produced by
 	ProviderTriggerKey string `json:"provider_trigger_key"`
@@ -29,18 +29,26 @@ type CallbackEventsListOutputItems struct {
 	CallbackInstanceId string `json:"callback_instance_id"`
 	// OccurredAt - Timestamp when the underlying provider event occurred
 	OccurredAt time.Time `json:"occurred_at"`
-	// CreatedAt - Timestamp when the callback event was recorded
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // CallbackEventsListOutputPagination represents the callback events list output pagination type.
 type CallbackEventsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // CallbackEventsListOutput represents the callback events list output type.
 type CallbackEventsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                             `json:"object"`
 	Items      []CallbackEventsListOutputItems    `json:"items"`
 	Pagination CallbackEventsListOutputPagination `json:"pagination"`
 }
@@ -59,48 +67,53 @@ func MapCallbackEventsListOutputToJSON(v *CallbackEventsListOutput) ([]byte, err
 	return json.Marshal(v)
 }
 
-// CallbackEventsListQueryOccurredAt - Filter when the underlying provider event occurred by date range
+// CallbackEventsListQueryOccurredAt - Only return results whose provider event time is in this range. Set `gt`, `lt`, or both.
 type CallbackEventsListQueryOccurredAt struct {
-	// Gt - Only include records after this timestamp for when the underlying provider event occurred
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for when the underlying provider event occurred
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// CallbackEventsListQueryCreatedAt - Filter callback event creation time by date range
+// CallbackEventsListQueryCreatedAt - Only return results whose callback event creation time is in this range. Set `gt`, `lt`, or both.
 type CallbackEventsListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for callback event creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for callback event creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // CallbackEventsListQuery represents the callback events list query type.
 type CallbackEventsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// CallbackId - Filter by callback ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// CallbackId - Only return events for one of these callbacks.
 	CallbackId *any `json:"callback_id,omitempty"`
-	// CallbackInstanceId - Filter by callback instance ID(s)
+	// CallbackInstanceId - Only return events for one of these callback instances.
 	CallbackInstanceId *any `json:"callback_instance_id,omitempty"`
-	// IntegrationId - Filter by the integration the callback belongs to
+	// IntegrationId - Only return events for callbacks belonging to one of these integrations.
 	IntegrationId *any `json:"integration_id,omitempty"`
-	// IntegrationProviderId - Filter by the integration provider the callback belongs to
+	// IntegrationProviderId - Only return events for callbacks belonging to one of these integration providers.
 	IntegrationProviderId *any `json:"integration_provider_id,omitempty"`
-	// ProviderId - Filter by the provider the callback belongs to
+	// ProviderId - Only return events for callbacks belonging to one of these providers.
 	ProviderId *any `json:"provider_id,omitempty"`
-	// ProviderTriggerKey - Filter by the provider trigger key that produced the event
+	// ProviderTriggerKey - Only return events produced by one of these provider triggers.
 	ProviderTriggerKey *any `json:"provider_trigger_key,omitempty"`
-	// Status - Filter by callback event processing status
+	// Status - Only return events with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// Source - Filter by callback event source
+	// Source - Only return events from one of these sources.
 	Source *any `json:"source,omitempty"`
-	// OccurredAt - Filter when the underlying provider event occurred by date range
+	// OccurredAt - Only return results whose provider event time is in this range. Set `gt`, `lt`, or both.
 	OccurredAt *CallbackEventsListQueryOccurredAt `json:"occurred_at,omitempty"`
-	// CreatedAt - Filter callback event creation time by date range
+	// CreatedAt - Only return results whose callback event creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *CallbackEventsListQueryCreatedAt `json:"created_at,omitempty"`
 }
 

@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// ChatsMessagesListOutputItemsAuthor represents the chats messages list output items author type.
+// ChatsMessagesListOutputItemsAuthor - Author who sent the message. `null` when the message was first seen as a deletion, which carries no author.
 type ChatsMessagesListOutputItemsAuthor struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsMessagesListOutputItemsAuthor struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -42,6 +42,7 @@ type ChatsMessagesListOutputItemsAuthor struct {
 // ChatsMessagesListOutputItemsReactionsEmoji represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsMessagesListOutputItemsReactionsEmoji struct {
+	// Type - Provider-specific custom emoji.
 	Type *string `json:"type,omitempty"`
 	// Value - The unicode emoji shortcode
 	Value *string `json:"value,omitempty"`
@@ -73,11 +74,13 @@ type ChatsMessagesListOutputItemsReactionsAuthors struct {
 	Email *string `json:"email,omitempty"`
 	// ImageUrl - URL of the author's avatar
 	ImageUrl *string `json:"imageUrl,omitempty"`
-	Raw      *any    `json:"raw,omitempty"`
+	// Raw - Raw reaction payload from the provider.
+	Raw *any `json:"raw,omitempty"`
 }
 
 // ChatsMessagesListOutputItemsReactions represents the chats messages list output items reactions type.
 type ChatsMessagesListOutputItemsReactions struct {
+	// Emoji - Emoji used for the reaction.
 	Emoji ChatsMessagesListOutputItemsReactionsEmoji `json:"emoji"`
 	// Count - Number of times this emoji was used to react
 	Count float64 `json:"count"`
@@ -103,11 +106,11 @@ type ChatsMessagesListOutputItemsUnfurls struct {
 
 // ChatsMessagesListOutputItemsAttachments represents the chats messages list output items attachments type.
 type ChatsMessagesListOutputItemsAttachments struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat message attachment identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ProviderAttachmentId - The attachment's identifier on the chat provider
+	// ProviderAttachmentId - Identifier the chat provider uses for this attachment.
 	ProviderAttachmentId *string `json:"provider_attachment_id,omitempty"`
 	// Type - The kind of content the attachment holds
 	Type string `json:"type"`
@@ -127,15 +130,15 @@ type ChatsMessagesListOutputItemsAttachments struct {
 	FileId string `json:"file_id"`
 	// DownloadUrl - Temporary URL the attachment content can be downloaded from. Null while the content is unavailable.
 	DownloadUrl *string `json:"download_url,omitempty"`
-	// CreatedAt - Timestamp when the attachment was recorded
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ChatsMessagesListOutputItems represents the chats messages list output items type.
 type ChatsMessagesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat message identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this message belongs to
 	ChatId string `json:"chat_id"`
@@ -145,11 +148,12 @@ type ChatsMessagesListOutputItems struct {
 	ThreadId *string `json:"thread_id,omitempty"`
 	// ProviderType - The provider's own name for this kind of message
 	ProviderType string `json:"provider_type"`
-	// ProviderMessageId - The message's identifier on the chat provider
+	// ProviderMessageId - Identifier the chat provider uses for this message.
 	ProviderMessageId string `json:"provider_message_id"`
 	// ProviderReplyToMessageId - Provider identifier of the message this one replies to, if it is a reply
-	ProviderReplyToMessageId *string                             `json:"provider_reply_to_message_id,omitempty"`
-	Author                   *ChatsMessagesListOutputItemsAuthor `json:"author,omitempty"`
+	ProviderReplyToMessageId *string `json:"provider_reply_to_message_id,omitempty"`
+	// Author - Author who sent the message. `null` when the message was first seen as a deletion, which carries no author.
+	Author *ChatsMessagesListOutputItemsAuthor `json:"author,omitempty"`
 	// Body - Structured content of the message. Null once the message has been deleted.
 	Body *map[string]any `json:"body,omitempty"`
 	// Reactions - Reactions left on the message, as reported by the provider
@@ -162,7 +166,7 @@ type ChatsMessagesListOutputItems struct {
 	SentAt time.Time `json:"sent_at"`
 	// Edited - Whether the message has been edited since it was sent
 	Edited bool `json:"edited"`
-	// EditedAt - Timestamp when the message was last edited
+	// EditedAt - When the message was last edited. `null` if never edited.
 	EditedAt *time.Time `json:"edited_at,omitempty"`
 	// CreatedAt - Timestamp when the message was first seen by Metorial
 	CreatedAt time.Time `json:"created_at"`
@@ -176,12 +180,20 @@ type ChatsMessagesListOutputItems struct {
 
 // ChatsMessagesListOutputPagination represents the chats messages list output pagination type.
 type ChatsMessagesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatsMessagesListOutput represents the chats messages list output type.
 type ChatsMessagesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                            `json:"object"`
 	Items      []ChatsMessagesListOutputItems    `json:"items"`
 	Pagination ChatsMessagesListOutputPagination `json:"pagination"`
 }
@@ -202,14 +214,19 @@ func MapChatsMessagesListOutputToJSON(v *ChatsMessagesListOutput) ([]byte, error
 
 // ChatsMessagesListQuery represents the chats messages list query type.
 type ChatsMessagesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ChannelId - The channel to list messages for
 	ChannelId string `json:"channel_id"`
-	// ThreadId - Filter to messages in this thread
+	// ThreadId - Only return messages in this thread.
 	ThreadId *string `json:"thread_id,omitempty"`
 	// Search - Search message content
 	Search *string `json:"search,omitempty"`

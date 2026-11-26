@@ -17,28 +17,33 @@ func NewCallbackInstancesEndpoint(client *endpoint.Client) *CallbackInstancesEnd
 
 // CallbackInstancesEndpointListParams contains optional query parameters for List.
 type CallbackInstancesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	// Id - Filter by callback instance ID(s)
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return callback instances with one of these IDs.
 	Id *any `json:"id,omitempty"`
-	// CallbackId - Filter by callback ID(s)
+	// CallbackId - Only return instances of one of these callbacks.
 	CallbackId *any `json:"callback_id,omitempty"`
-	// IntegrationId - Filter by the integration the callback belongs to
+	// IntegrationId - Only return instances of callbacks belonging to one of these integrations.
 	IntegrationId *any `json:"integration_id,omitempty"`
-	// IntegrationInstanceId - Filter by integration instance ID(s)
+	// IntegrationInstanceId - Only return instances listening for one of these integration instances.
 	IntegrationInstanceId *any `json:"integration_instance_id,omitempty"`
-	// IntegrationInstanceProviderId - Filter by integration instance provider ID(s)
+	// IntegrationInstanceProviderId - Only return instances registered on one of these integration instance providers.
 	IntegrationInstanceProviderId *any `json:"integration_instance_provider_id,omitempty"`
-	// Status - Filter by callback instance lifecycle status
+	// Status - Only return callback instances with one of these statuses. `deleted` instances are never listed.
 	Status *any `json:"status,omitempty"`
 	// Search - Match a callback instance by its exact ID
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter callback instance creation time by date range
+	// CreatedAt - Only return results whose callback instance creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter callback instance last update time by date range
+	// UpdatedAt - Only return results whose callback instance last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
@@ -59,7 +64,7 @@ func (e *CallbackInstancesEndpoint) List(instanceId string, params *CallbackInst
 	return &result, nil
 }
 
-// Get retrieves a specific callback instance by ID.
+// Get retrieves a callback instance.
 func (e *CallbackInstancesEndpoint) Get(instanceId string, callbackInstanceId string) (*callbackinstances.CallbackInstancesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "callback-instances", callbackInstanceId},

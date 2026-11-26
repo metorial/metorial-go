@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/skills/mergerequests/plan"
 )
 
-// SkillsMergeRequestsPlanEndpoint provides access to review, resolve, and apply changes between skills.
+// SkillsMergeRequestsPlanEndpoint provides access to a skill merge request is a proposed change from one skill into another.
 type SkillsMergeRequestsPlanEndpoint struct {
 	client *endpoint.Client
 }

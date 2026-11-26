@@ -7,13 +7,21 @@ import (
 
 // ConsumersGetMemberConsumerOutput represents the consumers get member consumer output type.
 type ConsumersGetMemberConsumerOutput struct {
-	Object    string         `json:"object"`
-	Id        string         `json:"id"`
-	Name      string         `json:"name"`
-	Email     string         `json:"email"`
-	ImageUrl  string         `json:"image_url"`
-	UserId    *string        `json:"user_id,omitempty"`
-	CreatedAt time.Time      `json:"created_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time      `json:"updated_at"`
 	Profile   map[string]any `json:"profile"`
 }
@@ -34,6 +42,7 @@ func MapConsumersGetMemberConsumerOutputToJSON(v *ConsumersGetMemberConsumerOutp
 
 // ConsumersGetMemberConsumerBody represents the consumers get member consumer body type.
 type ConsumersGetMemberConsumerBody struct {
+	// SurfaceIdentifier - Surface to create the profile on.
 	SurfaceIdentifier *string `json:"surface_identifier,omitempty"`
 }
 

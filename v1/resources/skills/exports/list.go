@@ -33,7 +33,7 @@ type SkillsExportsListOutputItemsFileCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsFileCreatedByOrganizationActor represents the skills exports list output items file created by organization actor type.
+// SkillsExportsListOutputItemsFileCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsExportsListOutputItemsFileCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,67 +57,83 @@ type SkillsExportsListOutputItemsFileCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsFileCreatedByConsumer represents the skills exports list output items file created by consumer type.
+// SkillsExportsListOutputItemsFileCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsExportsListOutputItemsFileCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsFileCreatedBy represents the skills exports list output items file created by type.
+// SkillsExportsListOutputItemsFileCreatedBy - Actor that uploaded the file.
 type SkillsExportsListOutputItemsFileCreatedBy struct {
-	Type              string                                                      `json:"type"`
-	Name              string                                                      `json:"name"`
-	ImageUrl          *string                                                     `json:"image_url,omitempty"`
-	Email             *string                                                     `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsExportsListOutputItemsFileCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsExportsListOutputItemsFileCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                             `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsExportsListOutputItemsFileCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsListOutputItemsFile represents the skills exports list output items file type.
 type SkillsExportsListOutputItemsFile struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The files's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The files's status
+	// Status - `deleted` after the file is deleted.
 	Status string `json:"status"`
-	// FileName - The file's name
+	// FileName - Name of the uploaded file.
 	FileName string `json:"file_name"`
-	// FileSize - The file's size in bytes
+	// FileSize - Size of the file in bytes.
 	FileSize float64 `json:"file_size"`
-	// FileType - The file's MIME type
+	// FileType - MIME type of the file.
 	FileType string `json:"file_type"`
-	// Title - The file's title
+	// Title - Label shown for the file.
 	Title string `json:"title"`
-	// Purpose - The file's purpose identifier
-	Purpose   string                                     `json:"purpose"`
+	// Purpose - Why the file was uploaded. Controls what it can be used for.
+	Purpose string `json:"purpose"`
+	// CreatedBy - Actor that uploaded the file.
 	CreatedBy *SkillsExportsListOutputItemsFileCreatedBy `json:"created_by,omitempty"`
-	// CreatedAt - The files's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - The files's last update date
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // SkillsExportsListOutputItemsFileLink represents the skills exports list output items file link type.
 type SkillsExportsListOutputItemsFileLink struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The links's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// FileId - The file's unique identifier
+	// FileId - File this link downloads.
 	FileId string `json:"file_id"`
-	// Url - The file's public URL
+	// Url - Public URL for downloading the file.
 	Url string `json:"url"`
-	// CreatedAt - The links's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// ExpiresAt - The file's expiration date
+	// ExpiresAt - When the link stops working. `null` if it never expires.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
@@ -149,7 +165,7 @@ type SkillsExportsListOutputItemsCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsCreatedByOrganizationActor represents the skills exports list output items created by organization actor type.
+// SkillsExportsListOutputItemsCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type SkillsExportsListOutputItemsCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -173,37 +189,53 @@ type SkillsExportsListOutputItemsCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsCreatedByConsumer represents the skills exports list output items created by consumer type.
+// SkillsExportsListOutputItemsCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type SkillsExportsListOutputItemsCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// SkillsExportsListOutputItemsCreatedBy represents the skills exports list output items created by type.
+// SkillsExportsListOutputItemsCreatedBy - Actor behind a participant.
 type SkillsExportsListOutputItemsCreatedBy struct {
-	Type              string                                                  `json:"type"`
-	Name              string                                                  `json:"name"`
-	ImageUrl          *string                                                 `json:"image_url,omitempty"`
-	Email             *string                                                 `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *SkillsExportsListOutputItemsCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *SkillsExportsListOutputItemsCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                         `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *SkillsExportsListOutputItemsCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // SkillsExportsListOutputItems represents the skills exports list output items type.
 type SkillsExportsListOutputItems struct {
-	Object      string                                 `json:"object"`
-	Id          string                                 `json:"id"`
-	Target      string                                 `json:"target"`
-	Status      string                                 `json:"status"`
-	File        *SkillsExportsListOutputItemsFile      `json:"file,omitempty"`
-	FileLink    *SkillsExportsListOutputItemsFileLink  `json:"file_link,omitempty"`
+	Object   string                                `json:"object"`
+	Id       string                                `json:"id"`
+	Target   string                                `json:"target"`
+	Status   string                                `json:"status"`
+	File     *SkillsExportsListOutputItemsFile     `json:"file,omitempty"`
+	FileLink *SkillsExportsListOutputItemsFileLink `json:"file_link,omitempty"`
+	// CreatedBy - Actor behind a participant.
 	CreatedBy   *SkillsExportsListOutputItemsCreatedBy `json:"created_by,omitempty"`
 	CreatedAt   time.Time                              `json:"created_at"`
 	StartedAt   *time.Time                             `json:"started_at,omitempty"`
@@ -212,12 +244,20 @@ type SkillsExportsListOutputItems struct {
 
 // SkillsExportsListOutputPagination represents the skills exports list output pagination type.
 type SkillsExportsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SkillsExportsListOutput represents the skills exports list output type.
 type SkillsExportsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                            `json:"object"`
 	Items      []SkillsExportsListOutputItems    `json:"items"`
 	Pagination SkillsExportsListOutputPagination `json:"pagination"`
 }
@@ -238,14 +278,22 @@ func MapSkillsExportsListOutputToJSON(v *SkillsExportsListOutput) ([]byte, error
 
 // SkillsExportsListQuery represents the skills exports list query type.
 type SkillsExportsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Id     *any     `json:"id,omitempty"`
-	Target *any     `json:"target,omitempty"`
-	Status *any     `json:"status,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Id - Only return skill exports with these IDs.
+	Id *any `json:"id,omitempty"`
+	// Target - Only return skill exports of one of these types.
+	Target *any `json:"target,omitempty"`
+	// Status - Only return skill exports with one of these statuses.
+	Status *any `json:"status,omitempty"`
 }
 
 // MapSkillsExportsListQueryFromJSON deserializes JSON data into a SkillsExportsListQuery.

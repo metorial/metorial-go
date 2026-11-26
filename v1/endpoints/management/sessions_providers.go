@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/providers"
 )
 
-// SessionsProvidersEndpoint provides access to session providers represent the providers that are actively connected to a session. Each session can have multiple providers, and providers can be added or removed during the session lifecycle.
+// SessionsProvidersEndpoint provides access to a session provider is one provider connected to a session, with the deployment, config, and credentials it runs with.
 type SessionsProvidersEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsProvidersEndpoint(client *endpoint.Client) *SessionsProvidersEnd
 
 // SessionsProvidersEndpointListParams contains optional query parameters for List.
 type SessionsProvidersEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by session provider ID(s)
 	Id *any `json:"id,omitempty"`
 	// SessionId - Filter by session ID(s)
@@ -36,26 +41,28 @@ type SessionsProvidersEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// Status - Filter by provider status
+	// Status - Only return session providers with one of these statuses.
 	Status *any `json:"status,omitempty"`
-	// CreatedAt - Filter session provider creation time by date range
+	// CreatedAt - Only return results whose session provider creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session provider last update time by date range
+	// UpdatedAt - Only return results whose session provider last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SessionsProvidersEndpointCreateBody contains the request body for Create.
 type SessionsProvidersEndpointCreateBody struct {
-	SessionId   string `json:"session_id"`
-	ToolFilters *any   `json:"tool_filters,omitempty"`
+	SessionId string `json:"session_id"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // SessionsProvidersEndpointUpdateBody contains the request body for Update.
 type SessionsProvidersEndpointUpdateBody struct {
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
 	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
-// List returns a paginated list of providers connected to a session.
+// List returns a paginated list of session providers.
 func (e *SessionsProvidersEndpoint) List(instanceId string, params *SessionsProvidersEndpointListParams) (*providers.SessionsProvidersListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -72,7 +79,7 @@ func (e *SessionsProvidersEndpoint) List(instanceId string, params *SessionsProv
 	return &result, nil
 }
 
-// Get retrieves a specific provider connected to a session.
+// Get retrieves a session provider.
 func (e *SessionsProvidersEndpoint) Get(instanceId string, sessionProviderId string) (*providers.SessionsProvidersGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-providers", sessionProviderId},
@@ -84,7 +91,7 @@ func (e *SessionsProvidersEndpoint) Get(instanceId string, sessionProviderId str
 	return &result, nil
 }
 
-// Create adds a new provider to an active session.
+// Create creates a session provider. The session must be active.
 func (e *SessionsProvidersEndpoint) Create(instanceId string, body *SessionsProvidersEndpointCreateBody) (*providers.SessionsProvidersCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-providers"},
@@ -97,7 +104,7 @@ func (e *SessionsProvidersEndpoint) Create(instanceId string, body *SessionsProv
 	return &result, nil
 }
 
-// Update updates a provider connected to a session.
+// Update updates a session provider.
 func (e *SessionsProvidersEndpoint) Update(instanceId string, sessionProviderId string, body *SessionsProvidersEndpointUpdateBody) (*providers.SessionsProvidersUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-providers", sessionProviderId},
@@ -110,7 +117,7 @@ func (e *SessionsProvidersEndpoint) Update(instanceId string, sessionProviderId 
 	return &result, nil
 }
 
-// Delete removes a provider from a session.
+// Delete archives a session provider. It stays listable with `status=archived`.
 func (e *SessionsProvidersEndpoint) Delete(instanceId string, sessionProviderId string) (*providers.SessionsProvidersDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-providers", sessionProviderId},

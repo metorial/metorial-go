@@ -33,7 +33,7 @@ type ConversationsGetOutputCreatedByActorOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsGetOutputCreatedByActorOrganizationActor represents the conversations get output created by actor organization actor type.
+// ConversationsGetOutputCreatedByActorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type ConversationsGetOutputCreatedByActorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,27 +57,42 @@ type ConversationsGetOutputCreatedByActorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsGetOutputCreatedByActorConsumer represents the conversations get output created by actor consumer type.
+// ConversationsGetOutputCreatedByActorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type ConversationsGetOutputCreatedByActorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// ConversationsGetOutputCreatedByActor represents the conversations get output created by actor type.
+// ConversationsGetOutputCreatedByActor - Actor behind a participant.
 type ConversationsGetOutputCreatedByActor struct {
-	Type              string                                                 `json:"type"`
-	Name              string                                                 `json:"name"`
-	ImageUrl          *string                                                `json:"image_url,omitempty"`
-	Email             *string                                                `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *ConversationsGetOutputCreatedByActorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *ConversationsGetOutputCreatedByActorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                        `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *ConversationsGetOutputCreatedByActorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // ConversationsGetOutputAssistantDefaultModelProvider represents the conversations get output assistant default model provider type.
@@ -134,12 +149,13 @@ type ConversationsGetOutputAssistant struct {
 
 // ConversationsGetOutput represents the conversations get output type.
 type ConversationsGetOutput struct {
-	Object         string                               `json:"object"`
-	Id             string                               `json:"id"`
-	Title          *string                              `json:"title,omitempty"`
-	AssistantId    string                               `json:"assistant_id"`
-	InstanceId     string                               `json:"instance_id"`
-	OrganizationId string                               `json:"organization_id"`
+	Object         string  `json:"object"`
+	Id             string  `json:"id"`
+	Title          *string `json:"title,omitempty"`
+	AssistantId    string  `json:"assistant_id"`
+	InstanceId     string  `json:"instance_id"`
+	OrganizationId string  `json:"organization_id"`
+	// CreatedByActor - Actor behind a participant.
 	CreatedByActor ConversationsGetOutputCreatedByActor `json:"created_by_actor"`
 	RootMessageId  string                               `json:"root_message_id"`
 	Assistant      ConversationsGetOutputAssistant      `json:"assistant"`

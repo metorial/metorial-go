@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/consumers/devices"
 )
 
-// ConsumersDevicesEndpoint provides access to inspect and revoke the Metorial Desktop devices consumers have enrolled.
+// ConsumersDevicesEndpoint provides access to a consumer device is a Metorial Desktop installation a consumer has enrolled. Revoking a device signs it out and removes its access.
 type ConsumersDevicesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewConsumersDevicesEndpoint(client *endpoint.Client) *ConsumersDevicesEndpo
 
 // ConsumersDevicesEndpointListParams contains optional query parameters for List.
 type ConsumersDevicesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// ConsumerProfileId - Only return devices enrolled by these consumer profiles.
 	ConsumerProfileId *any `json:"consumer_profile_id,omitempty"`
 	// ConsumerId - Only return devices enrolled by any profile of these consumers.
@@ -30,7 +35,7 @@ type ConsumersDevicesEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 }
 
-// List returns the Metorial Desktop devices enrolled by consumers of an instance.
+// List returns a paginated list of consumer devices.
 func (e *ConsumersDevicesEndpoint) List(instanceId string, params *ConsumersDevicesEndpointListParams) (*devices.ConsumersDevicesListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -47,7 +52,7 @@ func (e *ConsumersDevicesEndpoint) List(instanceId string, params *ConsumersDevi
 	return &result, nil
 }
 
-// Get retrieves a Metorial Desktop device enrolled by a consumer.
+// Get retrieves a consumer device.
 func (e *ConsumersDevicesEndpoint) Get(instanceId string, consumerDeviceId string) (*devices.ConsumersDevicesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "consumer-devices", consumerDeviceId},

@@ -29,30 +29,30 @@ type InstancesListOutputItemsProject struct {
 
 // InstancesListOutputItems represents the instances list output items type.
 type InstancesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The instance's unique identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Slug - The instance's slug
+	// Slug - URL-safe name, unique across Metorial.
 	Slug string `json:"slug"`
-	// Name - The instance's name
+	// Name - Display name.
 	Name string `json:"name"`
-	// OrganizationId - The organization's unique identifier
+	// OrganizationId - Organization this instance belongs to.
 	OrganizationId string `json:"organization_id"`
-	// SandboxId - The sandbox's unique identifier, if this instance is a sandbox
+	// SandboxId - Sandbox backing this instance, if it is a sandbox.
 	SandboxId *string `json:"sandbox_id,omitempty"`
-	// Type - The instance's type
+	// Type - Whether this instance is for development or production use.
 	Type string `json:"type"`
-	// CreatedAt - The instance's creation date
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - The instance's last update date
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time                       `json:"updated_at"`
 	Project   InstancesListOutputItemsProject `json:"project"`
 }
 
 // InstancesListOutput represents the instances list output type.
 type InstancesListOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
 	// Items - The list of instances
 	Items []InstancesListOutputItems `json:"items"`

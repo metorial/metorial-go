@@ -9,7 +9,7 @@ import (
 type ProviderDeploymentsSetupSessionsEmailsCreateOutputItems struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
-	// Id - Unique setup session email identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Deduplicated - True when this recipient was already emailed this setup link in the current fixed 10-minute window, so no new email was queued and the earlier record is returned instead. Only set by the create endpoint; always false when listing.
 	Deduplicated bool `json:"deduplicated"`
@@ -25,12 +25,20 @@ type ProviderDeploymentsSetupSessionsEmailsCreateOutputItems struct {
 
 // ProviderDeploymentsSetupSessionsEmailsCreateOutputPagination represents the provider deployments setup sessions emails create output pagination type.
 type ProviderDeploymentsSetupSessionsEmailsCreateOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProviderDeploymentsSetupSessionsEmailsCreateOutput represents the provider deployments setup sessions emails create output type.
 type ProviderDeploymentsSetupSessionsEmailsCreateOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                                       `json:"object"`
 	Items      []ProviderDeploymentsSetupSessionsEmailsCreateOutputItems    `json:"items"`
 	Pagination ProviderDeploymentsSetupSessionsEmailsCreateOutputPagination `json:"pagination"`
 }
@@ -51,9 +59,9 @@ func MapProviderDeploymentsSetupSessionsEmailsCreateOutputToJSON(v *ProviderDepl
 
 // ProviderDeploymentsSetupSessionsEmailsCreateBody represents the provider deployments setup sessions emails create body type.
 type ProviderDeploymentsSetupSessionsEmailsCreateBody struct {
-	// Emails - Email addresses to send the setup link to, at most 10
+	// Emails - Email addresses to send the setup link to, at most 10. Recipients are deduplicated case-insensitively and processed in order; if a later recipient fails, earlier ones may already have been queued. A setup link can be emailed to at most 50 different recipients within 24 hours, and the setup links of an instance to at most 200 different recipients combined; a request that would exceed either limit is rejected with `admin_setup_email_limit_reached` before any email is queued.
 	Emails *[]string `json:"emails,omitempty"`
-	// OrganizationMemberIds - Organization members to send the setup link to, at most 10. Each member is emailed at their organization profile email address, falling back to their account email when the profile has none.
+	// OrganizationMemberIds - Organization members to send the setup link to, at most 10. Each member is emailed at their organization profile email address, falling back to their account email when the profile has none. Passing organization member IDs requires the `organization.member:read` scope, since the response contains the members' email addresses.
 	OrganizationMemberIds *[]string `json:"organization_member_ids,omitempty"`
 }
 

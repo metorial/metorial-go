@@ -33,7 +33,7 @@ type DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActorTeams struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActor represents the documents comment threads update output created by organization actor type.
+// DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -57,27 +57,42 @@ type DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCreatedByConsumer represents the documents comment threads update output created by consumer type.
+// DocumentsCommentThreadsUpdateOutputCreatedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsCommentThreadsUpdateOutputCreatedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCreatedBy represents the documents comment threads update output created by type.
+// DocumentsCommentThreadsUpdateOutputCreatedBy - Actor behind a participant.
 type DocumentsCommentThreadsUpdateOutputCreatedBy struct {
-	Type              string                                                         `json:"type"`
-	Name              string                                                         `json:"name"`
-	ImageUrl          *string                                                        `json:"image_url,omitempty"`
-	Email             *string                                                        `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsCommentThreadsUpdateOutputCreatedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsCommentThreadsUpdateOutputCreatedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsCommentThreadsUpdateOutputCreatedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActorMember represents the documents comment threads update output resolved by organization actor member type.
@@ -108,7 +123,7 @@ type DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActorTeams struct 
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActor represents the documents comment threads update output resolved by organization actor type.
+// DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -132,27 +147,42 @@ type DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputResolvedByConsumer represents the documents comment threads update output resolved by consumer type.
+// DocumentsCommentThreadsUpdateOutputResolvedByConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsCommentThreadsUpdateOutputResolvedByConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputResolvedBy represents the documents comment threads update output resolved by type.
+// DocumentsCommentThreadsUpdateOutputResolvedBy - Actor behind a participant.
 type DocumentsCommentThreadsUpdateOutputResolvedBy struct {
-	Type              string                                                          `json:"type"`
-	Name              string                                                          `json:"name"`
-	ImageUrl          *string                                                         `json:"image_url,omitempty"`
-	Email             *string                                                         `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsCommentThreadsUpdateOutputResolvedByOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsCommentThreadsUpdateOutputResolvedByConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                 `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsCommentThreadsUpdateOutputResolvedByConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActorMember represents the documents comment threads update output comments author organization actor member type.
@@ -183,7 +213,7 @@ type DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActorTeams str
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActor represents the documents comment threads update output comments author organization actor type.
+// DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 type DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActor struct {
 	// Object - String representing the object's type
 	Object string `json:"object"`
@@ -207,74 +237,96 @@ type DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActor struct {
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCommentsAuthorConsumer represents the documents comment threads update output comments author consumer type.
+// DocumentsCommentThreadsUpdateOutputCommentsAuthorConsumer - Consumer details. `null` unless `type` is `consumer`.
 type DocumentsCommentThreadsUpdateOutputCommentsAuthorConsumer struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
-// DocumentsCommentThreadsUpdateOutputCommentsAuthor represents the documents comment threads update output comments author type.
+// DocumentsCommentThreadsUpdateOutputCommentsAuthor - Actor behind a participant.
 type DocumentsCommentThreadsUpdateOutputCommentsAuthor struct {
-	Type              string                                                              `json:"type"`
-	Name              string                                                              `json:"name"`
-	ImageUrl          *string                                                             `json:"image_url,omitempty"`
-	Email             *string                                                             `json:"email,omitempty"`
+	// Type - What kind of actor this is.
+	Type string `json:"type"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// ImageUrl - Profile image URL.
+	ImageUrl *string `json:"image_url,omitempty"`
+	// Email - Email address.
+	Email *string `json:"email,omitempty"`
+	// OrganizationActor - Organization actor details. `null` unless `type` is `organization_actor`.
 	OrganizationActor *DocumentsCommentThreadsUpdateOutputCommentsAuthorOrganizationActor `json:"organization_actor,omitempty"`
-	Consumer          *DocumentsCommentThreadsUpdateOutputCommentsAuthorConsumer          `json:"consumer,omitempty"`
-	ConsumerProfile   *map[string]any                                                     `json:"consumer_profile,omitempty"`
+	// Consumer - Consumer details. `null` unless `type` is `consumer`.
+	Consumer *DocumentsCommentThreadsUpdateOutputCommentsAuthorConsumer `json:"consumer,omitempty"`
+	// ConsumerProfile - Consumer profile details. `null` unless `type` is `consumer`.
+	ConsumerProfile *map[string]any `json:"consumer_profile,omitempty"`
 }
 
 // DocumentsCommentThreadsUpdateOutputComments represents the documents comment threads update output comments type.
 type DocumentsCommentThreadsUpdateOutputComments struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The unique identifier of the comment
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// ThreadId - The comment thread this comment belongs to
+	// ThreadId - Thread this comment belongs to.
 	ThreadId string `json:"thread_id"`
-	// Body - The plain-text body of the comment
+	// Body - The plain-text body of the comment.
 	Body string `json:"body"`
-	// AuthorId - The resource actor id of the comment author
-	AuthorId string                                            `json:"author_id"`
-	Author   DocumentsCommentThreadsUpdateOutputCommentsAuthor `json:"author"`
-	// EditedAt - When the comment body was last edited
-	EditedAt  *time.Time `json:"edited_at,omitempty"`
-	CreatedAt time.Time  `json:"created_at"`
-	UpdatedAt time.Time  `json:"updated_at"`
+	// AuthorId - The resource actor id of the comment author.
+	AuthorId string `json:"author_id"`
+	// Author - Actor behind a participant.
+	Author DocumentsCommentThreadsUpdateOutputCommentsAuthor `json:"author"`
+	// EditedAt - When the comment body was last edited.
+	EditedAt *time.Time `json:"edited_at,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // DocumentsCommentThreadsUpdateOutput represents the documents comment threads update output type.
 type DocumentsCommentThreadsUpdateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - The unique identifier of the comment thread
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// DocumentId - The document the thread is attached to
+	// DocumentId - Document this thread is attached to.
 	DocumentId string `json:"document_id"`
-	// Status - Whether the discussion is still open
+	// Status - Whether the discussion is still open.
 	Status string `json:"status"`
 	// AnchorStatus - Whether the commented text still exists in the document. Detached threads lost their text through edits.
 	AnchorStatus string `json:"anchor_status"`
-	// Quote - The text that was selected when the thread was created
+	// Quote - The text that was selected when the thread was created.
 	Quote string `json:"quote"`
-	// CreatedById - The resource actor id of the thread author
-	CreatedById string                                       `json:"created_by_id"`
-	CreatedBy   DocumentsCommentThreadsUpdateOutputCreatedBy `json:"created_by"`
-	// ResolvedById - The resource actor id of whoever resolved the thread
-	ResolvedById *string                                        `json:"resolved_by_id,omitempty"`
-	ResolvedBy   *DocumentsCommentThreadsUpdateOutputResolvedBy `json:"resolved_by,omitempty"`
-	// ResolvedAt - When the thread was resolved
+	// CreatedById - The resource actor id of the thread author.
+	CreatedById string `json:"created_by_id"`
+	// CreatedBy - Actor behind a participant.
+	CreatedBy DocumentsCommentThreadsUpdateOutputCreatedBy `json:"created_by"`
+	// ResolvedById - The resource actor id of whoever resolved the thread.
+	ResolvedById *string `json:"resolved_by_id,omitempty"`
+	// ResolvedBy - Actor behind a participant.
+	ResolvedBy *DocumentsCommentThreadsUpdateOutputResolvedBy `json:"resolved_by,omitempty"`
+	// ResolvedAt - When the thread was marked resolved.
 	ResolvedAt *time.Time `json:"resolved_at,omitempty"`
-	// Comments - The comments in this thread, oldest first
-	Comments  []DocumentsCommentThreadsUpdateOutputComments `json:"comments"`
-	CreatedAt time.Time                                     `json:"created_at"`
-	UpdatedAt time.Time                                     `json:"updated_at"`
+	// Comments - The comments in this thread, oldest first.
+	Comments []DocumentsCommentThreadsUpdateOutputComments `json:"comments"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapDocumentsCommentThreadsUpdateOutputFromJSON deserializes JSON data into a DocumentsCommentThreadsUpdateOutput.
@@ -293,6 +345,7 @@ func MapDocumentsCommentThreadsUpdateOutputToJSON(v *DocumentsCommentThreadsUpda
 
 // DocumentsCommentThreadsUpdateBody represents the documents comment threads update body type.
 type DocumentsCommentThreadsUpdateBody struct {
+	// Status - New status for the thread.
 	Status *string `json:"status,omitempty"`
 }
 

@@ -17,9 +17,9 @@ type ProviderIssuesListOutputItemsDailyOccurrences struct {
 
 // ProviderIssuesListOutputItems represents the provider issues list output items type.
 type ProviderIssuesListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider issue identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - Where the issue comes from: a failed provider or tool call, a provider authentication failure, or a ProtoGuard detection on session traffic
 	Type string `json:"type"`
@@ -43,18 +43,26 @@ type ProviderIssuesListOutputItems struct {
 	FirstSeenAt time.Time `json:"first_seen_at"`
 	// LastSeenAt - When the issue most recently occurred
 	LastSeenAt time.Time `json:"last_seen_at"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
 }
 
 // ProviderIssuesListOutputPagination represents the provider issues list output pagination type.
 type ProviderIssuesListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ProviderIssuesListOutput represents the provider issues list output type.
 type ProviderIssuesListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                             `json:"object"`
 	Items      []ProviderIssuesListOutputItems    `json:"items"`
 	Pagination ProviderIssuesListOutputPagination `json:"pagination"`
 }
@@ -73,29 +81,34 @@ func MapProviderIssuesListOutputToJSON(v *ProviderIssuesListOutput) ([]byte, err
 	return json.Marshal(v)
 }
 
-// ProviderIssuesListQueryLastSeenAt - Filter provider issue last occurrence time by date range
+// ProviderIssuesListQueryLastSeenAt - Only return results whose provider issue last occurrence time is in this range. Set `gt`, `lt`, or both.
 type ProviderIssuesListQueryLastSeenAt struct {
-	// Gt - Only include records after this timestamp for provider issue last occurrence time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider issue last occurrence time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
-// ProviderIssuesListQueryCreatedAt - Filter provider issue creation time by date range
+// ProviderIssuesListQueryCreatedAt - Only return results whose provider issue creation time is in this range. Set `gt`, `lt`, or both.
 type ProviderIssuesListQueryCreatedAt struct {
-	// Gt - Only include records after this timestamp for provider issue creation time
+	// Gt - Exclusive lower bound.
 	Gt *time.Time `json:"gt,omitempty"`
-	// Lt - Only include records before this timestamp for provider issue creation time
+	// Lt - Exclusive upper bound.
 	Lt *time.Time `json:"lt,omitempty"`
 }
 
 // ProviderIssuesListQuery represents the provider issues list query type.
 type ProviderIssuesListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by issue type(s)
 	Type *any `json:"type,omitempty"`
 	// Severity - Filter by severity
@@ -104,9 +117,9 @@ type ProviderIssuesListQuery struct {
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
 	ProviderId *any `json:"provider_id,omitempty"`
-	// LastSeenAt - Filter provider issue last occurrence time by date range
+	// LastSeenAt - Only return results whose provider issue last occurrence time is in this range. Set `gt`, `lt`, or both.
 	LastSeenAt *ProviderIssuesListQueryLastSeenAt `json:"last_seen_at,omitempty"`
-	// CreatedAt - Filter provider issue creation time by date range
+	// CreatedAt - Only return results whose provider issue creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *ProviderIssuesListQueryCreatedAt `json:"created_at,omitempty"`
 	// Search - Search by issue ID, code, subtype or message, or by the name of the related provider
 	Search *string `json:"search,omitempty"`

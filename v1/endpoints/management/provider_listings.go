@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerlistings"
 )
 
-// ProviderListingsEndpoint provides access to a listing is a provider enriched with marketplace metadata.
+// ProviderListingsEndpoint provides access to a provider listing is a provider with its marketplace details.
 type ProviderListingsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,25 +17,41 @@ func NewProviderListingsEndpoint(client *endpoint.Client) *ProviderListingsEndpo
 
 // ProviderListingsEndpointListParams contains optional query parameters for List.
 type ProviderListingsEndpointListParams struct {
-	Limit                *float64 `json:"limit,omitempty"`
-	After                *string  `json:"after,omitempty"`
-	Before               *string  `json:"before,omitempty"`
-	Cursor               *string  `json:"cursor,omitempty"`
-	Order                *string  `json:"order,omitempty"`
-	Search               *string  `json:"search,omitempty"`
-	Id                   *any     `json:"id,omitempty"`
-	ProviderCategoryId   *any     `json:"provider_category_id,omitempty"`
-	ProviderCollectionId *any     `json:"provider_collection_id,omitempty"`
-	ProviderGroupId      *any     `json:"provider_group_id,omitempty"`
-	PublisherId          *any     `json:"publisher_id,omitempty"`
-	IsOwner              *bool    `json:"is_owner,omitempty"`
-	IsPublic             *bool    `json:"is_public,omitempty"`
-	IsVerified           *bool    `json:"is_verified,omitempty"`
-	IsOfficial           *bool    `json:"is_official,omitempty"`
-	IsMetorial           *bool    `json:"is_metorial,omitempty"`
-	// CreatedAt - Filter provider listing creation time by date range
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Search - Search listings by name, description, or readme.
+	Search *string `json:"search,omitempty"`
+	// Id - Filter by listing ID(s).
+	Id *any `json:"id,omitempty"`
+	// ProviderCategoryId - Only return listings in these categories.
+	ProviderCategoryId *any `json:"provider_category_id,omitempty"`
+	// ProviderCollectionId - Only return listings in these collections.
+	ProviderCollectionId *any `json:"provider_collection_id,omitempty"`
+	// ProviderGroupId - Only return listings in these groups.
+	ProviderGroupId *any `json:"provider_group_id,omitempty"`
+	// PublisherId - Only return listings from these publishers.
+	PublisherId *any `json:"publisher_id,omitempty"`
+	// IsOwner - Only return listings published by your organization.
+	IsOwner *bool `json:"is_owner,omitempty"`
+	// IsPublic - Only return public listings.
+	IsPublic *bool `json:"is_public,omitempty"`
+	// IsVerified - Only return listings reviewed and trusted by Metorial.
+	IsVerified *bool `json:"is_verified,omitempty"`
+	// IsOfficial - Only return official listings.
+	IsOfficial *bool `json:"is_official,omitempty"`
+	// IsMetorial - Only return Metorial-maintained listings.
+	IsMetorial *bool `json:"is_metorial,omitempty"`
+	// CreatedAt - Only return results whose provider listing creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider listing last update time by date range
+	// UpdatedAt - Only return results whose provider listing last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 

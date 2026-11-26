@@ -7,15 +7,24 @@ import (
 
 // MagicMcpGroupsDeleteOutput represents the magic mcp groups delete output type.
 type MagicMcpGroupsDeleteOutput struct {
-	Object      string         `json:"object"`
-	Id          string         `json:"id"`
-	Status      string         `json:"status"`
-	Slug        string         `json:"slug"`
-	Name        *string        `json:"name,omitempty"`
-	Description *string        `json:"description,omitempty"`
-	Metadata    map[string]any `json:"metadata"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `deleted` once you delete the group.
+	Status string `json:"status"`
+	// Slug - URL-safe name, unique within the instance.
+	Slug string `json:"slug"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapMagicMcpGroupsDeleteOutputFromJSON deserializes JSON data into a MagicMcpGroupsDeleteOutput.

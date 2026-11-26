@@ -7,13 +7,21 @@ import (
 
 // ConsumersUpdateOutput represents the consumers update output type.
 type ConsumersUpdateOutput struct {
-	Object    string    `json:"object"`
-	Id        string    `json:"id"`
-	Name      string    `json:"name"`
-	Email     string    `json:"email"`
-	ImageUrl  string    `json:"image_url"`
-	UserId    *string   `json:"user_id,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Email - Email address.
+	Email string `json:"email"`
+	// ImageUrl - Avatar image URL.
+	ImageUrl string `json:"image_url"`
+	// UserId - User this consumer is linked to. `null` when unlinked.
+	UserId *string `json:"user_id,omitempty"`
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -33,7 +41,9 @@ func MapConsumersUpdateOutputToJSON(v *ConsumersUpdateOutput) ([]byte, error) {
 
 // ConsumersUpdateBody represents the consumers update body type.
 type ConsumersUpdateBody struct {
-	Name  *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Email - Email address. Must be unique within the organization.
 	Email *string `json:"email,omitempty"`
 }
 

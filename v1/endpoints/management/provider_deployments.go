@@ -6,7 +6,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/providerdeployments"
 )
 
-// ProviderDeploymentsEndpoint provides access to a deployment is a running instance of a provider, pinned to a specific version. Deployments support custom configuration values and user authentication.
+// ProviderDeploymentsEndpoint provides access to a provider deployment is a provider set up for your instance, with its own configuration and credentials. It follows the provider's current version unless you lock it to one.
 type ProviderDeploymentsEndpoint struct {
 	client *endpoint.Client
 }
@@ -18,11 +18,16 @@ func NewProviderDeploymentsEndpoint(client *endpoint.Client) *ProviderDeployment
 
 // ProviderDeploymentsEndpointListParams contains optional query parameters for List.
 type ProviderDeploymentsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Id - Filter by deployment ID(s)
 	Id *any `json:"id,omitempty"`
 	// ProviderId - Filter by provider ID(s)
@@ -41,35 +46,41 @@ type ProviderDeploymentsEndpointListParams struct {
 	Status *any `json:"status,omitempty"`
 	// Search - Search by name or description
 	Search *string `json:"search,omitempty"`
-	// CreatedAt - Filter provider deployment creation time by date range
+	// CreatedAt - Only return results whose provider deployment creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter provider deployment last update time by date range
+	// UpdatedAt - Only return results whose provider deployment last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // ProviderDeploymentsEndpointCreateBody contains the request body for Create.
 type ProviderDeploymentsEndpointCreateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider deployment. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// ProviderId - The provider to deploy
 	ProviderId string `json:"provider_id"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version
 	LockedProviderVersionId *string `json:"locked_provider_version_id,omitempty"`
-	// ProviderConfigId - Existing provider config ID
+	// ProviderConfigId - ID of an existing config to use.
 	ProviderConfigId *string `json:"provider_config_id,omitempty"`
 	ProviderConfig   *any    `json:"provider_config,omitempty"`
 }
 
 // ProviderDeploymentsEndpointUpdateBody contains the request body for Update.
 type ProviderDeploymentsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
-	Metadata    *map[string]any `json:"metadata,omitempty"`
-	ToolFilters *any            `json:"tool_filters,omitempty"`
+	// Metadata - Custom data to identify or organize the provider deployment. Replaces existing metadata.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 	// LockedProviderVersionId - Pin this deployment to a specific provider version, or null to follow latest
 	LockedProviderVersionId *nullable.Nullable[string] `json:"locked_provider_version_id,omitempty"`
 }
@@ -103,7 +114,7 @@ func (e *ProviderDeploymentsEndpoint) Get(instanceId string, providerDeploymentI
 	return &result, nil
 }
 
-// Create creates a new provider deployment.
+// Create creates a provider deployment.
 func (e *ProviderDeploymentsEndpoint) Create(instanceId string, body *ProviderDeploymentsEndpointCreateBody) (*providerdeployments.ProviderDeploymentsCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-deployments"},
@@ -129,7 +140,7 @@ func (e *ProviderDeploymentsEndpoint) Update(instanceId string, providerDeployme
 	return &result, nil
 }
 
-// Delete permanently deletes a provider deployment.
+// Delete archives a provider deployment. It stays listable with `status=archived`.
 func (e *ProviderDeploymentsEndpoint) Delete(instanceId string, providerDeploymentId string) (*providerdeployments.ProviderDeploymentsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "provider-deployments", providerDeploymentId},

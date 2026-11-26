@@ -7,19 +7,19 @@ import (
 
 // IdentityActorsCreateOutput represents the identity actors create output type.
 type IdentityActorsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique identity actor identifier.
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// Type - Type of actor that owns or participates in identities.
 	Type string `json:"type"`
-	// Status - Current lifecycle status of the identity actor.
+	// Status - Current lifecycle status of the identity actor. `archived` once you archive the actor.
 	Status string `json:"status"`
-	// Name - Human-readable name of the identity actor.
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Optional description of the actor.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata associated with the actor.
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 	// AgentId - Linked agent identifier when this actor represents an agent.
 	AgentId *string `json:"agent_id,omitempty"`
@@ -27,9 +27,9 @@ type IdentityActorsCreateOutput struct {
 	ConsumerId *string `json:"consumer_id,omitempty"`
 	// DefaultIdentityId - Identifier of the actor's default identity, which is its oldest active identity.
 	DefaultIdentityId *string `json:"default_identity_id,omitempty"`
-	// CreatedAt - Timestamp when the actor was created.
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the actor was last updated.
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -51,11 +51,11 @@ func MapIdentityActorsCreateOutputToJSON(v *IdentityActorsCreateOutput) ([]byte,
 type IdentityActorsCreateBody struct {
 	// Type - Whether this actor is a person or an agent.
 	Type string `json:"type"`
-	// Name - Human-readable display name for the actor.
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Optional description of the actor.
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Additional metadata to store on the actor.
+	// Metadata - Custom data to identify or organize the identity actor.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 

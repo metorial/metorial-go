@@ -2,10 +2,11 @@ package endpoints
 
 import (
 	"github.com/metorial/metorial-go/v1/internal/endpoint"
+	"github.com/metorial/metorial-go/v1/nullable"
 	"github.com/metorial/metorial-go/v1/resources/skills/agents"
 )
 
-// SkillsAgentsEndpoint provides access to manage sub-agents attached to a skill.
+// SkillsAgentsEndpoint provides access to a skill agent is a reusable sub-agent document stored in a skill.
 type SkillsAgentsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,25 +18,36 @@ func NewSkillsAgentsEndpoint(client *endpoint.Client) *SkillsAgentsEndpoint {
 
 // SkillsAgentsEndpointCreateBody contains the request body for Create.
 type SkillsAgentsEndpointCreateBody struct {
-	Name        string  `json:"name"`
-	Description *string `json:"description,omitempty"`
-	Content     *string `json:"content,omitempty"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
+	// Content - Agent document content.
+	Content *string `json:"content,omitempty"`
 }
 
 // SkillsAgentsEndpointListParams contains optional query parameters for List.
 type SkillsAgentsEndpointListParams struct {
-	Limit           *float64 `json:"limit,omitempty"`
-	After           *string  `json:"after,omitempty"`
-	Before          *string  `json:"before,omitempty"`
-	Cursor          *string  `json:"cursor,omitempty"`
-	Order           *string  `json:"order,omitempty"`
-	IncludeArchived *bool    `json:"include_archived,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// IncludeArchived - Include archived agents in the results.
+	IncludeArchived *bool `json:"include_archived,omitempty"`
 }
 
 // SkillsAgentsEndpointUpdateBody contains the request body for Update.
 type SkillsAgentsEndpointUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
-	Description *string `json:"description,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description. `null` clears it.
+	Description *nullable.Nullable[string] `json:"description,omitempty"`
 }
 
 // Create creates a new agent document in the skill agents directory.
@@ -51,7 +63,7 @@ func (e *SkillsAgentsEndpoint) Create(skillId string, body *SkillsAgentsEndpoint
 	return &result, nil
 }
 
-// List returns a paginated list of agents for a specific skill.
+// List returns a paginated list of skill agents.
 func (e *SkillsAgentsEndpoint) List(skillId string, params *SkillsAgentsEndpointListParams) (*agents.SkillsAgentsListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -68,7 +80,7 @@ func (e *SkillsAgentsEndpoint) List(skillId string, params *SkillsAgentsEndpoint
 	return &result, nil
 }
 
-// Get retrieves a specific agent within a skill.
+// Get retrieves a skill agent.
 func (e *SkillsAgentsEndpoint) Get(skillId string, skillAgentId string) (*agents.SkillsAgentsGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "agents", skillAgentId},
@@ -80,7 +92,7 @@ func (e *SkillsAgentsEndpoint) Get(skillId string, skillAgentId string) (*agents
 	return &result, nil
 }
 
-// Update updates the name or description for a specific skill agent.
+// Update updates a skill agent. Omitted fields keep their current value.
 func (e *SkillsAgentsEndpoint) Update(skillId string, skillAgentId string, body *SkillsAgentsEndpointUpdateBody) (*agents.SkillsAgentsUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "agents", skillAgentId},
@@ -93,7 +105,7 @@ func (e *SkillsAgentsEndpoint) Update(skillId string, skillAgentId string, body 
 	return &result, nil
 }
 
-// Delete archives a specific skill agent and removes its linked store item.
+// Delete archives a skill agent and removes its linked store item.
 func (e *SkillsAgentsEndpoint) Delete(skillId string, skillAgentId string) (*agents.SkillsAgentsDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"skills", skillId, "agents", skillAgentId},

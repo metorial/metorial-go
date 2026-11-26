@@ -7,23 +7,37 @@ import (
 
 // PortalsListingsListOutputItemsAccessProviderTemplate represents the portals listings list output items access provider template type.
 type PortalsListingsListOutputItemsAccessProviderTemplate struct {
-	Object        string         `json:"object"`
-	Id            string         `json:"id"`
-	Status        string         `json:"status"`
-	Name          string         `json:"name"`
-	Description   *string        `json:"description,omitempty"`
-	Metadata      map[string]any `json:"metadata"`
-	IntegrationId *string        `json:"integration_id,omitempty"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the template.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// IntegrationId - Integration the template was created from. `null` when it wasn’t created from one.
+	IntegrationId *string `json:"integration_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // PortalsListingsListOutputItemsAccessMagicMcpServer represents the portals listings list output items access magic mcp server type.
 type PortalsListingsListOutputItemsAccessMagicMcpServer struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Status      string  `json:"status"`
-	Name        *string `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the server is deleted.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
@@ -82,37 +96,58 @@ type PortalsListingsListOutputItemsAccess struct {
 	SkillPlugin      *PortalsListingsListOutputItemsAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
-// PortalsListingsListOutputItemsGroups represents the portals listings list output items groups type.
+// PortalsListingsListOutputItemsGroups - Catalog section the listing appears in.
 type PortalsListingsListOutputItemsGroups struct {
-	Id          string  `json:"id"`
-	Name        string  `json:"name"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Index       float64 `json:"index"`
+	// Index - Order of the group in the portal catalog.
+	Index float64 `json:"index"`
 }
 
 // PortalsListingsListOutputItems represents the portals listings list output items type.
 type PortalsListingsListOutputItems struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Name        string  `json:"name"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Readme      *string `json:"readme,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
 	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
-	IsDiscoverable bool                                   `json:"is_discoverable"`
-	Access         PortalsListingsListOutputItemsAccess   `json:"access"`
-	Groups         []PortalsListingsListOutputItemsGroups `json:"groups"`
-	CreatedAt      time.Time                              `json:"created_at"`
-	UpdatedAt      time.Time                              `json:"updated_at"`
+	IsDiscoverable bool `json:"is_discoverable"`
+	// Access - The integration, skill, or skill set the listing is for.
+	Access PortalsListingsListOutputItemsAccess `json:"access"`
+	// Groups - Catalog sections the listing appears in, in display order.
+	Groups []PortalsListingsListOutputItemsGroups `json:"groups"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // PortalsListingsListOutputPagination represents the portals listings list output pagination type.
 type PortalsListingsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // PortalsListingsListOutput represents the portals listings list output type.
 type PortalsListingsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                              `json:"object"`
 	Items      []PortalsListingsListOutputItems    `json:"items"`
 	Pagination PortalsListingsListOutputPagination `json:"pagination"`
 }
@@ -133,20 +168,34 @@ func MapPortalsListingsListOutputToJSON(v *PortalsListingsListOutput) ([]byte, e
 
 // PortalsListingsListQuery represents the portals listings list query type.
 type PortalsListingsListQuery struct {
-	Limit                          *float64 `json:"limit,omitempty"`
-	After                          *string  `json:"after,omitempty"`
-	Before                         *string  `json:"before,omitempty"`
-	Cursor                         *string  `json:"cursor,omitempty"`
-	Order                          *string  `json:"order,omitempty"`
-	Search                         *string  `json:"search,omitempty"`
-	ConsumerSurfaceProviderGroupId *any     `json:"consumer_surface_provider_group_id,omitempty"`
-	ProviderTemplateId             *any     `json:"provider_template_id,omitempty"`
-	MagicMcpServerId               *any     `json:"magic_mcp_server_id,omitempty"`
-	SkillId                        *any     `json:"skill_id,omitempty"`
-	SkillTemplateId                *any     `json:"skill_template_id,omitempty"`
-	SkillGroupId                   *any     `json:"skill_group_id,omitempty"`
-	SkillMarketplaceId             *any     `json:"skill_marketplace_id,omitempty"`
-	Type                           *any     `json:"type,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Search - Search by name or description.
+	Search *string `json:"search,omitempty"`
+	// ConsumerSurfaceProviderGroupId - Only return listings in these provider groups.
+	ConsumerSurfaceProviderGroupId *any `json:"consumer_surface_provider_group_id,omitempty"`
+	// ProviderTemplateId - Only return listings for these provider templates.
+	ProviderTemplateId *any `json:"provider_template_id,omitempty"`
+	// MagicMcpServerId - Only return listings for these magic MCP servers.
+	MagicMcpServerId *any `json:"magic_mcp_server_id,omitempty"`
+	// SkillId - Only return listings for these skills.
+	SkillId *any `json:"skill_id,omitempty"`
+	// SkillTemplateId - Only return listings for these skill templates.
+	SkillTemplateId *any `json:"skill_template_id,omitempty"`
+	// SkillGroupId - Only return listings for these skill groups.
+	SkillGroupId *any `json:"skill_group_id,omitempty"`
+	// SkillMarketplaceId - Only return listings for these skill marketplaces.
+	SkillMarketplaceId *any `json:"skill_marketplace_id,omitempty"`
+	// Type - Only return listings of these types.
+	Type *any `json:"type,omitempty"`
 	// HasAccess - Only return listings that have at least one consumer access grant (true) or none (false).
 	HasAccess *bool `json:"has_access,omitempty"`
 }

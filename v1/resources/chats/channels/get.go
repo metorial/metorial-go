@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// ChatsChannelsGetOutputRecipient represents the chats channels get output recipient type.
+// ChatsChannelsGetOutputRecipient - The DM recipient, when the provider reports one. `null` otherwise.
 type ChatsChannelsGetOutputRecipient struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsChannelsGetOutputRecipient struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -39,7 +39,7 @@ type ChatsChannelsGetOutputRecipient struct {
 	LastInteractionAt *time.Time `json:"last_interaction_at,omitempty"`
 }
 
-// ChatsChannelsGetOutputContextAuthor represents the chats channels get output context author type.
+// ChatsChannelsGetOutputContextAuthor - Author of the external resource, as reported by the provider.
 type ChatsChannelsGetOutputContextAuthor struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -47,7 +47,7 @@ type ChatsChannelsGetOutputContextAuthor struct {
 	Name string `json:"name"`
 }
 
-// ChatsChannelsGetOutputContextAssignee represents the chats channels get output context assignee type.
+// ChatsChannelsGetOutputContextAssignee - Assignee of the external resource, as reported by the provider.
 type ChatsChannelsGetOutputContextAssignee struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -61,13 +61,15 @@ type ChatsChannelsGetOutputContext struct {
 	Type string `json:"type"`
 	// Id - The resource's identifier on the provider
 	Id string `json:"id"`
-	// Description - Description of the resource
+	// Description - Description of the external resource, as reported by the provider.
 	Description *string `json:"description,omitempty"`
 	// Status - Status of the resource, as reported by the provider
 	Status *string `json:"status,omitempty"`
 	// Url - Link to the resource
-	Url      *string                                `json:"url,omitempty"`
-	Author   *ChatsChannelsGetOutputContextAuthor   `json:"author,omitempty"`
+	Url *string `json:"url,omitempty"`
+	// Author - Author of the external resource, as reported by the provider.
+	Author *ChatsChannelsGetOutputContextAuthor `json:"author,omitempty"`
+	// Assignee - Assignee of the external resource, as reported by the provider.
 	Assignee *ChatsChannelsGetOutputContextAssignee `json:"assignee,omitempty"`
 	// Labels - Labels attached to the resource
 	Labels *[]string `json:"labels,omitempty"`
@@ -75,9 +77,9 @@ type ChatsChannelsGetOutputContext struct {
 
 // ChatsChannelsGetOutput represents the chats channels get output type.
 type ChatsChannelsGetOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat channel identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this channel belongs to
 	ChatId string `json:"chat_id"`
@@ -87,16 +89,17 @@ type ChatsChannelsGetOutput struct {
 	Type string `json:"type"`
 	// ProviderType - The provider's own name for this kind of channel
 	ProviderType string `json:"provider_type"`
-	// ProviderChannelId - The channel's identifier on the chat provider
+	// ProviderChannelId - Identifier the chat provider uses for this channel.
 	ProviderChannelId string `json:"provider_channel_id"`
-	// Name - Display name of the channel
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Topic - Topic set on the channel
 	Topic *string `json:"topic,omitempty"`
 	// Subject - Subject of the channel, for providers that separate it from the topic
 	Subject *string `json:"subject,omitempty"`
 	// HasAccess - Whether the chat integration can read content from this channel
-	HasAccess bool                             `json:"has_access"`
+	HasAccess bool `json:"has_access"`
+	// Recipient - The DM recipient, when the provider reports one. `null` otherwise.
 	Recipient *ChatsChannelsGetOutputRecipient `json:"recipient,omitempty"`
 	// MemberCount - Number of members in the channel, if the provider reports it
 	MemberCount *float64 `json:"member_count,omitempty"`

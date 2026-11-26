@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/protoguardsuppressions"
 )
 
-// ProtoGuardSuppressionsEndpoint provides access to protoGuard suppressions mark known-benign findings so they no longer raise alerts.
+// ProtoGuardSuppressionsEndpoint provides access to a ProtoGuard suppression is a rule that hides known-benign findings. Matching findings no longer raise alerts.
 type ProtoGuardSuppressionsEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewProtoGuardSuppressionsEndpoint(client *endpoint.Client) *ProtoGuardSuppr
 
 // ProtoGuardSuppressionsEndpointListParams contains optional query parameters for List.
 type ProtoGuardSuppressionsEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Status - Only return suppressions with these statuses. Defaults to active.
 	Status *any `json:"status,omitempty"`
 	// FilterId - Only return suppressions of these filters, by id or key.
@@ -46,7 +51,7 @@ type ProtoGuardSuppressionsEndpointCreateBody struct {
 	ExpiresAt *string `json:"expires_at,omitempty"`
 }
 
-// List returns the ProtoGuard suppressions of this instance.
+// List returns a paginated list of ProtoGuard suppressions in the instance.
 func (e *ProtoGuardSuppressionsEndpoint) List(instanceId string, params *ProtoGuardSuppressionsEndpointListParams) (*protoguardsuppressions.ProtoGuardSuppressionsListOutput, error) {
 	var query map[string]any
 	if params != nil {

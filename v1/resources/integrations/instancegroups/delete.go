@@ -5,9 +5,11 @@ import (
 	"time"
 )
 
-// IntegrationsInstanceGroupsDeleteOutputImplementation represents the integrations instance groups delete output implementation type.
+// IntegrationsInstanceGroupsDeleteOutputImplementation - What backs this group. `null` for a standalone group.
 type IntegrationsInstanceGroupsDeleteOutputImplementation struct {
-	Type               string `json:"type"`
+	// Type - Which kind of backing this is.
+	Type string `json:"type"`
+	// MagicMcpEndpointId - Magic MCP endpoint backing this group.
 	MagicMcpEndpointId string `json:"magic_mcp_endpoint_id"`
 }
 
@@ -21,23 +23,38 @@ type IntegrationsInstanceGroupsDeleteOutputProvidersToolFilter struct {
 
 // IntegrationsInstanceGroupsDeleteOutputProviders represents the integrations instance groups delete output providers type.
 type IntegrationsInstanceGroupsDeleteOutputProviders struct {
-	Object                        string          `json:"object"`
-	Id                            string          `json:"id"`
-	Status                        string          `json:"status"`
-	Name                          string          `json:"name"`
-	Description                   *string         `json:"description,omitempty"`
-	Metadata                      *map[string]any `json:"metadata,omitempty"`
-	IntegrationId                 string          `json:"integration_id"`
-	IntegrationInstanceGroupId    string          `json:"integration_instance_group_id"`
-	IntegrationInstanceId         string          `json:"integration_instance_id"`
-	IntegrationProviderId         *string         `json:"integration_provider_id,omitempty"`
-	IntegrationInstanceProviderId string          `json:"integration_instance_provider_id"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the entry.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// IntegrationId - Integration this entry belongs to.
+	IntegrationId string `json:"integration_id"`
+	// IntegrationInstanceGroupId - Group this entry belongs to.
+	IntegrationInstanceGroupId string `json:"integration_instance_group_id"`
+	// IntegrationInstanceId - Instance this entry’s provider comes from.
+	IntegrationInstanceId string `json:"integration_instance_id"`
+	// IntegrationProviderId - Integration provider this entry was taken from. `null` when the entry has no integration provider.
+	IntegrationProviderId *string `json:"integration_provider_id,omitempty"`
+	// IntegrationInstanceProviderId - Integration instance provider this entry links.
+	IntegrationInstanceProviderId string `json:"integration_instance_provider_id"`
 	// ToolFilter - Tool filter configuration
-	ToolFilter           *IntegrationsInstanceGroupsDeleteOutputProvidersToolFilter `json:"tool_filter,omitempty"`
-	IsOverrideToolFilter bool                                                       `json:"is_override_tool_filter"`
-	CreatedAt            time.Time                                                  `json:"created_at"`
-	UpdatedAt            time.Time                                                  `json:"updated_at"`
-	ArchivedAt           *time.Time                                                 `json:"archived_at,omitempty"`
+	ToolFilter *IntegrationsInstanceGroupsDeleteOutputProvidersToolFilter `json:"tool_filter,omitempty"`
+	// IsOverrideToolFilter - Replaces the integration tool filters instead of combining with them.
+	IsOverrideToolFilter bool `json:"is_override_tool_filter"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // IntegrationsInstanceGroupsDeleteOutputAccessOwnerOrganizationMember - Organization member associated with this owner.
@@ -86,19 +103,30 @@ type IntegrationsInstanceGroupsDeleteOutputAccess struct {
 
 // IntegrationsInstanceGroupsDeleteOutput represents the integrations instance groups delete output type.
 type IntegrationsInstanceGroupsDeleteOutput struct {
-	Object         string                                                `json:"object"`
-	Id             string                                                `json:"id"`
-	Status         string                                                `json:"status"`
-	Name           string                                                `json:"name"`
-	Description    *string                                               `json:"description,omitempty"`
-	Metadata       *map[string]any                                       `json:"metadata,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `draft` when created. `archived` once you archive the group.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata *map[string]any `json:"metadata,omitempty"`
+	// Implementation - What backs this group. `null` for a standalone group.
 	Implementation *IntegrationsInstanceGroupsDeleteOutputImplementation `json:"implementation,omitempty"`
-	Providers      []IntegrationsInstanceGroupsDeleteOutputProviders     `json:"providers"`
+	// Providers - Providers linked into this group.
+	Providers []IntegrationsInstanceGroupsDeleteOutputProviders `json:"providers"`
 	// Access - Resource ownership and access settings.
-	Access     IntegrationsInstanceGroupsDeleteOutputAccess `json:"access"`
-	CreatedAt  time.Time                                    `json:"created_at"`
-	UpdatedAt  time.Time                                    `json:"updated_at"`
-	ArchivedAt *time.Time                                   `json:"archived_at,omitempty"`
+	Access IntegrationsInstanceGroupsDeleteOutputAccess `json:"access"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
+	// ArchivedAt - When this was archived. `null` while active.
+	ArchivedAt *time.Time `json:"archived_at,omitempty"`
 }
 
 // MapIntegrationsInstanceGroupsDeleteOutputFromJSON deserializes JSON data into a IntegrationsInstanceGroupsDeleteOutput.

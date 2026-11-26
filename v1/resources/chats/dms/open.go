@@ -5,11 +5,11 @@ import (
 	"time"
 )
 
-// ChatsDmsOpenOutputRecipient represents the chats dms open output recipient type.
+// ChatsDmsOpenOutputRecipient - The DM recipient, when the provider reports one. `null` otherwise.
 type ChatsDmsOpenOutputRecipient struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsDmsOpenOutputRecipient struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -39,7 +39,7 @@ type ChatsDmsOpenOutputRecipient struct {
 	LastInteractionAt *time.Time `json:"last_interaction_at,omitempty"`
 }
 
-// ChatsDmsOpenOutputContextAuthor represents the chats dms open output context author type.
+// ChatsDmsOpenOutputContextAuthor - Author of the external resource, as reported by the provider.
 type ChatsDmsOpenOutputContextAuthor struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -47,7 +47,7 @@ type ChatsDmsOpenOutputContextAuthor struct {
 	Name string `json:"name"`
 }
 
-// ChatsDmsOpenOutputContextAssignee represents the chats dms open output context assignee type.
+// ChatsDmsOpenOutputContextAssignee - Assignee of the external resource, as reported by the provider.
 type ChatsDmsOpenOutputContextAssignee struct {
 	// Id - The actor's identifier on the chat provider
 	Id string `json:"id"`
@@ -61,13 +61,15 @@ type ChatsDmsOpenOutputContext struct {
 	Type string `json:"type"`
 	// Id - The resource's identifier on the provider
 	Id string `json:"id"`
-	// Description - Description of the resource
+	// Description - Description of the external resource, as reported by the provider.
 	Description *string `json:"description,omitempty"`
 	// Status - Status of the resource, as reported by the provider
 	Status *string `json:"status,omitempty"`
 	// Url - Link to the resource
-	Url      *string                            `json:"url,omitempty"`
-	Author   *ChatsDmsOpenOutputContextAuthor   `json:"author,omitempty"`
+	Url *string `json:"url,omitempty"`
+	// Author - Author of the external resource, as reported by the provider.
+	Author *ChatsDmsOpenOutputContextAuthor `json:"author,omitempty"`
+	// Assignee - Assignee of the external resource, as reported by the provider.
 	Assignee *ChatsDmsOpenOutputContextAssignee `json:"assignee,omitempty"`
 	// Labels - Labels attached to the resource
 	Labels *[]string `json:"labels,omitempty"`
@@ -75,9 +77,9 @@ type ChatsDmsOpenOutputContext struct {
 
 // ChatsDmsOpenOutput represents the chats dms open output type.
 type ChatsDmsOpenOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat channel identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this channel belongs to
 	ChatId string `json:"chat_id"`
@@ -87,16 +89,17 @@ type ChatsDmsOpenOutput struct {
 	Type string `json:"type"`
 	// ProviderType - The provider's own name for this kind of channel
 	ProviderType string `json:"provider_type"`
-	// ProviderChannelId - The channel's identifier on the chat provider
+	// ProviderChannelId - Identifier the chat provider uses for this channel.
 	ProviderChannelId string `json:"provider_channel_id"`
-	// Name - Display name of the channel
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
 	// Topic - Topic set on the channel
 	Topic *string `json:"topic,omitempty"`
 	// Subject - Subject of the channel, for providers that separate it from the topic
 	Subject *string `json:"subject,omitempty"`
 	// HasAccess - Whether the chat integration can read content from this channel
-	HasAccess bool                         `json:"has_access"`
+	HasAccess bool `json:"has_access"`
+	// Recipient - The DM recipient, when the provider reports one. `null` otherwise.
 	Recipient *ChatsDmsOpenOutputRecipient `json:"recipient,omitempty"`
 	// MemberCount - Number of members in the channel, if the provider reports it
 	MemberCount *float64 `json:"member_count,omitempty"`
@@ -129,6 +132,7 @@ func MapChatsDmsOpenOutputToJSON(v *ChatsDmsOpenOutput) ([]byte, error) {
 // ChatsDmsOpenBodyUser represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsDmsOpenBodyUser struct {
+	// Type - Identify the user by their provider-specific ID.
 	Type *string `json:"type,omitempty"`
 	// Email - The user's email address
 	Email *string `json:"email,omitempty"`
@@ -141,6 +145,7 @@ type ChatsDmsOpenBodyUser struct {
 // ChatsDmsOpenBodyUsers represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsDmsOpenBodyUsers struct {
+	// Type - Identify the users by their provider-specific IDs.
 	Type *string `json:"type,omitempty"`
 	// Emails - The users' email addresses
 	Emails *[]string `json:"emails,omitempty"`
@@ -153,8 +158,11 @@ type ChatsDmsOpenBodyUsers struct {
 // ChatsDmsOpenBody represents one of several possible types.
 // This is a union type - only one set of fields will be populated.
 type ChatsDmsOpenBody struct {
-	Type  *string                `json:"type,omitempty"`
-	User  *ChatsDmsOpenBodyUser  `json:"user,omitempty"`
+	// Type - Open a DM with several users.
+	Type *string `json:"type,omitempty"`
+	// User - User to open the DM with.
+	User *ChatsDmsOpenBodyUser `json:"user,omitempty"`
+	// Users - Users to open the group DM with.
 	Users *ChatsDmsOpenBodyUsers `json:"users,omitempty"`
 }
 

@@ -7,9 +7,9 @@ import (
 
 // ChatsChannelsMembersListOutputItems represents the chats channels members list output items type.
 type ChatsChannelsMembersListOutputItems struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat author identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
 	// ChatId - The chat this author belongs to
 	ChatId string `json:"chat_id"`
@@ -19,11 +19,11 @@ type ChatsChannelsMembersListOutputItems struct {
 	Role string `json:"role"`
 	// ProviderType - The provider's own name for this kind of author
 	ProviderType string `json:"provider_type"`
-	// ProviderAuthorId - The author's identifier on the chat provider
+	// ProviderAuthorId - Identifier the chat provider uses for this author.
 	ProviderAuthorId string `json:"provider_author_id"`
 	// UserName - The author's handle on the chat provider
 	UserName string `json:"user_name"`
-	// FullName - The author's display name
+	// FullName - Display name.
 	FullName string `json:"full_name"`
 	// Email - Email address of the author, if the provider exposes one
 	Email *string `json:"email,omitempty"`
@@ -41,12 +41,20 @@ type ChatsChannelsMembersListOutputItems struct {
 
 // ChatsChannelsMembersListOutputPagination represents the chats channels members list output pagination type.
 type ChatsChannelsMembersListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // ChatsChannelsMembersListOutput represents the chats channels members list output type.
 type ChatsChannelsMembersListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                   `json:"object"`
 	Items      []ChatsChannelsMembersListOutputItems    `json:"items"`
 	Pagination ChatsChannelsMembersListOutputPagination `json:"pagination"`
 }
@@ -67,11 +75,16 @@ func MapChatsChannelsMembersListOutputToJSON(v *ChatsChannelsMembersListOutput) 
 
 // ChatsChannelsMembersListQuery represents the chats channels members list query type.
 type ChatsChannelsMembersListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 }
 
 // MapChatsChannelsMembersListQueryFromJSON deserializes JSON data into a ChatsChannelsMembersListQuery.

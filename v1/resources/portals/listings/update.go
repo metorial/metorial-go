@@ -7,23 +7,37 @@ import (
 
 // PortalsListingsUpdateOutputAccessProviderTemplate represents the portals listings update output access provider template type.
 type PortalsListingsUpdateOutputAccessProviderTemplate struct {
-	Object        string         `json:"object"`
-	Id            string         `json:"id"`
-	Status        string         `json:"status"`
-	Name          string         `json:"name"`
-	Description   *string        `json:"description,omitempty"`
-	Metadata      map[string]any `json:"metadata"`
-	IntegrationId *string        `json:"integration_id,omitempty"`
-	CreatedAt     time.Time      `json:"created_at"`
-	UpdatedAt     time.Time      `json:"updated_at"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once you archive the template.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
+	Description *string `json:"description,omitempty"`
+	// Metadata - Custom data you attach to identify or organize this record.
+	Metadata map[string]any `json:"metadata"`
+	// IntegrationId - Integration the template was created from. `null` when it wasn’t created from one.
+	IntegrationId *string `json:"integration_id,omitempty"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // PortalsListingsUpdateOutputAccessMagicMcpServer represents the portals listings update output access magic mcp server type.
 type PortalsListingsUpdateOutputAccessMagicMcpServer struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Status      string  `json:"status"`
-	Name        *string `json:"name,omitempty"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Status - `archived` once the server is deleted.
+	Status string `json:"status"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 }
 
@@ -82,27 +96,40 @@ type PortalsListingsUpdateOutputAccess struct {
 	SkillPlugin      *PortalsListingsUpdateOutputAccessSkillPlugin      `json:"skill_plugin,omitempty"`
 }
 
-// PortalsListingsUpdateOutputGroups represents the portals listings update output groups type.
+// PortalsListingsUpdateOutputGroups - Catalog section the listing appears in.
 type PortalsListingsUpdateOutputGroups struct {
-	Id          string  `json:"id"`
-	Name        string  `json:"name"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Index       float64 `json:"index"`
+	// Index - Order of the group in the portal catalog.
+	Index float64 `json:"index"`
 }
 
 // PortalsListingsUpdateOutput represents the portals listings update output type.
 type PortalsListingsUpdateOutput struct {
-	Object      string  `json:"object"`
-	Id          string  `json:"id"`
-	Name        string  `json:"name"`
+	// Object - String representing the object’s type.
+	Object string `json:"object"`
+	// Id - Unique ID.
+	Id string `json:"id"`
+	// Name - Display name.
+	Name string `json:"name"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Readme      *string `json:"readme,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
 	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
-	IsDiscoverable bool                                `json:"is_discoverable"`
-	Access         PortalsListingsUpdateOutputAccess   `json:"access"`
-	Groups         []PortalsListingsUpdateOutputGroups `json:"groups"`
-	CreatedAt      time.Time                           `json:"created_at"`
-	UpdatedAt      time.Time                           `json:"updated_at"`
+	IsDiscoverable bool `json:"is_discoverable"`
+	// Access - The integration, skill, or skill set the listing is for.
+	Access PortalsListingsUpdateOutputAccess `json:"access"`
+	// Groups - Catalog sections the listing appears in, in display order.
+	Groups []PortalsListingsUpdateOutputGroups `json:"groups"`
+	// CreatedAt - Creation time.
+	CreatedAt time.Time `json:"created_at"`
+	// UpdatedAt - Last update time.
+	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // MapPortalsListingsUpdateOutputFromJSON deserializes JSON data into a PortalsListingsUpdateOutput.
@@ -121,9 +148,12 @@ func MapPortalsListingsUpdateOutputToJSON(v *PortalsListingsUpdateOutput) ([]byt
 
 // PortalsListingsUpdateBody represents the portals listings update body type.
 type PortalsListingsUpdateBody struct {
-	Name        *string `json:"name,omitempty"`
+	// Name - Display name.
+	Name *string `json:"name,omitempty"`
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	Readme      *string `json:"readme,omitempty"`
+	// Readme - Longer guide shown to consumers.
+	Readme *string `json:"readme,omitempty"`
 	// IsDiscoverable - Whether every consumer on the portal can find this listing in the catalog and request access. When false, only consumers who already have access through one of their groups see it.
 	IsDiscoverable *bool `json:"is_discoverable,omitempty"`
 }

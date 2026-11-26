@@ -7,73 +7,73 @@ import (
 
 // ChatConnectionsCreateOutputProvidersProvider represents the chat connections create output providers provider type.
 type ChatConnectionsCreateOutputProvidersProvider struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Name - Display name of the provider
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Brief description of the provider
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Slug - URL-friendly identifier
+	// Slug - URL-safe name for the provider.
 	Slug string `json:"slug"`
-	// CreatedAt - Timestamp when the provider was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the provider was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsCreateOutputProvidersDeployment represents the chat connections create output providers deployment type.
 type ChatConnectionsCreateOutputProvidersDeployment struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Deployment ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default deployment
+	// IsDefault - Used when a request doesn't name a deployment.
 	IsDefault bool `json:"is_default"`
-	// Name - Deployment name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this deployment belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsCreateOutputProvidersConfig represents the chat connections create output providers config type.
 type ChatConnectionsCreateOutputProvidersConfig struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Config ID
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// IsDefault - Whether this is the default config
+	// IsDefault - The deployment falls back to this config when none is specified.
 	IsDefault bool `json:"is_default"`
-	// Name - Config name
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Custom key-value pairs for storing additional information
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// ProviderId - Provider ID
+	// ProviderId - Provider this config belongs to.
 	ProviderId string `json:"provider_id"`
-	// CreatedAt - Timestamp when created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
 // ChatConnectionsCreateOutputProviders represents the chat connections create output providers type.
 type ChatConnectionsCreateOutputProviders struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat connection provider identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat connection provider status
+	// Status - `archived` once the connection is archived.
 	Status     string                                          `json:"status"`
 	Provider   ChatConnectionsCreateOutputProvidersProvider    `json:"provider"`
 	Deployment *ChatConnectionsCreateOutputProvidersDeployment `json:"deployment,omitempty"`
@@ -82,9 +82,9 @@ type ChatConnectionsCreateOutputProviders struct {
 	AuthMethodId *string `json:"auth_method_id,omitempty"`
 	// AuthCredentialsId - The auth credentials this connection authenticates with, if any
 	AuthCredentialsId *string `json:"auth_credentials_id,omitempty"`
-	// Name - Display name of the provider link
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the provider link
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
 	// CreatedAt - Timestamp when the provider was linked
 	CreatedAt time.Time `json:"created_at"`
@@ -94,25 +94,25 @@ type ChatConnectionsCreateOutputProviders struct {
 
 // ChatConnectionsCreateOutput represents the chat connections create output type.
 type ChatConnectionsCreateOutput struct {
-	// Object - String representing the object's type
+	// Object - String representing the object’s type.
 	Object string `json:"object"`
-	// Id - Unique chat connection identifier
+	// Id - Unique ID.
 	Id string `json:"id"`
-	// Status - The chat connection status
+	// Status - `archived` once you archive the connection. Archived connections stay listable.
 	Status string `json:"status"`
-	// Slug - URL-safe identifier for the chat connection
+	// Slug - URL-safe name, unique across Metorial.
 	Slug string `json:"slug"`
-	// Name - Display name of the chat connection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the chat connection
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata set on the chat connection
+	// Metadata - Custom data you attach to identify or organize this record.
 	Metadata map[string]any `json:"metadata"`
 	// Providers - The provider linked to this chat connection. Currently always zero or one items.
 	Providers []ChatConnectionsCreateOutputProviders `json:"providers"`
-	// CreatedAt - Timestamp when the chat connection was created
+	// CreatedAt - Creation time.
 	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt - Timestamp when the chat connection was last updated
+	// UpdatedAt - Last update time.
 	UpdatedAt time.Time `json:"updated_at"`
 }
 
@@ -130,37 +130,38 @@ func MapChatConnectionsCreateOutputToJSON(v *ChatConnectionsCreateOutput) ([]byt
 	return json.Marshal(v)
 }
 
-// ChatConnectionsCreateBodyProvider represents the chat connections create body provider type.
+// ChatConnectionsCreateBodyProvider - Chat provider to link this connection to.
 type ChatConnectionsCreateBodyProvider struct {
-	// ProviderId - The chat provider to link this connection to
+	// ProviderId - Chat provider to link this connection to.
 	ProviderId string `json:"provider_id"`
-	// ProviderDeploymentId - Provider deployment to use for this connection
+	// ProviderDeploymentId - Provider deployment to use for this connection.
 	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
-	// ProviderAuthMethodId - Auth method to use for this connection
+	// ProviderAuthMethodId - Auth method to use for this connection.
 	ProviderAuthMethodId *string `json:"provider_auth_method_id,omitempty"`
-	// ProviderAuthCredentialsId - Auth credentials to use for this connection
+	// ProviderAuthCredentialsId - Auth credentials to use for this connection.
 	ProviderAuthCredentialsId *string `json:"provider_auth_credentials_id,omitempty"`
-	// ProviderConfigId - Provider config to use for this connection
+	// ProviderConfigId - Provider config to use for this connection.
 	ProviderConfigId *string `json:"provider_config_id,omitempty"`
-	// Name - Display name of the provider link
+	// Name - Display name.
 	Name *string `json:"name,omitempty"`
-	// Description - Description of the provider link
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata set on the provider link
+	// Metadata - Custom data to identify or organize the provider link.
 	Metadata *map[string]any `json:"metadata,omitempty"`
 }
 
 // ChatConnectionsCreateBody represents the chat connections create body type.
 type ChatConnectionsCreateBody struct {
-	// Name - Display name of the chat connection
+	// Name - Display name.
 	Name string `json:"name"`
-	// Description - Description of the connection
+	// Description - Free-text description.
 	Description *string `json:"description,omitempty"`
-	// Metadata - Metadata for the connection
+	// Metadata - Custom data to identify or organize the chat connection.
 	Metadata *map[string]any `json:"metadata,omitempty"`
-	// PrivateMetadata - Private metadata for the connection
-	PrivateMetadata *map[string]any                   `json:"private_metadata,omitempty"`
-	Provider        ChatConnectionsCreateBodyProvider `json:"provider"`
+	// PrivateMetadata - Private data stored with the connection. Never returned by the API.
+	PrivateMetadata *map[string]any `json:"private_metadata,omitempty"`
+	// Provider - Chat provider to link this connection to.
+	Provider ChatConnectionsCreateBodyProvider `json:"provider"`
 }
 
 // MapChatConnectionsCreateBodyFromJSON deserializes JSON data into a ChatConnectionsCreateBody.

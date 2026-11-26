@@ -32,7 +32,7 @@ type SandboxMachinesOperationsListOutputItems struct {
 	Kind string `json:"kind"`
 	// Trigger - What requested the operation
 	Trigger string `json:"trigger"`
-	// Outcome - The operation's outcome
+	// Outcome - `active` while the operation runs. `superseded` when a newer operation replaced it.
 	Outcome string                                           `json:"outcome"`
 	Failure *SandboxMachinesOperationsListOutputItemsFailure `json:"failure,omitempty"`
 	// FromMachineInstanceId - The instance the machine was running on when the operation began
@@ -47,12 +47,20 @@ type SandboxMachinesOperationsListOutputItems struct {
 
 // SandboxMachinesOperationsListOutputPagination represents the sandbox machines operations list output pagination type.
 type SandboxMachinesOperationsListOutputPagination struct {
+	// HasMoreBefore - Whether there are items before this page.
 	HasMoreBefore bool `json:"has_more_before"`
-	HasMoreAfter  bool `json:"has_more_after"`
+	// HasMoreAfter - Whether there are items after this page.
+	HasMoreAfter bool `json:"has_more_after"`
+	// Before - Cursor for the previous page, returned by lists that page by cursor. Pass it as `before`.
+	Before *string `json:"before,omitempty"`
+	// After - Cursor for the next page, returned by lists that page by cursor. Pass it as `after`.
+	After *string `json:"after,omitempty"`
 }
 
 // SandboxMachinesOperationsListOutput represents the sandbox machines operations list output type.
 type SandboxMachinesOperationsListOutput struct {
+	// Object - String representing the object’s type.
+	Object     string                                        `json:"object"`
 	Items      []SandboxMachinesOperationsListOutputItems    `json:"items"`
 	Pagination SandboxMachinesOperationsListOutputPagination `json:"pagination"`
 }
@@ -73,11 +81,16 @@ func MapSandboxMachinesOperationsListOutputToJSON(v *SandboxMachinesOperationsLi
 
 // SandboxMachinesOperationsListQuery represents the sandbox machines operations list query type.
 type SandboxMachinesOperationsListQuery struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// MachineInstanceId - Only operations that involved these instances
 	MachineInstanceId *any `json:"machine_instance_id,omitempty"`
 	Kind              *any `json:"kind,omitempty"`

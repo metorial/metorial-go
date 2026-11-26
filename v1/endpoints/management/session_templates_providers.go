@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessiontemplates/providers"
 )
 
-// SessionTemplatesProvidersEndpoint provides access to session template providers define which providers should be included when a session is created from a template.
+// SessionTemplatesProvidersEndpoint provides access to a session template provider is one provider in a session template, with its deployment, config, auth config, and tool filters.
 type SessionTemplatesProvidersEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,12 +17,18 @@ func NewSessionTemplatesProvidersEndpoint(client *endpoint.Client) *SessionTempl
 
 // SessionTemplatesProvidersEndpointListParams contains optional query parameters for List.
 type SessionTemplatesProvidersEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
-	Status *any     `json:"status,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
+	// Status - Only return session template providers with one of these statuses.
+	Status *any `json:"status,omitempty"`
 	// Id - Filter by session template provider ID(s)
 	Id *any `json:"id,omitempty"`
 	// SessionTemplateId - Filter by session template ID(s)
@@ -35,28 +41,34 @@ type SessionTemplatesProvidersEndpointListParams struct {
 	ProviderConfigId *any `json:"provider_config_id,omitempty"`
 	// ProviderAuthConfigId - Filter by provider auth config ID(s)
 	ProviderAuthConfigId *any `json:"provider_auth_config_id,omitempty"`
-	// CreatedAt - Filter session template provider creation time by date range
+	// CreatedAt - Only return results whose session template provider creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session template provider last update time by date range
+	// UpdatedAt - Only return results whose session template provider last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
 // SessionTemplatesProvidersEndpointCreateBody contains the request body for Create.
 type SessionTemplatesProvidersEndpointCreateBody struct {
-	SessionTemplateId     string  `json:"session_template_id"`
-	ProviderDeploymentId  *string `json:"provider_deployment_id,omitempty"`
+	// SessionTemplateId - Session template to add the provider to.
+	SessionTemplateId string `json:"session_template_id"`
+	// ProviderDeploymentId - Deployment the template provider runs with.
+	ProviderDeploymentId *string `json:"provider_deployment_id,omitempty"`
+	// ProviderConfigId - Config the template provider runs with.
 	ProviderConfigId      *string `json:"provider_config_id,omitempty"`
 	ProviderConfigVaultId *string `json:"provider_config_vault_id,omitempty"`
-	ProviderAuthConfigId  *string `json:"provider_auth_config_id,omitempty"`
-	ToolFilters           *any    `json:"tool_filters,omitempty"`
+	// ProviderAuthConfigId - Auth config the template provider runs with.
+	ProviderAuthConfigId *string `json:"provider_auth_config_id,omitempty"`
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
+	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
 // SessionTemplatesProvidersEndpointUpdateBody contains the request body for Update.
 type SessionTemplatesProvidersEndpointUpdateBody struct {
+	// ToolFilters - Limits which tools the provider can call. Omitted allows all tools.
 	ToolFilters *any `json:"tool_filters,omitempty"`
 }
 
-// List returns a paginated list of providers configured for a session template.
+// List returns a paginated list of session template providers.
 func (e *SessionTemplatesProvidersEndpoint) List(instanceId string, params *SessionTemplatesProvidersEndpointListParams) (*providers.SessionTemplatesProvidersListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -73,7 +85,7 @@ func (e *SessionTemplatesProvidersEndpoint) List(instanceId string, params *Sess
 	return &result, nil
 }
 
-// Get retrieves a specific provider configuration from a session template.
+// Get retrieves a session template provider.
 func (e *SessionTemplatesProvidersEndpoint) Get(instanceId string, sessionTemplateProviderId string) (*providers.SessionTemplatesProvidersGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-template-providers", sessionTemplateProviderId},
@@ -85,7 +97,7 @@ func (e *SessionTemplatesProvidersEndpoint) Get(instanceId string, sessionTempla
 	return &result, nil
 }
 
-// Create adds a new provider configuration to a session template.
+// Create creates a session template provider.
 func (e *SessionTemplatesProvidersEndpoint) Create(instanceId string, body *SessionTemplatesProvidersEndpointCreateBody) (*providers.SessionTemplatesProvidersCreateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-template-providers"},
@@ -98,7 +110,7 @@ func (e *SessionTemplatesProvidersEndpoint) Create(instanceId string, body *Sess
 	return &result, nil
 }
 
-// Update updates a provider configuration in a session template.
+// Update updates a session template provider.
 func (e *SessionTemplatesProvidersEndpoint) Update(instanceId string, sessionTemplateProviderId string, body *SessionTemplatesProvidersEndpointUpdateBody) (*providers.SessionTemplatesProvidersUpdateOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-template-providers", sessionTemplateProviderId},
@@ -111,7 +123,7 @@ func (e *SessionTemplatesProvidersEndpoint) Update(instanceId string, sessionTem
 	return &result, nil
 }
 
-// Delete removes a provider configuration from a session template.
+// Delete archives a session template provider. It stays listable with `status=archived`.
 func (e *SessionTemplatesProvidersEndpoint) Delete(instanceId string, sessionTemplateProviderId string) (*providers.SessionTemplatesProvidersDeleteOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"instances", instanceId, "session-template-providers", sessionTemplateProviderId},

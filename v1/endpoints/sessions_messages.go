@@ -5,7 +5,7 @@ import (
 	"github.com/metorial/metorial-go/v1/resources/sessions/messages"
 )
 
-// SessionsMessagesEndpoint provides access to session messages represent the MCP protocol messages exchanged during a session. This read-only resource provides visibility into the communication between clients and providers.
+// SessionsMessagesEndpoint provides access to a session message is one MCP message exchanged between a client and a provider. Messages are recorded automatically as the session runs.
 type SessionsMessagesEndpoint struct {
 	client *endpoint.Client
 }
@@ -17,11 +17,16 @@ func NewSessionsMessagesEndpoint(client *endpoint.Client) *SessionsMessagesEndpo
 
 // SessionsMessagesEndpointListParams contains optional query parameters for List.
 type SessionsMessagesEndpointListParams struct {
-	Limit  *float64 `json:"limit,omitempty"`
-	After  *string  `json:"after,omitempty"`
-	Before *string  `json:"before,omitempty"`
-	Cursor *string  `json:"cursor,omitempty"`
-	Order  *string  `json:"order,omitempty"`
+	// Limit - Page size, from 1 to 100. Defaults to 20.
+	Limit *float64 `json:"limit,omitempty"`
+	// After - Return the page after this point. Pass `pagination.after` if the previous response has it, otherwise the `id` of its last item.
+	After *string `json:"after,omitempty"`
+	// Before - Return the page before this point. Pass `pagination.before` if the previous response has it, otherwise the `id` of its first item.
+	Before *string `json:"before,omitempty"`
+	// Cursor - A `cur_` cursor from `pagination.after` or `pagination.before`. Alternative to `after` and `before`.
+	Cursor *string `json:"cursor,omitempty"`
+	// Order - Sort direction.
+	Order *string `json:"order,omitempty"`
 	// Type - Filter by message type(s)
 	Type *any `json:"type,omitempty"`
 	// Source - Filter by message source(s)
@@ -46,13 +51,13 @@ type SessionsMessagesEndpointListParams struct {
 	ParticipantId *any `json:"participant_id,omitempty"`
 	// ParentMessageId - Filter by parent message ID(s)
 	ParentMessageId *any `json:"parent_message_id,omitempty"`
-	// CreatedAt - Filter session message creation time by date range
+	// CreatedAt - Only return results whose session message creation time is in this range. Set `gt`, `lt`, or both.
 	CreatedAt *map[string]any `json:"created_at,omitempty"`
-	// UpdatedAt - Filter session message last update time by date range
+	// UpdatedAt - Only return results whose session message last update time is in this range. Set `gt`, `lt`, or both.
 	UpdatedAt *map[string]any `json:"updated_at,omitempty"`
 }
 
-// List returns a paginated list of messages for a session.
+// List returns a paginated list of session messages.
 func (e *SessionsMessagesEndpoint) List(params *SessionsMessagesEndpointListParams) (*messages.SessionsMessagesListOutput, error) {
 	var query map[string]any
 	if params != nil {
@@ -69,7 +74,7 @@ func (e *SessionsMessagesEndpoint) List(params *SessionsMessagesEndpointListPara
 	return &result, nil
 }
 
-// Get retrieves a specific message from a session.
+// Get retrieves a session message.
 func (e *SessionsMessagesEndpoint) Get(sessionMessageId string) (*messages.SessionsMessagesGetOutput, error) {
 	req := &endpoint.Request{
 		Path: []string{"session-messages", sessionMessageId},
